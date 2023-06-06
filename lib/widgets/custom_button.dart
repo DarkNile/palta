@@ -13,6 +13,8 @@ class CustomButton extends StatelessWidget {
     this.fontSize,
     this.fontWeight,
     this.color,
+    this.textColor,
+    this.borderColor,
   });
 
   final VoidCallback onPressed;
@@ -22,7 +24,7 @@ class CustomButton extends StatelessWidget {
   final double? radius;
   final double? fontSize;
   final FontWeight? fontWeight;
-  final Color? color;
+  final Color? color, textColor, borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,8 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(radius ?? 4)))),
+            side: BorderSide(color: borderColor ?? Colors.transparent),
+            borderRadius: BorderRadius.all(Radius.circular(radius ?? 6)))),
         elevation: MaterialStateProperty.all(0),
         fixedSize: MaterialStateProperty.all(
           Size(
@@ -38,13 +41,13 @@ class CustomButton extends StatelessWidget {
             height ?? 48,
           ),
         ),
-        backgroundColor: MaterialStateProperty.all(color ?? almostBlack),
+        backgroundColor: MaterialStateProperty.all(color ?? darkGreen),
         foregroundColor: MaterialStateProperty.all(Colors.white),
       ),
       child: CustomText(
         text: title,
         textAlign: TextAlign.center,
-        color: Colors.white,
+        color: textColor ?? Colors.white,
         fontSize: fontSize ?? 14,
         fontWeight: fontWeight ?? FontWeight.w400,
       ),

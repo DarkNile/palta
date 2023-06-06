@@ -9,7 +9,7 @@ import 'package:palta/home/view/home_screen.dart';
 
 import 'package:palta/product/controllers/product_controller.dart';
 import 'package:palta/utils/app_util.dart';
-import 'package:palta/widgets/custom_app_bar.dart';
+import 'package:palta/widgets/custom_app_bar2.dart';
 import 'package:palta/widgets/custom_drawer.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_button.dart';
@@ -85,7 +85,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar2(
         scaffoldKey: _scaffoldKey,
         showBackIcon: true,
       ),

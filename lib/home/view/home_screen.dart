@@ -11,7 +11,7 @@ import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_drawer.dart';
 import 'package:palta/home/widgets/home.dart';
 import 'package:palta/product/view/products_screen.dart';
-import 'package:palta/widgets/custom_app_bar.dart';
+import 'package:palta/widgets/custom_app_bar2.dart';
 import 'package:palta/widgets/custom_bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: _currentIndex == 2 ? null : Colors.white,
-      appBar: CustomAppBar(
+      appBar: CustomAppBar2(
         scaffoldKey: _scaffoldKey,
       ),
       drawer: CustomDrawer(

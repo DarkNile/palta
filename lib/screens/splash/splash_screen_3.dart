@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:palta/screens/splash/splash_screen_4.dart';
+import 'package:palta/constants/colors.dart';
+import 'package:palta/screens/on_boarding/on_boarding_screen1.dart';
+import 'package:palta/screens/splash/splash_screen_3.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:palta/widgets/custom_text.dart';
 
 class SplashScreen3 extends StatefulWidget {
   const SplashScreen3({super.key});
@@ -16,30 +19,55 @@ class _SplashScreen3State extends State<SplashScreen3> {
     animateSplash();
   }
 
+  bool startAnimation = false;
   Future<void> animateSplash() async {
     Future.delayed(
         const Duration(
-          seconds: 2,
+          milliseconds: 500,
         ), () {
-      Navigator.push(
-        context,
-        PageTransition(
-          type: PageTransitionType.fade,
-          child: const SplashScreen4(),
-        ),
-      );
+      setState(() {
+        startAnimation = true;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Image.asset(
-        'assets/images/splash_3.png',
-        width: width,
-        fit: BoxFit.fitWidth,
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          AnimatedPositioned(
+            top: startAnimation ? height * 0.51 : height * 0.07,
+            curve: Curves.fastOutSlowIn,
+            left: width * 0.3,
+            duration: const Duration(milliseconds: 1200),
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 1800),
+              opacity: startAnimation ? 0 : 1,
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/images/palta_logo.png',
+                    width: width * 0.4,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const CustomText(
+                    text: 'healthy food',
+                    color: darkGreen,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w100,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

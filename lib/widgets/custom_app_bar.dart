@@ -1,188 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:palta/checkout/controllers/checkout_controller.dart';
-import 'package:palta/checkout/view/cart_screen.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/product/controllers/product_controller.dart';
-import 'package:palta/product/view/products_screen.dart';
-import 'package:palta/utils/app_util.dart';
-import 'package:palta/widgets/custom_button.dart';
-import 'package:palta/widgets/custom_text.dart';
-import 'package:palta/widgets/custom_text_field.dart';
 
-class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+import 'custom_text.dart';
+import '';
+
+class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   const CustomAppBar({
-    super.key,
-    required this.scaffoldKey,
-    this.showBackIcon = false,
-  });
-
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final bool showBackIcon;
+    Key? key,
+  })  : preferredSize = const Size.fromHeight(160.0),
+        super(key: key);
 
   @override
-  State<CustomAppBar> createState() => _CustomAppBarState();
-
-  @override
-  Size get preferredSize => const Size.fromHeight(80);
-}
-
-class _CustomAppBarState extends State<CustomAppBar> {
-  final _searchController = TextEditingController();
-  final _productsController = Get.put(ProductController());
-  final _checkoutController = Get.put(CheckoutController());
+  final Size preferredSize;
 
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
+
     return AppBar(
+      iconTheme: const IconThemeData(color: Colors.black),
+      toolbarHeight: 110,
+      backgroundColor: Colors.transparent,
       elevation: 0,
-      backgroundColor: Colors.white,
-      toolbarHeight: 80,
-      centerTitle: true,
-      title: SvgPicture.asset(
-        'assets/icons/appbar_logo.svg',
+      flexibleSpace: CustomPaint(
+        painter: CustomShape(),
+        child: Container(),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Get.to(() => const CartScreen());
-          },
-          icon: Stack(
-            alignment: Alignment.bottomCenter,
-            clipBehavior: Clip.none,
-            children: [
-              const Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.black,
-                size: 24,
-              ),
-              Positioned.directional(
-                textDirection: Directionality.of(context),
-                bottom: -15,
-                end: 15,
-                child: Container(
-                  width: 18,
-                  height: 18,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                  child: Obx(() {
-                    return CustomText(
-                      text: _checkoutController.cartItems.value.toString(),
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      textAlign: TextAlign.center,
-                    );
-                  }),
-                ),
-              ),
-            ],
-          ),
+      title: Column(children: [
+        Image.asset(
+          'assets/images/palta_logo.png',
+          width: width * 0.4,
         ),
-        IconButton(
-            onPressed: () {
-              if (Get.currentRoute == '/ProductsScreen') {
-                AppUtil.dialog(
-                  context,
-                  'searchNow'.tr,
-                  [
-                    StatefulBuilder(builder: (context, setState) {
-                      return SizedBox(
-                        width: width,
-                        child: Column(children: [
-                          CustomTextField(
-                            controller: _searchController,
-                            hintText: 'searchKeyword'.tr,
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomButton(
-                                radius: 8,
-                                width: width * 0.67,
-                                onPressed: () {
-                                  _productsController.page(1);
-                                  _productsController.filteredProducts.clear();
-                                  _productsController.getFilteredProducts(
-                                    search: _searchController.text,
-                                    categoryId: '',
-                                  );
-                                  Get.back();
-                                },
-                                title: 'search'.tr,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              CustomButton(
-                                title: 'reset'.tr,
-                                width: width * 0.2,
-                                radius: 8,
-                                onPressed: () {
-                                  _searchController.clear();
-                                  _productsController.page(1);
-                                  _productsController.filteredProducts.clear();
-                                  _productsController.getFilteredProducts(
-                                    categoryId: '',
-                                  );
-                                  Get.back();
-                                },
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                        ]),
-                      );
-                    }),
-                  ],
-                  alignment: Alignment.bottomCenter,
-                );
-              } else {
-                Get.to(
-                  () => ProductsScreen(
-                    categoryId: '',
-                    categoryName: 'allProducts'.tr,
-                    isCategoryPage: false,
-                  ),
-                );
-              }
-            },
-            icon: const Icon(
-              Icons.search_outlined,
-              color: Colors.black,
-              size: 24,
-            )),
-        if (widget.showBackIcon)
-          IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              Icons.arrow_forward_outlined,
-              color: Colors.black,
-              size: 24,
-            ),
-          ),
-      ],
-      leading: IconButton(
-        onPressed: () {
-          widget.scaffoldKey.currentState!.openDrawer();
-        },
-        icon: const Icon(
-          Icons.menu,
-          color: Colors.black,
-          size: 24,
+        const SizedBox(
+          height: 10,
         ),
-      ),
+        const CustomText(
+          text: 'healthy food',
+          color: darkGreen,
+          fontSize: 17,
+          fontWeight: FontWeight.w100,
+        ),
+      ]),
     );
+  }
+}
+
+class CustomShape extends CustomPainter {
+  // @override
+  // Path getClip(Size size) {
+  //   double height = size.height;
+  //   double width = size.width;
+
+  //   var path = Path();
+  //   path.lineTo(0, height - 50);
+  //   path.quadraticBezierTo(width / 2, height, width, height - 50);
+  //   path.lineTo(width, 0);
+  //   path.close();
+  //   return path;
+  // }
+
+  // @override
+  // bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+  //   return true;
+  // }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    double height = size.height;
+    double width = size.width;
+    Paint paint = Paint();
+
+    var path = Path();
+    paint.color = Colors.white;
+    path.lineTo(0, height - 50);
+    path.quadraticBezierTo(width / 2, height, width, height - 50);
+    path.lineTo(width, 0);
+    path.close();
+
+    canvas.drawShadow(path, lighGrey.withOpacity(0.5), 5.0, false);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    // TODO: implement shouldRepaint
+    return true;
   }
 }
