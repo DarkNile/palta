@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/widgets/custom_text.dart';
 
 class CustomOutlinedButton extends StatelessWidget {
   const CustomOutlinedButton({
     super.key,
     required this.onPressed,
-    required this.child,
-    this.backgroundColor = Colors.black,
-    this.foregroundColor = Colors.white,
-    this.radius = 4,
+    required this.title,
   });
 
   final VoidCallback onPressed;
-  final Widget child;
-  final Color backgroundColor;
-  final Color foregroundColor;
-  final double radius;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +24,24 @@ class CustomOutlinedButton extends StatelessWidget {
             48,
           ),
         ),
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
-        foregroundColor: MaterialStateProperty.all(foregroundColor),
         shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(radius)),
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6)),
           ),
         ),
         side: MaterialStateProperty.all(
           const BorderSide(
-            color: warmGrey,
+            color: pineGreen,
           ),
         ),
       ),
-      child: child,
+      child: CustomText(
+        text: title,
+        color: pineGreen,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

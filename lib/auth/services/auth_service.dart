@@ -6,8 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:palta/auth/models/user.dart';
 import 'package:palta/constants/urls.dart';
-import 'package:palta/home/view/home_screen.dart';
-import 'package:palta/screens/splash/splash_screen_1.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/utils/app_util.dart';
 
 class AuthService {
@@ -26,7 +25,7 @@ class AuthService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-        Uri.parse('$baseUrl route=rest/register/register&language=$lang'),
+        Uri.parse('${baseUrl}route=rest/register/register&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -49,11 +48,11 @@ class AuthService {
       print(user);
       String token = user['access_token'];
       print(token);
-      var id = user['customer_id'];
-      print(id);
+      var customerId = user['customer_id'];
+      print(customerId);
       final getStorage = GetStorage();
       getStorage.write('token', token);
-      getStorage.write('userId', id);
+      getStorage.write('customerId', customerId.toString());
       return User.fromJson(user);
     } else {
       print(response.body);
@@ -76,7 +75,7 @@ class AuthService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-        Uri.parse('$baseUrl route=rest/login/login&language=$lang'),
+        Uri.parse('${baseUrl}route=rest/login/login&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -95,11 +94,11 @@ class AuthService {
       print(user);
       String token = user['access_token'];
       print(token);
-      var id = user['customer_id'];
-      print(id);
+      var customerId = user['customer_id'];
+      print(customerId);
       final getStorage = GetStorage();
       getStorage.write('token', token);
-      getStorage.write('userId', id);
+      getStorage.write('customerId', customerId.toString());
       return User.fromJson(user);
     } else {
       print(response.body);
@@ -118,7 +117,7 @@ class AuthService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-      Uri.parse('$baseUrl route=rest/logout/logout&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/logout/logout&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -129,9 +128,8 @@ class AuthService {
     print(response.statusCode);
     print(response.body);
     if (jsonDecode(response.body)['success'] == 1) {
-      final getStorage = GetStorage();
       getStorage.remove('token');
-      getStorage.remove('userId');
+      getStorage.remove('customerId');
       Get.offAll(() => const HomePage());
     } else {
       var errorMessage = jsonDecode(response.body)['error'];
@@ -149,7 +147,7 @@ class AuthService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-        Uri.parse('$baseUrl route=rest/forgotten/forgotten&language=$lang'),
+        Uri.parse('${baseUrl}route=rest/forgotten/forgotten&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -182,7 +180,7 @@ class AuthService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-        Uri.parse('$baseUrl route=rest/forgotten/check_otp&language=$lang'),
+        Uri.parse('${baseUrl}route=rest/forgotten/check_otp&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -217,7 +215,7 @@ class AuthService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.put(
-        Uri.parse('$baseUrl route=rest/account/password&language=$lang'),
+        Uri.parse('${baseUrl}route=rest/account/password&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -247,37 +245,38 @@ class AuthService {
     }
   }
 
-  static Future<void> loginUsingSocialMedia({
+  static Future<User?> loginUsingSocialMedia({
     required String email,
     required String accessToken,
     required String provider,
     required BuildContext context,
   }) async {
     final getStorage = GetStorage();
-    final String? token = getStorage.read('token');
-    print(token);
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-      Uri.parse('$baseUrl route=rest/login/socialLogin&language=$lang'),
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-      },
+      Uri.parse('${baseUrl}route=rest/login/socialLogin&language=$lang'),
       body: json.encode({
         "email": email.trim(),
         "social_access_token": accessToken,
         "provider": provider,
       }),
     );
+    print('${jsonDecode(response.body)}');
     if (jsonDecode(response.body)['success'] == 1) {
-      print(jsonDecode(response.body));
+      Map<String, dynamic> user = jsonDecode(response.body)['data'];
+      print(user);
+      var customerId = user['customer_id'];
+      final getStorage = GetStorage();
+      getStorage.write('customerId', customerId.toString());
+      return User.fromJson(user);
     } else {
+      print(response.body);
       var errorMessage = jsonDecode(response.body)['error'];
       if (context.mounted) {
         AppUtil.errorToast(context, errorMessage[0]);
       }
+      return null;
     }
   }
 
@@ -288,7 +287,7 @@ class AuthService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.delete(
-      Uri.parse('$baseUrl route=rest/account/deleteUser&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/deleteUser&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -301,8 +300,9 @@ class AuthService {
     if (response.statusCode == 200) {
       final getStorage = GetStorage();
       getStorage.remove('token');
-      getStorage.remove('userId');
-      Get.offAll(() => const SplashScreen1());
+      getStorage.remove('customerId');
+      // replace with splash
+      Get.offAll(const HomePage());
     }
   }
 }

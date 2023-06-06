@@ -6,7 +6,7 @@ import 'package:palta/utils/app_util.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
-    required this.controller,
+    this.controller,
     this.hintText,
     this.onFieldSubmitted,
     this.textInputType = TextInputType.text,
@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLines = 1,
   }) : super(key: key);
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType textInputType;
   final String? hintText;
   final Function()? onTap;

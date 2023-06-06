@@ -108,7 +108,6 @@ class _WalletScreenState extends State<WalletScreen> {
                         height: 48,
                       ),
                       CustomButton(
-                          radius: 4,
                           onPressed: () {
                             Get.to(
                               () => ProductsScreen(

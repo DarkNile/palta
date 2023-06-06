@@ -1,3 +1,4 @@
+import 'package:palta/product/widgets/nutrition_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,9 @@ class _ProductScreenState extends State<ProductScreen>
     _tabController = TabController(length: 2, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _productsController.getProductsByCategoryId(
-          categoryId: widget.categoryId);
+        categoryId: widget.categoryId,
+        homeController: _homeController,
+      );
     });
   }
 
@@ -69,7 +72,7 @@ class _ProductScreenState extends State<ProductScreen>
                 options: CarouselOptions(
                   enlargeCenterPage: true,
                   autoPlay: true,
-                  height: 581,
+                  height: 512,
                   viewportFraction: 1,
                   enableInfiniteScroll: false,
                   onPageChanged: (index, reason) {
@@ -84,8 +87,7 @@ class _ProductScreenState extends State<ProductScreen>
                       CachedNetworkImage(
                         imageUrl: widget.product.originalImages![index],
                         width: width,
-                        height: 581,
-                        fit: BoxFit.cover,
+                        height: 512,
                         placeholder: (context, url) {
                           return const CustomLoadingWidget();
                         },
@@ -123,7 +125,6 @@ class _ProductScreenState extends State<ProductScreen>
                                 CustomAnimatedSmoothIndicator(
                                   count: widget.product.originalImages!.length,
                                   activeIndex: _activeIndex,
-                                  isBlack: true,
                                 ),
                                 InkWell(
                                   onTap: () {
@@ -133,10 +134,12 @@ class _ProductScreenState extends State<ProductScreen>
                                     if (onFavoritePressed) {
                                       _homeController.addToWishlist(
                                         id: widget.product.id.toString(),
+                                        productController: _productsController,
                                       );
                                     } else {
                                       _homeController.deleteFromWishlist(
                                         id: widget.product.id.toString(),
+                                        productController: _productsController,
                                       );
                                     }
                                   },
@@ -172,15 +175,16 @@ class _ProductScreenState extends State<ProductScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       top: 21,
-                      left: AppUtil.rtlDirection(context) ? 0 : 15,
-                      right: AppUtil.rtlDirection(context) ? 15 : 0,
+                      left: 16,
+                      right: 16,
                     ),
                     child: CustomText(
                       text: widget.product.name!,
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
+                      height: 1.5,
                     ),
                   ),
                   Container(
@@ -194,32 +198,70 @@ class _ProductScreenState extends State<ProductScreen>
                     child: Row(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 23),
-                                child: RichText(
-                                  text: TextSpan(children: [
-                                    TextSpan(
-                                      text:
-                                          '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black,
-                                      ),
+                                child: Row(
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(children: [
+                                        TextSpan(
+                                          text:
+                                              '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            color: widget.product.special != 0
+                                                ? vermillion
+                                                : Colors.black,
+                                            decoration:
+                                                widget.product.special != 0
+                                                    ? TextDecoration.lineThrough
+                                                    : TextDecoration.none,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: 'riyal'.tr,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: widget.product.special != 0
+                                                ? vermillion
+                                                : Colors.black,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ]),
                                     ),
-                                    TextSpan(
-                                      text: 'riyal'.tr,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
+                                    if (widget.product.special != 0)
+                                      const SizedBox(
+                                        width: 8,
                                       ),
-                                    ),
-                                  ]),
+                                    if (widget.product.special != 0)
+                                      RichText(
+                                        text: TextSpan(children: [
+                                          TextSpan(
+                                            text:
+                                                '${double.parse(widget.product.special.toString()).toStringAsFixed(2)} ',
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: 'riyal'.tr,
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ]),
+                                      ),
+                                  ],
                                 ),
                               ),
                               if (widget.product.priceExcludingTax != null)
@@ -263,11 +305,11 @@ class _ProductScreenState extends State<ProductScreen>
                               children: [
                                 Container(
                                   width: 1,
-                                  height: 38,
+                                  height: 80,
                                   color: darkGrey,
                                 ),
                                 const SizedBox(
-                                  width: 19,
+                                  width: 24,
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,6 +371,31 @@ class _ProductScreenState extends State<ProductScreen>
                                         ]),
                                       ),
                                     ),
+                                    if (widget.product.customTabs != null)
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(() => NutritionScreen(
+                                                customtabs:
+                                                    widget.product.customTabs!,
+                                              ));
+                                        },
+                                        child: Container(
+                                          margin: const EdgeInsets.only(top: 8),
+                                          padding: const EdgeInsets.all(8),
+                                          alignment: Alignment.center,
+                                          decoration: const BoxDecoration(
+                                            color: yellow,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(8),
+                                            ),
+                                          ),
+                                          child: CustomText(
+                                            text: 'nutritionFacts'.tr,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ],
@@ -344,118 +411,6 @@ class _ProductScreenState extends State<ProductScreen>
                 ],
               ),
             ),
-            if (widget.product.options != null &&
-                widget.product.options!.isNotEmpty)
-              const SizedBox(
-                height: 10,
-              ),
-            if (widget.product.options != null &&
-                widget.product.options!.isNotEmpty)
-              Container(
-                width: MediaQuery.of(context).size.width,
-                color: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      text: 'chooseYourSize'.tr,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: vermillion,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 30,
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: widget.product.options!.first.option!.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              setState(() {
-                                option = widget
-                                    .product.options!.first.option![index];
-                              });
-                            },
-                            child: Container(
-                              width: 60,
-                              height: 30,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(8)),
-                                color: option != null &&
-                                        option ==
-                                            widget.product.options!.first
-                                                .option![index]
-                                    ? Colors.black
-                                    : Colors.grey,
-                              ),
-                              alignment: Alignment.center,
-                              child: CustomText(
-                                text: widget
-                                    .product.options!.first.option![index].name,
-                                textAlign: TextAlign.center,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            width: 8,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
-            // Container(
-            //   color: Colors.white,
-            //   alignment: Alignment.center,
-            //   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       RichText(
-            //         text: TextSpan(children: [
-            //           TextSpan(
-            //             text: '${'modelNumber'.tr} ',
-            //             style: const TextStyle(
-            //               fontSize: 10,
-            //               color: brownishGrey,
-            //             ),
-            //           ),
-            //           TextSpan(
-            //             text: widget.product.model,
-            //             style: const TextStyle(
-            //               fontSize: 12,
-            //               color: Colors.black,
-            //               fontWeight: FontWeight.w500,
-            //             ),
-            //           ),
-            //         ]),
-            //       ),
-            //       CustomButton(
-            //         onPressed: () {},
-            //         title: 'sizeGuide'.tr,
-            //         width: 110,
-            //         height: 40,
-            //         fontSize: 12,
-            //       ),
-            //     ],
-            //   ),
-            // ),
             const SizedBox(
               height: 10,
             ),
@@ -497,7 +452,7 @@ class _ProductScreenState extends State<ProductScreen>
                   SizedBox(
                     height: 250,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 36),
+                      padding: const EdgeInsets.only(top: 24),
                       child: TabBarView(
                         physics: const NeverScrollableScrollPhysics(),
                         controller: _tabController,
@@ -554,7 +509,7 @@ class _ProductScreenState extends State<ProductScreen>
                     height: 24,
                   ),
                   SizedBox(
-                    height: 337,
+                    height: 250,
                     child: Obx(() {
                       if (_productsController.isProductsLoading.value ||
                           _homeController.isWishListProductsLoading.value) {
@@ -591,7 +546,7 @@ class _ProductScreenState extends State<ProductScreen>
         ),
       ),
       bottomNavigationBar: Container(
-        height: 75.8,
+        height: 75,
         width: width,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
@@ -601,32 +556,20 @@ class _ProductScreenState extends State<ProductScreen>
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: CustomButton(
             onPressed: () async {
-              if (option == null) {
-                AppUtil.errorToast(
-                  context,
-                  'chooseSize'.tr,
-                );
-              } else {
-                productOptionId = widget.product.options!.first.productOptionId;
-                final isSuccess = await _checkoutController.addToCart(
-                  productId: widget.product.id.toString(),
-                  quantity: '1',
-                  productOptionId: productOptionId.toString(),
-                  productOptionValueId: option!.productOptionValueId.toString(),
-                );
-                if (isSuccess) {
-                  if (context.mounted) {
-                    Get.back();
-                    AppUtil.successToast(
-                      context,
-                      'productAddedToCart'.tr,
-                    );
-                  }
+              final isSuccess = await _checkoutController.addToCart(
+                productId: widget.product.id.toString(),
+                quantity: '1',
+              );
+              if (isSuccess) {
+                if (context.mounted) {
+                  AppUtil.successToast(
+                    context,
+                    'productAddedToCart'.tr,
+                  );
                 }
               }
             },
             title: 'addToCart'.tr,
-            radius: 4,
           ),
         ),
       ),

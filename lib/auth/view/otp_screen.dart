@@ -49,38 +49,26 @@ class _OTPScreenState extends State<OTPScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Stack(
-                alignment: AlignmentDirectional.topEnd,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                        left: AppUtil.rtlDirection(context) ? 80 : 0,
-                        right: AppUtil.rtlDirection(context) ? 0 : 80,
-                      ),
-                      child: SvgPicture.asset('assets/icons/background.svg')),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          text: 'verifyEmailAddress'.tr,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: AppUtil.rtlDirection(context)
-                              ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                              : SvgPicture.asset(
-                                  'assets/icons/right_arrow.svg'),
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: 'verifyEmailAddress'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: AppUtil.rtlDirection(context)
+                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 58,
@@ -123,7 +111,6 @@ class _OTPScreenState extends State<OTPScreen> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 return CustomButton(
-                  radius: 4,
                   onPressed: () async {
                     final isSuccess = await _authController.checkOTP(
                       email: widget.email,

@@ -1,25 +1,26 @@
-import 'package:get/get.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:get/get.dart';
 import 'package:palta/product/models/product.dart';
 import 'package:palta/product/services/product_service.dart';
 
 class ProductController extends GetxController {
-  final homeController = Get.put(HomeController());
   var isProductsLoading = false.obs;
   var products = <Product>[].obs;
   var isFilteredProductsLoading = false.obs;
   var filteredProducts = <Product>[].obs;
   var page = 1.obs;
 
-  Future<List<Product>?> getProductsByCategoryId(
-      {required String categoryId}) async {
+  Future<List<Product>?> getProductsByCategoryId({
+    required String categoryId,
+    required HomeController homeController,
+  }) async {
     try {
       isProductsLoading(true);
       final data =
           await ProductService.getProductsByCategoryId(categoryId: categoryId);
       if (data != null) {
-        manageFavProducts(data);
         products(data);
+        homeController.manageFavProducts(products);
         return products;
       } else {
         return null;
@@ -37,6 +38,7 @@ class ProductController extends GetxController {
     String search = '',
     String order = '',
     String sort = '',
+    required HomeController homeController,
   }) async {
     try {
       isFilteredProductsLoading(true);
@@ -49,8 +51,8 @@ class ProductController extends GetxController {
         sort: sort,
       );
       if (data != null) {
-        manageFavProducts(data);
         filteredProducts.addAll(data);
+        homeController.manageFavProducts(filteredProducts);
         return filteredProducts;
       } else {
         return null;
@@ -67,6 +69,7 @@ class ProductController extends GetxController {
     required String categoryId,
     required String minPrice,
     required String maxPrice,
+    required HomeController homeController,
   }) async {
     Map<String, dynamic> formData = {};
     if (categoryId.isEmpty) {
@@ -115,8 +118,8 @@ class ProductController extends GetxController {
         page: page.value.toString(),
       );
       if (data != null) {
-        manageFavProducts(data);
         filteredProducts(data);
+        homeController.manageFavProducts(filteredProducts);
         return filteredProducts;
       } else {
         return null;
@@ -127,17 +130,5 @@ class ProductController extends GetxController {
     } finally {
       isFilteredProductsLoading(false);
     }
-  }
-
-  manageFavProducts(List<Product>? products) async {
-    await homeController.getWishlistProducts().then((value) {
-      for (var element in value!) {
-        for (var element2 in products!) {
-          if (element.id.toString() == element2.id.toString()) {
-            element2.fav = true;
-          }
-        }
-      }
-    });
   }
 }

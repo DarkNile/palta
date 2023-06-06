@@ -39,45 +39,22 @@ class CustomCheckoutItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomText(
-                text: product.name!,
-                height: 2,
+              SizedBox(
+                width: 170,
+                child: CustomText(
+                  text: product.name!.split('&quot;').join(),
+                  height: 2,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               const SizedBox(
-                height: 8,
+                height: 16,
               ),
               CustomText(
                 text: product.price,
                 fontSize: 14,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
                 color: Colors.black,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Row(
-                children: [
-                  CustomText(
-                    text: product.option!.first.name,
-                    height: 2,
-                    color: brownishGrey,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  const CustomText(
-                    text: ':',
-                    height: 2,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  CustomText(
-                    text: product.option!.first.value,
-                    height: 2,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ],
               ),
               Row(
                 children: [

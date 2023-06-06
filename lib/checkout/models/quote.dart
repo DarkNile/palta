@@ -1,8 +1,8 @@
 class Quote {
   String code;
   String title;
-  double cost;
-  String taxClassId;
+  int cost;
+  dynamic taxClassId;
   String text;
 
   Quote({

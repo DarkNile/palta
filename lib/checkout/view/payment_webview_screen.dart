@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/failure_screen.dart';
 import 'package:palta/checkout/view/thank_you_screen.dart';
-import 'package:palta/home/view/home_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_header.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -28,7 +28,7 @@ class PaymentWebviewScreen extends StatelessWidget {
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           ..loadRequest(
             Uri.parse(
-                'https://paltas.store/index.php?route=rest/confirm/redirect_payfort&order_id=$orderId'),
+                'https://palta.com/index.php?route==rest/confirm/redirect_payfort&order_id=$orderId'),
           )
           ..setNavigationDelegate(
             NavigationDelegate(

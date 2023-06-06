@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/view/home_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:lottie/lottie.dart';
@@ -21,9 +21,9 @@ class ThankYouScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
-          top: 32,
-          bottom: 16,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 32,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,8 +69,8 @@ class ThankYouScreen extends StatelessWidget {
                 children: [
                   Lottie.asset(
                     'assets/lottie/preparing_order.json',
-                    width: 400,
-                    height: 400,
+                    width: 300,
+                    height: 300,
                   ),
                   const CustomText(
                     text: 'جاري تجهيز طلبك',

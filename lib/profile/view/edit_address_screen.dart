@@ -128,12 +128,9 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                     const SizedBox(
                       height: 12,
                     ),
-                    CustomDropDown(
-                      value: _profileController.countries.first,
-                      hintText: 'country'.tr,
-                      items: _profileController.countries,
-                      enabled: false,
-                      onChanged: (value) {},
+                    CustomTextField(
+                      initialValue: 'Saudia Arabia'.tr,
+                      readOnly: true,
                     ),
                     const SizedBox(
                       height: 26,
@@ -212,7 +209,6 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         );
                       }
                       return CustomButton(
-                        radius: 4,
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final isSuccess =

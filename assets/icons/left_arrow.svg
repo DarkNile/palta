@@ -1,4 +1,8 @@
-<svg id="west_black_24dp_1_" data-name="west_black_24dp (1)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <rect id="Rectangle_1948" data-name="Rectangle 1948" width="24" height="24" fill="none"/>
-  <path id="Path_4335" data-name="Path 4335" d="M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5,2,12Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="vuesax_outline_arrow-right" data-name="vuesax/outline/arrow-right" transform="translate(320 272) rotate(180)">
+    <g id="arrow-right" transform="translate(300 252)">
+      <path id="Vector" d="M.623,14.448a.618.618,0,0,1-.442-.183.629.629,0,0,1,0-.883L5.615,7.948a1.026,1.026,0,0,0,0-1.45L.181,1.065A.625.625,0,0,1,1.065.181L6.5,5.615a2.27,2.27,0,0,1,.667,1.608A2.236,2.236,0,0,1,6.5,8.831L1.065,14.265A.655.655,0,0,1,.623,14.448Z" transform="translate(6.802 2.777)" fill="#292d32"/>
+      <path id="Vector-2" data-name="Vector" d="M0,0H20V20H0Z" fill="none" opacity="0"/>
+    </g>
+  </g>
 </svg>

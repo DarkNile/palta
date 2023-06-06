@@ -7,46 +7,34 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
-    this.width,
-    this.height,
-    this.radius,
-    this.fontSize,
-    this.fontWeight,
-    this.color,
   });
 
   final VoidCallback onPressed;
   final String title;
-  final double? width;
-  final double? height;
-  final double? radius;
-  final double? fontSize;
-  final FontWeight? fontWeight;
-  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(radius ?? 4)))),
+        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(6)))),
         elevation: MaterialStateProperty.all(0),
         fixedSize: MaterialStateProperty.all(
           Size(
-            width ?? MediaQuery.of(context).size.width,
-            height ?? 48,
+            MediaQuery.of(context).size.width,
+            48,
           ),
         ),
-        backgroundColor: MaterialStateProperty.all(color ?? almostBlack),
+        backgroundColor: MaterialStateProperty.all(pineGreen),
         foregroundColor: MaterialStateProperty.all(Colors.white),
       ),
       child: CustomText(
         text: title,
         textAlign: TextAlign.center,
         color: Colors.white,
-        fontSize: fontSize ?? 14,
-        fontWeight: fontWeight ?? FontWeight.w400,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:palta/constants/colors.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -20,12 +22,13 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   final getStorage = GetStorage();
-  late String? token;
+  final _profileController = Get.put(ProfileController());
+  late String? customerId;
 
   @override
   void initState() {
     super.initState();
-    token = getStorage.read('token');
+    customerId = getStorage.read('customerId');
   }
 
   @override
@@ -34,58 +37,55 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       backgroundColor: Colors.white,
       currentIndex: widget.currentIndex,
       type: BottomNavigationBarType.fixed,
-      unselectedItemColor: Colors.grey,
-      selectedItemColor: Colors.black,
-      selectedFontSize: 10,
-      unselectedFontSize: 10,
+      unselectedItemColor: darkGrey,
+      selectedItemColor: avocado,
+      selectedFontSize: 12,
+      unselectedFontSize: 12,
       selectedLabelStyle: const TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w300,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
       ),
       unselectedLabelStyle: const TextStyle(
-        fontSize: 10,
-        fontWeight: FontWeight.w300,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
       ),
       items: [
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/home.svg',
-              colorFilter: ColorFilter.mode(
-                  widget.currentIndex == 0 ? Colors.black : Colors.grey,
-                  BlendMode.srcIn),
+              widget.currentIndex == 0
+                  ? 'assets/icons/home_green.svg'
+                  : 'assets/icons/home.svg',
             ),
             label: 'home'.tr),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/category.svg',
-              colorFilter: ColorFilter.mode(
-                  widget.currentIndex == 1 ? Colors.black : Colors.grey,
-                  BlendMode.srcIn),
+              widget.currentIndex == 1
+                  ? 'assets/icons/assessment_green.svg'
+                  : 'assets/icons/assessment.svg',
             ),
-            label: 'categories'.tr),
+            label: 'assessment'.tr),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/order.svg',
-              colorFilter: ColorFilter.mode(
-                  widget.currentIndex == 2 ? Colors.black : Colors.grey,
-                  BlendMode.srcIn),
+              widget.currentIndex == 2
+                  ? 'assets/icons/subscription_green.svg'
+                  : 'assets/icons/subscription.svg',
             ),
-            label: 'orders'.tr),
+            label: 'subscriptions'.tr),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              'assets/icons/favorite.svg',
-              colorFilter: ColorFilter.mode(
-                  widget.currentIndex == 3 ? Colors.black : Colors.grey,
-                  BlendMode.srcIn),
+              widget.currentIndex == 3
+                  ? 'assets/icons/guide_green.svg'
+                  : 'assets/icons/guide.svg',
             ),
-            label: 'favorites'.tr),
-        if (token != null && token!.isNotEmpty)
+            label: 'guides'.tr),
+        if (customerId != null &&
+            customerId!.isNotEmpty &&
+            customerId == _profileController.user.value.id.toString())
           BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                'assets/icons/profile.svg',
-                colorFilter: ColorFilter.mode(
-                    widget.currentIndex == 4 ? Colors.black : Colors.grey,
-                    BlendMode.srcIn),
+                widget.currentIndex == 4
+                    ? 'assets/icons/profile_green.svg'
+                    : 'assets/icons/profile.svg',
               ),
               label: 'profile'.tr),
       ],

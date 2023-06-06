@@ -1,12 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33">
-  <g id="Group_4133" data-name="Group 4133" transform="translate(-98.396 -7.5)">
-    <circle id="Ellipse_54" data-name="Ellipse 54" cx="16.5" cy="16.5" r="16.5" transform="translate(98.396 7.5)" fill="#fff"/>
-    <g id="account_circle_black_24dp_5_" data-name="account_circle_black_24dp (5)" transform="translate(103.396 11.5)">
-      <g id="Group_3819" data-name="Group 3819">
-        <rect id="Rectangle_1964" data-name="Rectangle 1964" width="24" height="24" fill="none"/>
-      </g>
-      <g id="Group_3820" data-name="Group 3820">
-        <path id="Path_32022" data-name="Path 32022" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,4A3.5,3.5,0,1,1,8.5,9.5,3.5,3.5,0,0,1,12,6Zm0,14a8.008,8.008,0,0,1-6.14-2.88,9.951,9.951,0,0,1,12.28,0A8.008,8.008,0,0,1,12,20Z" fill="#8b8b8b"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55">
+  <g id="Basket" transform="translate(0.5 0.5)">
+    <rect id="Rectangle_1709" data-name="Rectangle 1709" width="55" height="55" rx="27.5" transform="translate(-0.5 -0.5)" fill="#f4f9f9"/>
+    <g id="vuesax_outline_user" data-name="vuesax/outline/user" transform="translate(-92.5 -172.5)">
+      <g id="user">
+        <path id="Vector" d="M5.75,11.5A5.75,5.75,0,1,1,11.5,5.75,5.757,5.757,0,0,1,5.75,11.5Zm0-10A4.25,4.25,0,1,0,10,5.75,4.259,4.259,0,0,0,5.75,1.5Z" transform="translate(114.25 189.25)" fill="#292d32"/>
+        <path id="Vector-2" data-name="Vector" d="M17.93,8.5a.755.755,0,0,1-.75-.75c0-3.45-3.52-6.25-7.84-6.25S1.5,4.3,1.5,7.75a.755.755,0,0,1-.75.75A.755.755,0,0,1,0,7.75C0,3.48,4.19,0,9.34,0s9.34,3.48,9.34,7.75A.755.755,0,0,1,17.93,8.5Z" transform="translate(110.66 202.25)" fill="#292d32"/>
+        <path id="Vector-3" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(108 188)" fill="none" opacity="0"/>
       </g>
     </g>
   </g>

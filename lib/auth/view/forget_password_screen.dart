@@ -34,45 +34,38 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                alignment: AlignmentDirectional.topEnd,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                        left: AppUtil.rtlDirection(context) ? 80 : 0,
-                        right: AppUtil.rtlDirection(context) ? 0 : 80,
-                      ),
-                      child: SvgPicture.asset('assets/icons/background.svg')),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          text: 'resetPassword'.tr,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: AppUtil.rtlDirection(context)
-                              ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                              : SvgPicture.asset(
-                                  'assets/icons/right_arrow.svg'),
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: 'resetPassword'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: AppUtil.rtlDirection(context)
+                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
-                height: 80,
+                height: 60,
               ),
-              SvgPicture.asset('assets/icons/logo_icon.svg'),
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  height: 120,
+                ),
+              ),
               const SizedBox(
-                height: 50,
+                height: 40,
               ),
               CustomText(
                 text: 'emailAddress'.tr,
@@ -96,7 +89,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 return CustomButton(
-                  radius: 4,
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       final isSuccess = await _authController.forgetPass(

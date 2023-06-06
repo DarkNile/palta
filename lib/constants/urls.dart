@@ -1,1 +1,1 @@
-const String baseUrl = 'https://itsmines.store/index.php?';
+const String baseUrl = 'https://paltaksa.com/demo/index.php?';

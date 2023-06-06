@@ -173,24 +173,17 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       ),
                       CustomText(
                         text:
-                            '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!}',
+                            '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
                         color: almostBlack,
                         fontWeight: FontWeight.w500,
                       ),
                       const SizedBox(
-                        height: 12,
-                      ),
-                      const Divider(
-                        thickness: 1,
-                        color: lighGrey,
-                      ),
-                      const SizedBox(
-                        height: 12,
+                        height: 20,
                       ),
                       CustomText(
                         text:
                             '${widget.checkoutController.order!.shippingFirstName!} ${widget.checkoutController.order!.shippingLastName!}',
-                        color: brownishGrey,
+                        color: almostBlack,
                       ),
                       const SizedBox(
                         height: 8,
@@ -263,9 +256,9 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                             color: almostBlack,
                             fontWeight: FontWeight.w500,
                           ),
-                          if (widget.checkoutController.order!.shippingCode ==
-                              'aramex.aramex')
-                            Image.asset('assets/images/aramex.png'),
+                          // if (widget.checkoutController.order!.shippingCode ==
+                          //     'aramex.aramex')
+                          Image.asset('assets/images/aramex.png'),
                         ],
                       ),
                     ],
@@ -320,54 +313,14 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       ),
                       if (widget.checkoutController.order!.paymentCode ==
                           'payfort_fort')
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              text: 'creditCards'.tr,
-                              color: almostBlack,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Image.asset(
-                              'assets/images/cards.png',
-                              width: 120,
-                              height: 30,
-                            ),
-                          ],
+                        Image.asset(
+                          'assets/images/cards.png',
+                          height: 36,
                         )
                       else
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  text: 'cashOnDelivery'.tr,
-                                  color: almostBlack,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                CustomText(
-                                  text: 'taxAdded'.tr,
-                                  color: brownishGrey,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 4,
-                            ),
-                            Image.asset(
-                              'assets/images/cod.png',
-                              width: 30,
-                              height: 30,
-                            ),
-                          ],
+                        Image.asset(
+                          'assets/images/apple_pay.png',
+                          height: 20,
                         ),
                     ],
                   ),
@@ -517,6 +470,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                               CustomText(
                                 text: 'total'.tr,
                                 color: brownishGrey,
+                                fontWeight: FontWeight.w400,
                               ),
                               const SizedBox(
                                 height: 4,
@@ -562,11 +516,14 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           Container(
             alignment: Alignment.bottomCenter,
             color: Colors.white,
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ).copyWith(
+              top: 16,
+              bottom: 32,
+            ),
             child: CustomButton(
               onPressed: widget.onConfirmOrderTap,
-              radius: 4,
-              color: jadeGreen,
               title: 'confirmOrder'.tr,
             ),
           ),

@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:palta/auth/services/firebase_service.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -6,12 +10,13 @@ import 'package:palta/auth/view/register_screen.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/checkout_screen.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/view/home_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/checkout/view/widgets/custom_cart_item.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_card.dart';
 import 'package:palta/widgets/custom_text.dart';
+import 'package:lottie/lottie.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -22,6 +27,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final _checkoutController = Get.put(CheckoutController());
+  final _profileController = Get.put(ProfileController());
 
   // @override
   // void initState() {
@@ -97,20 +103,15 @@ class _CartScreenState extends State<CartScreen> {
             children: [
               CustomBodyTitle(title: '${'purchases'.tr} ( 0 )'),
               SizedBox(
-                height: height * 0.25,
+                height: height * 0.05,
               ),
-              Image.asset(
-                'assets/images/empty_cart.png',
-                width: 200,
-                height: 200,
-              ),
-              const SizedBox(
-                height: 24,
+              Lottie.asset(
+                'assets/lottie/empty_cart.json',
               ),
               CustomText(
                 text: 'emptyCart'.tr,
                 fontSize: 14,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 textAlign: TextAlign.center,
               ),
             ],
@@ -195,30 +196,30 @@ class _CartScreenState extends State<CartScreen> {
                 _checkoutController.cart!.products!.isNotEmpty)
               Container(
                 width: width,
-                height: height * 0.2,
+                height: height * 0.15,
                 alignment: Alignment.bottomCenter,
                 color: Colors.white,
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        width: width,
-                        height: 36,
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                          color: lightGreen,
-                        ),
-                        child: CustomText(
-                          text: 'congratulations'.tr,
-                          fontWeight: FontWeight.w400,
-                          color: darkGreen,
-                        ),
-                      ),
-                    ),
+                    // InkWell(
+                    //   onTap: () {},
+                    //   child: Container(
+                    //     width: width,
+                    //     height: 36,
+                    //     alignment: Alignment.center,
+                    //     decoration: const BoxDecoration(
+                    //       borderRadius: BorderRadius.all(Radius.circular(16)),
+                    //       color: lightGreen,
+                    //     ),
+                    //     child: CustomText(
+                    //       text: 'congratulations'.tr,
+                    //       fontWeight: FontWeight.w400,
+                    //       color: darkGreen,
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 4,
@@ -228,6 +229,8 @@ class _CartScreenState extends State<CartScreen> {
                         children: [
                           CustomText(
                             text: 'total'.tr,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
                           ),
                           RichText(
                             text: TextSpan(children: [
@@ -243,9 +246,9 @@ class _CartScreenState extends State<CartScreen> {
                               TextSpan(
                                 text: 'riyal'.tr,
                                 style: const TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w300,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ]),
@@ -253,199 +256,241 @@ class _CartScreenState extends State<CartScreen> {
                         ],
                       ),
                     ),
-                    CustomButton(
-                      onPressed: () async {
-                        final getStorage = GetStorage();
-                        final String? token = getStorage.read('token');
-                        if (token != null && token.isNotEmpty) {
-                          Get.to(() => const CheckoutScreen());
-                        } else {
-                          await showDialog(
-                              context: context,
-                              barrierDismissible: true,
-                              builder: (context) {
-                                return StatefulBuilder(
-                                    builder: (context, setState) {
-                                  return SizedBox(
-                                    width: width,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        AlertDialog(
-                                          insetPadding:
-                                              const EdgeInsets.all(16),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                          ),
-                                          title: CustomText(
-                                            text: 'signIn'.tr,
-                                            textAlign: TextAlign.center,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            color: warmGrey,
-                                          ),
-                                          content: SingleChildScrollView(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 20),
-                                            child: ListBody(
-                                              children: [
-                                                const SizedBox(
-                                                  height: 16,
-                                                ),
-                                                CustomButton(
-                                                  onPressed: () {
-                                                    Get.to(() =>
-                                                        const LoginScreen());
-                                                  },
-                                                  title: 'signIn'.tr,
-                                                  radius: 4,
-                                                ),
-                                                const SizedBox(
-                                                  height: 24,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Container(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                      width: 99,
-                                                    ),
-                                                    CustomText(
-                                                      text: 'loginThrough'.tr,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: warmGrey,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                                    Container(
-                                                      color: Colors.grey,
-                                                      height: 1,
-                                                      width: 99,
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 32,
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(horizontal: 4),
-                                                  child: Row(
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: CustomButton(
+                        onPressed: () async {
+                          final getStorage = GetStorage();
+                          final String? customerId =
+                              getStorage.read('customerId');
+                          if (customerId != null &&
+                              customerId.isNotEmpty &&
+                              customerId ==
+                                  _profileController.user.value.id.toString()) {
+                            Get.to(() => const CheckoutScreen());
+                          } else {
+                            await showDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                builder: (context) {
+                                  return StatefulBuilder(
+                                      builder: (context, setState) {
+                                    return SizedBox(
+                                      width: width,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          AlertDialog(
+                                            insetPadding:
+                                                const EdgeInsets.all(16),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(25),
+                                            ),
+                                            title: CustomText(
+                                              text: 'signIn'.tr,
+                                              textAlign: TextAlign.center,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: warmGrey,
+                                            ),
+                                            content: SingleChildScrollView(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20),
+                                              child: ListBody(
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 16,
+                                                  ),
+                                                  CustomButton(
+                                                    onPressed: () {
+                                                      Get.to(() =>
+                                                          const LoginScreen());
+                                                    },
+                                                    title: 'signIn'.tr,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 24,
+                                                  ),
+                                                  Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
-                                                    textDirection:
-                                                        TextDirection.ltr,
                                                     children: [
-                                                      Expanded(
-                                                        child: CustomCard(
-                                                          onTap: () {},
-                                                          icon: 'facebook_icon',
-                                                        ),
+                                                      Container(
+                                                        color: Colors.grey,
+                                                        height: 1,
+                                                        width: 99,
                                                       ),
-                                                      const SizedBox(
-                                                        width: 8,
-                                                      ),
-                                                      Expanded(
-                                                        child: CustomCard(
-                                                          onTap: () {},
-                                                          icon: 'apple_icon',
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 8,
-                                                      ),
-                                                      Expanded(
-                                                        child: CustomCard(
-                                                          onTap: () {},
-                                                          icon: 'google_icon',
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 32,
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    Get.to(() =>
-                                                        const RegisterScreen());
-                                                  },
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
                                                       CustomText(
-                                                        text: 'dontHaveAccount'
-                                                            .tr,
+                                                        text: 'loginThrough'.tr,
                                                         fontWeight:
                                                             FontWeight.w400,
-                                                        color:
-                                                            Colors.grey[500]!,
+                                                        color: warmGrey,
+                                                        textAlign:
+                                                            TextAlign.center,
                                                       ),
-                                                      const SizedBox(
-                                                        width: 4,
-                                                      ),
-                                                      CustomText(
-                                                        text: 'joinUs'.tr,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                      Container(
+                                                        color: Colors.grey,
+                                                        height: 1,
+                                                        width: 99,
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 40,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Material(
-                                          color: Colors.transparent,
-                                          child: InkWell(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            onTap: () {
-                                              Get.back();
-                                            },
-                                            child: Container(
-                                              height: 35,
-                                              width: 35,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  color: Colors.transparent,
-                                                  border: Border.all(
-                                                      color: Colors.white)),
-                                              child: const Icon(
-                                                Icons.close,
-                                                color: Colors.white,
+                                                  const SizedBox(
+                                                    height: 32,
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 4),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      textDirection:
+                                                          TextDirection.ltr,
+                                                      children: [
+                                                        // Expanded(
+                                                        //   child: CustomCard(
+                                                        //     onTap: () {},
+                                                        //     icon: 'facebook_icon',
+                                                        //   ),
+                                                        // ),
+                                                        // const SizedBox(
+                                                        //   width: 8,
+                                                        // ),
+                                                        if (Platform.isIOS)
+                                                          Expanded(
+                                                            child: CustomCard(
+                                                              onTap: () async {
+                                                                final user = await FirebaseService()
+                                                                    .signInWithApple(
+                                                                        context:
+                                                                            context);
+                                                                if (user !=
+                                                                    null) {
+                                                                  setState(() {
+                                                                    _profileController
+                                                                        .getAccount();
+                                                                    _checkoutController
+                                                                        .getCartItems();
+                                                                  });
+                                                                  Get.offAll(() =>
+                                                                      const HomePage());
+                                                                }
+                                                              },
+                                                              icon:
+                                                                  'apple_icon',
+                                                            ),
+                                                          ),
+                                                        if (Platform.isIOS)
+                                                          const SizedBox(
+                                                            width: 8,
+                                                          ),
+                                                        Expanded(
+                                                          child: CustomCard(
+                                                            onTap: () async {
+                                                              final user = await FirebaseService()
+                                                                  .signInWithGoogle(
+                                                                      context:
+                                                                          context);
+                                                              if (user !=
+                                                                  null) {
+                                                                setState(() {
+                                                                  _profileController
+                                                                      .getAccount();
+                                                                  _checkoutController
+                                                                      .getCartItems();
+                                                                });
+                                                                Get.offAll(() =>
+                                                                    const HomePage());
+                                                              }
+                                                            },
+                                                            icon: 'google_icon',
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 32,
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Get.to(() =>
+                                                          const RegisterScreen());
+                                                    },
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        CustomText(
+                                                          text:
+                                                              'dontHaveAccount'
+                                                                  .tr,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color:
+                                                              Colors.grey[500]!,
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 4,
+                                                        ),
+                                                        CustomText(
+                                                          text: 'joinUs'.tr,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 40,
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
+                                          Material(
+                                            color: Colors.transparent,
+                                            child: InkWell(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              onTap: () {
+                                                Get.back();
+                                              },
+                                              child: Container(
+                                                height: 35,
+                                                width: 35,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: Colors.transparent,
+                                                    border: Border.all(
+                                                        color: Colors.white)),
+                                                child: const Icon(
+                                                  Icons.close,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
                                 });
-                              });
-                        }
-                      },
-                      title: 'checkout'.tr,
-                      radius: 4,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                          }
+                        },
+                        title: 'checkout'.tr,
+                      ),
                     ),
                   ],
                 ),

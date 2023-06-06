@@ -107,6 +107,7 @@ class AppUtil {
                           textAlign: TextAlign.center,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
+                          height: 2,
                         ),
                   titlePadding: title is String && title.isEmpty
                       ? const EdgeInsets.all(0)
@@ -117,24 +118,27 @@ class AppUtil {
                     ),
                   ),
                 ),
-                if (showClose)
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Container(
-                      height: 35,
-                      width: 35,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.transparent,
-                          border: Border.all(color: Colors.white)),
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                // if (showClose)
+                //   Material(
+                //     color: Colors.transparent,
+                //     child: InkWell(
+                //       onTap: () {
+                //         Get.back();
+                //       },
+                //       child: Container(
+                //         height: 35,
+                //         width: 35,
+                //         decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(20),
+                //             color: Colors.transparent,
+                //             border: Border.all(color: Colors.white)),
+                //         child: const Icon(
+                //           Icons.close,
+                //           color: Colors.white,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
               ],
             );
           });

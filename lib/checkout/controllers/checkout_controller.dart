@@ -51,15 +51,11 @@ class CheckoutController extends GetxController {
   Future<bool> addToCart({
     required String productId,
     required String quantity,
-    required String productOptionId,
-    required String productOptionValueId,
   }) async {
     try {
       final isSuccess = await CheckoutService.addToCart(
         productId: productId,
         quantity: quantity,
-        productOptionId: productOptionId,
-        productOptionValueId: productOptionValueId,
       );
       if (isSuccess) {
         getCartItems();

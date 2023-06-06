@@ -49,6 +49,16 @@ dependencies:
   url_launcher: ^6.1.11
   lottie: ^2.3.2
   webview_flutter: ^4.2.1
+  flutter_paytabs_bridge: ^2.3.6
+  flutter_app_version_checker: ^0.3.2
+  firebase_core: ^2.8.0
+  firebase_messaging: ^14.3.0
+  device_info_plus: ^8.2.2
+  android_id: ^0.3.2
+  cloud_firestore: ^4.7.1
+  flutter_rating_bar: ^4.0.1
+  firebase_auth: ^4.6.2
+  the_apple_sign_in: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -90,19 +100,19 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: ReadexPro
+    - family: Vazirmatn
       fonts:
-        - asset: assets/fonts/ReadexPro-Bold.ttf
+        - asset: assets/fonts/static/Vazirmatn-Bold.ttf
           weight: 700
-        - asset: assets/fonts/ReadexPro-ExtraLight.ttf
+        - asset: assets/fonts/static/Vazirmatn-ExtraLight.ttf
           weight: 200
-        - asset: assets/fonts/ReadexPro-Light.ttf
+        - asset: assets/fonts/static/Vazirmatn-Light.ttf
           weight: 300
-        - asset: assets/fonts/ReadexPro-Medium.ttf
+        - asset: assets/fonts/static/Vazirmatn-Medium.ttf
           weight: 500
-        - asset: assets/fonts/ReadexPro-Regular.ttf
+        - asset: assets/fonts/static/Vazirmatn-Regular.ttf
           weight: 400
-        - asset: assets/fonts/ReadexPro-SemiBold.ttf
+        - asset: assets/fonts/static/Vazirmatn-SemiBold.ttf
           weight: 600
   #
   # For details regarding fonts from package dependencies,
