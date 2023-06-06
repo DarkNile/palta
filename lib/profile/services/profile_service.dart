@@ -21,7 +21,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=rest/account/account&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/account&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -31,7 +31,7 @@ class ProfileService {
 
     print("response.statusCode");
     print(response.statusCode);
-    print('$baseUrl route=rest/account/account');
+    print('${baseUrl}route=rest/account/account');
     print('${jsonDecode(response.body)}');
 
     if (jsonDecode(response.body)['success'] == 1) {
@@ -56,7 +56,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.put(
-      Uri.parse('$baseUrl route=rest/account/account&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/account&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -92,7 +92,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=feed/rest_api/countries&language=$lang'),
+      Uri.parse('${baseUrl}route=feed/rest_api/countries&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -116,7 +116,8 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=feed/rest_api/countries&id=184&language=$lang'),
+      Uri.parse(
+          '${baseUrl}route=feed/rest_api/countries&id=184&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -143,7 +144,7 @@ class ProfileService {
     print(lang);
     final response = await http.get(
       Uri.parse(
-          '$baseUrl route=feed/rest_api/cities&id=$zoneId&language=$lang'),
+          '${baseUrl}route=feed/rest_api/cities&id=$zoneId&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -169,7 +170,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=rest/account/address&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/address&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -178,9 +179,13 @@ class ProfileService {
     );
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
-      List<dynamic> data = jsonDecode(response.body)['data']['addresses'];
-      print('data: $data');
-      return data.map((address) => Address.fromJson(address)).toList();
+      var data = jsonDecode(response.body)['data'];
+      if (data is List) {
+        return null;
+      }
+      List<dynamic> addresses = data['addresses'];
+      print('data: $addresses');
+      return addresses.map((address) => Address.fromJson(address)).toList();
     } else {
       print(response.body);
       var errorMessage = jsonDecode(response.body)['error'];
@@ -205,17 +210,17 @@ class ProfileService {
     print(token);
     final String? lang = getStorage.read('lang');
     print(lang);
-    var userId = getStorage.read('userId');
-    print(userId);
+    final String? customerId = getStorage.read('customerId');
+    print(customerId);
     final response = await http.post(
-      Uri.parse('$baseUrl route=rest/account/address&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/address&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
       body: jsonEncode({
-        "customer_id": userId.toString(),
+        "customer_id": customerId,
         "firstname": firstName,
         "lastname": lastName,
         "city": city,
@@ -225,7 +230,7 @@ class ProfileService {
       }),
     );
     print(jsonEncode({
-      "customer_id": userId.toString(),
+      "customer_id": customerId,
       "firstname": firstName,
       "lastname": lastName,
       "city": city,
@@ -264,7 +269,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.put(
-      Uri.parse('$baseUrl route=rest/account/address&id=$id&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/address&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -302,7 +307,7 @@ class ProfileService {
     }
   }
 
-  static Future<void> deleteAddress({
+  static Future<bool> deleteAddress({
     required String id,
     required BuildContext context,
   }) async {
@@ -312,7 +317,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.delete(
-      Uri.parse('$baseUrl route=rest/account/address&id=$id&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/address&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -323,12 +328,14 @@ class ProfileService {
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];
       print('data: $data');
+      return true;
     } else {
       print(response.body);
       var errorMessage = jsonDecode(response.body)['error'];
       if (context.mounted) {
         AppUtil.errorToast(context, errorMessage[0]);
       }
+      return false;
     }
   }
 
@@ -341,7 +348,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=rest/account/transactions&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/account/transactions&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -374,7 +381,7 @@ class ProfileService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=rest/order/orders&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/order/orders&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -405,7 +412,7 @@ class ProfileService {
     print(lang);
     final response = await http.get(
       Uri.parse(
-          '$baseUrl route=rest/order/orders&order_status=$orderStatus&language=$lang'),
+          '${baseUrl}route=rest/order/orders&order_status=$orderStatus&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

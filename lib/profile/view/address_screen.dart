@@ -83,7 +83,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       ),
                     ),
                     Positioned(
-                      bottom: 8,
+                      bottom: 20,
                       child: InkWell(
                         onTap: () {
                           Get.to(() => const AddAddressScreen());
@@ -136,16 +136,24 @@ class _AddressScreenState extends State<AddressScreen> {
                           ),
                         );
                       },
-                      onDeleteTap: () {
-                        _profileController.deleteAddress(
-                            id: _profileController.addresses[index].id,
-                            context: context);
+                      onDeleteTap: () async {
+                        final isSuccess =
+                            await _profileController.deleteAddress(
+                          id: _profileController.addresses[index].id,
+                          context: context,
+                        );
+                        if (isSuccess) {
+                          setState(() {
+                            _profileController.addresses
+                                .remove(_profileController.addresses[index]);
+                          });
+                        }
                       },
                     );
                   },
                 ),
                 Positioned(
-                  bottom: 8,
+                  bottom: 20,
                   child: InkWell(
                     onTap: () {
                       Get.to(() => const AddAddressScreen());

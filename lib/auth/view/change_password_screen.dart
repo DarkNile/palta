@@ -39,38 +39,26 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                alignment: AlignmentDirectional.topEnd,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                        left: AppUtil.rtlDirection(context) ? 80 : 0,
-                        right: AppUtil.rtlDirection(context) ? 0 : 80,
-                      ),
-                      child: SvgPicture.asset('assets/icons/background.svg')),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          text: 'resetPassword'.tr,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: AppUtil.rtlDirection(context)
-                              ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                              : SvgPicture.asset(
-                                  'assets/icons/right_arrow.svg'),
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: 'resetPassword'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: AppUtil.rtlDirection(context)
+                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 70,
@@ -137,7 +125,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 return CustomButton(
-                  radius: 4,
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       if (!AppUtil.isPasswordValidate(_passwordController.text,

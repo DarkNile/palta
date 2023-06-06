@@ -31,8 +31,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 child: CachedNetworkImage(
                   imageUrl: trackingOrder.products!.first.originalImage!,
-                  width: 50,
-                  height: 75,
+                  width: 60,
                   placeholder: (context, url) {
                     return const CustomLoadingWidget();
                   },
@@ -50,7 +49,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                         text: '${'orderNumber'.tr}  ',
                         style: const TextStyle(
                           fontSize: 10,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w400,
                           color: brownishGrey,
                         ),
                       ),
@@ -59,7 +58,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.black,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ]),
@@ -73,7 +72,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                         text: '${'items'.tr}  ',
                         style: const TextStyle(
                           fontSize: 10,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w400,
                           color: brownishGrey,
                         ),
                       ),
@@ -82,7 +81,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.black,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ]),
@@ -98,9 +97,10 @@ class CustomTrackingOrderCard extends StatelessWidget {
                 color: brownishGrey,
                 fontSize: 10,
                 textAlign: TextAlign.center,
+                fontWeight: FontWeight.w400,
               ),
               const SizedBox(
-                height: 20,
+                height: 8,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -123,6 +123,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                   color: Colors.white,
                   fontSize: 10,
                   textAlign: TextAlign.center,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ],

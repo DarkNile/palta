@@ -20,11 +20,20 @@ class AddAddressScreen extends StatefulWidget {
 class _AddAddressScreenState extends State<AddAddressScreen> {
   final _profileController = Get.put(ProfileController());
   final _formKey = GlobalKey<FormState>();
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
+  late final TextEditingController _firstNameController;
+  late final TextEditingController _lastNameController;
   final _districtController = TextEditingController();
   Zone? zone;
   City? city;
+
+  @override
+  void initState() {
+    super.initState();
+    _firstNameController = TextEditingController(
+        text: _profileController.user.value.firstName ?? '');
+    _lastNameController = TextEditingController(
+        text: _profileController.user.value.lastName ?? '');
+  }
 
   @override
   void dispose() {
@@ -113,12 +122,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     const SizedBox(
                       height: 12,
                     ),
-                    CustomDropDown(
-                      value: _profileController.countries.first,
-                      hintText: 'country'.tr,
-                      items: _profileController.countries,
-                      enabled: false,
-                      onChanged: (value) {},
+                    CustomTextField(
+                      initialValue: 'Saudia Arabia'.tr,
+                      readOnly: true,
                     ),
                     const SizedBox(
                       height: 26,
@@ -137,6 +143,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         items: _profileController.zones,
                         onChanged: (value) {
                           zone = value;
+                          city = null;
                           _profileController.getCitiesByZoneId(
                               zoneId: zone!.zoneId);
                         }),
@@ -191,7 +198,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         );
                       }
                       return CustomButton(
-                        radius: 4,
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final isSuccess =

@@ -1,3 +1,5 @@
+import 'package:palta/constants/colors.dart';
+import 'package:palta/product/widgets/custom_review_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/product/models/product.dart';
@@ -10,12 +12,30 @@ class RatingReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CustomText(
-        text: 'noReviews'.tr,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
-    );
+    if (product.reviews!.reviewTotal == '0') {
+      return Center(
+        child: CustomText(
+          text: 'noReviews'.tr,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: brownishGrey,
+        ),
+      );
+    } else {
+      return ListView.separated(
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          itemCount: product.reviews!.reviews!.length,
+          separatorBuilder: (context, index) {
+            return const Divider(
+              height: 32,
+            );
+          },
+          itemBuilder: (context, index) {
+            return CustomReviewItem(
+              review: product.reviews!.reviews![index],
+            );
+          });
+    }
   }
 }

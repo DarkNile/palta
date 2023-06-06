@@ -1,3 +1,4 @@
+import 'package:palta/profile/view/edit_address_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
@@ -178,6 +179,30 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                           isChecked = value;
                         });
                       },
+                      onEditTap: () {
+                        widget.profileController.getCitiesByZoneId(
+                          zoneId:
+                              widget.profileController.addresses[index].zoneId,
+                        );
+                        Get.to(
+                          () => EditAddressScreen(
+                            address: widget.profileController.addresses[index],
+                          ),
+                        );
+                      },
+                      onDeleteTap: () async {
+                        final isSuccess =
+                            await widget.profileController.deleteAddress(
+                          id: widget.profileController.addresses[index].id,
+                          context: context,
+                        );
+                        if (isSuccess) {
+                          setState(() {
+                            widget.profileController.addresses.remove(
+                                widget.profileController.addresses[index]);
+                          });
+                        }
+                      },
                     );
                   }),
             ),
@@ -192,7 +217,6 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                 );
               }
               return CustomButton(
-                radius: 4,
                 onPressed: () {
                   if (checkedIndex != null && isChecked) {
                     widget.onNextTap(checkedIndex!);
@@ -203,6 +227,9 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                 title: 'next'.tr,
               );
             }),
+            const SizedBox(
+              height: 16,
+            ),
           ],
         ),
       );

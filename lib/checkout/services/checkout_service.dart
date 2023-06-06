@@ -18,7 +18,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=rest/cart/cart&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/cart/cart&language=$lang'),
       headers: {
         "Accept": "application/json",
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
@@ -41,8 +41,6 @@ class CheckoutService {
   static Future<bool> addToCart({
     required String productId,
     required String quantity,
-    required String productOptionId,
-    required String productOptionValueId,
   }) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
@@ -50,7 +48,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-      Uri.parse('$baseUrl route=rest/cart/cart&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/cart/cart&language=$lang'),
       headers: {
         "Accept": "application/json",
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
@@ -59,9 +57,6 @@ class CheckoutService {
       body: json.encode({
         'product_id': productId,
         'quantity': quantity,
-        'option': {
-          productOptionId: productOptionValueId,
-        },
       }),
     );
     print('response status code: ${response.statusCode}');
@@ -85,7 +80,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.put(
-      Uri.parse('$baseUrl route=rest/cart/cart&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/cart/cart&language=$lang'),
       headers: {
         'Accept': 'application/json',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
@@ -114,7 +109,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.delete(
-      Uri.parse('$baseUrl route=rest/cart/cart&key=$productId&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/cart/cart&key=$productId&language=$lang'),
       headers: {
         'Accept': 'application/json',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
@@ -137,7 +132,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.delete(
-      Uri.parse('$baseUrl route=rest/cart/emptycart&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/cart/emptycart&language=$lang'),
       headers: {
         'Accept': 'application/json',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
@@ -164,7 +159,7 @@ class CheckoutService {
     print(lang);
     final response = await http.post(
       Uri.parse(
-          '$baseUrl route=rest/shipping_address/shippingaddress&existing=1&language=$lang'),
+          '${baseUrl}route=rest/shipping_address/shippingaddress&existing=1&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -200,7 +195,7 @@ class CheckoutService {
     print(lang);
     final response = await http.post(
       Uri.parse(
-          '$baseUrl route=rest/payment_address/paymentaddress&existing=1&language=$lang'),
+          '${baseUrl}route=rest/payment_address/paymentaddress&existing=1&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -235,7 +230,7 @@ class CheckoutService {
     print(lang);
     final response = await http.get(
       Uri.parse(
-          '$baseUrl route=rest/shipping_method/shippingmethods&language=$lang'),
+          '${baseUrl}route=rest/shipping_method/shippingmethods&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -271,7 +266,7 @@ class CheckoutService {
     print(lang);
     final response = await http.post(
         Uri.parse(
-            '$baseUrl route=rest/shipping_method/shippingmethods&language=$lang'),
+            '${baseUrl}route=rest/shipping_method/shippingmethods&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -311,7 +306,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=rest/payment_method/payments&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/payment_method/payments&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -345,7 +340,8 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-        Uri.parse('$baseUrl route=rest/payment_method/payments&language=$lang'),
+        Uri.parse(
+            '${baseUrl}route=rest/payment_method/payments&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -388,7 +384,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-        Uri.parse('$baseUrl route=rest/cart/coupon&language=$lang'),
+        Uri.parse('${baseUrl}route=rest/cart/coupon&language=$lang'),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -429,7 +425,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.delete(
-      Uri.parse('$baseUrl route=rest/cart/coupon&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/cart/coupon&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -461,7 +457,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-      Uri.parse('$baseUrl route=rest/confirm/confirm&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/confirm/confirm&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -495,7 +491,7 @@ class CheckoutService {
     print(lang);
     final response = await http.put(
       Uri.parse(
-          '$baseUrl route=rest/confirm/saveOrderToDatabase&language=$lang'),
+          '${baseUrl}route=rest/confirm/saveOrderToDatabase&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',

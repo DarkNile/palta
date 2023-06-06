@@ -90,7 +90,6 @@ class _ShippingMethodPageState extends State<ShippingMethodPage> {
               );
             }
             return CustomButton(
-              radius: 4,
               onPressed: () {
                 if (checkedIndex != null && isChecked) {
                   widget.onNextTap(checkedIndex!);
@@ -101,6 +100,9 @@ class _ShippingMethodPageState extends State<ShippingMethodPage> {
               title: 'next'.tr,
             );
           }),
+          const SizedBox(
+            height: 16,
+          ),
         ],
       ),
     );

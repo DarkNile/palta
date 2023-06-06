@@ -1,0 +1,8 @@
+<svg id="calendar_month_black_24dp_2_" data-name="calendar_month_black_24dp (2)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_46086" data-name="Group 46086">
+    <rect id="Rectangle_22606" data-name="Rectangle 22606" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Group_46087" data-name="Group 46087" transform="translate(3 2)">
+    <path id="Path_78226" data-name="Path 78226" d="M19,4H18V2H16V4H8V2H6V4H5A1.991,1.991,0,0,0,3.01,6L3,20a2,2,0,0,0,2,2H19a2.006,2.006,0,0,0,2-2V6A2.006,2.006,0,0,0,19,4Zm0,16H5V10H19ZM9,14H7V12H9Zm4,0H11V12h2Zm4,0H15V12h2ZM9,18H7V16H9Zm4,0H11V16h2Zm4,0H15V16h2Z" transform="translate(-3 -2)" fill="#212427"/>
+  </g>
+</svg>

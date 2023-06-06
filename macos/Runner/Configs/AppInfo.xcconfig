@@ -8,7 +8,7 @@
 PRODUCT_NAME = palta
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.DigitalsPartners.palta
+PRODUCT_BUNDLE_IDENTIFIER = com.DigitalPartner.palta
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.DigitalsPartners. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.DigitalPartner. All rights reserved.

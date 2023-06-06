@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <g id="overlay" transform="translate(-199 -1000)">
+    <g id="arrow" transform="translate(181 817)">
+      <circle id="Ellipse_225" data-name="Ellipse 225" cx="17.5" cy="17.5" r="17.5" transform="translate(18 183)" fill="#fff"/>
+      <g id="vuesax_linear_info-circle" data-name="vuesax/linear/info-circle" transform="translate(-340 -63)">
+        <g id="info-circle">
+          <path id="Vector" d="M10,20A10,10,0,1,0,0,10,10.029,10.029,0,0,0,10,20Z" transform="translate(366 254)" fill="none" stroke="#114520" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+          <path id="Vector-2" data-name="Vector" d="M0,0V5" transform="translate(376 260)" fill="none" stroke="#114520" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+          <path id="Vector-3" data-name="Vector" d="M0,0H.009" transform="translate(375.995 268)" fill="none" stroke="#114520" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <path id="Vector-4" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(364 252)" fill="none" opacity="0"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

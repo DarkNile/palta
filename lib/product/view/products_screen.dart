@@ -5,7 +5,7 @@ import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/models/category.dart';
 
-import 'package:palta/home/view/home_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 
 import 'package:palta/product/controllers/product_controller.dart';
 import 'package:palta/utils/app_util.dart';
@@ -59,13 +59,18 @@ class _ProductsScreenState extends State<ProductsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _productsController.page(1);
       _productsController.filteredProducts.clear();
-      _productsController.getFilteredProducts(categoryId: widget.categoryId);
+      _productsController.getFilteredProducts(
+        categoryId: widget.categoryId,
+        homeController: _homeController,
+      );
       _scrollController.addListener(() {
         if (_scrollController.position.maxScrollExtent ==
             _scrollController.offset) {
           _productsController.page.value++;
           _productsController.getFilteredProducts(
-              categoryId: widget.categoryId);
+            categoryId: widget.categoryId,
+            homeController: _homeController,
+          );
         }
       });
     });
@@ -105,12 +110,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
           Get.back();
           _productsController.page(1);
           _productsController.filteredProducts.clear();
-          _productsController.getFilteredProducts(categoryId: id);
+          _productsController.getFilteredProducts(
+            categoryId: id,
+            homeController: _homeController,
+          );
         },
       ),
       body: Obx(() {
-        if ((_productsController.isFilteredProductsLoading.value ||
-                _homeController.isWishListProductsLoading.value) &&
+        if (_productsController.isFilteredProductsLoading.value &&
             _productsController.page.value == 1) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -262,14 +269,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                   children: [
                                     CustomButton(
                                       title: 'submit'.tr,
-                                      width: width * 0.67,
-                                      radius: 8,
                                       onPressed: () {
                                         _productsController.page(1);
                                         _productsController.filteredProducts
                                             .clear();
                                         if (widget.isCategoryPage) {
                                           _productsController.filterByPrice(
+                                            homeController: _homeController,
                                             categoryId: widget.categoryId,
                                             minPrice: currentRangeValues.start
                                                 .toString(),
@@ -278,6 +284,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                           );
                                         } else {
                                           _productsController.filterByPrice(
+                                            homeController: _homeController,
                                             categoryId:
                                                 categoryController.text.isEmpty
                                                     ? ''
@@ -296,8 +303,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                     ),
                                     CustomButton(
                                       title: 'reset'.tr,
-                                      width: width * 0.2,
-                                      radius: 8,
                                       onPressed: () {
                                         setState(() {
                                           currentRangeValues =
@@ -314,6 +319,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                             .clear();
                                         _productsController.getFilteredProducts(
                                           categoryId: widget.categoryId,
+                                          homeController: _homeController,
                                         );
                                         Get.back();
                                       },
@@ -444,8 +450,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                     children: [
                                       CustomButton(
                                         title: 'submit'.tr,
-                                        width: width * 0.67,
-                                        radius: 8,
                                         onPressed: () {
                                           _productsController.page(1);
                                           _productsController.filteredProducts
@@ -456,6 +460,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                               categoryId: widget.categoryId,
                                               order: 'desc',
                                               sort: 'date_added',
+                                              homeController: _homeController,
                                             );
                                           } else if (groupValue == 'priceL') {
                                             _productsController
@@ -463,6 +468,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                               categoryId: widget.categoryId,
                                               order: 'asc',
                                               sort: 'price',
+                                              homeController: _homeController,
                                             );
                                           } else if (groupValue == 'priceH') {
                                             _productsController
@@ -470,6 +476,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                               categoryId: widget.categoryId,
                                               order: 'desc',
                                               sort: 'price',
+                                              homeController: _homeController,
                                             );
                                           }
                                           Get.back();
@@ -480,8 +487,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                       ),
                                       CustomButton(
                                         title: 'reset'.tr,
-                                        width: width * 0.2,
-                                        radius: 8,
                                         onPressed: () {
                                           setState(() {
                                             groupValue = '';
@@ -492,6 +497,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                           _productsController
                                               .getFilteredProducts(
                                             categoryId: widget.categoryId,
+                                            homeController: _homeController,
                                           );
                                           Get.back();
                                         },
@@ -562,9 +568,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         shrinkWrap: true,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: isListViewLayout ? 1 : 2,
-                          childAspectRatio: isListViewLayout ? 1.9 : 0.6,
+                          childAspectRatio: isListViewLayout ? 2.4 : 0.8,
                           crossAxisSpacing: 8,
-                          mainAxisSpacing: 24,
+                          mainAxisSpacing: 8,
                         ),
                         itemCount: _productsController.filteredProducts.length,
                         itemBuilder: (context, index) {
@@ -576,8 +582,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             isListViewLayout: isListViewLayout,
                           );
                         }),
-                    if ((_productsController.isFilteredProductsLoading.value ||
-                            _homeController.isWishListProductsLoading.value) &&
+                    if (_productsController.isFilteredProductsLoading.value &&
                         _productsController.page.value > 1)
                       const Align(
                           alignment: Alignment.bottomCenter,

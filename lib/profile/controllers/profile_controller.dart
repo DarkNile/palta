@@ -77,7 +77,7 @@ class ProfileController extends GetxController {
       isCountriesLoading(true);
       final data = await ProfileService.getCountries();
       if (data != null) {
-        countries(data.where((element) => element.id == 184).toList());
+        countries(data);
         return countries;
       } else {
         return null;
@@ -210,20 +210,24 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<void> deleteAddress({
+  Future<bool> deleteAddress({
     required String id,
     required BuildContext context,
   }) async {
     try {
-      await ProfileService.deleteAddress(
+      final isSuccess = await ProfileService.deleteAddress(
         id: id,
         context: context,
       );
-      if (context.mounted) {
-        getAddress(context: context);
+      if (isSuccess) {
+        if (context.mounted) {
+          getAddress(context: context);
+        }
       }
+      return isSuccess;
     } catch (e) {
       print(e);
+      return false;
     }
   }
 

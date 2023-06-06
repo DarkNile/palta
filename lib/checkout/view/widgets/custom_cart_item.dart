@@ -51,36 +51,15 @@ class CustomCartItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(
-                  text: product.name!,
-                  height: 2,
-                ),
-                Row(
-                  children: [
-                    CustomText(
-                      text: product.option!.first.name,
-                      height: 2,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    const CustomText(
-                      text: ':',
-                      height: 2,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    CustomText(
-                      text: product.option!.first.value,
-                      height: 2,
-                      fontWeight: FontWeight.w600,
-                      color: almostBlack,
-                    ),
-                  ],
+                SizedBox(
+                  width: 170,
+                  child: CustomText(
+                    text: product.name!.split('&quot;').join(),
+                    height: 2,
+                  ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 16,
                 ),
                 RichText(
                   text: TextSpan(children: [
@@ -103,7 +82,7 @@ class CustomCartItem extends StatelessWidget {
                   ]),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 16,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

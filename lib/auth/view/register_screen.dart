@@ -1,8 +1,10 @@
+import 'package:palta/checkout/controllers/checkout_controller.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
-import 'package:palta/home/view/home_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -18,6 +20,8 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _authController = Get.put(AuthController());
+  final _profileController = Get.put(ProfileController());
+  final _checkoutController = Get.put(CheckoutController());
   final _formKey = GlobalKey<FormState>();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -42,38 +46,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                alignment: AlignmentDirectional.topEnd,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                        left: AppUtil.rtlDirection(context) ? 80 : 0,
-                        right: AppUtil.rtlDirection(context) ? 0 : 80,
-                      ),
-                      child: SvgPicture.asset('assets/icons/background.svg')),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          text: 'createAccount'.tr,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: AppUtil.rtlDirection(context)
-                              ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                              : SvgPicture.asset(
-                                  'assets/icons/right_arrow.svg'),
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: 'createAccount'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: AppUtil.rtlDirection(context)
+                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 70,
@@ -243,7 +235,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 return CustomButton(
-                  radius: 4,
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       if (!AppUtil.isEmailValidate(_emailController.text)) {
@@ -275,6 +266,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         context: context,
                       );
                       if (user != null) {
+                        setState(() {
+                          _profileController.getAccount();
+                          _checkoutController.getCartItems();
+                        });
                         Get.offAll(() => const HomePage());
                       }
                     }

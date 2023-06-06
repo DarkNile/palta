@@ -1,3 +1,4 @@
+import 'package:palta/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -24,12 +25,12 @@ class CustomBodyTitle extends StatelessWidget {
       ),
       width: MediaQuery.of(context).size.width,
       height: 40,
-      color: Colors.black,
+      color: green,
       child: CustomText(
         text: title,
         fontSize: fontSize ?? 14,
         color: Colors.white,
-        fontWeight: fontWeight ?? FontWeight.w300,
+        fontWeight: fontWeight ?? FontWeight.w400,
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:palta/constants/colors.dart';
 import 'package:palta/utils/app_util.dart';
 
 class CustomText extends StatelessWidget {
@@ -8,7 +9,7 @@ class CustomText extends StatelessWidget {
     this.fontSize = 12,
     this.textAlign,
     this.fontWeight = FontWeight.w300,
-    this.color = Colors.black,
+    this.color = darkGrey,
     this.textDecoration,
     this.maxlines,
     this.textOverflow,

@@ -8,7 +8,7 @@ class CustomLoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Lottie.asset(
-        'assets/lottie/lottie.json',
+        'assets/lottie/green_loading.json',
       ),
     );
   }

@@ -10,6 +10,7 @@ class AuthController extends GetxController {
   var isOTPLoading = false.obs;
   var isProfileLoading = false.obs;
   var isChangePasswordLoading = false.obs;
+  var isSocialLoginLoading = false.obs;
   var user = User().obs;
 
   Future<User?> register({
@@ -141,21 +142,30 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> loginUsingSocialMedia({
+  Future<User?> loginUsingSocialMedia({
     required BuildContext context,
     required String email,
     required String accessToken,
     required String provider,
   }) async {
     try {
-      await AuthService.loginUsingSocialMedia(
+      isSocialLoginLoading(true);
+      final user = await AuthService.loginUsingSocialMedia(
         email: email,
         accessToken: accessToken,
         provider: provider,
         context: context,
       );
+      if (user != null) {
+        return user;
+      } else {
+        return null;
+      }
     } catch (e) {
       print(e);
+      return null;
+    } finally {
+      isSocialLoginLoading(false);
     }
   }
 

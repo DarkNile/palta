@@ -29,39 +29,26 @@ class StaticPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 28),
-                child: Stack(
-                  alignment: AlignmentDirectional.topEnd,
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.only(
-                          left: AppUtil.rtlDirection(context) ? 80 : 0,
-                          right: AppUtil.rtlDirection(context) ? 0 : 80,
-                        ),
-                        child: SvgPicture.asset('assets/icons/background.svg')),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 60),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomText(
-                            text: homeController.staticPageData['title']!,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.back();
-                            },
-                            child: AppUtil.rtlDirection(context)
-                                ? SvgPicture.asset(
-                                    'assets/icons/left_arrow.svg')
-                                : SvgPicture.asset(
-                                    'assets/icons/right_arrow.svg'),
-                          ),
-                        ],
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: homeController.staticPageData['title']!,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                    ),
-                  ],
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: AppUtil.rtlDirection(context)
+                            ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                            : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(

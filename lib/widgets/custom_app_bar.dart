@@ -1,186 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:palta/checkout/controllers/checkout_controller.dart';
-import 'package:palta/checkout/view/cart_screen.dart';
-import 'package:palta/constants/colors.dart';
-import 'package:palta/product/controllers/product_controller.dart';
-import 'package:palta/product/view/products_screen.dart';
-import 'package:palta/utils/app_util.dart';
-import 'package:palta/widgets/custom_button.dart';
-import 'package:palta/widgets/custom_text.dart';
-import 'package:palta/widgets/custom_text_field.dart';
+import 'package:palta/widgets/custom_clip_path.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
-    required this.scaffoldKey,
+    this.scaffoldKey,
     this.showBackIcon = false,
+    this.isFromOnboarding = false,
   });
 
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
   final bool showBackIcon;
+  final bool isFromOnboarding;
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(80);
+  Size get preferredSize => const Size.fromHeight(128);
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  final _searchController = TextEditingController();
-  final _productsController = Get.put(ProductController());
-  final _checkoutController = Get.put(CheckoutController());
-
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    return AppBar(
-      elevation: 0,
-      backgroundColor: Colors.white,
-      toolbarHeight: 80,
-      centerTitle: true,
-      title: SvgPicture.asset(
-        'assets/icons/appbar_logo.svg',
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Get.to(() => const CartScreen());
-          },
-          icon: Stack(
-            alignment: Alignment.bottomCenter,
-            clipBehavior: Clip.none,
-            children: [
-              const Icon(
-                Icons.shopping_cart_outlined,
-                color: Colors.black,
-                size: 24,
-              ),
-              Positioned.directional(
-                textDirection: Directionality.of(context),
-                bottom: -15,
-                end: 15,
-                child: Container(
-                  width: 18,
-                  height: 18,
-                  alignment: Alignment.center,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                  child: Obx(() {
-                    return CustomText(
-                      text: _checkoutController.cartItems.value.toString(),
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      textAlign: TextAlign.center,
-                    );
-                  }),
-                ),
-              ),
-            ],
-          ),
-        ),
-        IconButton(
-            onPressed: () {
-              if (Get.currentRoute == '/ProductsScreen') {
-                AppUtil.dialog(
-                  context,
-                  'searchNow'.tr,
-                  [
-                    StatefulBuilder(builder: (context, setState) {
-                      return SizedBox(
-                        width: width,
-                        child: Column(children: [
-                          CustomTextField(
-                            controller: _searchController,
-                            hintText: 'searchKeyword'.tr,
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomButton(
-                                radius: 8,
-                                width: width * 0.67,
-                                onPressed: () {
-                                  _productsController.page(1);
-                                  _productsController.filteredProducts.clear();
-                                  _productsController.getFilteredProducts(
-                                    search: _searchController.text,
-                                    categoryId: '',
-                                  );
-                                  Get.back();
-                                },
-                                title: 'search'.tr,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              CustomButton(
-                                title: 'reset'.tr,
-                                width: width * 0.2,
-                                radius: 8,
-                                onPressed: () {
-                                  _searchController.clear();
-                                  _productsController.page(1);
-                                  _productsController.filteredProducts.clear();
-                                  _productsController.getFilteredProducts(
-                                    categoryId: '',
-                                  );
-                                  Get.back();
-                                },
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 40,
-                          ),
-                        ]),
-                      );
-                    }),
+    return ClipPath(
+      clipper: CustomClipPath(),
+      child: Card(
+        clipBehavior: Clip.none,
+        margin: const EdgeInsets.all(0),
+        elevation: 10,
+        child: Container(
+          width: width,
+          height: 128,
+          color: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          alignment: Alignment.center,
+          child: widget.isFromOnboarding
+              ? Image.asset(
+                  'assets/images/logo.png',
+                  width: 117.5,
+                  height: 51,
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        widget.scaffoldKey!.currentState!.openDrawer();
+                      },
+                      child: SvgPicture.asset(
+                        'assets/icons/menu.svg',
+                      ),
+                    ),
+                    Image.asset(
+                      'assets/images/logo.png',
+                      width: 117.5,
+                      height: 51,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: SvgPicture.asset(
+                        'assets/icons/notification.svg',
+                      ),
+                    ),
                   ],
-                  alignment: Alignment.bottomCenter,
-                );
-              } else {
-                Get.to(
-                  () => ProductsScreen(
-                    categoryId: '',
-                    categoryName: 'allProducts'.tr,
-                    isCategoryPage: false,
-                  ),
-                );
-              }
-            },
-            icon: const Icon(
-              Icons.search_outlined,
-              color: Colors.black,
-              size: 24,
-            )),
-        if (widget.showBackIcon)
-          IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              Icons.arrow_forward_outlined,
-              color: Colors.black,
-              size: 24,
-            ),
-          ),
-      ],
-      leading: IconButton(
-        onPressed: () {
-          widget.scaffoldKey.currentState!.openDrawer();
-        },
-        icon: const Icon(
-          Icons.menu,
-          color: Colors.black,
-          size: 24,
+                ),
         ),
       ),
     );

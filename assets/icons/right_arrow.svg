@@ -1,9 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g id="header" transform="translate(0 0.367)">
-    <g id="icons_back" data-name="icons/back" transform="translate(24 24) rotate(180)">
-      <rect id="bg" width="24" height="24" transform="translate(0 0.367)" fill="none"/>
-      <g id="ico" transform="translate(5 5.231)">
-        <path id="union" d="M6.241,13.29.362,7.411A.751.751,0,0,1,.1,6.388a.758.758,0,0,1,.2-.237L6.241.22A.75.75,0,0,1,7.3,1.281L2.563,6.019H15.251a.75.75,0,0,1,0,1.5H2.591L7.3,12.23a.75.75,0,1,1-1.061,1.06Z" fill="#0c0f1e"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="Group_4155" data-name="Group 4155" transform="translate(-334 -41)">
+    <circle id="Ellipse_220" data-name="Ellipse 220" cx="15" cy="15" r="15" transform="translate(334 41)" fill="#fff"/>
+    <g id="vuesax_outline_arrow-right" data-name="vuesax/outline/arrow-right" transform="translate(39 -206)">
+      <g id="arrow-right" transform="translate(300 252)">
+        <path id="Vector" d="M.623,14.448a.618.618,0,0,1-.442-.183.629.629,0,0,1,0-.883L5.615,7.948a1.026,1.026,0,0,0,0-1.45L.181,1.065A.625.625,0,0,1,1.065.181L6.5,5.615a2.27,2.27,0,0,1,.667,1.608A2.236,2.236,0,0,1,6.5,8.831L1.065,14.265A.655.655,0,0,1,.623,14.448Z" transform="translate(6.802 2.777)" fill="#292d32"/>
+        <path id="Vector-2" data-name="Vector" d="M0,0H20V20H0Z" fill="none" opacity="0"/>
       </g>
     </g>
   </g>

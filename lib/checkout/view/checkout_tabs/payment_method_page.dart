@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
@@ -27,7 +29,8 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.checkoutController.paymentMethods.length == 1) {
+    if (widget.checkoutController.paymentMethods.length == 1 ||
+        Platform.isAndroid) {
       checkedIndex = 0;
       isChecked = true;
     } else {
@@ -50,7 +53,12 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
           Expanded(
             child: ListView.separated(
                 shrinkWrap: true,
-                itemCount: widget.checkoutController.paymentMethods.length,
+                itemCount: Platform.isIOS
+                    ? widget.checkoutController.paymentMethods.length
+                    : widget.checkoutController.paymentMethods
+                        .where((element) => element.code == 'payfort_fort')
+                        .toList()
+                        .length,
                 separatorBuilder: (context, index) {
                   return const SizedBox(
                     height: 16,
@@ -89,7 +97,6 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
               );
             }
             return CustomButton(
-              radius: 4,
               onPressed: () {
                 if (checkedIndex != null && isChecked) {
                   widget.onNextTap(checkedIndex!);
@@ -100,6 +107,9 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
               title: 'next'.tr,
             );
           }),
+          const SizedBox(
+            height: 16,
+          ),
         ],
       ),
     );

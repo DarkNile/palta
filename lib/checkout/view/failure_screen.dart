@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:palta/home/view/home_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class FailureScreen extends StatefulWidget {

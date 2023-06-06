@@ -16,7 +16,7 @@ class ProductService {
     print(lang);
     final response = await http.get(
       Uri.parse(
-          '$baseUrl route=feed/rest_api/products&category=$categoryId&language=$lang'),
+          '${baseUrl}route=feed/rest_api/products&category=$categoryId&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -47,7 +47,7 @@ class ProductService {
     print(lang);
     final response = await http.get(
       Uri.parse(
-          '$baseUrl route=feed/rest_api/products&search=$search&page=$page&limit=20&language=$lang&category=$categoryId&order=$order&sort=$sort&filter_description=1'),
+          '${baseUrl}route=feed/rest_api/products&search=$search&page=$page&limit=20&language=$lang&category=$categoryId&order=$order&sort=$sort&filter_description=1'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -55,7 +55,7 @@ class ProductService {
       },
     );
     print(
-        '$baseUrl route=feed/rest_api/products&search=$search&page=$page&limit=20&language=$lang&category=$categoryId&order=$order&sort=$sort&filter_description=1');
+        '${baseUrl}route=feed/rest_api/products&search=$search&page=$page&limit=20&language=$lang&category=$categoryId&order=$order&sort=$sort&filter_description=1');
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       List<dynamic> data = jsonDecode(response.body)['data'];
@@ -77,7 +77,7 @@ class ProductService {
     print(lang);
     final response = await http.post(
       Uri.parse(
-          '$baseUrl route=feed/rest_api/search&page=$page&limit=20&language=$lang'),
+          '${baseUrl}route=feed/rest_api/search&page=$page&limit=20&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -86,7 +86,7 @@ class ProductService {
       body: json.encode(formData),
     );
     print(
-        '$baseUrl route=feed/rest_api/search&page=$page&limit=20&language=$lang');
+        '${baseUrl}route=feed/rest_api/search&page=$page&limit=20&language=$lang');
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       print(jsonDecode(response.body)['data']);

@@ -1,4 +1,10 @@
-<svg id="ic_menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <path id="Path_4322" data-name="Path 4322" d="M0,0H24V24H0Z" fill="none"/>
-  <path id="Path_4323" data-name="Path 4323" d="M3,18H21V16H3Zm0-5H21V11H3ZM3,6V8H21V6Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="vuesax_linear_menu" data-name="vuesax/linear/menu" transform="translate(-684 -380)">
+    <g id="menu">
+      <path id="Vector" d="M0,0H18" transform="translate(687 387)" fill="none" stroke="#292d32" stroke-linecap="round" stroke-width="1.5"/>
+      <path id="Vector-2" data-name="Vector" d="M0,0H18" transform="translate(687 392)" fill="none" stroke="#292d32" stroke-linecap="round" stroke-width="1.5"/>
+      <path id="Vector-3" data-name="Vector" d="M0,0H18" transform="translate(687 397)" fill="none" stroke="#292d32" stroke-linecap="round" stroke-width="1.5"/>
+      <path id="Vector-4" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(684 380)" fill="none" opacity="0"/>
+    </g>
+  </g>
 </svg>

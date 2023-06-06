@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.DigitalsPartners" "\0"
+            VALUE "CompanyName", "com.DigitalPartner" "\0"
             VALUE "FileDescription", "palta" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "palta" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.DigitalsPartners. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.DigitalPartner. All rights reserved." "\0"
             VALUE "OriginalFilename", "palta.exe" "\0"
             VALUE "ProductName", "palta" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

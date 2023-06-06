@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:palta/auth/services/firebase_service.dart';
+import 'package:palta/checkout/controllers/checkout_controller.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -5,7 +10,7 @@ import 'package:palta/auth/controllers/auth_controller.dart';
 import 'package:palta/auth/view/forget_password_screen.dart';
 import 'package:palta/auth/view/register_screen.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/view/home_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_card.dart';
@@ -21,6 +26,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _authController = Get.put(AuthController());
+  final _profileController = Get.put(ProfileController());
+  final _checkoutController = Get.put(CheckoutController());
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -40,45 +47,38 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                alignment: AlignmentDirectional.topEnd,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(
-                        left: AppUtil.rtlDirection(context) ? 80 : 0,
-                        right: AppUtil.rtlDirection(context) ? 0 : 80,
-                      ),
-                      child: SvgPicture.asset('assets/icons/background.svg')),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomText(
-                          text: 'signIn'.tr,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: AppUtil.rtlDirection(context)
-                              ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                              : SvgPicture.asset(
-                                  'assets/icons/right_arrow.svg'),
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: 'signIn'.tr,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: AppUtil.rtlDirection(context)
+                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
-                height: 80,
+                height: 60,
               ),
-              SvgPicture.asset('assets/icons/logo_icon.svg'),
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  height: 120,
+                ),
+              ),
               const SizedBox(
-                height: 50,
+                height: 40,
               ),
               CustomText(
                 text: 'emailAddress'.tr,
@@ -142,7 +142,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 return CustomButton(
-                  radius: 4,
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       final user = await _authController.login(
@@ -151,6 +150,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         context: context,
                       );
                       if (user != null) {
+                        setState(() {
+                          _profileController.getAccount();
+                          _checkoutController.getCartItems();
+                        });
                         Get.offAll(() => const HomePage());
                       }
                     }
@@ -191,27 +194,49 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   textDirection: TextDirection.ltr,
                   children: [
-                    Expanded(
-                      child: CustomCard(
-                        onTap: () {},
-                        icon: 'facebook_icon',
+                    // Expanded(
+                    //   child: CustomCard(
+                    //     onTap: () {},
+                    //     icon: 'facebook_icon',
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   width: 8,
+                    // ),
+                    if (Platform.isIOS)
+                      Expanded(
+                        child: CustomCard(
+                          onTap: () async {
+                            final user = await FirebaseService()
+                                .signInWithApple(context: context);
+                            if (user != null) {
+                              setState(() {
+                                _profileController.getAccount();
+                                _checkoutController.getCartItems();
+                              });
+                              Get.offAll(() => const HomePage());
+                            }
+                          },
+                          icon: 'apple_icon',
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      child: CustomCard(
-                        onTap: () {},
-                        icon: 'apple_icon',
+                    if (Platform.isIOS)
+                      const SizedBox(
+                        width: 8,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
                     Expanded(
                       child: CustomCard(
-                        onTap: () {},
+                        onTap: () async {
+                          final user = await FirebaseService()
+                              .signInWithGoogle(context: context);
+                          if (user != null) {
+                            setState(() {
+                              _profileController.getAccount();
+                              _checkoutController.getCartItems();
+                            });
+                            Get.offAll(() => const HomePage());
+                          }
+                        },
                         icon: 'google_icon',
                       ),
                     ),
