@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/constants/primary_green.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/splash/splash_screen_1.dart';
 import 'package:palta/utils/translations.dart';
 
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: primaryGreen,
       ),
       home: const SplashScreen1(),
+      // home: const HomePage(),
     );
   }
 }

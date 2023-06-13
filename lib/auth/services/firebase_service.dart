@@ -1,5 +1,4 @@
 import 'package:palta/auth/controllers/auth_controller.dart';
-import 'package:palta/home/view/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

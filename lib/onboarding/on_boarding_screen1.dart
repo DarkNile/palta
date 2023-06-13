@@ -19,89 +19,103 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const CustomAppBar(
-        isFromOnboarding: true,
-      ),
-      body: Padding(
-        padding: EdgeInsets.only(top: height * 0.18),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Image.asset('assets/images/cover_1.png'),
-          const SizedBox(
-            height: 35,
-          ),
-          const CustomText(
-            text: 'بالتا تقدم ،',
-            fontSize: 18,
-            color: pineGreen,
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          const CustomText(
-            text: 'وجبات غذائية صحية',
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
-          ),
-          const SizedBox(
-            height: 35,
-          ),
-          const CustomText(
-            textAlign: TextAlign.center,
-            text:
-                'إختـر اشتـراك وجباتك بناءً على أهدافك الصحية و\n تفضيلاتك الشخصية  ',
-            fontSize: 14,
-            color: pineGreen,
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          SizedBox(
-            width: 40,
-            height: 10,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return ClipOval(
-                  child: Container(
-                    color: _currentIndex == index
-                        ? pineGreen.withOpacity(0.4)
-                        : warmGrey.withOpacity(0.2),
-                    height: 10,
-                    width: 10,
+      backgroundColor: Colors.white,
+      body: Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children: [
+          Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset('assets/images/cover_1.png'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 58),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CustomText(
+                        text: 'بالتا تقدم ،',
+                        fontSize: 18,
+                        color: pineGreen,
+                        fontWeight: FontWeight.w400,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 11,
+                      ),
+                      const CustomText(
+                        text: 'وجبات غذائية صحية',
+                        fontSize: 26,
+                        fontWeight: FontWeight.w700,
+                        color: darkGrey,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const CustomText(
+                        textAlign: TextAlign.center,
+                        text:
+                            'إختـر اشتـراك وجباتك بناءً على أهدافك الصحية و تفضيلاتك الشخصية',
+                        fontSize: 16,
+                        color: darkGrey,
+                        fontWeight: FontWeight.w300,
+                      ),
+                      const SizedBox(
+                        height: 58,
+                      ),
+                      SizedBox(
+                        height: 8,
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              height: 8,
+                              width: 8,
+                              decoration: BoxDecoration(
+                                color: _currentIndex == index
+                                    ? oliveGreen
+                                    : lightGrey2,
+                                shape: BoxShape.circle,
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              width: 8,
+                            );
+                          },
+                          itemCount: 3,
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  width: 5,
-                );
-              },
-              itemCount: 3,
-            ),
-          ),
-          const SizedBox(
-            height: 35,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: CustomOutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  PageTransition(
-                    duration: const Duration(milliseconds: 500),
-                    type: PageTransitionType.fade,
-                    child: const OnBoardingScreen2(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 36)
+                      .copyWith(bottom: 40),
+                  child: CustomOutlinedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          duration: const Duration(milliseconds: 500),
+                          type: PageTransitionType.fade,
+                          child: const OnBoardingScreen2(),
+                        ),
+                      );
+                    },
+                    title: "التالي",
                   ),
-                );
-              },
-              title: "التالي",
-            ),
-          )
-        ]),
+                ),
+              ]),
+          const CustomAppBar(
+            isFromOnboarding: true,
+          ),
+        ],
       ),
     );
   }

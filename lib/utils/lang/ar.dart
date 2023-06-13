@@ -208,4 +208,5 @@ const Map<String, String> ar = {
   'assessment': 'التقييم',
   'subscriptions': 'إشتراكاتي',
   'guides': 'إرشاداتي',
+  'notificationsAndAlerts': 'الإشعارات و التنبيهات',
 };

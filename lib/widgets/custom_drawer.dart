@@ -10,7 +10,7 @@ import 'package:palta/home/view/static_pages/contact_us_page.dart';
 import 'package:palta/home/view/static_pages/static_page.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_card.dart';
-import 'package:palta/widgets/custom_clip_path.dart';
+import 'package:palta/widgets/custom_app_bar_clip_path.dart';
 import 'package:palta/widgets/custom_drawer_item.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -53,7 +53,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: Column(
           children: [
             ClipPath(
-              clipper: CustomClipPath(),
+              clipper: CustomAppBarClipPath(),
               child: Container(
                 alignment: Alignment.center,
                 color: offWhite,

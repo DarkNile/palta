@@ -26,3 +26,4 @@ const Color darkGrey = Color(0xff212127);
 const Color avocado = Color(0xff91bb37);
 const Color oliveGreen = Color(0xff9ec648);
 const Color paleGrey = Color(0xfff5f5f7);
+const Color iceBlue = Color(0xfff4f9f9);

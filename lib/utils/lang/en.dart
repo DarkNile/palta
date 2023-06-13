@@ -214,4 +214,5 @@ const Map<String, String> en = {
   'assessment': 'Assessment',
   'subscriptions': 'Subscriptions',
   'guides': 'Guidances',
+  'notificationsAndAlerts': 'Notifications & Alerts',
 };
