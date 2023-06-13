@@ -1,4 +1,3 @@
-import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/sub_category_screen.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -7,8 +6,6 @@ import 'package:get/get.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/product/view/products_screen.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
-import 'package:palta/widgets/custom_outlined_button.dart';
-import 'package:palta/widgets/custom_text.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key, required this.homeController});

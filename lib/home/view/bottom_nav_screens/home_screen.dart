@@ -57,7 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Obx(() {
             if (widget.homeController.isBannersLoading.value) {
-              return Container();
+              return SizedBox(
+                width: width,
+                height: 379,
+              );
             }
             return Stack(
               clipBehavior: Clip.none,

@@ -92,7 +92,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
         scaffoldKey: _scaffoldKey,
-        showBackIcon: true,
       ),
       drawer: CustomDrawer(
         onProfileTileTap: () {
