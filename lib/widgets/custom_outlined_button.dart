@@ -7,10 +7,16 @@ class CustomOutlinedButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
+    this.width,
+    this.height,
+    this.radius,
   });
 
   final VoidCallback onPressed;
   final String title;
+  final double? width;
+  final double? height;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +26,13 @@ class CustomOutlinedButton extends StatelessWidget {
         elevation: MaterialStateProperty.all(0),
         fixedSize: MaterialStateProperty.all(
           Size(
-            MediaQuery.of(context).size.width,
-            48,
+            width ?? MediaQuery.of(context).size.width,
+            height ?? 48,
           ),
         ),
         shape: MaterialStateProperty.all(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(6)),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius ?? 6)),
           ),
         ),
         side: MaterialStateProperty.all(

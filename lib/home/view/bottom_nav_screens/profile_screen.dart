@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
+import 'package:palta/auth/view/change_password_screen.dart';
 import 'package:palta/auth/view/edit_details_screen.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/view/home_page.dart';
 import 'package:palta/home/widgets/custom_profile_item.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/profile/view/address_screen.dart';
+import 'package:palta/profile/view/wallet_screen.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_body_title.dart';
+import 'package:palta/widgets/custom_outlined_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -33,108 +35,129 @@ class ProfileScreen extends StatelessWidget {
       return SingleChildScrollView(
         child: Column(
           children: [
-            CustomBodyTitle(title: 'profile'.tr),
+            CustomBodyTitle(
+              title: 'profile'.tr,
+            ),
+            CustomBodyTitle(
+              title: 'profile'.tr,
+            ),
             Stack(
               clipBehavior: Clip.none,
+              alignment: AlignmentDirectional.bottomCenter,
               children: [
                 Container(
+                  padding: EdgeInsets.only(
+                    right: AppUtil.rtlDirection(context) ? 23 : 0,
+                    left: AppUtil.rtlDirection(context) ? 0 : 23,
+                    top: 18,
+                    bottom: 14,
+                  ),
                   width: MediaQuery.of(context).size.width,
-                  height: 95,
-                  color: greenAccent,
+                  height: 163,
+                  color: pineGreen,
+                  child: CustomText(
+                    text: 'profile'.tr,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
                 ),
                 Positioned(
-                    top: 16,
-                    left: 16,
-                    right: 16,
-                    child: Card(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 18,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                    text: 'hello'.tr,
-                                    color: brownishGrey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  CustomText(
-                                    text:
-                                        '${profileController.user.value.firstName!} ${profileController.user.value.lastName!}',
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  CustomText(
-                                    text: profileController.user.value.email!,
-                                    color: brownishGrey,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  CustomText(
-                                    text: profileController.user.value.phone!,
-                                    textDirection: TextDirection.ltr,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12,
-                                  ),
-                                ]),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                  bottom: -63,
+                  left: 16,
+                  right: 16,
+                  child: Card(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 18,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                InkWell(
-                                  onTap: () {
-                                    authController.logout(context);
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 8,
-                                      horizontal: 16,
-                                    ),
-                                    decoration: const BoxDecoration(
-                                        color: yellow,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(4))),
-                                    child: CustomText(
-                                      text: 'logout'.tr,
-                                      color: Colors.white,
-                                      textAlign: TextAlign.center,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
+                                CustomText(
+                                  text: 'hello'.tr,
+                                  color: brownishGrey,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
                                 ),
                                 const SizedBox(
-                                  height: 24,
+                                  height: 8,
                                 ),
-                                SvgPicture.asset(
-                                    'assets/icons/person_icon.svg'),
-                              ],
-                            ),
-                          ],
-                        ),
+                                CustomText(
+                                  text:
+                                      '${profileController.user.value.firstName!} ${profileController.user.value.lastName!}',
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                CustomText(
+                                  text: profileController.user.value.email!,
+                                  color: brownishGrey,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                CustomText(
+                                  text: profileController.user.value.phone!,
+                                  textDirection: TextDirection.ltr,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                ),
+                              ]),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomOutlinedButton(
+                                width: 82,
+                                height: 28,
+                                radius: 3,
+                                onPressed: () {
+                                  authController.logout(context);
+                                },
+                                title: 'logout'.tr,
+                              ),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              Container(
+                                width: 55,
+                                height: 55,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: iceBlue,
+                                ),
+                                child:
+                                    SvgPicture.asset('assets/icons/person.svg'),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
             const SizedBox(
-              height: 100,
+              height: 80,
+            ),
+            CustomProfileItem(
+              onTap: () {
+                Get.to(() => const WalletScreen());
+              },
+              title: 'walletBalance',
+              subtitle: 'checkYourBalance',
+              icon: 'wallet',
             ),
             CustomProfileItem(
               onTap: () {
@@ -146,38 +169,6 @@ class ProfileScreen extends StatelessWidget {
             ),
             CustomProfileItem(
               onTap: () {
-                Get.offAll(
-                  () => const HomePage(
-                    pageIndex: 2,
-                  ),
-                );
-              },
-              title: 'registerPurchaseOrderTitle',
-              subtitle: 'registerPurchaseOrderSubtitle',
-              icon: 'bag',
-            ),
-            // CustomProfileItem(
-            //   onTap: () {
-            //     Get.to(() => const WalletScreen());
-            //   },
-            //   title: 'walletBalance',
-            //   subtitle: 'checkYourBalance',
-            //   icon: 'wallet',
-            // ),
-            // CustomProfileItem(
-            //   onTap: () {},
-            //   title: 'returnProductTitle',
-            //   subtitle: 'returnProductSubtitle',
-            //   icon: 'replay',
-            // ),
-            // CustomProfileItem(
-            //   onTap: () {},
-            //   title: 'mailingListTitle',
-            //   subtitle: 'mailingListSubtitle',
-            //   icon: 'post_office',
-            // ),
-            CustomProfileItem(
-              onTap: () {
                 Get.to(
                   () => EditDetailsScreen(
                     profileController: profileController,
@@ -187,6 +178,18 @@ class ProfileScreen extends StatelessWidget {
               title: 'editDetailsTitle',
               subtitle: 'editDetailsSubtitle',
               icon: 'edit',
+            ),
+            CustomProfileItem(
+              onTap: () {
+                Get.to(
+                  () => ChangePasswordScreen(
+                    email: profileController.user.value.email!,
+                  ),
+                );
+              },
+              title: 'changePassword',
+              subtitle: 'changeOwnPassword',
+              icon: 'lock',
             ),
             CustomProfileItem(
               onTap: () {

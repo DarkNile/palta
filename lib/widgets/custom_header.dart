@@ -17,7 +17,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       backgroundColor: Colors.white,
       centerTitle: true,
-      toolbarHeight: 44,
+      toolbarHeight: 60,
       title: CustomText(
         text: title,
         fontSize: 14,

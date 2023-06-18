@@ -209,4 +209,20 @@ const Map<String, String> ar = {
   'subscriptions': 'إشتراكاتي',
   'guides': 'إرشاداتي',
   'notificationsAndAlerts': 'الإشعارات و التنبيهات',
+  'changePassword': 'تغيير كلمة المرور',
+  'changeOwnPassword': 'تغيير كلمة المرور الخاصة بي',
+  'passwordChangeSuccessfully': 'تم تغيير كلمة المرور بنجاح',
+  'successRequest': 'تم ارسال طلبك بنجاح',
+  'enjoyBeingHealthy': 'تمتع بصحة جيدة',
+  'paltaPresents': 'بالتا تقدم',
+  'healthyFoodMeals': 'وجبات غذائية صحية',
+  'healthyFoodMealsDescription':
+      'اختـر اشتـراك وجباتك بناءً على أهدافك الصحية و تفضيلاتك الشخصية',
+  'homeDelivery': 'توصيل الوجبات للمنزل',
+  'homeDeliveryDescription':
+      'نوفر لك خدمة توصيل الوجبات الصحية الى المنزل طبقاً لمواعيد محددة',
+  'nutritionalAdvice': 'استشارات غذائية',
+  'nutritionalAdviceDescription':
+      'للانتقال الى حياة صحية فقد تحتاج الى استشارات و دعم و نحن هنا لمساعدتك',
+  'startNow': 'ابدأ الأن',
 };

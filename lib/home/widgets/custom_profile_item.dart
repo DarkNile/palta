@@ -33,23 +33,18 @@ class CustomProfileItem extends StatelessWidget {
         fontSize: 10,
       ),
       leading: Container(
-        width: 40,
-        height: 40,
+        width: 44,
+        height: 44,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: darkGrey,
+          color: iceBlue,
         ),
         child: leading ??
             SvgPicture.asset(
               'assets/icons/$icon.svg',
             ),
       ),
-      // trailing: const Icon(
-      //   Icons.arrow_forward_ios_outlined,
-      //   size: 16,
-      //   color: Colors.black,
-      // ),
     );
   }
 }

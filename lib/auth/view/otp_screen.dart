@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
 import 'package:palta/auth/view/change_password_screen.dart';
+import 'package:palta/constants/colors.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -144,6 +145,10 @@ class _OTPScreenState extends State<OTPScreen> {
                     children: [
                       SvgPicture.asset(
                         'assets/icons/resend.svg',
+                        colorFilter: const ColorFilter.mode(
+                          pineGreen,
+                          BlendMode.srcIn,
+                        ),
                       ),
                       const SizedBox(
                         width: 4,
@@ -152,7 +157,9 @@ class _OTPScreenState extends State<OTPScreen> {
                         text: 'resendCode'.tr,
                         textAlign: TextAlign.center,
                         textDecoration: TextDecoration.underline,
+                        fontSize: 14,
                         fontWeight: FontWeight.w400,
+                        color: pineGreen,
                       ),
                     ],
                   ),

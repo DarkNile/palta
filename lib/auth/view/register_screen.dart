@@ -68,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(
-                height: 70,
+                height: 60,
               ),
               Row(
                 children: [
@@ -88,7 +88,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           controller: _firstNameController,
                           hintText: 'firstName'.tr,
                           textInputType: TextInputType.name,
-                          prefixIcon: const Icon(Icons.person),
                         ),
                       ],
                     ),
@@ -119,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ],
               ),
               const SizedBox(
-                height: 26,
+                height: 24,
               ),
               CustomText(
                 text: 'emailAddress'.tr,
@@ -133,10 +132,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 controller: _emailController,
                 hintText: 'emailAddress'.tr,
                 textInputType: TextInputType.emailAddress,
-                prefixIcon: const Icon(Icons.alternate_email),
+                prefixIcon: const Icon(Icons.person),
               ),
               const SizedBox(
-                height: 26,
+                height: 24,
               ),
               CustomText(
                 text: 'phoneNumber'.tr,
@@ -171,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     : null,
               ),
               const SizedBox(
-                height: 26,
+                height: 24,
               ),
               CustomText(
                 text: 'password'.tr,
@@ -198,7 +197,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(
-                height: 26,
+                height: 24,
               ),
               CustomText(
                 text: 'passwordConfirmation'.tr,
@@ -277,6 +276,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   title: 'signUp'.tr,
                 );
               }),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

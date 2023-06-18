@@ -1,3 +1,4 @@
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:palta/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -39,9 +40,6 @@ void main() async {
       print('yes notification: ${message.notification}');
     }
   });
-  await GetStorage.init();
-  final getStorage = GetStorage();
-  final String lang = getStorage.read('lang') ?? 'ar';
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     systemNavigationBarColor: Colors.white,
@@ -50,17 +48,32 @@ void main() async {
     statusBarBrightness: Brightness.light,
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
-  runApp(MyApp(lang: lang));
+  await GetStorage.init();
+  runApp(Phoenix(child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.lang});
-  final String lang;
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final getStorage = GetStorage();
+  late String lang;
+
+  @override
+  void initState() {
+    super.initState();
+    lang = getStorage.read('lang') ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: Translation(),
-      locale: Locale(lang),
+      locale: Locale(lang.isEmpty ? 'ar' : lang),
       fallbackLocale: const Locale('ar'),
       debugShowCheckedModeBanner: false,
       title: 'Palta',
@@ -68,8 +81,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Vazirmatn',
         primarySwatch: primaryGreen,
       ),
-      home: const SplashScreen1(),
-      // home: const HomePage(),
+      home: lang.isEmpty ? const SplashScreen1() : const HomePage(),
     );
   }
 }

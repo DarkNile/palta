@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
 import 'package:palta/auth/view/otp_screen.dart';
+import 'package:palta/constants/colors.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -61,7 +62,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               Center(
                 child: Image.asset(
                   'assets/images/logo.png',
-                  height: 120,
+                  height: 58.3,
+                ),
+              ),
+              const Center(
+                child: CustomText(
+                  text: 'Healthy Food',
+                  color: pineGreen,
+                  textAlign: TextAlign.center,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
               const SizedBox(

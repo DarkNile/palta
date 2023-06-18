@@ -215,4 +215,20 @@ const Map<String, String> en = {
   'subscriptions': 'Subscriptions',
   'guides': 'Guidances',
   'notificationsAndAlerts': 'Notifications & Alerts',
+  'changePassword': 'Change Password',
+  'changeOwnPassword': 'Change my own password',
+  'passwordChangeSuccessfully': 'Your password has changed successfully',
+  'successRequest': 'Your request has been sent successfully',
+  'enjoyBeingHealthy': 'Enjoy Being Healthy',
+  'paltaPresents': 'Palta Presents',
+  'healthyFoodMeals': 'Healthy Food Meals',
+  'healthyFoodMealsDescription':
+      'Choose your meal plan based on your health goals and personal preferences',
+  'homeDelivery': 'Home Delivery of Meals',
+  'homeDeliveryDescription':
+      'We provide you with home delivery of healthy meals according to specific dates',
+  'nutritionalAdvice': 'Nutritional Advice',
+  'nutritionalAdviceDescription':
+      'For transition to a healthy life, you may need counseling and support, and we are here to help you',
+  'startNow': 'Start Now',
 };

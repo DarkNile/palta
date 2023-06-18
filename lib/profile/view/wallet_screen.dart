@@ -30,7 +30,7 @@ class _WalletScreenState extends State<WalletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lighGrey,
+      backgroundColor: Colors.white,
       appBar: CustomHeader(title: 'walletBalance'.tr),
       body: Column(
         children: [
@@ -48,78 +48,73 @@ class _WalletScreenState extends State<WalletScreen> {
             }
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Card(
-                color: Colors.white,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4))),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 18.5,
-                    bottom: 47,
-                    left: 24,
-                    right: 24,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: 'currentBalance'.tr,
-                        fontWeight: FontWeight.w400,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 18.5,
+                  bottom: 47,
+                  left: 24,
+                  right: 24,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: 'currentBalance'.tr,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const Divider(
+                      color: darkGrey,
+                    ),
+                    const SizedBox(
+                      height: 51.5,
+                    ),
+                    Container(
+                      width: 44,
+                      height: 44,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: iceBlue,
                       ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const Divider(
-                        color: darkGrey,
-                      ),
-                      const SizedBox(
-                        height: 51.5,
-                      ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: darkGrey,
-                        ),
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset('assets/icons/wallet.svg'),
-                      ),
-                      const SizedBox(
-                        height: 21,
-                      ),
-                      CustomText(
-                        text: _profileController.wallet.value.balance ?? '0.00',
-                        color: _profileController.wallet.value.balance == null
-                            ? vermillion
-                            : jadeGreen,
-                        fontSize: 36,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      CustomText(
-                        text: 'walletSubtitle'.tr,
-                        color: orange,
-                        height: 2,
-                      ),
-                      const SizedBox(
-                        height: 48,
-                      ),
-                      CustomButton(
-                          onPressed: () {
-                            Get.to(
-                              () => ProductsScreen(
-                                categoryId: '',
-                                categoryName: 'allProducts'.tr,
-                                isCategoryPage: false,
-                              ),
-                            );
-                          },
-                          title: 'continueShopping'.tr),
-                    ],
-                  ),
+                      alignment: Alignment.center,
+                      child: SvgPicture.asset('assets/icons/wallet.svg'),
+                    ),
+                    const SizedBox(
+                      height: 21,
+                    ),
+                    CustomText(
+                      text: _profileController.wallet.value.balance ?? '0.00',
+                      color: _profileController.wallet.value.balance == null
+                          ? vermillion
+                          : jadeGreen,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    CustomText(
+                      text: 'walletSubtitle'.tr,
+                      color: orange,
+                      height: 2,
+                    ),
+                    const SizedBox(
+                      height: 48,
+                    ),
+                    CustomButton(
+                        onPressed: () {
+                          Get.to(
+                            () => ProductsScreen(
+                              categoryId: '',
+                              categoryName: 'allProducts'.tr,
+                              isCategoryPage: false,
+                            ),
+                          );
+                        },
+                        title: 'continueShopping'.tr),
+                  ],
                 ),
               ),
             );

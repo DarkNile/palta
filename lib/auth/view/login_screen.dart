@@ -74,7 +74,16 @@ class _LoginScreenState extends State<LoginScreen> {
               Center(
                 child: Image.asset(
                   'assets/images/logo.png',
-                  height: 120,
+                  height: 58.3,
+                ),
+              ),
+              const Center(
+                child: CustomText(
+                  text: 'Healthy Food',
+                  color: pineGreen,
+                  textAlign: TextAlign.center,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
               const SizedBox(
@@ -92,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: _emailController,
                 hintText: 'emailAddress'.tr,
                 textInputType: TextInputType.emailAddress,
-                prefixIcon: const Icon(Icons.alternate_email),
+                prefixIcon: const Icon(Icons.person),
               ),
               const SizedBox(
                 height: 24,
@@ -130,8 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: CustomText(
                   text: 'forgetPassword'.tr,
-                  color: vermillion,
+                  color: pineGreen,
                   textDecoration: TextDecoration.underline,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               const SizedBox(
@@ -161,90 +172,90 @@ class _LoginScreenState extends State<LoginScreen> {
                   title: 'signIn'.tr,
                 );
               }),
+              // const SizedBox(
+              //   height: 29,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     Container(
+              //       color: Colors.grey,
+              //       height: 1,
+              //       width: 99,
+              //     ),
+              //     CustomText(
+              //       text: 'loginThrough'.tr,
+              //       fontWeight: FontWeight.w400,
+              //       color: warmGrey,
+              //       textAlign: TextAlign.center,
+              //     ),
+              //     Container(
+              //       color: Colors.grey,
+              //       height: 1,
+              //       width: 99,
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(
+              //   height: 29,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 12),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     textDirection: TextDirection.ltr,
+              //     children: [
+              //       // Expanded(
+              //       //   child: CustomCard(
+              //       //     onTap: () {},
+              //       //     icon: 'facebook_icon',
+              //       //   ),
+              //       // ),
+              //       // const SizedBox(
+              //       //   width: 8,
+              //       // ),
+              //       if (Platform.isIOS)
+              //         Expanded(
+              //           child: CustomCard(
+              //             onTap: () async {
+              //               final user = await FirebaseService()
+              //                   .signInWithApple(context: context);
+              //               if (user != null) {
+              //                 setState(() {
+              //                   _profileController.getAccount();
+              //                   _checkoutController.getCartItems();
+              //                 });
+              //                 Get.offAll(() => const HomePage());
+              //               }
+              //             },
+              //             icon: 'apple_icon',
+              //           ),
+              //         ),
+              //       if (Platform.isIOS)
+              //         const SizedBox(
+              //           width: 8,
+              //         ),
+              //       Expanded(
+              //         child: CustomCard(
+              //           onTap: () async {
+              //             final user = await FirebaseService()
+              //                 .signInWithGoogle(context: context);
+              //             if (user != null) {
+              //               setState(() {
+              //                 _profileController.getAccount();
+              //                 _checkoutController.getCartItems();
+              //               });
+              //               Get.offAll(() => const HomePage());
+              //             }
+              //           },
+              //           icon: 'google_icon',
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(
-                height: 29,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    color: Colors.grey,
-                    height: 1,
-                    width: 99,
-                  ),
-                  CustomText(
-                    text: 'loginThrough'.tr,
-                    fontWeight: FontWeight.w400,
-                    color: warmGrey,
-                    textAlign: TextAlign.center,
-                  ),
-                  Container(
-                    color: Colors.grey,
-                    height: 1,
-                    width: 99,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 29,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  textDirection: TextDirection.ltr,
-                  children: [
-                    // Expanded(
-                    //   child: CustomCard(
-                    //     onTap: () {},
-                    //     icon: 'facebook_icon',
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   width: 8,
-                    // ),
-                    if (Platform.isIOS)
-                      Expanded(
-                        child: CustomCard(
-                          onTap: () async {
-                            final user = await FirebaseService()
-                                .signInWithApple(context: context);
-                            if (user != null) {
-                              setState(() {
-                                _profileController.getAccount();
-                                _checkoutController.getCartItems();
-                              });
-                              Get.offAll(() => const HomePage());
-                            }
-                          },
-                          icon: 'apple_icon',
-                        ),
-                      ),
-                    if (Platform.isIOS)
-                      const SizedBox(
-                        width: 8,
-                      ),
-                    Expanded(
-                      child: CustomCard(
-                        onTap: () async {
-                          final user = await FirebaseService()
-                              .signInWithGoogle(context: context);
-                          if (user != null) {
-                            setState(() {
-                              _profileController.getAccount();
-                              _checkoutController.getCartItems();
-                            });
-                            Get.offAll(() => const HomePage());
-                          }
-                        },
-                        icon: 'google_icon',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 32,
+                height: 40,
               ),
               InkWell(
                 onTap: () {
