@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:palta/splash/splash_screen_2.dart';
@@ -163,19 +165,18 @@ class _SplashScreen1State extends State<SplashScreen1> {
                   opacity: logoAnimation ? 1 : 0,
                   duration: const Duration(milliseconds: 1000),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
                         'assets/images/logo.png',
+                        height: 81.6,
                         width: width * 0.4,
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
                       const CustomText(
-                        text: 'healthy food',
+                        text: 'Healthy Food',
                         color: pineGreen,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w100,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
                       ),
                     ],
                   ),
@@ -191,6 +192,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
                         : height * 0.74,
                 curve: Curves.fastOutSlowIn,
                 left: width * 0.22,
+                right: width * 0.22,
                 duration: const Duration(milliseconds: 500),
                 child: AnimatedOpacity(
                   opacity: isClicked
@@ -199,11 +201,12 @@ class _SplashScreen1State extends State<SplashScreen1> {
                           ? 1
                           : 0,
                   duration: const Duration(milliseconds: 200),
-                  child: const CustomText(
-                    text: 'Enjoy being healthy',
+                  child: CustomText(
+                    text: 'enjoyBeingHealthy'.tr,
                     fontSize: 24,
                     color: pineGreen,
                     fontWeight: FontWeight.w400,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               )
@@ -227,6 +230,9 @@ class _SplashScreen1State extends State<SplashScreen1> {
                       setState(() {
                         isClicked = true;
                       });
+                      Get.updateLocale(const Locale('ar'));
+                      final getStorage = GetStorage();
+                      getStorage.write('lang', 'ar');
                       Future.delayed(const Duration(milliseconds: 600), () {
                         Navigator.pushReplacement(
                           context,
@@ -237,7 +243,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
                         );
                       });
                     },
-                    title: 'اللغة العربية',
+                    title: 'arabicLanguage'.tr,
                   ),
                 ),
               )
@@ -257,8 +263,24 @@ class _SplashScreen1State extends State<SplashScreen1> {
                           : 0,
                   duration: const Duration(milliseconds: 500),
                   child: CustomOutlinedButton(
-                    onPressed: () {},
-                    title: 'English',
+                    onPressed: () {
+                      setState(() {
+                        isClicked = true;
+                      });
+                      Get.updateLocale(const Locale('en-gb'));
+                      final getStorage = GetStorage();
+                      getStorage.write('lang', 'en-gb');
+                      Future.delayed(const Duration(milliseconds: 600), () {
+                        Navigator.pushReplacement(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: const SplashScreen2(),
+                          ),
+                        );
+                      });
+                    },
+                    title: 'englishLanguage'.tr,
                   ),
                 ),
               )

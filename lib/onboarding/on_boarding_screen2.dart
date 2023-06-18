@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_outlined_button.dart';
@@ -34,8 +35,8 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CustomText(
-                        text: 'بالتا تقدم ،',
+                      CustomText(
+                        text: 'paltaPresents'.tr,
                         fontSize: 18,
                         color: pineGreen,
                         fontWeight: FontWeight.w400,
@@ -44,8 +45,8 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                       const SizedBox(
                         height: 11,
                       ),
-                      const CustomText(
-                        text: 'توصيل الوجبات للمنزل',
+                      CustomText(
+                        text: 'homeDelivery'.tr,
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
                         color: darkGrey,
@@ -54,10 +55,9 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                       const SizedBox(
                         height: 30,
                       ),
-                      const CustomText(
+                      CustomText(
                         textAlign: TextAlign.center,
-                        text:
-                            'نوفر لك خدمة توصيل الوجبات الصحية الى المنزل طبقا لمواعيد محددة',
+                        text: 'homeDeliveryDescription'.tr,
                         fontSize: 16,
                         color: darkGrey,
                         fontWeight: FontWeight.w300,
@@ -108,7 +108,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                         ),
                       );
                     },
-                    title: "التالي",
+                    title: 'next'.tr,
                   ),
                 ),
               ]),

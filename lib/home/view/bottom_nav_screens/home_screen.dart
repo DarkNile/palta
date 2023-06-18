@@ -55,18 +55,19 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Obx(() {
-            if (widget.homeController.isBannersLoading.value) {
-              return SizedBox(
-                width: width,
-                height: 379,
-              );
-            }
-            return Stack(
-              clipBehavior: Clip.none,
-              alignment: AlignmentDirectional.bottomStart,
-              children: [
-                CarouselSlider.builder(
+          Stack(
+            clipBehavior: Clip.none,
+            alignment: AlignmentDirectional.bottomStart,
+            children: [
+              Obx(() {
+                if (widget.homeController.isBannersLoading.value) {
+                  return SizedBox(
+                    width: width,
+                    height: 379,
+                    child: const CustomLoadingWidget(),
+                  );
+                }
+                return CarouselSlider.builder(
                     itemCount: widget.homeController.banners.length,
                     options: CarouselOptions(
                       enlargeCenterPage: true,
@@ -105,35 +106,35 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       );
-                    }),
-                Positioned(
-                  left: 16,
-                  right: 16,
-                  top: 339,
-                  bottom: -100,
-                  child: SizedBox(
-                    height: 140,
-                    child: ListView.separated(
-                      itemCount: 3,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          width: 12,
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        return CustomHomeCard(
-                          title: titles[index],
-                          icon: icons[index],
-                        );
-                      },
-                    ),
+                    });
+              }),
+              Positioned(
+                left: 16,
+                right: 16,
+                top: 339,
+                bottom: -100,
+                child: SizedBox(
+                  height: 140,
+                  child: ListView.separated(
+                    itemCount: 3,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        width: 12,
+                      );
+                    },
+                    itemBuilder: (context, index) {
+                      return CustomHomeCard(
+                        title: titles[index],
+                        icon: icons[index],
+                      );
+                    },
                   ),
                 ),
-              ],
-            );
-          }),
+              ),
+            ],
+          ),
           const SizedBox(
             height: 134,
           ),

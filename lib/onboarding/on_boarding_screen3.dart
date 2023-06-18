@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:palta/splash/splash_screen_3.dart';
 import 'package:palta/widgets/custom_app_bar.dart';
@@ -34,8 +35,8 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CustomText(
-                        text: 'بالتا تقدم ،',
+                      CustomText(
+                        text: 'paltaPresents'.tr,
                         fontSize: 18,
                         color: pineGreen,
                         fontWeight: FontWeight.w400,
@@ -44,8 +45,8 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                       const SizedBox(
                         height: 11,
                       ),
-                      const CustomText(
-                        text: 'استشارات غذائية',
+                      CustomText(
+                        text: 'nutritionalAdvice'.tr,
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
                         color: darkGrey,
@@ -54,10 +55,9 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                       const SizedBox(
                         height: 30,
                       ),
-                      const CustomText(
+                      CustomText(
                         textAlign: TextAlign.center,
-                        text:
-                            'للانتقال الى حياة صحية فقد تحتاج الى استشارات ودعم ونحن هنا لمساعدتك',
+                        text: 'nutritionalAdviceDescription'.tr,
                         fontSize: 16,
                         color: darkGrey,
                         fontWeight: FontWeight.w300,
@@ -108,7 +108,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                         ),
                       );
                     },
-                    title: "أبدأ الآن",
+                    title: 'startNow'.tr,
                   ),
                 ),
               ]),

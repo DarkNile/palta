@@ -97,12 +97,8 @@ class AddressCard extends StatelessWidget {
                     child: Row(
                       children: [
                         const Spacer(),
-                        SvgPicture.asset(
-                          'assets/icons/edit.svg',
-                          colorFilter: const ColorFilter.mode(
-                            Colors.black,
-                            BlendMode.srcIn,
-                          ),
+                        const Icon(
+                          Icons.edit,
                         ),
                         const SizedBox(
                           width: 8,

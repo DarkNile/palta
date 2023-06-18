@@ -65,16 +65,14 @@ class _SplashScreen2State extends State<SplashScreen2> {
               children: [
                 Image.asset(
                   'assets/images/logo.png',
+                  height: 81.6,
                   width: width * 0.4,
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
                 const CustomText(
-                  text: 'healthy food',
+                  text: 'Healthy Food',
                   color: pineGreen,
-                  fontSize: 17,
-                  fontWeight: FontWeight.w100,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
                 ),
               ],
             ),

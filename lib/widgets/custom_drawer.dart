@@ -1,4 +1,3 @@
-import 'package:palta/home/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -14,6 +13,7 @@ import 'package:palta/widgets/custom_app_bar_clip_path.dart';
 import 'package:palta/widgets/custom_drawer_item.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
@@ -132,14 +132,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ),
                   CustomDrawerTile(
                     onTap: () {
-                      _homeController.getStaticPage(id: '4');
+                      _homeController.getStaticPage(id: '12');
                       Get.to(() => StaticPage(homeController: _homeController));
                     },
                     title: 'aboutUs',
                   ),
                   CustomDrawerTile(
                     onTap: () {
-                      _homeController.getStaticPage(id: '2');
+                      _homeController.getStaticPage(id: '11');
                       Get.to(() => StaticPage(homeController: _homeController));
                     },
                     title: 'commonQuestions',
@@ -160,14 +160,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   CustomDrawerTile(
                     onTap: () {
-                      _homeController.getStaticPage(id: '9');
+                      _homeController.getStaticPage(id: '16');
                       Get.to(() => StaticPage(homeController: _homeController));
                     },
                     title: 'deliveryPolicy',
                   ),
                   CustomDrawerTile(
                     onTap: () {
-                      _homeController.getStaticPage(id: '8');
+                      _homeController.getStaticPage(id: '7');
                       Get.to(() => StaticPage(homeController: _homeController));
                     },
                     title: 'refundPolicy',
@@ -241,8 +241,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           Get.updateLocale(Locale(lang));
                           final getStorage = GetStorage();
                           getStorage.write('lang', lang);
-                          // replace with splash
-                          Get.offAll(const HomePage());
+                          Get.deleteAll(force: true);
+                          Phoenix.rebirth(Get.context!);
+                          Get.reset();
                         }),
                   ),
                   const SizedBox(

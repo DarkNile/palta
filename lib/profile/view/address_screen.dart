@@ -62,11 +62,11 @@ class _AddressScreenState extends State<AddressScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            width: 40,
-                            height: 40,
+                            width: 44,
+                            height: 44,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: darkGrey,
+                              color: iceBlue,
                             ),
                             alignment: Alignment.center,
                             child:
@@ -94,7 +94,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           height: 54,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: almostBlack,
+                            color: pineGreen,
                           ),
                           alignment: Alignment.center,
                           child: const Icon(
@@ -164,7 +164,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       height: 54,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: almostBlack,
+                        color: pineGreen,
                       ),
                       alignment: Alignment.center,
                       child: const Icon(
