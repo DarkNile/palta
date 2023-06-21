@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions1.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,9 @@ class AssessmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: paleGrey,
-      body: Stack(
+    return SingleChildScrollView(
+    
+      child: Stack(
         children: [
           Container(
             height: 290,
@@ -109,9 +110,8 @@ class AssessmentScreen extends StatelessWidget {
                       width: 90.0,
                       height: 90.0,
                       decoration: BoxDecoration(
-                        color: const Color(0xff7c94b6),
                         image: const DecorationImage(
-                          image: AssetImage('assets/images/cover_8.png'),
+                          image: AssetImage('assets/images/Ellipse 199.png'),
                           fit: BoxFit.cover,
                         ),
                         borderRadius:
@@ -119,6 +119,7 @@ class AssessmentScreen extends StatelessWidget {
                         border: Border.all(
                           color: Colors.white,
                           width: 5.0,
+                          strokeAlign: BorderSide.strokeAlignInside
                         ),
                       ),
                     ),
@@ -128,23 +129,7 @@ class AssessmentScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/icons/quotation.png',
-                              height: 21,
-                              color: warmGrey.withOpacity(0.6),
-                            ),
-                            const SizedBox(
-                              width: 2,
-                            ),
-                            Image.asset(
-                              'assets/icons/quotation.png',
-                              height: 21,
-                              color: warmGrey.withOpacity(0.6),
-                            ),
-                          ],
-                        ),
+                      SvgPicture.asset('assets/icons/doubleQoutes.svg'),
                         const SizedBox(
                           height: 13,
                         ),

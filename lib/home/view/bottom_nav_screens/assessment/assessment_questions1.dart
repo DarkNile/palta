@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions2.dart';
 import 'package:palta/home/view/home_page.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class AssessmentQuestion1 extends StatefulWidget {
@@ -72,24 +73,28 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
             width: width,
             height: 40,
             color: pineGreen,
-            padding: const EdgeInsets.only(right: 20, top: 6),
-            child: CustomText(
-              text: 'q1'.tr,
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            padding: AppUtil.rtlDirection(context)
+                ? const EdgeInsets.only(right: 20)
+                : const EdgeInsets.only(left: 20),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: CustomText(
+                text: 'q1'.tr,
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
-          SizedBox(
-            height: height * 0.78,
-            child: ListView(
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
+          LimitedBox(
+            maxHeight: height * 0.78,
+            child: SingleChildScrollView(
+                child: 
                   Padding(
                     padding: const EdgeInsets.only(
                       right: 16,
                       left: 16,
+                      top: 20
                     ),
                     child: Column(children: [
                       CustomText(
@@ -104,7 +109,7 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
                         color: darkGrey,
                       ),
                       const SizedBox(
-                        height: 38,
+                        height: 20,
                       ),
                       InkWell(
                         onTap: () {
@@ -133,11 +138,15 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                     ),
-                                    CustomText(
-                                      text: 'maintainingWight'.tr,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                      color: darkGrey,
+                                    SizedBox(
+                                      width: width * 0.65,
+                                      child: CustomText(
+                                        text: 'maintainingWight'.tr,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                        color: darkGrey,
+                                      
+                                      ),
                                     ),
                                   ],
                                 )
@@ -176,11 +185,15 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                     ),
-                                    CustomText(
-                                      text: 'slimYouNeedGainWeight'.tr,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                      color: darkGrey,
+                                    SizedBox(
+                                      width: width * 0.67,
+                                      child: CustomText(
+                                        text: 'slimYouNeedGainWeight'.tr,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                        color: darkGrey,
+                                        
+                                      ),
                                     ),
                                   ],
                                 )
@@ -219,13 +232,18 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                     ),
-                                    CustomText(
-                                      text: 'YouIdealWeightWantMaintain'.tr,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                      color: darkGrey,
+                                    SizedBox(
+                                      width: width * 0.67,
+                                      child: CustomText(
+                                        text:'YouIdealWeightWantMaintain'.tr,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                        color: darkGrey,
+                                      
+                                      ),
                                     ),
                                   ],
+                                  
                                 )
                               ],
                             ),
@@ -262,12 +280,16 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                     ),
-                                    CustomText(
-                                      text: 'needIncreaseMuscle'.tr,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                      color: darkGrey,
+                                     SizedBox(
+                                      width: width * 0.67,
+                                      child: CustomText(
+                                        text:'needIncreaseMuscle'.tr,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                        color: darkGrey,
+                                      ),
                                     ),
+                                   
                                   ],
                                 )
                               ],
@@ -280,7 +302,7 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
                       ),
                     ]),
                   )
-                ]),
+                ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 17),
