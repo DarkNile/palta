@@ -231,4 +231,16 @@ const Map<String, String> en = {
   'nutritionalAdviceDescription':
       'For transition to a healthy life, you may need counseling and support, and we are here to help you',
   'startNow': 'Start Now',
+  /////// ASSES
+  'iOfferYou':'Hello, I offer you health services that enhance your lifestyle',
+  'AskForNutritionalAdvice' : 'Ask for nutritional advice',
+  'q1':'Firsrt Question',
+        'whatIsGoal':'What is your goal.?',
+
+  'q2':'Second Question',
+  'q3':'Third Question',
+  'q4':'Fourth Question',
+  'q5':'Fifth Question',
+  'q6':'Sixth Question',
+  
 };
