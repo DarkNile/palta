@@ -75,113 +75,123 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
             height: 40,
             color: pineGreen,
             padding: EdgeInsets.only(right: 20, top: 6),
-            child:  CustomText(
+            child: CustomText(
               text: 'q6'.tr,
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
-         Container(
-          height:height* 0.78,
-          child: ListView(
-            shrinkWrap: true,
-    physics: AlwaysScrollableScrollPhysics(),
-            children: [
-            
-          Padding(
-            padding: EdgeInsets.only(right: 16, left: 16,),
-            child: Column(children: [
-               CustomText(
-                text:'heighWeight'.tr,
-                fontSize: 24,
-                fontWeight: FontWeight.w800,
-              ),
-              CustomText(
-                text: 'writeHeightWeight'.tr,
-                fontSize: 16,
-                fontWeight: FontWeight.w200,
-                color: darkGrey,
-              ),
-              SizedBox(
-                height: 38,
-              ),
-             
-              Card(
-                    elevation: 4,
-                    color: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
+          Container(
+            height: height * 0.78,
+            child: ListView(
+                shrinkWrap: true,
+                physics: AlwaysScrollableScrollPhysics(),
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: 16,
+                      left: 16,
                     ),
-                    child: 
-                    Container(
-                      width: width*0.8,
-                      height: height*0.49,
-                      child:  Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(child: SvgPicture.asset('assets/icons/length.svg')),
-                          
-                           CustomText(text: 'heightCm'.tr,fontSize: 16,fontWeight: FontWeight.w400,),
-                          const CustomTextField(),
-                         const SizedBox(height: 33,),
-                           CustomText(text: 'weightKm'.tr,fontSize: 16,fontWeight: FontWeight.w400,),
-                          const CustomTextField(),
-                                                    SizedBox(height: 46,),
-
-                          CustomButton(onPressed: (){
-                            Get.offAll(()=>const AssessmentResult());
-                          }, title: 'result'.tr)
-                                
-                        ],),
+                    child: Column(children: [
+                      CustomText(
+                        text: 'heighWeight'.tr,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
                       ),
-                    )
-                  ),
-                 
-            
-            
-
-            ]),
-          )
-        
-          ]),
-         ),
-
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
-                child: Row(
-                  children: [
-                   const CustomText(
-                              text: '6 / 6',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300,
-                              color: darkGrey,
-                            ),
-            const  Expanded(child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 17),
-                child:   Divider(
-                  
-                  height: 20,thickness:1, color:pinkishGrey,),
-              )),
-                            InkWell(
-                              onTap: () {
-                                Get.offAll(const HomePage());
-                              },
-                              child: CustomText(
-                                text: 'إلغاء'.tr,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: darkGrey,
+                      CustomText(
+                        text: 'writeHeightWeight'.tr,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w200,
+                        color: darkGrey,
+                      ),
+                      SizedBox(
+                        height: 38,
+                      ),
+                      Card(
+                          elevation: 4,
+                          color: Colors.white,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                          ),
+                          child: Container(
+                            width: width * 0.8,
+                            height: height * 0.49,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Center(
+                                      child: SvgPicture.asset(
+                                          'assets/icons/length.svg')),
+                                  CustomText(
+                                    text: 'heightCm'.tr,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  const CustomTextField(),
+                                  const SizedBox(
+                                    height: 33,
+                                  ),
+                                  CustomText(
+                                    text: 'weightKm'.tr,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                  const CustomTextField(),
+                                  SizedBox(
+                                    height: 46,
+                                  ),
+                                  CustomButton(
+                                      onPressed: () {
+                                        Get.offAll(
+                                            () => const AssessmentResult());
+                                      },
+                                      title: 'result'.tr)
+                                ],
                               ),
                             ),
-                  ],
+                          )),
+                    ]),
+                  )
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 17),
+            child: Row(
+              children: [
+                const CustomText(
+                  text: '6 / 6',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  color: darkGrey,
                 ),
-              )
-        
+                const Expanded(
+                    child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 17),
+                  child: Divider(
+                    height: 20,
+                    thickness: 1,
+                    color: pinkishGrey,
+                  ),
+                )),
+                InkWell(
+                  onTap: () {
+                    Get.offAll(const HomePage());
+                  },
+                  child: CustomText(
+                    text: 'cancel'.tr,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                    color: darkGrey,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

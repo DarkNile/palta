@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'body_program_2',
     'body_program_3'
   ];
-  final List<String> programIcons = ['fitness', 'muscle', 'weight'];
+  final List<String> programIcons = ['muscle', 'fitness', 'weight'];
 
   @override
   Widget build(BuildContext context) {
@@ -148,25 +148,33 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 28,
           ),
-          ListView.separated(
-            itemCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 28,
+          Obx(() {
+            if (widget.homeController.isProgramsLoading.value) {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            },
-            itemBuilder: (context, index) {
-              return CustomProgramCard(
-                title: programTitles[index],
-                subtitle: programSubtitles[index],
-                image: programImages[index],
-                icon: programIcons[index],
-              );
-            },
-          ),
+            }
+            return ListView.separated(
+              itemCount: widget.homeController.programs.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 28,
+                );
+              },
+              itemBuilder: (context, index) {
+                return CustomProgramCard(
+                  title: widget.homeController.programs[index].name!,
+                  subtitle: widget.homeController.programs[index].description!,
+                  image: widget.homeController.programs[index].originalImage!,
+                  icon: programIcons[index],
+                  onTap: () {},
+                );
+              },
+            );
+          }),
           const SizedBox(
             height: 28,
           ),

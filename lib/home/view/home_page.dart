@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     _currentIndex = widget.pageIndex ?? 0;
     // checkAppVersion();
     _homeController.getBanners(id: '7');
+    _homeController.getPrograms();
   }
 
   @override

@@ -1,14 +1,8 @@
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions1.dart';
-import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions2.dart';
-import 'package:palta/home/view/sub_category_screen.dart';
-import 'package:palta/widgets/custom_body_title.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/home/controllers/home_controller.dart';
-import 'package:palta/product/view/products_screen.dart';
-import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 import '../../../widgets/custom_outlined_button.dart';
@@ -38,8 +32,8 @@ class AssessmentScreen extends StatelessWidget {
                 const SizedBox(
                   height: 130,
                 ),
-                const CustomText(
-                  text: 'التقييم',
+                CustomText(
+                  text: 'assessment'.tr,
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -95,7 +89,7 @@ class AssessmentScreen extends StatelessWidget {
                         ),
                         CustomOutlinedButton(
                           onPressed: () {
-                              Get.to(() => const AssessmentQuestion1());
+                            Get.to(() => const AssessmentQuestion1());
                           },
                           title: 'startAssessment'.tr,
                         ),
@@ -120,7 +114,8 @@ class AssessmentScreen extends StatelessWidget {
                           image: AssetImage('assets/images/cover_8.png'),
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(50.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50.0)),
                         border: Border.all(
                           color: Colors.white,
                           width: 5.0,
@@ -164,8 +159,7 @@ class AssessmentScreen extends StatelessWidget {
                         SizedBox(
                           width: width * 0.6,
                           child: CustomText(
-                            text:
-                            'iOfferYou'.tr,
+                            text: 'iOfferYou'.tr,
                             fontSize: 14,
                           ),
                         ),
@@ -175,14 +169,12 @@ class AssessmentScreen extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 35,
-                ), 
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: CustomOutlinedButton(
-                    onPressed: () {
-                    
-                    },
-                    title:'AskForNutritionalAdvice'.tr,
+                    onPressed: () {},
+                    title: 'AskForNutritionalAdvice'.tr,
                   ),
                 ),
               ],

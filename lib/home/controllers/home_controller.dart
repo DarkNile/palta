@@ -29,6 +29,8 @@ class HomeController extends GetxController {
   var staticPageData = <String, dynamic>{}.obs;
   var isLocationsLoading = false.obs;
   var locations = <Location>[].obs;
+  var programs = <Product>[].obs;
+  var isProgramsLoading = false.obs;
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
@@ -75,6 +77,24 @@ class HomeController extends GetxController {
       return null;
     } finally {
       isCategoriesLoading(false);
+    }
+  }
+
+  Future<List<Product>?> getPrograms() async {
+    try {
+      isProgramsLoading(true);
+      final data = await HomeService.getPrograms();
+      if (data != null) {
+        programs(data);
+        return programs;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isProgramsLoading(false);
     }
   }
 
