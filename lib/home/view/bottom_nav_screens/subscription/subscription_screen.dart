@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_info.dart';
 import 'package:palta/home/widgets/custom_subscription_card.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 
@@ -36,7 +37,9 @@ class SubscriptionScreen extends StatelessWidget {
                 date: '10/12/2023',
                 image: 'assets/images/body_program_3.png',
                 onChangeMeals: () {},
-                onInfoTap: () {},
+                onInfoTap: (){
+                  Get.to(()=>const SubscriptionInfo());
+                },
               );
             },
             separatorBuilder: (context, index) {
