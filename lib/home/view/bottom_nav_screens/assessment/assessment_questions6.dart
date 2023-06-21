@@ -82,7 +82,7 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: CustomText(
-                text: 'q5'.tr,
+                text: 'q6'.tr,
                 color: Colors.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
