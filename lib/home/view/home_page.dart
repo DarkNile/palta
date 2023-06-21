@@ -1,7 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/view/bottom_nav_screens/category_screen.dart';
+import 'package:palta/home/view/bottom_nav_screens/assessment_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/favorite_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/order_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/profile_screen.dart';
@@ -19,7 +19,6 @@ import 'package:palta/product/view/products_screen.dart';
 import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_bottom_navigation_bar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key, this.pageIndex});
 
@@ -115,7 +114,7 @@ class _HomePageState extends State<HomePage> {
             controller: _pageController,
             children: [
               HomeScreen(homeController: _homeController),
-              CategoryScreen(homeController: _homeController),
+              AssessmentScreen(homeController: _homeController),
               OrderScreen(profileController: _profileController),
               FavoriteScreen(homeController: _homeController),
               ProfileScreen(
