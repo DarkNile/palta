@@ -67,6 +67,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     lang = getStorage.read('lang') ?? '';
+  //  lang = 'en';
+
   }
 
   @override

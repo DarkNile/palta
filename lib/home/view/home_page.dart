@@ -3,7 +3,7 @@ import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/guide_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription_screen.dart';
-import 'package:palta/home/view/bottom_nav_screens/assessment_screen.dart';
+import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/profile_screen.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';

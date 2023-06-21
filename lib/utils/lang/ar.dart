@@ -279,4 +279,16 @@ const Map<String, String> ar = {
   'fat': 'صافي الدهون',
   'protein': 'صافي البروتين',
   'subscribeNow': 'إشترك الأن ',
+
+  'forThoseWishingToMaintainWeight':
+      'للراغبين بالحفاظ على الوزن وتشكيل جسم متناسق مثالى',
+  'breakfastDishes': 'اطباق الفطور',
+  'lunchDishes': 'اطباق الغداء',
+  'dinnerDishes': 'اطباق العشاء',
+  'throughAccountYouCanControl': 'من خلال حسابك يمكنك التحكم في التالى',
+  'possibilityChangeAndReplaceMeals': 'إمكانية تغيير واستبدال الوجبات',
+  'possibilityCancelTheSubscription': 'إمكانية إيقاف او الغاء الاشتراك',
+  'possibilityToRequestNutritionalAdvice': 'إمكانية طلب استشارة غذائية',
+  'startFrom':'يبدأ من ',
+
 };

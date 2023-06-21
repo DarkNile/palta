@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/widgets/custom_text.dart';
 
-import '../../../widgets/custom_outlined_button.dart';
+import '../../../../widgets/custom_outlined_button.dart';
 
 class AssessmentScreen extends StatelessWidget {
   const AssessmentScreen({super.key, required this.homeController});
