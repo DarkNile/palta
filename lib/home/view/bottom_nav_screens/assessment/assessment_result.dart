@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/view/bottom_nav_screens/program_info.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_info.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_text.dart';
 
@@ -196,7 +196,7 @@ class _AssessmentResultState extends State<AssessmentResult> {
                             CustomButton(
                                 onPressed: () {
 
-                                  Get.to(()=> const ProgramInfo());
+                                  Get.to(()=> const SubscriptionInfo(fromAssessment: true,));
 
 
                                 }, title: 'subscribeNow'.tr)

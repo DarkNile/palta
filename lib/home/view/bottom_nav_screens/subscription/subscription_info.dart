@@ -10,17 +10,20 @@ import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
 
 import '../../../../utils/app_util.dart';
-import '../../../widgets/custom_app_bar_clip_path.dart';
-import 'dart:math' as math; // import this
+import 'dart:math' as math;
 
-class ProgramInfo extends StatefulWidget {
-  const ProgramInfo({super.key});
+import '../../../../widgets/custom_app_bar_clip_path.dart'; // import this
+
+class SubscriptionInfo extends StatefulWidget {
+  const SubscriptionInfo({super.key,  this.fromAssessment = false});
+
+  final bool fromAssessment;
 
   @override
-  State<ProgramInfo> createState() => _ProgramInfoState();
+  State<SubscriptionInfo> createState() => _SubscriptionInfoState();
 }
 
-class _ProgramInfoState extends State<ProgramInfo> {
+class _SubscriptionInfoState extends State<SubscriptionInfo> {
   List breakfastInfo = [
     {'image': 'assets/images/sandwich_2.png', 'name': 'كلوب سانددويتش'},
     {
@@ -100,7 +103,7 @@ class _ProgramInfoState extends State<ProgramInfo> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
+                  widget.fromAssessment ?  Container(
                       color: offWhite,
                       height: 82,
                       padding: const EdgeInsets.symmetric(horizontal: 36),
@@ -220,7 +223,7 @@ class _ProgramInfoState extends State<ProgramInfo> {
                               ],
                             ),
                           ]),
-                    ),
+                    ):Container(),
                     Padding(
                       padding: AppUtil.rtlDirection(context)
                           ? const EdgeInsets.only(top: 20, right: 28)
@@ -621,7 +624,7 @@ class _ProgramInfoState extends State<ProgramInfo> {
                       child: CustomButton(
                                   onPressed: () {
                     
-                                    Get.to(()=> const ProgramInfo());
+                              
                     
                     
                                   }, title: 'subscribeNow'.tr),
