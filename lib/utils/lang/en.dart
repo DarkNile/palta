@@ -262,7 +262,7 @@ const Map<String, String> en = {
   'male': 'Male',
   'female': 'Fmale',
   'q4': 'Fourth Question',
-  'WhatBestPicture Body': 'What is the best picture that describes your body?',
+  'WhatBestPicture': 'What is the best picture that describes your body?',
   'chooseYourBodyShape': 'Choose your body shape from the following pictures',
   'hourglassBody': 'Hourglass body shape',
   'rectangleBody': 'Rectangle body shape',
@@ -270,7 +270,7 @@ const Map<String, String> en = {
   'pearBody': 'Pear body shape',
   'q5': 'Fifth Question',
 
-  'howActiveYou?': 'How physically active are you?(',
+  'howActiveYou': 'How physically active are you?',
   'numberExerciseDuringWeek':
       'The number of times you exercise during the week',
   'exercise7': 'Exercise 5 -7 times',
