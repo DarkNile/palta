@@ -2,8 +2,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/category_screen.dart';
-import 'package:palta/home/view/bottom_nav_screens/favorite_screen.dart';
-import 'package:palta/home/view/bottom_nav_screens/order_screen.dart';
+import 'package:palta/home/view/bottom_nav_screens/guide_screen.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/profile_screen.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -60,7 +60,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: _currentIndex == 0 ? paleGrey : Colors.white,
+      backgroundColor:
+          _currentIndex == 0 || _currentIndex == 2 ? paleGrey : Colors.white,
       drawer: CustomDrawer(
         onProfileTileTap: () {
           Get.back();
@@ -116,8 +117,8 @@ class _HomePageState extends State<HomePage> {
             children: [
               HomeScreen(homeController: _homeController),
               CategoryScreen(homeController: _homeController),
-              OrderScreen(profileController: _profileController),
-              FavoriteScreen(homeController: _homeController),
+              SubscriptionScreen(homeController: _homeController),
+              GuideScreen(homeController: _homeController),
               ProfileScreen(
                 profileController: _profileController,
                 authController: _authController,

@@ -225,4 +225,6 @@ const Map<String, String> ar = {
   'nutritionalAdviceDescription':
       'للانتقال الى حياة صحية فقد تحتاج الى استشارات و دعم و نحن هنا لمساعدتك',
   'startNow': 'ابدأ الأن',
+  'changeMeals': 'تغيير الوجبات',
+  'subscriptionInfo': 'معلومات الإشتراك',
 };

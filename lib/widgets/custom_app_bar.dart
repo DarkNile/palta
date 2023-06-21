@@ -110,7 +110,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       },
                       child: widget.isFromNotification
                           ? SvgPicture.asset(
-                              'assets/icons/notification.svg',
+                              'assets/icons/notification_green.svg',
                             )
                           : SvgPicture.asset(
                               'assets/icons/notification.svg',

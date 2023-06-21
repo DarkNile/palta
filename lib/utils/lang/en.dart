@@ -231,4 +231,6 @@ const Map<String, String> en = {
   'nutritionalAdviceDescription':
       'For transition to a healthy life, you may need counseling and support, and we are here to help you',
   'startNow': 'Start Now',
+  'changeMeals': 'Change Meals',
+  'subscriptionInfo': 'Subscription Info',
 };
