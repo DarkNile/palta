@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_result.dart';
 import 'package:palta/home/view/home_page.dart';
@@ -76,8 +75,8 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
             height: 40,
             color: pineGreen,
             padding: EdgeInsets.only(right: 20, top: 6),
-            child: const CustomText(
-              text: 'السؤال السادس',
+            child:  CustomText(
+              text: 'q6'.tr,
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -93,13 +92,13 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
           Padding(
             padding: EdgeInsets.only(right: 16, left: 16,),
             child: Column(children: [
-              const CustomText(
-                text: 'الطول والوزن .؟',
+               CustomText(
+                text:'heighWeight'.tr,
                 fontSize: 24,
                 fontWeight: FontWeight.w800,
               ),
-             const CustomText(
-                text: 'اكتب طولك ووزنك بعناية',
+              CustomText(
+                text: 'writeHeightWeight'.tr,
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
                 color: darkGrey,
@@ -126,16 +125,16 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
                           children: [
                             Center(child: SvgPicture.asset('assets/icons/length.svg')),
                           
-                          const CustomText(text: 'الطول / سم',fontSize: 16,fontWeight: FontWeight.w400,),
+                           CustomText(text: 'heightCm'.tr,fontSize: 16,fontWeight: FontWeight.w400,),
                           const CustomTextField(),
-                          SizedBox(height: 33,),
-                          const CustomText(text: 'الوزن / كم',fontSize: 16,fontWeight: FontWeight.w400,),
+                         const SizedBox(height: 33,),
+                           CustomText(text: 'weightKm'.tr,fontSize: 16,fontWeight: FontWeight.w400,),
                           const CustomTextField(),
                                                     SizedBox(height: 46,),
 
                           CustomButton(onPressed: (){
                             Get.offAll(()=>const AssessmentResult());
-                          }, title: 'النتيجة')
+                          }, title: 'result'.tr)
                                 
                         ],),
                       ),
@@ -156,14 +155,14 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
                 padding: const EdgeInsets.symmetric(horizontal: 17),
                 child: Row(
                   children: [
-                    CustomText(
+                   const CustomText(
                               text: '6 / 6',
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
                               color: darkGrey,
                             ),
-              Expanded(child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
+            const  Expanded(child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 17),
                 child:   Divider(
                   
                   height: 20,thickness:1, color:pinkishGrey,),
@@ -173,7 +172,7 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
                                 Get.offAll(const HomePage());
                               },
                               child: CustomText(
-                                text: 'إلغاء',
+                                text: 'إلغاء'.tr,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
                                 color: darkGrey,

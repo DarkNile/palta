@@ -246,6 +246,7 @@ const Map<String, String> ar = {
   'years': 'عـام',
   'q3': 'السؤال الثالث',
   'WhatGender': 'ماهو جنسك .؟',
+  'selectGender':'إختر نوع الجنس',
   'male': 'ذكر',
   'female': 'أنثى',
   'q4': 'السؤال الرابع',

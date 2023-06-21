@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions5.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_text.dart';
 
-import 'assessment_questions3.dart';
 
 class AssessmentQuestion4 extends StatefulWidget {
   const AssessmentQuestion4({super.key});
@@ -75,36 +73,36 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
             width: width,
             height: 40,
             color: pineGreen,
-            padding: EdgeInsets.only(right: 20, top: 6),
-            child: const CustomText(
-              text: 'السؤال الرابع',
+            padding:const EdgeInsets.only(right: 20, top: 6),
+            child:  CustomText(
+              text: 'q4'.tr,
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
-         Container(
+         SizedBox(
           height:height* 0.78,
           child: ListView(
             shrinkWrap: true,
-    physics: AlwaysScrollableScrollPhysics(),
+    physics:const AlwaysScrollableScrollPhysics(),
             children: [
             
           Padding(
-            padding: EdgeInsets.only(right: 16, left: 16,),
+            padding: const EdgeInsets.only(right: 16, left: 16,),
             child: Column(children: [
-              const CustomText(
-                text: 'ما هي أفضل صورة تصف جسمك؟',
+               CustomText(
+                text:'WhatBestPicture'.tr,
                 fontSize: 24,
                 fontWeight: FontWeight.w800,
               ),
               CustomText(
-                text: 'إختر شكل جسمك من بين الصور التالية',
+                text:'chooseYourBodyShape'.tr,
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
                 color: darkGrey,
               ),
-              SizedBox(
+             const SizedBox(
                 height: 38,
               ),
               Row(
@@ -122,7 +120,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.4,
                         height: 228,
                         child:  Column(
@@ -131,7 +129,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                             SvgPicture.asset('assets/icons/shape_2.svg'),
                                                                          const SizedBox(height: 10,),
 
-                           CustomText(text: 'جسم الساعة الرملية',fontSize: 18,),
+                           CustomText(text: 'hourglassBody'.tr,fontSize: 18,),
 
           
                         ],),
@@ -151,7 +149,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.4,
                         height: 228,
                         child:  Column(
@@ -160,7 +158,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                             SvgPicture.asset('assets/icons/shape_1.svg'),
                                              const SizedBox(height: 10,),
 
-                           CustomText(text: 'جسم المستطيل',fontSize: 18,),
+                           CustomText(text: 'rectangleBody'.tr,fontSize: 18,),
 
           
                         ],),
@@ -187,7 +185,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.4,
                         height: 228,
                         child:  Column(
@@ -196,7 +194,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                             SvgPicture.asset('assets/icons/shape_3.svg'),
                                                                          const SizedBox(height: 10,),
 
-                           CustomText(text: 'جسم التفاحة',fontSize: 18,),
+                           CustomText(text: 'appleBody'.tr,fontSize: 18,),
 
           
                         ],),
@@ -216,7 +214,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.4,
                         height: 228,
                         child:  Column(
@@ -225,7 +223,7 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                             SvgPicture.asset('assets/icons/shape_5.svg'),
                                              const SizedBox(height: 10,),
 
-                          const CustomText(text:'جسم الكمثرى',fontSize: 18,),
+                           CustomText(text:'pearBody'.tr,fontSize: 18,),
 
           
                         ],),
@@ -254,18 +252,18 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
                               fontWeight: FontWeight.w300,
                               color: darkGrey,
                             ),
-              Expanded(child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
+             const Expanded(child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 17),
                 child:   Divider(
                   
                   height: 20,thickness:1, color:pinkishGrey,),
               )),
                             InkWell(
                               onTap: () {
-                                Get.off(HomePage());
+                                Get.offAll(const HomePage());
                               },
                               child: CustomText(
-                                text: 'إلغاء',
+                                text: 'cancel'.tr,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
                                 color: darkGrey,

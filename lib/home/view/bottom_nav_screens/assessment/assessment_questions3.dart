@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_text.dart';
 
-import 'assessment_questions3.dart';
 import 'assessment_questions4.dart';
 
 class AssessmentQuestion3 extends StatefulWidget {
@@ -48,7 +46,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                     width: 10,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin:const EdgeInsets.symmetric(vertical: 10),
                     width: 250,
                     height: 6,
                     child: const ClipRRect(
@@ -75,36 +73,36 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
             width: width,
             height: 40,
             color: pineGreen,
-            padding: EdgeInsets.only(right: 20, top: 6),
-            child: const CustomText(
-              text: 'السؤال الثالث',
+            padding:const EdgeInsets.only(right: 20, top: 6),
+            child:  CustomText(
+              text: 'q3'.tr,
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
-         Container(
+         SizedBox(
           height:height* 0.78,
           child: ListView(
             shrinkWrap: true,
-    physics: AlwaysScrollableScrollPhysics(),
+    physics: const AlwaysScrollableScrollPhysics(),
             children: [
             
           Padding(
-            padding: EdgeInsets.only(right: 16, left: 16,),
+            padding:const EdgeInsets.only(right: 16, left: 16,),
             child: Column(children: [
-              const CustomText(
-                text: 'ماهو جنسك .؟',
+               CustomText(
+                text: 'WhatGender'.tr,
                 fontSize: 24,
                 fontWeight: FontWeight.w800,
               ),
               CustomText(
-                text: 'إختر نوع الجنس',
+                text: 'selectGender'.tr,
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
                 color: darkGrey,
               ),
-              SizedBox(
+            const  SizedBox(
                 height: 38,
               ),
               Row(
@@ -122,7 +120,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.4,
                         height: 195,
                         child:  Column(
@@ -131,7 +129,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                             SvgPicture.asset('assets/icons/man.svg'),
                                                                          const SizedBox(height: 10,),
 
-                           CustomText(text: 'ذكر',fontSize: 18,),
+                           CustomText(text: 'male'.tr,fontSize: 18,),
 
           
                         ],),
@@ -151,7 +149,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.4,
                         height: 195,
                         child:  Column(
@@ -160,7 +158,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                             SvgPicture.asset('assets/icons/girl.svg'),
                                              const SizedBox(height: 10,),
 
-                           CustomText(text: 'أنثى',fontSize: 18,),
+                           CustomText(text: 'female'.tr,fontSize: 18,),
 
           
                         ],),
@@ -191,18 +189,18 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                               fontWeight: FontWeight.w300,
                               color: darkGrey,
                             ),
-              Expanded(child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
+             const Expanded(child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 17),
                 child:   Divider(
                   
                   height: 20,thickness:1, color:pinkishGrey,),
               )),
                             InkWell(
                               onTap: () {
-                                Get.off(HomePage());
+                                Get.offAll(HomePage());
                               },
                               child: CustomText(
-                                text: 'إلغاء',
+                                text: 'cancel'.tr,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
                                 color: darkGrey,

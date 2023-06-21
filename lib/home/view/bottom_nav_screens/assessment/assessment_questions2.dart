@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -47,7 +45,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                     width: 10,
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin:const EdgeInsets.symmetric(vertical: 10),
                     width: 250,
                     height: 6,
                     child: const ClipRRect(
@@ -74,36 +72,36 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
             width: width,
             height: 40,
             color: pineGreen,
-            padding: EdgeInsets.only(right: 20, top: 6),
-            child: const CustomText(
-              text: 'السؤال الثاني',
+            padding:const EdgeInsets.only(right: 20, top: 6),
+            child:  CustomText(
+              text: 'q2'.tr,
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
           ),
-         Container(
+         SizedBox(
           height:height* 0.78,
           child: ListView(
             shrinkWrap: true,
-    physics: AlwaysScrollableScrollPhysics(),
+    physics: const AlwaysScrollableScrollPhysics(),
             children: [
             
           Padding(
             padding: EdgeInsets.only(right: 16, left: 16,),
             child: Column(children: [
-              const CustomText(
-                text: 'كم عمرك .؟',
+               CustomText(
+                text: 'howOldAreYou'.tr,
                 fontSize: 24,
                 fontWeight: FontWeight.w800,
               ),
               CustomText(
-                text: 'إختر متوسط الفئة العمرية الخاصة بك',
+                text: 'ChooseAverageAge'.tr,
                 fontSize: 16,
                 fontWeight: FontWeight.w200,
                 color: darkGrey,
               ),
-              SizedBox(
+            const  SizedBox(
                 height: 38,
               ),
               Row(
@@ -124,11 +122,11 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                       Container(
                         width: width*0.4,
                         height: 112,
-                        child: const Column(
+                        child:  Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomText(text: '14  : 12',fontSize: 18,),
-                                                      CustomText(text: 'عـام',fontSize: 14,color: brownishGrey,),
+                          const CustomText(text: '14  : 12',fontSize: 18,),
+                                                      CustomText(text: 'years'.tr,fontSize: 14,color: brownishGrey,),
 
           
                         ],),
@@ -148,14 +146,14 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.42,
                         height: 112,
-                        child: const Column(
+                        child:  Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomText(text: '18  : 15',fontSize: 18,),
-                                                      CustomText(text: 'عـام',fontSize: 14,color: brownishGrey,),
+                          const CustomText(text: '18  : 15',fontSize: 18,),
+                                                      CustomText(text:  'years'.tr,fontSize: 14,color: brownishGrey,),
 
           
                         ],),
@@ -185,14 +183,14 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
-                        width: width*0.4,
+                     SizedBox(
+                        width: width*0.42,
                         height: 112,
-                        child: const Column(
+                        child:  Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomText(text: '25  : 19',fontSize: 18,),
-                                                      CustomText(text: 'عـام',fontSize: 14,color: brownishGrey,),
+                          const CustomText(text: '25  : 19',fontSize: 18,),
+                                                      CustomText(text:  'years'.tr,fontSize: 14,color: brownishGrey,),
 
           
                         ],),
@@ -212,14 +210,14 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.42,
                         height: 112,
-                        child: const Column(
+                        child:  Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomText(text: '54  : 26',fontSize: 18,),
-                                                      CustomText(text: 'عـام',fontSize: 14,color: brownishGrey,),
+                          const CustomText(text:'54  : 26',fontSize: 18,),
+                                                      CustomText(text:  'years'.tr,fontSize: 14,color: brownishGrey,),
 
           
                         ],),
@@ -248,19 +246,20 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
-                        width: width*0.4,
+
+                      SizedBox(
+                        width: width*0.42,
                         height: 112,
-                        child: const Column(
+                        child:  Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomText(text: '59  : 55',fontSize: 18,),
-                                                      CustomText(text: 'عـام',fontSize: 14,color: brownishGrey,),
+                          const CustomText(text: '59  : 55',fontSize: 18,),
+                                                      CustomText(text:  'years'.tr,fontSize: 14,color: brownishGrey,),
 
           
                         ],),
                       )
-                    ),
+                   ),
                   ),
                  const SizedBox(width: 10,),
                      InkWell(
@@ -274,14 +273,14 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         borderRadius: BorderRadius.all(Radius.circular(6)),
                       ),
                       child: 
-                      Container(
+                      SizedBox(
                         width: width*0.42,
                         height: 112,
-                        child: const Column(
+                        child:  Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                           CustomText(text: '60',fontSize: 18,),
-                                                      CustomText(text: '  عـام وما فوق',fontSize: 14,color: brownishGrey,),
+                          const CustomText(text: '60',fontSize: 18,),
+                                                      CustomText(text:'years'.tr,fontSize: 14,color: brownishGrey,),
 
           
                         ],),
@@ -307,13 +306,13 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                 padding: const EdgeInsets.symmetric(horizontal: 17),
                 child: Row(
                   children: [
-                    CustomText(
+                  const  CustomText(
                               text: '6 / 2',
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
                               color: darkGrey,
                             ),
-              Expanded(child: Padding(
+             const Expanded(child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 17),
                 child:   Divider(
                   
@@ -321,10 +320,10 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
               )),
                             InkWell(
                               onTap: () {
-                                Get.off(HomePage());
+                                Get.offAll(const HomePage());
                               },
                               child: CustomText(
-                                text: 'إلغاء',
+                                text: 'cancel'.tr,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
                                 color: darkGrey,
