@@ -21,7 +21,6 @@ class AssessmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: paleGrey,
       body: Stack(
@@ -96,7 +95,7 @@ class AssessmentScreen extends StatelessWidget {
                         ),
                         CustomOutlinedButton(
                           onPressed: () {
-                              Get.to(() => AssessmentQuestion1());
+                              Get.to(() => const AssessmentQuestion1());
                           },
                           title: 'startAssessment'.tr,
                         ),
@@ -121,7 +120,7 @@ class AssessmentScreen extends StatelessWidget {
                           image: AssetImage('assets/images/cover_8.png'),
                           fit: BoxFit.cover,
                         ),
-                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                        borderRadius: const BorderRadius.all(Radius.circular(50.0)),
                         border: Border.all(
                           color: Colors.white,
                           width: 5.0,
@@ -162,11 +161,11 @@ class AssessmentScreen extends StatelessWidget {
                         const SizedBox(
                           height: 13,
                         ),
-                        Container(
+                        SizedBox(
                           width: width * 0.6,
-                          child: new CustomText(
+                          child: CustomText(
                             text:
-                            'مرحبا اقدم لكم الخدمات الصحية التي تعزز من أسلوب حياتك',
+                            'iOfferYou'.tr,
                             fontSize: 14,
                           ),
                         ),
@@ -176,14 +175,14 @@ class AssessmentScreen extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 35,
-                ),
+                ), 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: CustomOutlinedButton(
                     onPressed: () {
                     
                     },
-                    title: 'أطلب استشارة غذائية'.tr,
+                    title:'AskForNutritionalAdvice'.tr,
                   ),
                 ),
               ],
