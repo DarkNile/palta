@@ -225,7 +225,8 @@ const Map<String, String> ar = {
   'nutritionalAdviceDescription':
       'للانتقال الى حياة صحية فقد تحتاج الى استشارات و دعم و نحن هنا لمساعدتك',
   'startNow': 'ابدأ الأن',
-
+  'changeMeals': 'تغيير الوجبات',
+  'subscriptionInfo': 'معلومات الإشتراك',
   /////// ASSES
   'iOfferYou': 'مرحبا اقدم لكم الخدمات الصحية التي تعزز من أسلوب حياتك',
   'AskForNutritionalAdvice': 'أطلب استشارة غذائية',
@@ -246,7 +247,7 @@ const Map<String, String> ar = {
   'years': 'عـام',
   'q3': 'السؤال الثالث',
   'WhatGender': 'ماهو جنسك .؟',
-  'selectGender':'إختر نوع الجنس',
+  'selectGender': 'إختر نوع الجنس',
   'male': 'ذكر',
   'female': 'أنثى',
   'q4': 'السؤال الرابع',
