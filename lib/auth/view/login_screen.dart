@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:palta/auth/services/firebase_service.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +10,6 @@ import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
-import 'package:palta/widgets/custom_card.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
 

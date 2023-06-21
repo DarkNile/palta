@@ -58,6 +58,31 @@ class HomeService {
     }
   }
 
+  static Future<List<Product>?> getPrograms() async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse(
+          '${baseUrl}route=feed/rest_api/products&limit=50&page=1&product_type=1&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      List<dynamic> data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return data.map((product) => Product.fromJson(product)).toList();
+    } else {
+      return null;
+    }
+  }
+
   static Future<List<Category>?> getSubCategories({required String id}) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');

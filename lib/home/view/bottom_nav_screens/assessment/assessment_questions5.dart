@@ -45,7 +45,7 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
                     width: 10,
                   ),
                   Container(
-                    margin:const EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     width: 250,
                     height: 6,
                     child: const ClipRRect(
@@ -87,7 +87,7 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   Padding(
-                    padding:const EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       right: 16,
                       left: 16,
                     ),
@@ -292,7 +292,7 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
                     Get.offAll(const HomePage());
                   },
                   child: CustomText(
-                    text: 'إلغاء'.tr,
+                    text: 'cancel'.tr,
                     fontSize: 16,
                     fontWeight: FontWeight.w300,
                     color: darkGrey,
