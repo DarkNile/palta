@@ -293,5 +293,6 @@ const Map<String, String> ar = {
   'subscriptionPeriod':'مدة الأشتراك - أيام',
 'numberOfPerson':'عدد الأفراد',
 'continueSubscribing':'متابعة الاشتراك',
+'mealIngredients':'مكونات الوجبة'
 
 };
