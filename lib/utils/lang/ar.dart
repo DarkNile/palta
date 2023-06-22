@@ -290,5 +290,8 @@ const Map<String, String> ar = {
   'possibilityCancelTheSubscription': 'إمكانية إيقاف او الغاء الاشتراك',
   'possibilityToRequestNutritionalAdvice': 'إمكانية طلب استشارة غذائية',
   'startFrom':'يبدأ من ',
+  'subscriptionPeriod':'مدة الأشتراك - أيام',
+'numberOfPerson':'عدد الأفراد',
+'continueSubscribing':'متابعة الاشتراك',
 
 };

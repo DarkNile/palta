@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_result.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/subscribe_now_sheet.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/home/widgets/custom_home_card.dart';
 import 'package:palta/widgets/custom_button.dart';
@@ -15,7 +16,7 @@ import 'dart:math' as math;
 import '../../../../widgets/custom_app_bar_clip_path.dart'; // import this
 
 class SubscriptionInfo extends StatefulWidget {
-  const SubscriptionInfo({super.key,  this.fromAssessment = false});
+  const SubscriptionInfo({super.key, this.fromAssessment = false});
 
   final bool fromAssessment;
 
@@ -103,127 +104,134 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                     const SizedBox(
                       height: 20,
                     ),
-                  widget.fromAssessment ?  Container(
-                      color: offWhite,
-                      height: 82,
-                      padding: const EdgeInsets.symmetric(horizontal: 36),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                CustomText(
-                                  text: 'calories'.tr,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  width: 63,
-                                  height: 26,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: orange,
+                    widget.fromAssessment
+                        ? Container(
+                            color: offWhite,
+                            height: 82,
+                            padding: const EdgeInsets.symmetric(horizontal: 36),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    children: [
+                                      CustomText(
+                                        text: 'calories'.tr,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        width: 63,
+                                        height: 26,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: orange,
+                                        ),
+                                        child: const Center(
+                                          child: CustomText(
+                                            text: '220',
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  child: const Center(
-                                    child: CustomText(
-                                      text: '220',
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                  Column(
+                                    children: [
+                                      CustomText(
+                                        text: 'carbohydrates'.tr,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        width: 63,
+                                        height: 26,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: orange,
+                                        ),
+                                        child: const Center(
+                                          child: CustomText(
+                                            text: '220',
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                CustomText(
-                                  text: 'carbohydrates'.tr,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  width: 63,
-                                  height: 26,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: orange,
+                                  Column(
+                                    children: [
+                                      CustomText(
+                                        text: 'fat'.tr,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        width: 63,
+                                        height: 26,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: orange,
+                                        ),
+                                        child: const Center(
+                                          child: CustomText(
+                                            text: '220',
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  child: const Center(
-                                    child: CustomText(
-                                      text: '220',
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
+                                  Column(
+                                    children: [
+                                      CustomText(
+                                        text: 'protein'.tr,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        width: 63,
+                                        height: 26,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: orange,
+                                        ),
+                                        child: const Center(
+                                          child: CustomText(
+                                            text: '220',
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                CustomText(
-                                  text: 'fat'.tr,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  width: 63,
-                                  height: 26,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: orange,
-                                  ),
-                                  child: const Center(
-                                    child: CustomText(
-                                      text: '220',
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                CustomText(
-                                  text: 'protein'.tr,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  width: 63,
-                                  height: 26,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: orange,
-                                  ),
-                                  child: const Center(
-                                    child: CustomText(
-                                      text: '220',
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ]),
-                    ):Container(),
+                                ]),
+                          )
+                        : Container(),
                     Padding(
                       padding: AppUtil.rtlDirection(context)
                           ? const EdgeInsets.only(top: 20, right: 28)
@@ -487,7 +495,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 itemBuilder: (context, index) {
                                   return Container(
                                     margin: EdgeInsets.symmetric(vertical: 15),
-                                   // height: 20,
+                                    // height: 20,
                                     decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
@@ -501,7 +509,6 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                             Radius.circular(5))),
                                     child: Container(
                                       padding: EdgeInsets.all(20),
-
                                       width: 173,
                                       child: Column(
                                         crossAxisAlignment:
@@ -519,8 +526,6 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                       ),
                                     ),
                                   );
-                               
-                     
                                 }),
                           ),
                           const SizedBox(
@@ -602,7 +607,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
           Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-             padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 width: width,
                 height: 78,
                 color: Colors.white,
@@ -610,25 +615,40 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                    
-                    CustomText(text: 'startFrom'.tr,fontSize: 12,),
-                    Row(children: [
-                                          CustomText(text: '250' + ' ',fontSize: 20,color: avocado,),
-                    CustomText(text: 'riyal'.tr),
-
-                    ],)
-                  ],),
+                      CustomText(
+                        text: 'startFrom'.tr,
+                        fontSize: 12,
+                      ),
+                      Row(
+                        children: [
+                          CustomText(
+                            text: '250' + ' ',
+                            fontSize: 20,
+                            color: avocado,
+                          ),
+                          CustomText(text: 'riyal'.tr),
+                        ],
+                      )
+                    ],
+                  ),
                   Spacer(),
-                    Container(
-                      width: 240,
-                      child: CustomButton(
-                                  onPressed: () {
-                    
-                              
-                    
-                    
-                                  }, title: 'subscribeNow'.tr),
-                    )
+                  Container(
+                    width: 240,
+                    child: CustomButton(
+                        onPressed: () {
+                          //   Get.to(() => const SubscriptionNowSheet());
+                          showModalBottomSheet<void>(
+                            context: context,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            builder: (BuildContext context) {
+                              return const SubscriptionNowSheet();
+                            },
+                          );
+                        },
+                        title: 'subscribeNow'.tr),
+                  )
                 ]),
               ))
         ],
