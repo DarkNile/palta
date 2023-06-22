@@ -305,5 +305,9 @@ const Map<String, String> en = {
 'possibilityToRequestNutritionalAdvice':'Possibility to request nutritional advice',
 'startFrom':'Start from',
 
+'subscriptionPeriod':'Subscription period - days',
+'numberOfPerson':'Number of Person',
+'continueSubscribing':'Continue subscribing',
+
 
 };
