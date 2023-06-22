@@ -31,26 +31,18 @@ class HomeController extends GetxController {
   var locations = <Location>[].obs;
   var programs = <Product>[].obs;
   var isProgramsLoading = false.obs;
+  var info = <Product>[].obs;
+  var isInfoLoading = false.obs;
+  var guidances = <Product>[].obs;
+  var isGuidancesLoading = false.obs;
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
       isBannersLoading(true);
       final data = await HomeService.getBanners(id: id);
       if (data != null) {
-        if (id == '7') {
-          banners(data);
-          return banners;
-        } else if (id == '10') {
-          honeyBanner(data);
-          return honeyBanner;
-        } else if (id == '11') {
-          oliveOilBanner(data);
-          return oliveOilBanner;
-        } else if (id == '12') {
-          oliveBanner(data);
-          return oliveBanner;
-        }
-        return data;
+        banners(data);
+        return banners;
       } else {
         return null;
       }
@@ -95,6 +87,42 @@ class HomeController extends GetxController {
       return null;
     } finally {
       isProgramsLoading(false);
+    }
+  }
+
+  Future<List<Product>?> getInfo() async {
+    try {
+      isInfoLoading(true);
+      final data = await HomeService.getInfo();
+      if (data != null) {
+        info(data);
+        return info;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isInfoLoading(false);
+    }
+  }
+
+  Future<List<Product>?> getGuidances() async {
+    try {
+      isGuidancesLoading(true);
+      final data = await HomeService.getGuidances();
+      if (data != null) {
+        guidances(data);
+        return guidances;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isGuidancesLoading(false);
     }
   }
 

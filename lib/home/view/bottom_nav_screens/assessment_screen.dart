@@ -15,173 +15,170 @@ class AssessmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: paleGrey,
-      body: Stack(
-        children: [
-          Container(
-            height: 290,
-            width: width,
-            color: pineGreen,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 130,
+    return Stack(
+      children: [
+        Container(
+          height: 290,
+          width: width,
+          color: pineGreen,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 130,
+              ),
+              CustomText(
+                text: 'assessment'.tr,
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Card(
+                elevation: 4,
+                color: Colors.white,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
                 ),
-                CustomText(
-                  text: 'assessment'.tr,
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Card(
-                  elevation: 4,
-                  color: Colors.white,
-                  shape: const RoundedRectangleBorder(
+                child: Container(
+                  width: width,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                   ),
-                  child: Container(
-                    width: width,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 36),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 1,
-                        ),
-                        Image.asset('assets/images/dish.png'),
-                        const SizedBox(
-                          height: 21,
-                        ),
-                        RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                              text: '${'smartAssessment'.tr} ',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: darkGrey,
-                              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 36),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 1,
+                      ),
+                      Image.asset('assets/images/dish.png'),
+                      const SizedBox(
+                        height: 21,
+                      ),
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                            text: '${'smartAssessment'.tr} ',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: darkGrey,
                             ),
-                            TextSpan(
-                              text: 'smartAssessmentDescription'.tr,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: brownishGrey,
-                              ),
+                          ),
+                          TextSpan(
+                            text: 'smartAssessmentDescription'.tr,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                              color: brownishGrey,
                             ),
-                          ]),
-                        ),
-                        const SizedBox(
-                          height: 21,
-                        ),
-                        CustomOutlinedButton(
-                          onPressed: () {
-                            Get.to(() => const AssessmentQuestion1());
-                          },
-                          title: 'startAssessment'.tr,
-                        ),
-                        const SizedBox(
-                          height: 35,
-                        ),
-                      ],
-                    ),
+                          ),
+                        ]),
+                      ),
+                      const SizedBox(
+                        height: 21,
+                      ),
+                      CustomOutlinedButton(
+                        onPressed: () {
+                          Get.to(() => const AssessmentQuestion1());
+                        },
+                        title: 'startAssessment'.tr,
+                      ),
+                      const SizedBox(
+                        height: 35,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 42,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 90.0,
-                      height: 90.0,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff7c94b6),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/cover_8.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(50.0)),
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 5.0,
-                        ),
+              ),
+              const SizedBox(
+                height: 42,
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 90.0,
+                    height: 90.0,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff7c94b6),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/cover_8.png'),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(50.0)),
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 5.0,
                       ),
                     ),
-                    const SizedBox(
-                      width: 32,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/icons/quotation.png',
-                              height: 21,
-                              color: warmGrey.withOpacity(0.6),
-                            ),
-                            const SizedBox(
-                              width: 2,
-                            ),
-                            Image.asset(
-                              'assets/icons/quotation.png',
-                              height: 21,
-                              color: warmGrey.withOpacity(0.6),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 13,
-                        ),
-                        const CustomText(
-                          text: 'كابتن ندى',
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        const SizedBox(
-                          height: 13,
-                        ),
-                        SizedBox(
-                          width: width * 0.6,
-                          child: CustomText(
-                            text: 'iOfferYou'.tr,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: CustomOutlinedButton(
-                    onPressed: () {},
-                    title: 'AskForNutritionalAdvice'.tr,
                   ),
+                  const SizedBox(
+                    width: 32,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/icons/quotation.png',
+                            height: 21,
+                            color: warmGrey.withOpacity(0.6),
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Image.asset(
+                            'assets/icons/quotation.png',
+                            height: 21,
+                            color: warmGrey.withOpacity(0.6),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
+                      const CustomText(
+                        text: 'كابتن ندى',
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
+                      SizedBox(
+                        width: width * 0.6,
+                        child: CustomText(
+                          text: 'iOfferYou'.tr,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: CustomOutlinedButton(
+                  onPressed: () {},
+                  title: 'AskForNutritionalAdvice'.tr,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +20,6 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _authController = Get.put(AuthController());
   final _profileController = Get.put(ProfileController());
-  final _checkoutController = Get.put(CheckoutController());
   final _formKey = GlobalKey<FormState>();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -265,10 +263,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         context: context,
                       );
                       if (user != null) {
-                        setState(() {
-                          _profileController.getAccount();
-                          _checkoutController.getCartItems();
-                        });
+                        _profileController.getAccount();
                         Get.offAll(() => const HomePage());
                       }
                     }

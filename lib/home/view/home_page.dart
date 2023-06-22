@@ -46,9 +46,12 @@ class _HomePageState extends State<HomePage> {
     customerId = getStorage.read('customerId');
     _pageController = PageController(initialPage: widget.pageIndex ?? 0);
     _currentIndex = widget.pageIndex ?? 0;
-    // checkAppVersion();
     _homeController.getBanners(id: '7');
     _homeController.getPrograms();
+    _homeController.getInfo();
+    _homeController.getGuidances();
+    _profileController.getAccount();
+    checkAppVersion();
   }
 
   @override
@@ -62,7 +65,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor:
-          _currentIndex == 0 || _currentIndex == 2 ? paleGrey : Colors.white,
+          _currentIndex == 0 || _currentIndex == 1 || _currentIndex == 2
+              ? paleGrey
+              : Colors.white,
       drawer: CustomDrawer(
         onProfileTileTap: () {
           Get.back();
@@ -116,10 +121,18 @@ class _HomePageState extends State<HomePage> {
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
-              HomeScreen(homeController: _homeController),
-              AssessmentScreen(homeController: _homeController),
-              SubscriptionScreen(homeController: _homeController),
-              GuideScreen(homeController: _homeController),
+              HomeScreen(
+                homeController: _homeController,
+              ),
+              AssessmentScreen(
+                homeController: _homeController,
+              ),
+              SubscriptionScreen(
+                profileController: _profileController,
+              ),
+              GuideScreen(
+                homeController: _homeController,
+              ),
               ProfileScreen(
                 profileController: _profileController,
                 authController: _authController,

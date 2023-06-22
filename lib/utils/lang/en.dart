@@ -293,4 +293,9 @@ const Map<String, String> en = {
   'fat': 'Fat',
   'protein': 'Protein',
   'subscribeNow': 'Subscribe now',
+  'successfulSubscription': 'Subscription completed successfully',
+  'manageSubscription': 'Manage my subscriptions',
+  'subscriptionPeriod': 'Subscription period',
+  'numberOfIndividuals': 'No. of individuals',
+  'subscriptionStartDate': 'Start date',
 };

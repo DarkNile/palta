@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions1.dart';
 import 'package:palta/home/widgets/custom_home_card.dart';
 import 'package:palta/home/widgets/custom_program_card.dart';
 import 'package:palta/utils/app_util.dart';
@@ -150,9 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Obx(() {
             if (widget.homeController.isProgramsLoading.value) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const CustomLoadingWidget();
             }
             return ListView.separated(
               itemCount: widget.homeController.programs.length,
@@ -227,7 +226,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 21,
                     ),
                     CustomOutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => const AssessmentQuestion1());
+                      },
                       title: 'startAssessment'.tr,
                     ),
                     const SizedBox(

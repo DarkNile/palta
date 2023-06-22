@@ -279,4 +279,9 @@ const Map<String, String> ar = {
   'fat': 'صافي الدهون',
   'protein': 'صافي البروتين',
   'subscribeNow': 'إشترك الأن ',
+  'successfulSubscription': 'تم الاشتراك بنجاح',
+  'manageSubscription': 'إدارة إشتراكاتي',
+  'subscriptionPeriod': 'مدة الإشتراك',
+  'numberOfIndividuals': 'عدد الأفراد',
+  'subscriptionStartDate': 'تاريخ بدء الإشتراك',
 };
