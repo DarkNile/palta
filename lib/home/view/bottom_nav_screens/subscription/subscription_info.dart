@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_result.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/meal_info_popup.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription/subscribe_now_sheet.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/home/widgets/custom_home_card.dart';
@@ -269,23 +270,43 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(10),
-                                                    topRight:
-                                                        Radius.circular(10)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                      breakfastInfo[index]
-                                                          ['image'],
-                                                    ),
-                                                    fit: BoxFit.cover)),
-                                            height: 178,
-                                            width: 267,
+                                          Stack(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(10),
+                                                        topRight:
+                                                            Radius.circular(10)),
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                          breakfastInfo[index]
+                                                              ['image'],
+                                                        ),
+                                                        fit: BoxFit.cover)),
+                                                height: 178,
+                                                width: 267,
 
-                                            //   child: Image.asset(breakfastInfo[index]['image'],fit:BoxFit.cover ,)
+                                                  
+                                              ),
+                                              Positioned(
+                                                left: 12,
+                                                bottom: 9,
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                  return await  showDialog( context: context, builder: (BuildContext context) {
+                                                      return const MealInfoPopup();
+                                                     });
+                                                  },
+                                                  child: Container(
+                                                    height: 35,
+                                                    width: 35,
+                                                    decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                    child:SvgPicture.asset('assets/icons/overlay.svg')),
+                                                ),
+                                              )
+                                            ],
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -347,24 +368,45 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(10),
-                                                    topRight:
-                                                        Radius.circular(10)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                      breakfastInfo[index]
-                                                          ['image'],
-                                                    ),
-                                                    fit: BoxFit.cover)),
-                                            height: 178,
-                                            width: 267,
+                                          Stack(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(10),
+                                                        topRight:
+                                                            Radius.circular(10)),
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                          breakfastInfo[index]
+                                                              ['image'],
+                                                        ),
+                                                        fit: BoxFit.cover)),
+                                                height: 178,
+                                                width: 267,
 
-                                            //   child: Image.asset(breakfastInfo[index]['image'],fit:BoxFit.cover ,)
+                                                  
+                                              ),
+                                              Positioned(
+                                                left: 12,
+                                                bottom: 9,
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                  return await  showDialog( context: context, builder: (BuildContext context) {
+                                                      return const MealInfoPopup();
+                                                     });
+                                                  },
+                                                  child: Container(
+                                                    height: 35,
+                                                    width: 35,
+                                                    decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                    child:SvgPicture.asset('assets/icons/overlay.svg')),
+                                                ),
+                                              )
+                                            ],
                                           ),
+                                          
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: CustomText(
@@ -425,24 +467,45 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(10),
-                                                    topRight:
-                                                        Radius.circular(10)),
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                      breakfastInfo[index]
-                                                          ['image'],
-                                                    ),
-                                                    fit: BoxFit.cover)),
-                                            height: 178,
-                                            width: 267,
+                                           Stack(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.only(
+                                                        topLeft:
+                                                            Radius.circular(10),
+                                                        topRight:
+                                                            Radius.circular(10)),
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                          breakfastInfo[index]
+                                                              ['image'],
+                                                        ),
+                                                        fit: BoxFit.cover)),
+                                                height: 178,
+                                                width: 267,
 
-                                            //   child: Image.asset(breakfastInfo[index]['image'],fit:BoxFit.cover ,)
+                                                  
+                                              ),
+                                              Positioned(
+                                                left: 12,
+                                                bottom: 9,
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                  return await  showDialog( context: context, builder: (BuildContext context) {
+                                                      return const MealInfoPopup();
+                                                     });
+                                                  },
+                                                  child: Container(
+                                                    height: 35,
+                                                    width: 35,
+                                                    decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                    child:SvgPicture.asset('assets/icons/overlay.svg')),
+                                                ),
+                                              )
+                                            ],
                                           ),
+                                          
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: CustomText(

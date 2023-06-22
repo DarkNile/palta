@@ -308,6 +308,7 @@ const Map<String, String> en = {
 'subscriptionPeriod':'Subscription period - days',
 'numberOfPerson':'Number of Person',
 'continueSubscribing':'Continue subscribing',
+'mealIngredients':'Meal ingredients'
 
 
 };
