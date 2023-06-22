@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
@@ -11,7 +12,7 @@ class CustomSubscriptionCard extends StatelessWidget {
     required this.title,
     required this.date,
     required this.image,
-    required this.onChangeMeals,
+    // required this.onChangeMeals,
     required this.onInfoTap,
   });
 
@@ -19,7 +20,7 @@ class CustomSubscriptionCard extends StatelessWidget {
   final String title;
   final String date;
   final String image;
-  final VoidCallback onChangeMeals;
+  // final VoidCallback onChangeMeals;
   final VoidCallback onInfoTap;
 
   @override
@@ -41,7 +42,8 @@ class CustomSubscriptionCard extends StatelessWidget {
                 width: 91,
                 height: 29,
                 alignment: Alignment.center,
-                color: status == 'لديك 4 ايام' ? reddish : brownGrey,
+                // color: status == 'لديك 4 ايام' ? reddish : brownGrey,
+                color: reddish,
                 child: CustomText(
                   text: status,
                   fontSize: 12,
@@ -78,22 +80,22 @@ class CustomSubscriptionCard extends StatelessWidget {
                     ),
                     CircleAvatar(
                       radius: 45,
-                      backgroundImage: AssetImage(image),
+                      backgroundImage: CachedNetworkImageProvider(image),
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 22,
                 ),
-                if (status == 'لديك 4 ايام')
-                  CustomOutlinedButton(
-                    onPressed: onChangeMeals,
-                    title: 'changeMeals'.tr,
-                  ),
-                if (status == 'لديك 4 ايام')
-                  const SizedBox(
-                    height: 11,
-                  ),
+                // if (status == 'لديك 4 ايام')
+                //   CustomOutlinedButton(
+                //     onPressed: onChangeMeals,
+                //     title: 'changeMeals'.tr,
+                //   ),
+                // if (status == 'لديك 4 ايام')
+                //   const SizedBox(
+                //     height: 11,
+                //   ),
                 CustomOutlinedButton(
                   onPressed: onInfoTap,
                   title: 'subscriptionInfo'.tr,

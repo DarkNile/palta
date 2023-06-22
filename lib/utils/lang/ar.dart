@@ -279,6 +279,11 @@ const Map<String, String> ar = {
   'fat': 'صافي الدهون',
   'protein': 'صافي البروتين',
   'subscribeNow': 'إشترك الأن ',
+  'successfulSubscription': 'تم الاشتراك بنجاح',
+  'manageSubscription': 'إدارة إشتراكاتي',
+  'subscriptionPeriod': 'مدة الإشتراك',
+  'numberOfIndividuals': 'عدد الأفراد',
+  'subscriptionStartDate': 'تاريخ بدء الإشتراك',
 
   'forThoseWishingToMaintainWeight':
       'للراغبين بالحفاظ على الوزن وتشكيل جسم متناسق مثالى',
@@ -289,10 +294,9 @@ const Map<String, String> ar = {
   'possibilityChangeAndReplaceMeals': 'إمكانية تغيير واستبدال الوجبات',
   'possibilityCancelTheSubscription': 'إمكانية إيقاف او الغاء الاشتراك',
   'possibilityToRequestNutritionalAdvice': 'إمكانية طلب استشارة غذائية',
-  'startFrom':'يبدأ من ',
-  'subscriptionPeriod':'مدة الأشتراك - أيام',
-'numberOfPerson':'عدد الأفراد',
-'continueSubscribing':'متابعة الاشتراك',
-'mealIngredients':'مكونات الوجبة'
-
+  'startFrom': 'يبدأ من ',
+  'subscriptionPeriodDays': 'مدة الأشتراك - أيام',
+  'numberOfPerson': 'عدد الأفراد',
+  'continueSubscribing': 'متابعة الاشتراك',
+  'mealIngredients': 'مكونات الوجبة'
 };

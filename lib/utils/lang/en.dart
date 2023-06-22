@@ -293,22 +293,29 @@ const Map<String, String> en = {
   'fat': 'Fat',
   'protein': 'Protein',
   'subscribeNow': 'Subscribe now',
+  'successfulSubscription': 'Subscription completed successfully',
+  'manageSubscription': 'Manage my subscriptions',
+  'subscriptionPeriod': 'Subscription period',
+  'numberOfIndividuals': 'No. of individuals',
+  'subscriptionStartDate': 'Start date',
 
   /////////////INFO
-  'forThoseWishingToMaintainWeight':'  For those wishing to maintain weight and form a perfect fit body',
-  'breakfastDishes':'Breakfast dishes',
-  'lunchDishes':'Lunch dishes',
-  'dinnerDishes':'Dinner dishes',
-  'throughAccountYouCanControl':'Through your account you can control the following',
-  'possibilityChangeAndReplaceMeals':'Possibility to change and replace meals',
-'possibilityCancelTheSubscription':'Possibility to stop or cancel the subscription',
-'possibilityToRequestNutritionalAdvice':'Possibility to request nutritional advice',
-'startFrom':'Start from',
+  'forThoseWishingToMaintainWeight':
+      '  For those wishing to maintain weight and form a perfect fit body',
+  'breakfastDishes': 'Breakfast dishes',
+  'lunchDishes': 'Lunch dishes',
+  'dinnerDishes': 'Dinner dishes',
+  'throughAccountYouCanControl':
+      'Through your account you can control the following',
+  'possibilityChangeAndReplaceMeals': 'Possibility to change and replace meals',
+  'possibilityCancelTheSubscription':
+      'Possibility to stop or cancel the subscription',
+  'possibilityToRequestNutritionalAdvice':
+      'Possibility to request nutritional advice',
+  'startFrom': 'Start from',
 
-'subscriptionPeriod':'Subscription period - days',
-'numberOfPerson':'Number of Person',
-'continueSubscribing':'Continue subscribing',
-'mealIngredients':'Meal ingredients'
-
-
+  'subscriptionPeriodDays': 'Subscription period - days',
+  'numberOfPerson': 'Number of Person',
+  'continueSubscribing': 'Continue subscribing',
+  'mealIngredients': 'Meal ingredients'
 };

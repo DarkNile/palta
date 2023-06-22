@@ -56,8 +56,9 @@ class CustomProgramCard extends StatelessWidget {
                       width: width,
                       height: 163,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          const CustomLoadingWidget(),
+                      placeholder: (context, url) {
+                        return const CustomLoadingWidget();
+                      },
                     ),
                   ),
                   Positioned.directional(

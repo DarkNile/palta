@@ -335,8 +335,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       if (_checkoutController.order!.paymentCode! ==
                           'payfort_fort') {
                         Get.to(() => PaymentWebviewScreen(
-                              orderId: _checkoutController.order!.orderId!,
-                              email: _checkoutController.order!.email!,
+                              order: _checkoutController.order!,
                               checkoutController: _checkoutController,
                             ));
                       } else {
@@ -403,8 +402,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
             print(transactionDetails);
             _checkoutController.saveOrderToDatabase();
             Get.off(() => ThankYouScreen(
-                  orderId: _checkoutController.order!.orderId!,
-                  email: _checkoutController.order!.email!,
+                  order: _checkoutController.order!,
                 ));
           } else if (event["status"] == "error") {
             // Handle error here.

@@ -28,7 +28,7 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
             height: 50,
           ),
           CustomText(
-            text: 'subscriptionPeriod'.tr,
+            text: 'subscriptionPeriodDays'.tr,
             fontSize: 16,
           ),
           const SizedBox(
@@ -40,16 +40,28 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
                         _selectedDuration = index + 1;
                       });
                     },
                     child: Container(
-                      decoration: BoxDecoration(color: _selectedDuration == index + 1 ? pineGreen : paleGrey,borderRadius: BorderRadius.all(Radius.circular(5))),
+                      decoration: BoxDecoration(
+                          color: _selectedDuration == index + 1
+                              ? pineGreen
+                              : paleGrey,
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
                       width: 82,
                       height: 41,
-                      child: Center(child: CustomText(text: duration[index],fontSize: 14,color: _selectedDuration == index + 1 ? Colors.white : Colors.black,),),
+                      child: Center(
+                        child: CustomText(
+                          text: duration[index],
+                          fontSize: 14,
+                          color: _selectedDuration == index + 1
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -67,7 +79,7 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
             text: 'numberOfPerson'.tr,
             fontSize: 16,
           ),
-           const SizedBox(
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
@@ -76,16 +88,28 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: (){
+                    onTap: () {
                       setState(() {
                         _selectedIndividual = index + 1;
                       });
                     },
                     child: Container(
-                      decoration: BoxDecoration(color: _selectedIndividual == index + 1 ? pineGreen : paleGrey,borderRadius: BorderRadius.all(Radius.circular(5))),
+                      decoration: BoxDecoration(
+                          color: _selectedIndividual == index + 1
+                              ? pineGreen
+                              : paleGrey,
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
                       width: 68,
                       height: 41,
-                      child: Center(child: CustomText(text: individual[index],fontSize: 14,color: _selectedIndividual == index + 1 ? Colors.white : Colors.black,),),
+                      child: Center(
+                        child: CustomText(
+                          text: individual[index],
+                          fontSize: 14,
+                          color: _selectedIndividual == index + 1
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -105,17 +129,15 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                 text: 'total'.tr,
                 fontSize: 16,
               ),
-
               Spacer(),
               CustomText(
-                text: '575.00 '+'riyal'.tr,
+                text: '575.00 ' + 'riyal'.tr,
                 fontSize: 20,
                 color: avocado,
               ),
             ],
           ),
-
-            const SizedBox(
+          const SizedBox(
             height: 48,
           ),
           CustomButton(

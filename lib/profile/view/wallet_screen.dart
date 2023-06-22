@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/product/view/products_screen.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_button.dart';
@@ -104,16 +104,11 @@ class _WalletScreenState extends State<WalletScreen> {
                       height: 48,
                     ),
                     CustomButton(
-                        onPressed: () {
-                          Get.to(
-                            () => ProductsScreen(
-                              categoryId: '',
-                              categoryName: 'allProducts'.tr,
-                              isCategoryPage: false,
-                            ),
-                          );
-                        },
-                        title: 'continueShopping'.tr),
+                      onPressed: () {
+                        Get.offAll(() => const HomePage());
+                      },
+                      title: 'continueShopping'.tr,
+                    ),
                   ],
                 ),
               ),

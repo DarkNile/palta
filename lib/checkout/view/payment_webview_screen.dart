@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
+import 'package:palta/checkout/models/order.dart';
 import 'package:palta/checkout/view/failure_screen.dart';
 import 'package:palta/checkout/view/thank_you_screen.dart';
 import 'package:palta/home/view/home_page.dart';
@@ -10,13 +11,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 class PaymentWebviewScreen extends StatelessWidget {
   const PaymentWebviewScreen({
     super.key,
-    required this.orderId,
-    required this.email,
+    required this.order,
     required this.checkoutController,
   });
 
-  final int orderId;
-  final String email;
+  final Order order;
   final CheckoutController checkoutController;
 
   @override
@@ -28,7 +27,7 @@ class PaymentWebviewScreen extends StatelessWidget {
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           ..loadRequest(
             Uri.parse(
-                'https://palta.com/index.php?route==rest/confirm/redirect_payfort&order_id=$orderId'),
+                'https://palta.com/index.php?route==rest/confirm/redirect_payfort&order_id=${order.orderId}'),
           )
           ..setNavigationDelegate(
             NavigationDelegate(
@@ -53,8 +52,7 @@ class PaymentWebviewScreen extends StatelessWidget {
                   if (isSuccess) {
                     Get.offAll(
                       () => ThankYouScreen(
-                        orderId: orderId,
-                        email: email,
+                        order: order,
                       ),
                     );
                   }

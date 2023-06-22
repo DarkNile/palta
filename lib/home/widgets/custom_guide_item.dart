@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class CustomGuideItem extends StatelessWidget {
@@ -24,10 +26,13 @@ class CustomGuideItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              image,
+            child: CachedNetworkImage(
+              imageUrl: image,
               width: 120,
               height: 102,
+              placeholder: (context, url) {
+                return const CustomLoadingWidget();
+              },
             ),
           ),
           const SizedBox(

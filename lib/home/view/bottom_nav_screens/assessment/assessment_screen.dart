@@ -17,7 +17,6 @@ class AssessmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-    
       child: Stack(
         children: [
           Container(
@@ -117,10 +116,9 @@ class AssessmentScreen extends StatelessWidget {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(50.0)),
                         border: Border.all(
-                          color: Colors.white,
-                          width: 5.0,
-                          strokeAlign: BorderSide.strokeAlignInside
-                        ),
+                            color: Colors.white,
+                            width: 5.0,
+                            strokeAlign: BorderSide.strokeAlignInside),
                       ),
                     ),
                     const SizedBox(
@@ -129,7 +127,7 @@ class AssessmentScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      SvgPicture.asset('assets/icons/doubleQoutes.svg'),
+                        SvgPicture.asset('assets/icons/doubleQoutes.svg'),
                         const SizedBox(
                           height: 13,
                         ),
