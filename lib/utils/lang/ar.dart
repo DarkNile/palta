@@ -284,4 +284,19 @@ const Map<String, String> ar = {
   'subscriptionPeriod': 'مدة الإشتراك',
   'numberOfIndividuals': 'عدد الأفراد',
   'subscriptionStartDate': 'تاريخ بدء الإشتراك',
+
+  'forThoseWishingToMaintainWeight':
+      'للراغبين بالحفاظ على الوزن وتشكيل جسم متناسق مثالى',
+  'breakfastDishes': 'اطباق الفطور',
+  'lunchDishes': 'اطباق الغداء',
+  'dinnerDishes': 'اطباق العشاء',
+  'throughAccountYouCanControl': 'من خلال حسابك يمكنك التحكم في التالى',
+  'possibilityChangeAndReplaceMeals': 'إمكانية تغيير واستبدال الوجبات',
+  'possibilityCancelTheSubscription': 'إمكانية إيقاف او الغاء الاشتراك',
+  'possibilityToRequestNutritionalAdvice': 'إمكانية طلب استشارة غذائية',
+  'startFrom': 'يبدأ من ',
+  'subscriptionPeriodDays': 'مدة الأشتراك - أيام',
+  'numberOfPerson': 'عدد الأفراد',
+  'continueSubscribing': 'متابعة الاشتراك',
+  'mealIngredients': 'مكونات الوجبة'
 };

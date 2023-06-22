@@ -8,6 +8,8 @@ import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
 
+import '../../../../utils/app_util.dart';
+
 class AssessmentQuestion6 extends StatefulWidget {
   const AssessmentQuestion6({super.key});
 
@@ -74,12 +76,17 @@ class _AssessmentQuestion6State extends State<AssessmentQuestion6> {
             width: width,
             height: 40,
             color: pineGreen,
-            padding: EdgeInsets.only(right: 20, top: 6),
-            child: CustomText(
-              text: 'q6'.tr,
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            padding: AppUtil.rtlDirection(context)
+                ? const EdgeInsets.only(right: 20)
+                : const EdgeInsets.only(left: 20),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: CustomText(
+                text: 'q6'.tr,
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           Container(

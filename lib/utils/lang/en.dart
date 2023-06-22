@@ -262,7 +262,7 @@ const Map<String, String> en = {
   'male': 'Male',
   'female': 'Fmale',
   'q4': 'Fourth Question',
-  'WhatBestPicture Body': 'What is the best picture that describes your body?',
+  'WhatBestPicture': 'What is the best picture that describes your body?',
   'chooseYourBodyShape': 'Choose your body shape from the following pictures',
   'hourglassBody': 'Hourglass body shape',
   'rectangleBody': 'Rectangle body shape',
@@ -270,7 +270,7 @@ const Map<String, String> en = {
   'pearBody': 'Pear body shape',
   'q5': 'Fifth Question',
 
-  'howActiveYou?': 'How physically active are you?(',
+  'howActiveYou': 'How physically active are you?',
   'numberExerciseDuringWeek':
       'The number of times you exercise during the week',
   'exercise7': 'Exercise 5 -7 times',
@@ -298,4 +298,24 @@ const Map<String, String> en = {
   'subscriptionPeriod': 'Subscription period',
   'numberOfIndividuals': 'No. of individuals',
   'subscriptionStartDate': 'Start date',
+
+  /////////////INFO
+  'forThoseWishingToMaintainWeight':
+      '  For those wishing to maintain weight and form a perfect fit body',
+  'breakfastDishes': 'Breakfast dishes',
+  'lunchDishes': 'Lunch dishes',
+  'dinnerDishes': 'Dinner dishes',
+  'throughAccountYouCanControl':
+      'Through your account you can control the following',
+  'possibilityChangeAndReplaceMeals': 'Possibility to change and replace meals',
+  'possibilityCancelTheSubscription':
+      'Possibility to stop or cancel the subscription',
+  'possibilityToRequestNutritionalAdvice':
+      'Possibility to request nutritional advice',
+  'startFrom': 'Start from',
+
+  'subscriptionPeriodDays': 'Subscription period - days',
+  'numberOfPerson': 'Number of Person',
+  'continueSubscribing': 'Continue subscribing',
+  'mealIngredients': 'Meal ingredients'
 };

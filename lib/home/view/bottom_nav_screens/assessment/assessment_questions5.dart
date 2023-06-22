@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions6.dart';
 import 'package:palta/home/view/home_page.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class AssessmentQuestion5 extends StatefulWidget {
@@ -72,201 +73,201 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
             width: width,
             height: 40,
             color: pineGreen,
-            padding: const EdgeInsets.only(right: 20, top: 6),
-            child: CustomText(
-              text: 'q5'.tr,
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            padding: AppUtil.rtlDirection(context)
+                ? const EdgeInsets.only(right: 20)
+                : const EdgeInsets.only(left: 20),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: CustomText(
+                text: 'q5'.tr,
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           SizedBox(
             height: height * 0.78,
-            child: ListView(
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 16,
-                      left: 16,
-                    ),
-                    child: Column(children: [
-                      CustomText(
-                        text: 'howActiveYou'.tr,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w800,
-                      ),
-                      CustomText(
-                        text: 'numberExerciseDuringWeek'.tr,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w200,
-                        color: darkGrey,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 14, left: 14, top: 20),
+                child: Column(children: [
+                  CustomText(
+                    text: 'howActiveYou'.tr,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  CustomText(
+                    text: 'numberExerciseDuringWeek'.tr,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w200,
+                    color: darkGrey,
+                  ),
+                  const SizedBox(
+                    height: 38,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion6());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              width: width * 0.43,
+                              height: 228,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/outline.svg'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomText(
+                                    text: 'exercise7'.tr,
+                                    fontSize: 18,
+                                  ),
+                                  CustomText(
+                                    text: 'perWeek'.tr,
+                                    fontSize: 14,
+                                    color: brownishGrey,
+                                  ),
+                                ],
+                              ),
+                            )),
                       ),
                       const SizedBox(
-                        height: 38,
+                        width: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Get.to(() => const AssessmentQuestion6());
-                            },
-                            child: Card(
-                                elevation: 4,
-                                color: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                ),
-                                child: SizedBox(
-                                  width: width * 0.4,
-                                  height: 228,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                          'assets/icons/outline.svg'),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomText(
-                                        text: 'exercise7'.tr,
-                                        fontSize: 18,
-                                      ),
-                                      CustomText(
-                                        text: 'perWeek'.tr,
-                                        fontSize: 14,
-                                        color: brownishGrey,
-                                      ),
-                                    ],
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion6());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              width: width * 0.43,
+                              height: 228,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/fit.svg'),
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                )),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(() => const AssessmentQuestion6());
-                            },
-                            child: Card(
-                                elevation: 4,
-                                color: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                ),
-                                child: SizedBox(
-                                  width: width * 0.4,
-                                  height: 228,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset('assets/icons/fit.svg'),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomText(
-                                        text: 'exercise5'.tr,
-                                        fontSize: 18,
-                                      ),
-                                      CustomText(
-                                        text: 'perWeek'.tr,
-                                        fontSize: 14,
-                                        color: brownishGrey,
-                                      ),
-                                    ],
+                                  CustomText(
+                                    text: 'exercise5'.tr,
+                                    fontSize: 18,
                                   ),
-                                )),
-                          ),
-                        ],
+                                  CustomText(
+                                    text: 'perWeek'.tr,
+                                    fontSize: 14,
+                                    color: brownishGrey,
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion6());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              width: width * 0.43,
+                              height: 228,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/outline.svg'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomText(
+                                    text: 'exercise2'.tr,
+                                    fontSize: 18,
+                                  ),
+                                  CustomText(
+                                    text: 'perWeek'.tr,
+                                    fontSize: 14,
+                                    color: brownishGrey,
+                                  ),
+                                ],
+                              ),
+                            )),
                       ),
                       const SizedBox(
-                        height: 16,
+                        width: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Get.to(() => const AssessmentQuestion6());
-                            },
-                            child: Card(
-                                elevation: 4,
-                                color: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                ),
-                                child: SizedBox(
-                                  width: width * 0.4,
-                                  height: 228,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                          'assets/icons/outline.svg'),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomText(
-                                        text: 'exercise2'.tr,
-                                        fontSize: 18,
-                                      ),
-                                      CustomText(
-                                        text: 'perWeek'.tr,
-                                        fontSize: 14,
-                                        color: brownishGrey,
-                                      ),
-                                    ],
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion6());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              width: width * 0.43,
+                              height: 228,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/chair.svg'),
+                                  const SizedBox(
+                                    height: 10,
                                   ),
-                                )),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(() => const AssessmentQuestion6());
-                            },
-                            child: Card(
-                                elevation: 4,
-                                color: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(6)),
-                                ),
-                                child: SizedBox(
-                                  width: width * 0.4,
-                                  height: 228,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                          'assets/icons/chair.svg'),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      CustomText(
-                                        text: 'withoutActivity'.tr,
-                                        fontSize: 18,
-                                      ),
-                                      CustomText(
-                                        text: 'perWeek'.tr,
-                                        fontSize: 14,
-                                        color: brownishGrey,
-                                      ),
-                                    ],
+                                  CustomText(
+                                    text: 'withoutActivity'.tr,
+                                    fontSize: 18,
                                   ),
-                                )),
-                          ),
-                        ],
+                                  CustomText(
+                                    text: 'perWeek'.tr,
+                                    fontSize: 14,
+                                    color: brownishGrey,
+                                  ),
+                                ],
+                              ),
+                            )),
                       ),
-                    ]),
-                  )
+                    ],
+                  ),
                 ]),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 17),

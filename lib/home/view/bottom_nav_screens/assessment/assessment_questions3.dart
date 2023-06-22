@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 import 'assessment_questions4.dart';
@@ -69,16 +70,21 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
               ),
             ),
           ),
-          Container(
+           Container(
             width: width,
             height: 40,
             color: pineGreen,
-            padding:const EdgeInsets.only(right: 20, top: 6),
-            child:  CustomText(
-              text: 'q3'.tr,
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+            padding: AppUtil.rtlDirection(context)
+                ? const EdgeInsets.only(right: 20)
+                : const EdgeInsets.only(left: 20),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: CustomText(
+                text: 'q3'.tr,
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
          SizedBox(
