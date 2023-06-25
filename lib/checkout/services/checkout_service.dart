@@ -41,6 +41,9 @@ class CheckoutService {
   static Future<bool> addToCart({
     required String productId,
     required String quantity,
+    required bool hasCombination,
+    String? option1Id,
+    String? option2Id,
   }) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
@@ -54,10 +57,19 @@ class CheckoutService {
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
         'Authorization': 'Bearer $token'
       },
-      body: json.encode({
-        'product_id': productId,
-        'quantity': quantity,
-      }),
+      body: hasCombination
+          ? json.encode({
+              'combination_option': {
+                '1': option1Id,
+                '5': option2Id,
+              },
+              'product_id': productId,
+              'quantity': quantity,
+            })
+          : json.encode({
+              'product_id': productId,
+              'quantity': quantity,
+            }),
     );
     print('response status code: ${response.statusCode}');
     if (json.decode(response.body)['success'] == 1) {
@@ -66,6 +78,37 @@ class CheckoutService {
       return true;
     } else {
       print(json.decode(response.body)['error']);
+      return false;
+    }
+  }
+
+  static Future<bool> saveCalendar({
+    required String date,
+    required String time,
+    required String fridayOn,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=checkout/cart/calendarsave&language=$lang'),
+      headers: {
+        "Accept": "application/json",
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        'Authorization': 'Bearer $token'
+      },
+      body: json.encode({
+        'calendar_start': date,
+        'calendar_time': time,
+        'friday_on': fridayOn,
+      }),
+    );
+    print('response status code: ${response.statusCode}');
+    if (response.statusCode == 200) {
+      return true;
+    } else {
       return false;
     }
   }

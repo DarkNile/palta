@@ -27,7 +27,7 @@ class PaymentWebviewScreen extends StatelessWidget {
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           ..loadRequest(
             Uri.parse(
-                'https://palta.com/index.php?route==rest/confirm/redirect_payfort&order_id=${order.orderId}'),
+                'https://paltaksa.com/index.php?route=rest/confirm/redirect_paytabs&order_id=${order.orderId}'),
           )
           ..setNavigationDelegate(
             NavigationDelegate(

@@ -236,7 +236,7 @@ const Map<String, String> en = {
   /////// ASSES
   'iOfferYou': 'Hello, I offer you health services that enhance your lifestyle',
   'AskForNutritionalAdvice': 'Ask for nutritional advice',
-  'q1': 'Firsrt Question',
+  'q1': 'First Question',
   'whatIsGoal': 'What is your goal.?',
   'chooseYourGoal': 'Choose your goal to see which diet works best for you',
   'WeightLoss': 'Weight loss and body sculpting',
@@ -317,5 +317,13 @@ const Map<String, String> en = {
   'subscriptionPeriodDays': 'Subscription period - days',
   'numberOfPerson': 'Number of Person',
   'continueSubscribing': 'Continue subscribing',
-  'mealIngredients': 'Meal ingredients'
+  'mealIngredients': 'Meal ingredients',
+  'captainNada': 'Captain Nada',
+  'timeToReceiveMeals': 'Time to receive meals',
+  'fridayReceiving': 'Are you ready to receive meals on Friday?',
+  'yes': 'Yes',
+  'no': 'No',
+  'completeInfo': 'Please complete the information above',
+  'previous': 'Previous',
+  'program': 'Program',
 };

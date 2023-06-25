@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions1.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_info.dart';
 import 'package:palta/home/widgets/custom_home_card.dart';
 import 'package:palta/home/widgets/custom_program_card.dart';
 import 'package:palta/utils/app_util.dart';
@@ -169,7 +170,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   subtitle: widget.homeController.programs[index].description!,
                   image: widget.homeController.programs[index].originalImage!,
                   icon: programIcons[index],
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(
+                      () => SubscriptionInfo(
+                        program: widget.homeController.programs[index],
+                        icon: programIcons[index],
+                        hasCombination: true,
+                      ),
+                    );
+                  },
                 );
               },
             );

@@ -22,9 +22,12 @@ class CustomPaymentMethodCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isChecked ? jadeGreen.withOpacity(0.06) : Colors.white,
+          color: isChecked ? selectedColor.withOpacity(0.5) : Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: isChecked ? jadeGreen : darkGrey),
+          border: Border.all(
+            color: isChecked ? avocado : veryLightPink,
+            width: isChecked ? 2 : 1,
+          ),
         ),
         padding: const EdgeInsets.all(18),
         child: Row(
@@ -34,7 +37,7 @@ class CustomPaymentMethodCard extends StatelessWidget {
             Transform.scale(
               scale: 1.2,
               child: Checkbox(
-                fillColor: MaterialStateProperty.all(jadeGreen),
+                fillColor: MaterialStateProperty.all(pineGreen),
                 checkColor: Colors.white,
                 value: isChecked,
                 shape: const CircleBorder(),
@@ -44,7 +47,12 @@ class CustomPaymentMethodCard extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            if (paymentMethod.code == 'payfort_fort')
+            if (paymentMethod.code == 'cod')
+              Image.asset(
+                'assets/images/cod.png',
+                height: 36,
+              )
+            else if (paymentMethod.code == 'paytabs_creditcard')
               Image.asset(
                 'assets/images/cards.png',
                 height: 36,

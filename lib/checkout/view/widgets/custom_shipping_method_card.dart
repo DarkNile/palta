@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:palta/checkout/models/shipping_method.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -24,9 +23,12 @@ class CustomShippingMethodCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isChecked ? jadeGreen.withOpacity(0.06) : Colors.white,
+          color: isChecked ? selectedColor.withOpacity(0.5) : Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: isChecked ? jadeGreen : darkGrey),
+          border: Border.all(
+            color: isChecked ? avocado : veryLightPink,
+            width: isChecked ? 2 : 1,
+          ),
         ),
         padding: const EdgeInsets.all(18),
         child: Row(
@@ -36,7 +38,7 @@ class CustomShippingMethodCard extends StatelessWidget {
             Transform.scale(
               scale: 1.2,
               child: Checkbox(
-                fillColor: MaterialStateProperty.all(jadeGreen),
+                fillColor: MaterialStateProperty.all(pineGreen),
                 checkColor: Colors.white,
                 value: isChecked,
                 shape: const CircleBorder(),
@@ -51,10 +53,8 @@ class CustomShippingMethodCard extends StatelessWidget {
                   height: 4,
                 ),
                 CustomText(
-                  text: shippingMethod.quote.first.code == 'aramex.aramex'
-                      ? 'shippingThroughAramex'.tr
-                      : shippingMethod.title,
-                  color: almostBlack,
+                  text: shippingMethod.title,
+                  color: pineGreen,
                   fontWeight: FontWeight.w500,
                 ),
                 const SizedBox(
@@ -62,7 +62,7 @@ class CustomShippingMethodCard extends StatelessWidget {
                 ),
                 CustomText(
                   text: shippingMethod.quote.first.text,
-                  color: almostBlack,
+                  color: avocado,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -71,9 +71,6 @@ class CustomShippingMethodCard extends StatelessWidget {
                 ),
               ],
             ),
-            const Spacer(),
-            // if (shippingMethod.quote.first.code == 'aramex.aramex')
-            Image.asset('assets/images/aramex.png'),
           ],
         ),
       ),

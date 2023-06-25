@@ -7,10 +7,14 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
+    this.backgroundColor,
+    this.foregroundColor,
   });
 
   final VoidCallback onPressed;
   final String title;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +30,15 @@ class CustomButton extends StatelessWidget {
             48,
           ),
         ),
-        backgroundColor: MaterialStateProperty.all(pineGreen),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
+        backgroundColor:
+            MaterialStateProperty.all(backgroundColor ?? pineGreen),
+        foregroundColor:
+            MaterialStateProperty.all(foregroundColor ?? Colors.white),
       ),
       child: CustomText(
         text: title,
         textAlign: TextAlign.center,
-        color: Colors.white,
+        color: foregroundColor ?? Colors.white,
         fontSize: 16,
         fontWeight: FontWeight.w400,
       ),

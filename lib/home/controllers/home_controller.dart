@@ -1,3 +1,5 @@
+import 'package:palta/home/models/combination.dart';
+import 'package:palta/home/models/sub_combination.dart';
 import 'package:palta/product/controllers/product_controller.dart';
 import 'package:get/get.dart';
 import 'package:palta/home/models/category.dart';
@@ -31,10 +33,16 @@ class HomeController extends GetxController {
   var locations = <Location>[].obs;
   var programs = <Product>[].obs;
   var isProgramsLoading = false.obs;
-  var info = <Product>[].obs;
+  var breakfastMeals = <Product>[].obs;
+  var lunchMeals = <Product>[].obs;
+  var dinnerMeals = <Product>[].obs;
   var isInfoLoading = false.obs;
   var guidances = <Product>[].obs;
   var isGuidancesLoading = false.obs;
+  var combinations = <Combination>[].obs;
+  var isCombinationsLoading = false.obs;
+  var subCombinations = <SubCombination>[].obs;
+  var isSubCombinationsLoading = false.obs;
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
@@ -90,13 +98,26 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<List<Product>?> getInfo() async {
+  Future<List<Product>?> getInfo({
+    required String mealType,
+  }) async {
     try {
       isInfoLoading(true);
-      final data = await HomeService.getInfo();
+      final data = await HomeService.getInfo(mealType: mealType);
       if (data != null) {
-        info(data);
-        return info;
+        if (mealType == '1') {
+          breakfastMeals(data);
+          return breakfastMeals;
+        }
+        if (mealType == '2') {
+          lunchMeals(data);
+          return lunchMeals;
+        }
+        if (mealType == '3') {
+          dinnerMeals(data);
+          return dinnerMeals;
+        }
+        return data;
       } else {
         return null;
       }
@@ -123,6 +144,50 @@ class HomeController extends GetxController {
       return null;
     } finally {
       isGuidancesLoading(false);
+    }
+  }
+
+  Future<List<Combination>?> getCombination({
+    required String productId,
+  }) async {
+    try {
+      isCombinationsLoading(true);
+      final data = await HomeService.getCombination(productId: productId);
+      if (data != null) {
+        combinations(data);
+        return combinations;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isCombinationsLoading(false);
+    }
+  }
+
+  Future<List<SubCombination>?> getSubCombination({
+    required String productId,
+    required String optionId,
+  }) async {
+    try {
+      isSubCombinationsLoading(true);
+      final data = await HomeService.getSubCombination(
+        productId: productId,
+        optionId: optionId,
+      );
+      if (data != null) {
+        subCombinations(data);
+        return subCombinations;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isSubCombinationsLoading(false);
     }
   }
 

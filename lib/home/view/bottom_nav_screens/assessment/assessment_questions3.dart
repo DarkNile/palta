@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
-import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 import 'assessment_questions4.dart';
@@ -47,7 +46,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                     width: 10,
                   ),
                   Container(
-                    margin:const EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     width: 250,
                     height: 6,
                     child: const ClipRRect(
@@ -70,152 +69,150 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
               ),
             ),
           ),
-           Container(
+          Container(
             width: width,
             height: 40,
             color: pineGreen,
-            padding: AppUtil.rtlDirection(context)
-                ? const EdgeInsets.only(right: 20)
-                : const EdgeInsets.only(left: 20),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CustomText(
-                text: 'q3'.tr,
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 8,
+            ),
+            child: CustomText(
+              text: 'q3'.tr,
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
-         SizedBox(
-          height:height* 0.78,
-          child: ListView(
-            shrinkWrap: true,
-    physics: const AlwaysScrollableScrollPhysics(),
-            children: [
-            
-          Padding(
-            padding:const EdgeInsets.only(right: 16, left: 16,),
-            child: Column(children: [
-               CustomText(
-                text: 'WhatGender'.tr,
-                fontSize: 24,
-                fontWeight: FontWeight.w800,
-              ),
-              CustomText(
-                text: 'selectGender'.tr,
-                fontSize: 16,
-                fontWeight: FontWeight.w200,
-                color: darkGrey,
-              ),
-            const  SizedBox(
-                height: 38,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+          SizedBox(
+            height: height * 0.78,
+            child: ListView(
+                shrinkWrap: true,
+                physics: const AlwaysScrollableScrollPhysics(),
                 children: [
-                  InkWell(
-                          onTap: () {
-                  Get.to(()=> const AssessmentQuestion4());
-                },
-                    
-                    child: Card(
-                      elevation: 4,
-                      color: Colors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
-                      ),
-                      child: 
-                      SizedBox(
-                        width: width*0.4,
-                        height: 195,
-                        child:  Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset('assets/icons/man.svg'),
-                                                                         const SizedBox(height: 10,),
-
-                           CustomText(text: 'male'.tr,fontSize: 18,),
-
-          
-                        ],),
-                      )
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 16,
+                      left: 16,
                     ),
-                  ),
-                 const SizedBox(width: 10,),
-                  InkWell(
-                          onTap: () {
-                  Get.to(()=> const AssessmentQuestion4());
-                },
-                    
-                    child: Card(
-                      elevation: 4,
-                      color: Colors.white,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                    child: Column(children: [
+                      CustomText(
+                        text: 'WhatGender'.tr,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w800,
                       ),
-                      child: 
-                      SizedBox(
-                        width: width*0.4,
-                        height: 195,
-                        child:  Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset('assets/icons/girl.svg'),
-                                             const SizedBox(height: 10,),
-
-                           CustomText(text: 'female'.tr,fontSize: 18,),
-
-          
-                        ],),
-                      )
-                    ),
-                  ),
-
-                ],
-              ),
-              
-          
-        
-
-            ]),
-          )
-        
-          ]),
-         ),
-
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
-                child: Row(
-                  children: [
-                    const CustomText(
-                              text: '6 / 3',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300,
-                              color: darkGrey,
-                            ),
-             const Expanded(child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 17),
-                child:   Divider(
-                  
-                  height: 20,thickness:1, color:pinkishGrey,),
-              )),
-                            InkWell(
-                              onTap: () {
-                                Get.offAll(HomePage());
-                              },
-                              child: CustomText(
-                                text: 'cancel'.tr,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: darkGrey,
-                              ),
-                            ),
-                  ],
+                      CustomText(
+                        text: 'selectGender'.tr,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w200,
+                        color: darkGrey,
+                      ),
+                      const SizedBox(
+                        height: 38,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => const AssessmentQuestion4());
+                            },
+                            child: Card(
+                                elevation: 4,
+                                color: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(6)),
+                                ),
+                                child: SizedBox(
+                                  width: width * 0.4,
+                                  height: 195,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset('assets/icons/man.svg'),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomText(
+                                        text: 'male'.tr,
+                                        fontSize: 18,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => const AssessmentQuestion4());
+                            },
+                            child: Card(
+                                elevation: 4,
+                                color: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(6)),
+                                ),
+                                child: SizedBox(
+                                  width: width * 0.4,
+                                  height: 195,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset('assets/icons/girl.svg'),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      CustomText(
+                                        text: 'female'.tr,
+                                        fontSize: 18,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
+                    ]),
+                  )
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 17),
+            child: Row(
+              children: [
+                const CustomText(
+                  text: '6 / 3',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  color: darkGrey,
                 ),
-              )
-        
+                const Expanded(
+                    child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 17),
+                  child: Divider(
+                    height: 20,
+                    thickness: 1,
+                    color: pinkishGrey,
+                  ),
+                )),
+                InkWell(
+                  onTap: () {
+                    Get.offAll(HomePage());
+                  },
+                  child: CustomText(
+                    text: 'cancel'.tr,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                    color: darkGrey,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

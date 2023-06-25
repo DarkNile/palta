@@ -2,7 +2,7 @@
     package="com.DigitalPartner.palta">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="palta"
+        android:label="Palta | بالتا"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

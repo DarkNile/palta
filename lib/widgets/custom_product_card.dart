@@ -3,7 +3,6 @@ import 'package:palta/widgets/custom_product_border.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/product/models/product.dart';
@@ -34,7 +33,6 @@ class CustomProductCard extends StatefulWidget {
 
 class _CustomProductCardState extends State<CustomProductCard> {
   final _homeController = Get.put(HomeController());
-  final _checkoutController = Get.put(CheckoutController());
   final _productController = Get.put(ProductController());
 
   @override
@@ -108,19 +106,19 @@ class _CustomProductCardState extends State<CustomProductCard> {
                         start: 0,
                         child: InkWell(
                           onTap: () async {
-                            final isSuccess =
-                                await _checkoutController.addToCart(
-                              productId: widget.product.id.toString(),
-                              quantity: '1',
-                            );
-                            if (isSuccess) {
-                              if (context.mounted) {
-                                AppUtil.successToast(
-                                  context,
-                                  'productAddedToCart'.tr,
-                                );
-                              }
-                            }
+                            // final isSuccess =
+                            //     await _checkoutController.addToCart(
+                            //   productId: widget.product.id.toString(),
+                            //   quantity: '1',
+                            // );
+                            // if (isSuccess) {
+                            //   if (context.mounted) {
+                            //     AppUtil.successToast(
+                            //       context,
+                            //       'productAddedToCart'.tr,
+                            //     );
+                            //   }
+                            // }
                           },
                           child: const Icon(
                             Icons.add_shopping_cart,
@@ -338,19 +336,19 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           ),
                           InkWell(
                             onTap: () async {
-                              final isSuccess =
-                                  await _checkoutController.addToCart(
-                                productId: widget.product.id.toString(),
-                                quantity: '1',
-                              );
-                              if (isSuccess) {
-                                if (context.mounted) {
-                                  AppUtil.successToast(
-                                    context,
-                                    'productAddedToCart'.tr,
-                                  );
-                                }
-                              }
+                              // final isSuccess =
+                              //     await _checkoutController.addToCart(
+                              //   productId: widget.product.id.toString(),
+                              //   quantity: '1',
+                              // );
+                              // if (isSuccess) {
+                              //   if (context.mounted) {
+                              //     AppUtil.successToast(
+                              //       context,
+                              //       'productAddedToCart'.tr,
+                              //     );
+                              //   }
+                              // }
                             },
                             child: const Icon(
                               Icons.add_shopping_cart,

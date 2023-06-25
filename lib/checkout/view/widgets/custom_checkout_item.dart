@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:palta/constants/colors.dart';
 import 'package:palta/product/models/product.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -17,72 +16,34 @@ class CustomCheckoutItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-          flex: 1,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(4)),
-            child: CachedNetworkImage(
-              imageUrl: product.image!,
-              placeholder: (context, url) {
-                return const CustomLoadingWidget();
-              },
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              text: 'program'.tr,
+              fontSize: 14,
             ),
+            CustomText(
+              text: product.name!,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ],
+        ),
+        ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          child: CachedNetworkImage(
+            imageUrl: product.image!,
+            width: 91,
+            height: 69,
+            fit: BoxFit.cover,
+            placeholder: (context, url) {
+              return const CustomLoadingWidget();
+            },
           ),
         ),
-        const SizedBox(
-          width: 16,
-        ),
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 170,
-                child: CustomText(
-                  text: product.name!.split('&quot;').join(),
-                  height: 2,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomText(
-                text: product.price,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-              Row(
-                children: [
-                  CustomText(
-                    text: 'quantity'.tr,
-                    height: 2,
-                    color: brownishGrey,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  const CustomText(
-                    text: ':',
-                    height: 2,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  CustomText(
-                    text: product.quantity,
-                    height: 2,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        )
       ],
     );
   }

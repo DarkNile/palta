@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_info.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_text.dart';
-
-import '../../../../widgets/custom_button.dart';
 
 class AssessmentResult extends StatefulWidget {
   const AssessmentResult({super.key});
@@ -19,7 +16,6 @@ class _AssessmentResultState extends State<AssessmentResult> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -61,7 +57,6 @@ class _AssessmentResultState extends State<AssessmentResult> {
                 ),
                 child: SizedBox(
                   width: width * 0.8,
-                  height: height * 0.59,
                   child: Column(
                     children: [
                       Image.asset(
@@ -82,7 +77,7 @@ class _AssessmentResultState extends State<AssessmentResult> {
                               fontSize: 18,
                               fontWeight: FontWeight.w800,
                             ),
-                           const SizedBox(
+                            const SizedBox(
                               height: 27,
                             ),
                             Row(
@@ -100,7 +95,7 @@ class _AssessmentResultState extends State<AssessmentResult> {
                                     borderRadius: BorderRadius.circular(20),
                                     color: iceBlue,
                                   ),
-                                  child:  const Center(
+                                  child: const Center(
                                     child: CustomText(
                                       text: '220',
                                       fontSize: 14,
@@ -127,7 +122,7 @@ class _AssessmentResultState extends State<AssessmentResult> {
                                     borderRadius: BorderRadius.circular(20),
                                     color: iceBlue,
                                   ),
-                                  child:const Center(
+                                  child: const Center(
                                     child: CustomText(
                                       text: '40',
                                       fontSize: 14,
@@ -146,7 +141,7 @@ class _AssessmentResultState extends State<AssessmentResult> {
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
-                               const Spacer(),
+                                const Spacer(),
                                 Container(
                                   width: 90,
                                   height: 32,
@@ -154,7 +149,7 @@ class _AssessmentResultState extends State<AssessmentResult> {
                                     borderRadius: BorderRadius.circular(20),
                                     color: iceBlue,
                                   ),
-                                  child:const Center(
+                                  child: const Center(
                                     child: CustomText(
                                       text: '15',
                                       fontSize: 14,
@@ -191,15 +186,14 @@ class _AssessmentResultState extends State<AssessmentResult> {
                               ],
                             ),
                             const SizedBox(
-                              height: 35,
+                              height: 40,
                             ),
-                            CustomButton(
-                                onPressed: () {
+                            // CustomButton(
+                            //     onPressed: () {
 
-                                  Get.to(()=> const SubscriptionInfo(fromAssessment: true,));
+                            //       Get.to(()=> const SubscriptionInfo(fromAssessment: true,));
 
-
-                                }, title: 'subscribeNow'.tr)
+                            //     }, title: 'subscribeNow'.tr)
                           ],
                         ),
                       ),
