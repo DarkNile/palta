@@ -72,33 +72,35 @@ class CustomTextField extends StatelessWidget {
             }
           : null,
       autofocus: autofocus,
-      cursorColor: Colors.black,
+      cursorColor: avocado,
       decoration: InputDecoration(
+        isDense: true,
         counterStyle: const TextStyle(fontSize: 0, height: 0),
         hintText: hintText,
         hintStyle: const TextStyle(
-          fontSize: 14,
+          fontSize: 12,
           fontWeight: FontWeight.w400,
+          color: brownishGrey,
         ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(color: Colors.grey, width: 1)),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: veryLightPink, width: 1)),
         enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(color: Colors.grey, width: 1)),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: veryLightPink, width: 1)),
         disabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(color: Colors.grey, width: 1)),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: veryLightPink, width: 1)),
         focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(color: Colors.black, width: 1)),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            borderSide: BorderSide(color: veryLightPink, width: 1)),
         errorBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
             borderSide: BorderSide(color: vermillion, width: 1)),
         focusedErrorBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(4)),
+            borderRadius: BorderRadius.all(Radius.circular(6)),
             borderSide: BorderSide(color: vermillion, width: 1)),
       ),
     );

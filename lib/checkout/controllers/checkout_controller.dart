@@ -24,6 +24,7 @@ class CheckoutController extends GetxController {
   var isAddingPaymentMethodLoading = false.obs;
   var total = 0.0.obs;
   var cartItems = 0.obs;
+  var isSavingCalendar = false.obs;
 
   Future<Cart?> getCartItems() async {
     try {
@@ -51,11 +52,17 @@ class CheckoutController extends GetxController {
   Future<bool> addToCart({
     required String productId,
     required String quantity,
+    required bool hasCombination,
+    String? option1Id,
+    String? option2Id,
   }) async {
     try {
       final isSuccess = await CheckoutService.addToCart(
         productId: productId,
         quantity: quantity,
+        hasCombination: hasCombination,
+        option1Id: option1Id,
+        option2Id: option2Id,
       );
       if (isSuccess) {
         getCartItems();
@@ -64,6 +71,27 @@ class CheckoutController extends GetxController {
     } catch (e) {
       print(e);
       return false;
+    }
+  }
+
+  Future<bool> saveCalendar({
+    required String date,
+    required String time,
+    required String fridayOn,
+  }) async {
+    try {
+      isSavingCalendar(true);
+      final isSuccess = await CheckoutService.saveCalendar(
+        date: date,
+        time: time,
+        fridayOn: fridayOn,
+      );
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isSavingCalendar(false);
     }
   }
 

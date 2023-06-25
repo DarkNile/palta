@@ -48,7 +48,10 @@ class _HomePageState extends State<HomePage> {
     _currentIndex = widget.pageIndex ?? 0;
     _homeController.getBanners(id: '7');
     _homeController.getPrograms();
-    _homeController.getInfo();
+    _homeController.getInfo(mealType: '1');
+    _homeController.getInfo(mealType: '2');
+    _homeController.getInfo(mealType: '3');
+    _profileController.getUserOrders();
     _homeController.getGuidances();
     _profileController.getAccount();
     checkAppVersion();

@@ -6,9 +6,6 @@ import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questio
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_text.dart';
 
-import '../../../../utils/app_util.dart';
-
-
 class AssessmentQuestion4 extends StatefulWidget {
   const AssessmentQuestion4({super.key});
 
@@ -71,224 +68,229 @@ class _AssessmentQuestion4State extends State<AssessmentQuestion4> {
               ),
             ),
           ),
-           Container(
+          Container(
             width: width,
             height: 40,
             color: pineGreen,
-            padding: AppUtil.rtlDirection(context)
-                ? const EdgeInsets.only(right: 20)
-                : const EdgeInsets.only(left: 20),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CustomText(
-                text: 'q4'.tr,
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 8,
+            ),
+            child: CustomText(
+              text: 'q4'.tr,
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(
+            height: height * 0.78,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16, left: 16, top: 30),
+                child: Column(children: [
+                  CustomText(
+                    text: 'WhatBestPicture'.tr,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  CustomText(
+                    text: 'chooseYourBodyShape'.tr,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w200,
+                    color: darkGrey,
+                  ),
+                  const SizedBox(
+                    height: 38,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion5());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: SizedBox(
+                              width: width * 0.4,
+                              height: 250,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/shape_2.svg'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                        child: CustomText(
+                                      text: 'hourglassBody'.tr,
+                                      fontSize: 18,
+                                    )),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion5());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: SizedBox(
+                              width: width * 0.4,
+                              height: 250,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/shape_1.svg'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomText(
+                                      text: 'rectangleBody'.tr,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion5());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: SizedBox(
+                              width: width * 0.4,
+                              height: 250,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/shape_3.svg'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomText(
+                                      text: 'appleBody'.tr,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.to(() => const AssessmentQuestion5());
+                        },
+                        child: Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6)),
+                            ),
+                            child: SizedBox(
+                              width: width * 0.4,
+                              height: 250,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset('assets/icons/shape_5.svg'),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomText(
+                                      text: 'pearBody'.tr,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  )
+                ]),
               ),
             ),
           ),
-         SizedBox(
-          height:height* 0.78,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16, left: 16,top: 30),
-              child: Column(children: [
-                 CustomText(
-                  text:'WhatBestPicture'.tr,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
-                ),
-                CustomText(
-                  text:'chooseYourBodyShape'.tr,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 17),
+            child: Row(
+              children: [
+                const CustomText(
+                  text: '6 / 4',
                   fontSize: 16,
-                  fontWeight: FontWeight.w200,
+                  fontWeight: FontWeight.w300,
                   color: darkGrey,
                 ),
-               const SizedBox(
-                  height: 38,
+                const Expanded(
+                    child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 17),
+                  child: Divider(
+                    height: 20,
+                    thickness: 1,
+                    color: pinkishGrey,
+                  ),
+                )),
+                InkWell(
+                  onTap: () {
+                    Get.offAll(const HomePage());
+                  },
+                  child: CustomText(
+                    text: 'cancel'.tr,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                    color: darkGrey,
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                            onTap: () {
-                    Get.to(()=> const AssessmentQuestion5());
-                  },
-                      
-                      child: Card(
-                        elevation: 4,
-                        color: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ),
-                        child: 
-                        SizedBox(
-                          width: width*0.4,
-                          height: 250,
-                          child:  Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset('assets/icons/shape_2.svg'),
-                                                                           const SizedBox(height: 10,),
-          
-                             Padding(
-                               padding: const EdgeInsets.all(8.0),
-                               child: SizedBox(
-                                
-                                child: CustomText(text: 'hourglassBody'.tr,fontSize: 18,)),
-                             ),
-          
-            
-                          ],),
-                        )
-                      ),
-                    ),
-                   const SizedBox(width: 10,),
-                    InkWell(
-                            onTap: () {
-                    Get.to(()=> const AssessmentQuestion5());
-                  },
-                      
-                      child: Card(
-                        elevation: 4,
-                        color: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ),
-                        child: 
-                        SizedBox(
-                          width: width*0.4,
-                          height: 250,
-                          child:  Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset('assets/icons/shape_1.svg'),
-                                               const SizedBox(height: 10,),
-          
-                             Padding(
-                               padding: const EdgeInsets.all(8.0),
-                               child: CustomText(text: 'rectangleBody'.tr,fontSize: 18,),
-                             ),
-          
-            
-                          ],),
-                        )
-                      ),
-                    ),
-          
-                  ],
-                ),
-                
-            const SizedBox(height: 16,),
-            Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                            onTap: () {
-                    Get.to(()=> const AssessmentQuestion5());
-                  },
-                      
-                      child: Card(
-                        elevation: 4,
-                        color: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ),
-                        child: 
-                        SizedBox(
-                          width: width*0.4,
-                          height: 250,
-                          child:  Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset('assets/icons/shape_3.svg'),
-                                                                           const SizedBox(height: 10,),
-          
-                             Padding(
-                               padding: const EdgeInsets.all(8.0),
-                               child: CustomText(text: 'appleBody'.tr,fontSize: 18,),
-                             ),
-          
-            
-                          ],),
-                        )
-                      ),
-                    ),
-                   const SizedBox(width: 10,),
-                    InkWell(
-                            onTap: () {
-                    Get.to(()=> const AssessmentQuestion5());
-                  },
-                      
-                      child: Card(
-                        elevation: 4,
-                        color: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                        ),
-                        child: 
-                        SizedBox(
-                          width: width*0.4,
-                          height: 250,
-                          child:  Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset('assets/icons/shape_5.svg'),
-                                               const SizedBox(height: 10,),
-          
-                             Padding(
-                               padding: const EdgeInsets.all(8.0),
-                               child: CustomText(text:'pearBody'.tr,fontSize: 18,),
-                             ),
-          
-            
-                          ],),
-                        )
-                      ),
-                    ),
-          
-                  ],
-                ),
-                
-         const SizedBox(height: 20,)
-              ]),
+              ],
             ),
-          ),
-         ),
-
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
-                child: Row(
-                  children: [
-                    const CustomText(
-                              text: '6 / 4',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300,
-                              color: darkGrey,
-                            ),
-             const Expanded(child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 17),
-                child:   Divider(
-                  
-                  height: 20,thickness:1, color:pinkishGrey,),
-              )),
-                            InkWell(
-                              onTap: () {
-                                Get.offAll(const HomePage());
-                              },
-                              child: CustomText(
-                                text: 'cancel'.tr,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                                color: darkGrey,
-                              ),
-                            ),
-                  ],
-                ),
-              )
-        
+          )
         ],
       ),
     );

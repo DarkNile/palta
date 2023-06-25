@@ -16,11 +16,13 @@ class ShippingAddressPage extends StatefulWidget {
     required this.onNextTap,
     required this.profileController,
     required this.checkoutController,
+    required this.onPreviousTap,
   });
 
   final ProfileController profileController;
   final Function(int) onNextTap;
   final CheckoutController checkoutController;
+  final VoidCallback onPreviousTap;
 
   @override
   State<ShippingAddressPage> createState() => _ShippingAddressPageState();
@@ -102,7 +104,11 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: 'shippedTo'.tr),
+                CustomText(
+                  text: 'shippedTo'.tr,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
                 InkWell(
                   onTap: () {
                     Get.to(
@@ -126,7 +132,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                           height: 16,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: almostBlack,
+                            color: pineGreen,
                           ),
                           child: const Icon(
                             Icons.add,
@@ -139,7 +145,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                         ),
                         CustomText(
                           text: 'addNewAddress'.tr,
-                          color: almostBlack,
+                          color: pineGreen,
                           fontWeight: FontWeight.w400,
                         )
                       ],
@@ -166,7 +172,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                       onTap: () {
                         setState(() {
                           checkedIndex = index;
-                          isChecked = !isChecked;
+                          isChecked = true;
                         });
                       },
                       address: widget.profileController.addresses[index],
@@ -209,24 +215,52 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
             const SizedBox(
               height: 16,
             ),
-            Obx(() {
-              if (widget.checkoutController.isAddingShippingAddress.value ||
-                  widget.checkoutController.isAddingPaymentAddress.value) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              return CustomButton(
-                onPressed: () {
-                  if (checkedIndex != null && isChecked) {
-                    widget.onNextTap(checkedIndex!);
-                  } else {
-                    AppUtil.errorToast(context, 'noShippingAddress'.tr);
-                  }
-                },
-                title: 'next'.tr,
-              );
-            }),
+            Container(
+              alignment: Alignment.bottomCenter,
+              color: Colors.white,
+              width: width,
+              height: 80,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: CustomButton(
+                      onPressed: widget.onPreviousTap,
+                      title: 'previous'.tr,
+                      backgroundColor: paleGrey,
+                      foregroundColor: darkGrey,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 9,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Obx(() {
+                      if (widget.checkoutController.isAddingShippingAddress
+                              .value ||
+                          widget.checkoutController.isAddingPaymentAddress
+                              .value) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return CustomButton(
+                        onPressed: () {
+                          if (checkedIndex != null && isChecked) {
+                            widget.onNextTap(checkedIndex!);
+                          } else {
+                            AppUtil.errorToast(context, 'noShippingAddress'.tr);
+                          }
+                        },
+                        title: 'next'.tr,
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(
               height: 16,
             ),

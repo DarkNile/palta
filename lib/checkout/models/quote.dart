@@ -1,7 +1,7 @@
 class Quote {
   String code;
   String title;
-  int cost;
+  dynamic cost;
   dynamic taxClassId;
   String text;
 

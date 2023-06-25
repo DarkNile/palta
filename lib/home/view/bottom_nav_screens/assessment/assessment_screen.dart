@@ -131,8 +131,8 @@ class AssessmentScreen extends StatelessWidget {
                         const SizedBox(
                           height: 13,
                         ),
-                        const CustomText(
-                          text: 'كابتن ندى',
+                        CustomText(
+                          text: 'captainNada'.tr,
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
                         ),

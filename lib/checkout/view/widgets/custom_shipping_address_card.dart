@@ -32,9 +32,12 @@ class CustomShippingAddressCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isChecked ? jadeGreen.withOpacity(0.06) : Colors.white,
+          color: isChecked ? selectedColor.withOpacity(0.5) : Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: isChecked ? jadeGreen : darkGrey),
+          border: Border.all(
+            color: isChecked ? avocado : veryLightPink,
+            width: isChecked ? 2 : 1,
+          ),
         ),
         child: Column(
           children: [
@@ -47,7 +50,7 @@ class CustomShippingAddressCard extends StatelessWidget {
                   Transform.scale(
                     scale: 1.2,
                     child: Checkbox(
-                      fillColor: MaterialStateProperty.all(jadeGreen),
+                      fillColor: MaterialStateProperty.all(pineGreen),
                       checkColor: Colors.white,
                       value: isChecked,
                       shape: const CircleBorder(),
@@ -105,9 +108,12 @@ class CustomShippingAddressCard extends StatelessWidget {
             Container(
               height: 41,
               decoration: BoxDecoration(
-                color: isChecked ? jadeGreen.withOpacity(0.06) : lighGrey,
-                border: const Border(
-                  top: BorderSide(color: darkGrey),
+                color: isChecked ? selectedColor.withOpacity(0.5) : lighGrey,
+                border: Border(
+                  top: BorderSide(
+                    width: isChecked ? 2 : 1,
+                    color: isChecked ? avocado : veryLightPink,
+                  ),
                 ),
               ),
               child: Row(
@@ -118,12 +124,8 @@ class CustomShippingAddressCard extends StatelessWidget {
                       child: Row(
                         children: [
                           const Spacer(),
-                          SvgPicture.asset(
-                            'assets/icons/edit.svg',
-                            colorFilter: const ColorFilter.mode(
-                              Colors.black,
-                              BlendMode.srcIn,
-                            ),
+                          const Icon(
+                            Icons.edit,
                           ),
                           const SizedBox(
                             width: 8,
@@ -140,8 +142,8 @@ class CustomShippingAddressCard extends StatelessWidget {
                   ),
                   Container(
                     height: 41,
-                    width: 1,
-                    color: darkGrey,
+                    width: isChecked ? 2 : 1,
+                    color: isChecked ? avocado : veryLightPink,
                   ),
                   Expanded(
                     child: InkWell(

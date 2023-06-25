@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/widgets/custom_shipping_method_card.dart';
+import 'package:palta/constants/colors.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -11,10 +12,11 @@ class ShippingMethodPage extends StatefulWidget {
     super.key,
     required this.onNextTap,
     required this.checkoutController,
+    required this.onPreviousTap,
   });
 
   final Function(int) onNextTap;
-
+  final VoidCallback onPreviousTap;
   final CheckoutController checkoutController;
 
   @override
@@ -39,12 +41,17 @@ class _ShippingMethodPageState extends State<ShippingMethodPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(text: 'chooseShippingMethod'.tr),
+          CustomText(
+            text: 'chooseShippingMethod'.tr,
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+          ),
           const SizedBox(
             height: 16,
           ),
@@ -62,7 +69,7 @@ class _ShippingMethodPageState extends State<ShippingMethodPage> {
                     onTap: () {
                       setState(() {
                         checkedIndex = index;
-                        isChecked = !isChecked;
+                        isChecked = true;
                       });
                     },
                     shippingMethod:
@@ -83,23 +90,50 @@ class _ShippingMethodPageState extends State<ShippingMethodPage> {
           const SizedBox(
             height: 16,
           ),
-          Obx(() {
-            if (widget.checkoutController.isAddingShippingMethodLoading.value) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return CustomButton(
-              onPressed: () {
-                if (checkedIndex != null && isChecked) {
-                  widget.onNextTap(checkedIndex!);
-                } else {
-                  AppUtil.errorToast(context, 'noShippingMethod'.tr);
-                }
-              },
-              title: 'next'.tr,
-            );
-          }),
+          Container(
+            alignment: Alignment.bottomCenter,
+            color: Colors.white,
+            width: width,
+            height: 80,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: CustomButton(
+                    onPressed: widget.onPreviousTap,
+                    title: 'previous'.tr,
+                    backgroundColor: paleGrey,
+                    foregroundColor: darkGrey,
+                  ),
+                ),
+                const SizedBox(
+                  width: 9,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Obx(() {
+                    if (widget.checkoutController.isAddingShippingMethodLoading
+                        .value) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return CustomButton(
+                      onPressed: () {
+                        if (checkedIndex != null && isChecked) {
+                          widget.onNextTap(checkedIndex!);
+                        } else {
+                          AppUtil.errorToast(context, 'noShippingMethod'.tr);
+                        }
+                      },
+                      title: 'next'.tr,
+                    );
+                  }),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(
             height: 16,
           ),

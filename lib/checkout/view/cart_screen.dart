@@ -267,7 +267,9 @@ class _CartScreenState extends State<CartScreen> {
                               customerId.isNotEmpty &&
                               customerId ==
                                   _profileController.user.value.id.toString()) {
-                            Get.to(() => const CheckoutScreen());
+                            Get.to(() => const CheckoutScreen(
+                                  hasCombination: true,
+                                ));
                           } else {
                             await showDialog(
                                 context: context,

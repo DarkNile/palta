@@ -30,3 +30,4 @@ const Color iceBlue = Color(0xfff4f9f9);
 const Color veryLightPink = Color(0xffe8e8e8);
 const Color reddish = Color(0xffd63737);
 const Color brownGrey = Color(0xff888888);
+const Color selectedColor = Color(0xffe7f1d1);

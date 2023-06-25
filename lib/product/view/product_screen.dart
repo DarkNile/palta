@@ -4,7 +4,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/product/controllers/product_controller.dart';
@@ -13,7 +12,6 @@ import 'package:palta/product/models/product.dart';
 import 'package:palta/product/view/products_screen.dart';
 import 'package:palta/product/widgets/product_description_screen.dart';
 import 'package:palta/product/widgets/rating_review_screen.dart';
-import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_animated_smooth_indicator.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
@@ -38,7 +36,6 @@ class _ProductScreenState extends State<ProductScreen>
     with TickerProviderStateMixin {
   final _homeController = Get.put(HomeController());
   final _productsController = Get.put(ProductController());
-  final _checkoutController = Get.put(CheckoutController());
 
   bool onFavoritePressed = false;
   int _activeIndex = 0;
@@ -556,18 +553,18 @@ class _ProductScreenState extends State<ProductScreen>
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: CustomButton(
             onPressed: () async {
-              final isSuccess = await _checkoutController.addToCart(
-                productId: widget.product.id.toString(),
-                quantity: '1',
-              );
-              if (isSuccess) {
-                if (context.mounted) {
-                  AppUtil.successToast(
-                    context,
-                    'productAddedToCart'.tr,
-                  );
-                }
-              }
+              // final isSuccess = await _checkoutController.addToCart(
+              //   productId: widget.product.id.toString(),
+              //   quantity: '1',
+              // );
+              // if (isSuccess) {
+              //   if (context.mounted) {
+              //     AppUtil.successToast(
+              //       context,
+              //       'productAddedToCart'.tr,
+              //     );
+              //   }
+              // }
             },
             title: 'addToCart'.tr,
           ),

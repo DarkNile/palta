@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions6.dart';
 import 'package:palta/home/view/home_page.dart';
-import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class AssessmentQuestion5 extends StatefulWidget {
@@ -73,17 +72,15 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
             width: width,
             height: 40,
             color: pineGreen,
-            padding: AppUtil.rtlDirection(context)
-                ? const EdgeInsets.only(right: 20)
-                : const EdgeInsets.only(left: 20),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: CustomText(
-                text: 'q5'.tr,
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 8,
+            ),
+            child: CustomText(
+              text: 'q5'.tr,
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(

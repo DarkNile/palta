@@ -7,24 +7,27 @@ import 'package:palta/constants/colors.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
+import 'package:dotted_line/dotted_line.dart';
 
 class OrderSummaryPage extends StatefulWidget {
   const OrderSummaryPage({
     super.key,
     required this.checkoutController,
-    required this.onEditPurchasesTap,
+    required this.onEditInfoTap,
     required this.onEditAddressTap,
     required this.onEditShippingTap,
     required this.onEditPaymentTap,
     required this.onConfirmOrderTap,
+    required this.onPreviousTap,
   });
 
   final CheckoutController checkoutController;
-  final VoidCallback onEditPurchasesTap;
+  final VoidCallback onEditInfoTap;
   final VoidCallback onEditAddressTap;
   final VoidCallback onEditShippingTap;
   final VoidCallback onEditPaymentTap;
   final VoidCallback onConfirmOrderTap;
+  final VoidCallback onPreviousTap;
 
   @override
   State<OrderSummaryPage> createState() => _OrderSummaryPageState();
@@ -42,6 +45,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -53,10 +57,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
               shrinkWrap: true,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
-                    top: 20,
-                    bottom: 32,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,39 +66,34 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text:
-                                '${'purchases'.tr} ( ${widget.checkoutController.order!.products!.length} )',
-                            fontWeight: FontWeight.w400,
+                            text: 'subscriptionInfo'.tr,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: pineGreen,
                           ),
                           InkWell(
-                            onTap: widget.onEditPurchasesTap,
-                            child: Row(
-                              children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                CustomText(
-                                  text: 'edit'.tr,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ],
+                            onTap: widget.onEditInfoTap,
+                            child: CustomText(
+                              text: 'edit'.tr,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: pineGreen,
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 4,
                       ),
                       const Divider(
                         thickness: 1,
                         color: lighGrey,
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       ListView.separated(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         shrinkWrap: true,
                         itemCount:
                             widget.checkoutController.order!.products!.length,
@@ -117,14 +113,17 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: 16,
+                    bottom: 16,
+                  ),
+                  color: veryLightPink,
+                  width: width,
+                  height: 6,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
-                    top: 20,
-                    bottom: 32,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,76 +133,96 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         children: [
                           CustomText(
                             text: 'shippingAddress'.tr,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: pineGreen,
                           ),
                           InkWell(
                             onTap: widget.onEditAddressTap,
-                            child: Row(
-                              children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                CustomText(
-                                  text: 'edit'.tr,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ],
+                            child: CustomText(
+                              text: 'edit'.tr,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: pineGreen,
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 4,
                       ),
                       const Divider(
                         thickness: 1,
                         color: lighGrey,
                       ),
                       const SizedBox(
-                        height: 20,
-                      ),
-                      CustomText(
-                        text: widget.checkoutController.order!.shippingAddress!,
-                        color: almostBlack,
-                      ),
-                      const SizedBox(
                         height: 8,
                       ),
-                      CustomText(
-                        text:
-                            '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
-                        color: almostBlack,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomText(
-                        text:
-                            '${widget.checkoutController.order!.shippingFirstName!} ${widget.checkoutController.order!.shippingLastName!}',
-                        color: almostBlack,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      CustomText(
-                        text: widget.checkoutController.order!.phone!,
-                        color: almostBlack,
-                        fontWeight: FontWeight.w600,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: iceBlue,
+                              ),
+                              child:
+                                  SvgPicture.asset('assets/icons/location.svg'),
+                            ),
+                            const SizedBox(
+                              width: 18,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: widget.checkoutController.order!
+                                      .shippingAddress!,
+                                  fontSize: 14,
+                                ),
+                                CustomText(
+                                  text:
+                                      '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                CustomText(
+                                  text:
+                                      '${widget.checkoutController.order!.shippingFirstName!} ${widget.checkoutController.order!.shippingLastName!}',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                ),
+                                CustomText(
+                                  text: widget.checkoutController.order!.phone!,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: 16,
+                    bottom: 16,
+                  ),
+                  color: veryLightPink,
+                  width: width,
+                  height: 6,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
-                    top: 20,
-                    bottom: 32,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,65 +232,50 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         children: [
                           CustomText(
                             text: 'shippingInfo'.tr,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: pineGreen,
                           ),
                           InkWell(
                             onTap: widget.onEditShippingTap,
-                            child: Row(
-                              children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                CustomText(
-                                  text: 'edit'.tr,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ],
+                            child: CustomText(
+                              text: 'edit'.tr,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: pineGreen,
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 4,
                       ),
                       const Divider(
                         thickness: 1,
                         color: lighGrey,
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomText(
-                            text:
-                                widget.checkoutController.order!.shippingCode ==
-                                        'aramex.aramex'
-                                    ? 'shippingThroughAramex'.tr
-                                    : widget.checkoutController.order!
-                                        .shippingCode!,
-                            color: almostBlack,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          // if (widget.checkoutController.order!.shippingCode ==
-                          //     'aramex.aramex')
-                          Image.asset('assets/images/aramex.png'),
-                        ],
+                      CustomText(
+                        text: widget.checkoutController.order!.shippingCode!,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: 16,
+                    bottom: 16,
+                  ),
+                  color: veryLightPink,
+                  width: width,
+                  height: 6,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
-                    top: 20,
-                    bottom: 32,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,38 +285,38 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         children: [
                           CustomText(
                             text: 'paymentInfo'.tr,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: pineGreen,
                           ),
                           InkWell(
                             onTap: widget.onEditPaymentTap,
-                            child: Row(
-                              children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                CustomText(
-                                  text: 'edit'.tr,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ],
+                            child: CustomText(
+                              text: 'edit'.tr,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: pineGreen,
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 4,
                       ),
                       const Divider(
                         thickness: 1,
                         color: lighGrey,
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
-                      if (widget.checkoutController.order!.paymentCode ==
-                          'payfort_fort')
+                      if (widget.checkoutController.order!.paymentCode == 'cod')
+                        Image.asset(
+                          'assets/images/cod.png',
+                          height: 36,
+                        )
+                      else if (widget.checkoutController.order!.paymentCode ==
+                          'paytabs_creditcard')
                         Image.asset(
                           'assets/images/cards.png',
                           height: 36,
@@ -325,43 +329,50 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: 16,
+                    bottom: 16,
+                  ),
+                  color: veryLightPink,
+                  width: width,
+                  height: 6,
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
-                    top: 20,
-                    bottom: 32,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
                         text: 'totalInvoice'.tr,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: pineGreen,
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 4,
                       ),
                       const Divider(
                         thickness: 1,
                         color: lighGrey,
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 8,
                       ),
                       Row(
                         children: [
                           Expanded(
                             flex: 3,
-                            child: CustomTextField(
-                              controller: _couponController,
-                              validator: false,
-                              hintText: 'couponCode'.tr,
-                              textInputType: TextInputType.text,
-                              readOnly: isCouponAdded ? true : false,
+                            child: SizedBox(
+                              height: 43,
+                              child: CustomTextField(
+                                controller: _couponController,
+                                validator: false,
+                                hintText: 'couponCode'.tr,
+                                textInputType: TextInputType.text,
+                                readOnly: isCouponAdded ? true : false,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -405,23 +416,24 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                                 style: ButtonStyle(
                                     elevation: MaterialStateProperty.all(0),
                                     backgroundColor: MaterialStateProperty.all(
-                                        isCouponAdded
-                                            ? vermillion
-                                            : almostBlack),
-                                    foregroundColor:
-                                        MaterialStateProperty.all(Colors.white),
+                                      isCouponAdded ? pineGreen : paleGrey,
+                                    ),
+                                    foregroundColor: MaterialStateProperty.all(
+                                      isCouponAdded ? Colors.white : darkGrey,
+                                    ),
                                     fixedSize: MaterialStateProperty.all(
-                                        const Size.fromHeight(54)),
+                                        const Size.fromHeight(43)),
                                     shape: MaterialStateProperty.all(
                                         const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
-                                                Radius.circular(4))))),
+                                                Radius.circular(6))))),
                                 child: CustomText(
                                   text:
                                       isCouponAdded ? 'remove'.tr : 'apply'.tr,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14,
-                                  color: Colors.white,
+                                  color:
+                                      isCouponAdded ? Colors.white : darkGrey,
                                 ),
                               );
                             }),
@@ -437,8 +449,11 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                           itemCount:
                               widget.checkoutController.order!.totals!.length,
                           separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 20,
+                            return const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8),
+                              child: DottedLine(
+                                dashColor: veryLightPink,
+                              ),
                             );
                           },
                           itemBuilder: (context, index) {
@@ -446,8 +461,11 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                    text: widget.checkoutController.order!
-                                        .totals![index].title!),
+                                  text: widget.checkoutController.order!
+                                      .totals![index].title!,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                                 CustomText(
                                   text: widget.checkoutController.order!
                                       .totals![index].text!,
@@ -458,7 +476,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                             );
                           }),
                       const SizedBox(
-                        height: 34,
+                        height: 24,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -469,17 +487,34 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                             children: [
                               CustomText(
                                 text: 'total'.tr,
-                                color: brownishGrey,
-                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
                               ),
                               const SizedBox(
-                                height: 4,
+                                height: 8,
                               ),
-                              CustomText(
-                                text: widget.checkoutController.order!.total
-                                    .toStringAsFixed(2),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
+                              RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text:
+                                          '${widget.checkoutController.order!.total.toStringAsFixed(2)} ',
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w700,
+                                        color: avocado,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'riyal'.tr,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: avocado,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -489,14 +524,14 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                               SvgPicture.asset(
                                 'assets/icons/barcode_1.svg',
                                 colorFilter: const ColorFilter.mode(
-                                  darkGrey,
+                                  veryLightPink,
                                   BlendMode.srcIn,
                                 ),
                               ),
                               SvgPicture.asset(
                                 'assets/icons/barcode_2.svg',
                                 colorFilter: const ColorFilter.mode(
-                                  darkGrey,
+                                  veryLightPink,
                                   BlendMode.srcIn,
                                 ),
                               ),
@@ -507,25 +542,45 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 16,
           ),
           Container(
             alignment: Alignment.bottomCenter,
             color: Colors.white,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ).copyWith(
-              top: 16,
-              bottom: 32,
+            width: width,
+            height: 80,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: CustomButton(
+                    onPressed: widget.onPreviousTap,
+                    title: 'previous'.tr,
+                    backgroundColor: paleGrey,
+                    foregroundColor: darkGrey,
+                  ),
+                ),
+                const SizedBox(
+                  width: 9,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: CustomButton(
+                    onPressed: widget.onConfirmOrderTap,
+                    title: 'confirmOrder'.tr,
+                    backgroundColor: avocado,
+                  ),
+                ),
+              ],
             ),
-            child: CustomButton(
-              onPressed: widget.onConfirmOrderTap,
-              title: 'confirmOrder'.tr,
-            ),
+          ),
+          const SizedBox(
+            height: 16,
           ),
         ],
       ),
