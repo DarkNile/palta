@@ -307,4 +307,6 @@ const Map<String, String> ar = {
   'completeInfo': 'من فضلك أكمل البيانات بأعلى',
   'previous': 'السابق',
   'program': 'البرنامج',
+  'meal': 'وجبة',
+  'startsWith': 'بدءا من',
 };

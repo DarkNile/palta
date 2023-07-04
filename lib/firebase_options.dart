@@ -50,23 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB4X6_6eYcRCLHSElXskRhl5cvBmOuN9n4',
-    appId: '1:571806460921:android:5584a8514aff69d5796b28',
-    messagingSenderId: '571806460921',
-    projectId: 'palta-1b970',
-    storageBucket: 'palta-1b970.appspot.com',
+    apiKey: 'AIzaSyDgIrB1I1Tle7cW16Zp7NsFKvtlMne2Mqg',
+    appId: '1:916400402118:android:bb38e9a802a2020e0231c7',
+    messagingSenderId: '916400402118',
+    projectId: 'palta-a66d2',
+    storageBucket: 'palta-a66d2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDkkDacXG7IDN7zydXyCcR2hKHXEwCNJiA',
-    appId: '1:571806460921:ios:d7bbab2caad0e2ab796b28',
-    messagingSenderId: '571806460921',
-    projectId: 'palta-1b970',
-    storageBucket: 'palta-1b970.appspot.com',
-    androidClientId:
-        '571806460921-5tvle1enbkodhcirpdg75omrgdrmi7eo.apps.googleusercontent.com',
-    iosClientId:
-        '571806460921-6fmql0c52ogao1bllnigh25elupinb5o.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAw2L22EOCuXHpILmjds6i_cqzJcr0l1MA',
+    appId: '1:916400402118:ios:8bcafded17316c3c0231c7',
+    messagingSenderId: '916400402118',
+    projectId: 'palta-a66d2',
+    storageBucket: 'palta-a66d2.appspot.com',
+    iosClientId: '916400402118-pgf8hn298nmbspogtlnnj2li5u99nrom.apps.googleusercontent.com',
     iosBundleId: 'com.DigitalPartner.palta',
   );
 }

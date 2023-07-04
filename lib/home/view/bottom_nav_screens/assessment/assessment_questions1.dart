@@ -51,7 +51,7 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
                     child: const ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       child: LinearProgressIndicator(
-                        value: 0.088,
+                        value: 0.0,
                         valueColor: AlwaysStoppedAnimation<Color>(avocado),
                         backgroundColor: lightGrey2,
                       ),

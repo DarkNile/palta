@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/models/user.dart';
 import 'package:palta/profile/models/address.dart';
+import 'package:palta/profile/models/calendar.dart';
 import 'package:palta/profile/models/city.dart';
 import 'package:palta/profile/models/country.dart';
 import 'package:palta/profile/models/tracking_order.dart';
@@ -28,6 +29,8 @@ class ProfileController extends GetxController {
   var wallet = Wallet().obs;
   var userOrders = <TrackingOrder>[].obs;
   var userOrdersByStatus = <TrackingOrder>[].obs;
+  var isCalendarLoading = false.obs;
+  var calendar = <Calendar>[].obs;
 
   Future<User?> getAccount() async {
     try {
@@ -286,6 +289,32 @@ class ProfileController extends GetxController {
       return null;
     } finally {
       isUserOrdersByStatusLoading(false);
+    }
+  }
+
+  Future<List<Calendar>?> getCalendar({
+    required String orderId,
+    required String orderProductId,
+    String? date,
+  }) async {
+    try {
+      isCalendarLoading(true);
+      final data = await ProfileService.getCalendar(
+        orderId: orderId,
+        orderProductId: orderProductId,
+        date: date,
+      );
+      if (data != null) {
+        calendar(data);
+        return calendar;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isCalendarLoading(false);
     }
   }
 }

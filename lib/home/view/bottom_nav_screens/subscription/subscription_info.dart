@@ -9,7 +9,7 @@ import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/checkout_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
-import 'package:palta/home/view/bottom_nav_screens/subscription/meal_info_popup.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/meal.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription/subscribe_now_sheet.dart';
 import 'package:palta/home/widgets/custom_home_card.dart';
 import 'package:palta/product/models/product.dart';
@@ -286,84 +286,15 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                   );
                                 },
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
-                                                  topRight: Radius.circular(10),
-                                                ),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: _homeController
-                                                      .breakfastMeals[index]
-                                                      .originalImage!,
-                                                  fit: BoxFit.cover,
-                                                  height: 178,
-                                                  width: 267,
-                                                  placeholder: (context, url) {
-                                                    return const CustomLoadingWidget();
-                                                  },
-                                                ),
-                                              ),
-                                              Positioned(
-                                                left: 12,
-                                                bottom: 9,
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    return await showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return MealInfoPopup(
-                                                            title: _homeController
-                                                                .breakfastMeals[
-                                                                    index]
-                                                                .name!,
-                                                            image: _homeController
-                                                                .breakfastMeals[
-                                                                    index]
-                                                                .originalImage!,
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Container(
-                                                      height: 35,
-                                                      width: 35,
-                                                      decoration: const BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          20))),
-                                                      child: SvgPicture.asset(
-                                                          'assets/icons/overlay.svg')),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8),
-                                            child: CustomText(
-                                              text: _homeController
-                                                  .breakfastMeals[index].name!,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ]),
+                                  return Meal(
+                                    title: _homeController
+                                        .breakfastMeals[index].name!,
+                                    image: _homeController
+                                        .breakfastMeals[index].originalImage!,
+                                    description: _homeController
+                                        .breakfastMeals[index].description!,
+                                    price: _homeController
+                                        .breakfastMeals[index].priceFormated!,
                                   );
                                 }),
                           );
@@ -408,85 +339,15 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                   );
                                 },
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
-                                                  topRight: Radius.circular(10),
-                                                ),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: _homeController
-                                                      .lunchMeals[index]
-                                                      .originalImage!,
-                                                  fit: BoxFit.cover,
-                                                  height: 178,
-                                                  width: 267,
-                                                  placeholder: (context, url) {
-                                                    return const CustomLoadingWidget();
-                                                  },
-                                                ),
-                                              ),
-                                              Positioned(
-                                                left: 12,
-                                                bottom: 9,
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    return await showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return MealInfoPopup(
-                                                            title:
-                                                                _homeController
-                                                                    .lunchMeals[
-                                                                        index]
-                                                                    .name!,
-                                                            image: _homeController
-                                                                .lunchMeals[
-                                                                    index]
-                                                                .originalImage!,
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Container(
-                                                      height: 35,
-                                                      width: 35,
-                                                      decoration: const BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          20))),
-                                                      child: SvgPicture.asset(
-                                                          'assets/icons/overlay.svg')),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8),
-                                            child: CustomText(
-                                              text: _homeController
-                                                  .lunchMeals[index].name!,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ]),
+                                  return Meal(
+                                    title:
+                                        _homeController.lunchMeals[index].name!,
+                                    image: _homeController
+                                        .lunchMeals[index].originalImage!,
+                                    description: _homeController
+                                        .lunchMeals[index].description!,
+                                    price: _homeController
+                                        .lunchMeals[index].priceFormated!,
                                   );
                                 }),
                           );
@@ -531,85 +392,15 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                   );
                                 },
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20))),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
-                                                  topRight: Radius.circular(10),
-                                                ),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: _homeController
-                                                      .dinnerMeals[index]
-                                                      .originalImage!,
-                                                  fit: BoxFit.cover,
-                                                  height: 178,
-                                                  width: 267,
-                                                  placeholder: (context, url) {
-                                                    return const CustomLoadingWidget();
-                                                  },
-                                                ),
-                                              ),
-                                              Positioned(
-                                                left: 12,
-                                                bottom: 9,
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    return await showDialog(
-                                                        context: context,
-                                                        builder: (BuildContext
-                                                            context) {
-                                                          return MealInfoPopup(
-                                                            title:
-                                                                _homeController
-                                                                    .dinnerMeals[
-                                                                        index]
-                                                                    .name!,
-                                                            image: _homeController
-                                                                .dinnerMeals[
-                                                                    index]
-                                                                .originalImage!,
-                                                          );
-                                                        });
-                                                  },
-                                                  child: Container(
-                                                      height: 35,
-                                                      width: 35,
-                                                      decoration: const BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          20))),
-                                                      child: SvgPicture.asset(
-                                                          'assets/icons/overlay.svg')),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8),
-                                            child: CustomText(
-                                              text: _homeController
-                                                  .dinnerMeals[index].name!,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ]),
+                                  return Meal(
+                                    title: _homeController
+                                        .dinnerMeals[index].name!,
+                                    image: _homeController
+                                        .dinnerMeals[index].originalImage!,
+                                    description: _homeController
+                                        .dinnerMeals[index].description!,
+                                    price: _homeController
+                                        .dinnerMeals[index].priceFormated!,
                                   );
                                 }),
                           );
