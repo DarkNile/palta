@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:palta/auth/models/user.dart';
 import 'package:palta/constants/urls.dart';
 import 'package:palta/profile/models/address.dart';
+import 'package:palta/profile/models/calendar.dart';
 import 'package:palta/profile/models/city.dart';
 import 'package:palta/profile/models/country.dart';
 import 'package:palta/profile/models/tracking_order.dart';
@@ -426,6 +427,39 @@ class ProfileService {
       return data
           .map((trackingOrder) => TrackingOrder.fromJson(trackingOrder))
           .toList();
+    } else {
+      var errorMessage = jsonDecode(response.body)['error'];
+      print(errorMessage);
+      return null;
+    }
+  }
+
+  static Future<List<Calendar>?> getCalendar({
+    required String orderId,
+    required String orderProductId,
+    String? date,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final String? customerId = getStorage.read('customerId');
+    print(customerId);
+    final response = await http.get(
+      Uri.parse(
+          '${baseUrl}route=rest/calendar/calendar&order_id=$orderId&order_product_id=$orderProductId&customer_id=$customerId&date=$date&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      List<dynamic> data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return data.map((calendar) => Calendar.fromJson(calendar)).toList();
     } else {
       var errorMessage = jsonDecode(response.body)['error'];
       print(errorMessage);

@@ -41,12 +41,12 @@ class GuideScreen extends StatelessWidget {
                   date: homeController.guidances[index].dateAvailable!,
                   image: homeController.guidances[index].originalImage!,
                   onTap: () {
-                    Get.to(
-                      () => SubscriptionInfo(
-                        hasCombination: false,
-                        program: homeController.guidances[index],
-                      ),
-                    );
+                    // Get.to(
+                    //   () => SubscriptionInfo(
+                    //     hasCombination: false,
+                    //     program: homeController.guidances[index],
+                    //   ),
+                    // );
                   },
                 );
               },

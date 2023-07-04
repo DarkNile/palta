@@ -326,4 +326,6 @@ const Map<String, String> en = {
   'completeInfo': 'Please complete the information above',
   'previous': 'Previous',
   'program': 'Program',
+  'meal': 'Meal',
+  'startsWith': 'Starts with',
 };
