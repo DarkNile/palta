@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/models/cart.dart';
@@ -233,6 +235,9 @@ class CheckoutController extends GetxController {
       isPaymentMethodsLoading(true);
       final data = await CheckoutService.getPaymentMethods(context: context);
       if (data != null) {
+        if (Platform.isAndroid) {
+          data.removeWhere((element) => element.code == 'paytabs_applepay');
+        }
         paymentMethods(data);
         return paymentMethods;
       } else {

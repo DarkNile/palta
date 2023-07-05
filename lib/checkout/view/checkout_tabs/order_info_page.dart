@@ -306,12 +306,13 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                   ],
                 ),
               const SizedBox(
-                height: 80,
+                height: 108,
               ),
             ],
           ),
         ),
         Container(
+          margin: const EdgeInsets.only(bottom: 28),
           alignment: Alignment.bottomCenter,
           color: Colors.white,
           width: width,
