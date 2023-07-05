@@ -58,10 +58,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
           Expanded(
             child: ListView.separated(
                 shrinkWrap: true,
-                // itemCount: Platform.isIOS
-                //     ? widget.checkoutController.paymentMethods.length
-                //     : widget.checkoutController.paymentMethods.length - 1,
-                itemCount: widget.checkoutController.paymentMethods.length - 1,
+                itemCount: widget.checkoutController.paymentMethods.length,
                 separatorBuilder: (context, index) {
                   return const SizedBox(
                     height: 16,

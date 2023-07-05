@@ -441,14 +441,13 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                               ),
                             );
                           }
+                        } else {
+                          applePay(
+                            double.parse(_checkoutController.order!.total
+                                .toStringAsFixed(2)),
+                            _checkoutController.order!.orderId!.toString(),
+                          );
                         }
-                        // else {
-                        //   applePay(
-                        //     double.parse(_checkoutController.order!.total
-                        //         .toStringAsFixed(2)),
-                        //     _checkoutController.order!.orderId!.toString(),
-                        //   );
-                        // }
                       },
                     );
                   }),
@@ -465,12 +464,12 @@ class _CheckoutScreenState extends State<CheckoutScreen>
     print('amount $amount');
     print('orderId $orderId');
     var configuration = PaymentSdkConfigurationDetails(
-      profileId: "64604",
-      serverKey: "SZJNMJHBT2-J6JRLZ2JJW-BBT62LGDMR",
-      clientKey: "CVKMT9-VTRB6G-6RB9M6-DTDQG6",
+      profileId: "97390",
+      serverKey: "SWJNDJZLNB-JGZRMMMTZD-HD6ZJJ666N",
+      clientKey: "CPKMB9-GQPV6T-9RNNN7-D2P9MQ",
       cartId: orderId,
       cartDescription: "Pay via Apple Pay",
-      merchantName: "Al-Jouf Agricultural Development Company",
+      merchantName: "Palta",
       screentTitle: "Pay with Card",
       locale: PaymentSdkLocale.AR,
       amount: amount,

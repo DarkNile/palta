@@ -466,4 +466,39 @@ class ProfileService {
       return null;
     }
   }
+
+  static Future<bool> requestOff({
+    required List<String> dates,
+    required String orderId,
+    required String orderProductId,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/calendar/requestoff&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+      body: jsonEncode({
+        'dates': dates,
+        'order_id': orderId,
+        'order_product_id': orderProductId,
+      }),
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      List<dynamic> data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return true;
+    } else {
+      var errorMessage = jsonDecode(response.body)['error'];
+      print(errorMessage);
+      return false;
+    }
+  }
 }

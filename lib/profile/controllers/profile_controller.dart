@@ -31,6 +31,7 @@ class ProfileController extends GetxController {
   var userOrdersByStatus = <TrackingOrder>[].obs;
   var isCalendarLoading = false.obs;
   var calendar = <Calendar>[].obs;
+  var isRequestOffLoading = false.obs;
 
   Future<User?> getAccount() async {
     try {
@@ -315,6 +316,27 @@ class ProfileController extends GetxController {
       return null;
     } finally {
       isCalendarLoading(false);
+    }
+  }
+
+  Future<bool> requestOff({
+    required List<String> dates,
+    required String orderId,
+    required String orderProductId,
+  }) async {
+    try {
+      isRequestOffLoading(true);
+      final isSuccess = await ProfileService.requestOff(
+        dates: dates,
+        orderId: orderId,
+        orderProductId: orderProductId,
+      );
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isRequestOffLoading(false);
     }
   }
 }
