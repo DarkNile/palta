@@ -4,14 +4,21 @@ import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questio
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_text.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../widgets/custom_outlined_button.dart';
 
 class AssessmentScreen extends StatelessWidget {
-  const AssessmentScreen({super.key, required this.homeController});
+  const AssessmentScreen({
+    super.key,
+    required this.homeController,
+    required this.profileController,
+  });
 
   final HomeController homeController;
+  final ProfileController profileController;
 
   @override
   Widget build(BuildContext context) {
@@ -153,13 +160,26 @@ class AssessmentScreen extends StatelessWidget {
                 const SizedBox(
                   height: 35,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: CustomOutlinedButton(
-                    onPressed: () {},
-                    title: 'AskForNutritionalAdvice'.tr,
-                  ),
-                ),
+                Obx(() {
+                  if (profileController.isConactNadaLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: CustomOutlinedButton(
+                      onPressed: () async {
+                        final contact = await profileController.contactNada();
+                        if (contact != null) {
+                          await launchUrlString(
+                              'whatsapp://send?phone=${contact.phone!}');
+                        }
+                      },
+                      title: 'AskForNutritionalAdvice'.tr,
+                    ),
+                  );
+                }),
               ],
             ),
           ),

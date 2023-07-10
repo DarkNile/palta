@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_details.dart';
 import 'package:palta/home/widgets/custom_subscription_card.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_body_title.dart';
@@ -48,8 +49,10 @@ class SubscriptionScreen extends StatelessWidget {
                     date: profileController.userOrders[index].dateAdded!,
                     image: profileController
                         .userOrders[index].products!.first.originalImage!,
-                    // onChangeMeals: () {},
-                    onInfoTap: () {},
+                    onInfoTap: () {
+                      Get.to(() => SubscriptionDetails(
+                          order: profileController.userOrders[index]));
+                    },
                   );
                 },
                 separatorBuilder: (context, index) {

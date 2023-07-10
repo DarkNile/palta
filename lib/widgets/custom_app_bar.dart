@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/notification_screen.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_app_bar_clip_path.dart';
 import 'package:palta/widgets/custom_text.dart';
 
@@ -12,11 +14,13 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.scaffoldKey,
     this.isFromNotification = false,
     this.isFromOnboarding = false,
+    this.isFromStaticPage = false,
   });
 
   final GlobalKey<ScaffoldState>? scaffoldKey;
   final bool isFromOnboarding;
   final bool isFromNotification;
+  final bool isFromStaticPage;
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -26,6 +30,16 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
+  final getStorage = GetStorage();
+  late String? customerId;
+  final _profileController = Get.put(ProfileController());
+
+  @override
+  void initState() {
+    super.initState();
+    customerId = getStorage.read('customerId');
+  }
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -52,27 +66,34 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       },
                       icon: const Icon(Icons.arrow_back_ios),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/logo.png',
-                          width: 117.5,
-                          height: 51,
-                        ),
-                        const SizedBox(
-                          height: 1,
-                        ),
-                        const CustomText(
-                          text: 'Healthy Food',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300,
-                          textAlign: TextAlign.center,
-                          color: pineGreen,
-                        ),
-                      ],
-                    ),
+                    if (widget.isFromStaticPage)
+                      Image.asset(
+                        'assets/images/logo.png',
+                        width: 117.5,
+                        height: 51,
+                      )
+                    else
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/logo.png',
+                            width: 117.5,
+                            height: 51,
+                          ),
+                          const SizedBox(
+                            height: 1,
+                          ),
+                          const CustomText(
+                            text: 'Healthy Food',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            textAlign: TextAlign.center,
+                            color: pineGreen,
+                          ),
+                        ],
+                      ),
                     const SizedBox(
                       width: 48,
                     ),
@@ -104,9 +125,14 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(
-                          () => const NotificationScreen(),
-                        );
+                        if (customerId != null &&
+                            customerId!.isNotEmpty &&
+                            customerId ==
+                                _profileController.user.value.id.toString()) {
+                          Get.to(
+                            () => const NotificationScreen(),
+                          );
+                        }
                       },
                       child: widget.isFromNotification
                           ? SvgPicture.asset(

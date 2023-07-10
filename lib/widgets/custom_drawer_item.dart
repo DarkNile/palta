@@ -9,11 +9,13 @@ class CustomDrawerTile extends StatelessWidget {
     required this.onTap,
     required this.title,
     this.subtitle,
+    this.leading,
   });
 
   final VoidCallback onTap;
   final String title;
   final Widget? subtitle;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class CustomDrawerTile extends StatelessWidget {
       minVerticalPadding: 0,
       minLeadingWidth: 0,
       subtitle: subtitle,
+      leading: leading,
     );
   }
 }

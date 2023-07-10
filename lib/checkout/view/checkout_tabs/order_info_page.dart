@@ -21,7 +21,7 @@ class OrderInfoPage extends StatefulWidget {
 
   final CheckoutController checkoutController;
   final bool hasCombination;
-  final Function(String, String, String) onNextTap;
+  final Function(String, String) onNextTap;
   final VoidCallback onPreviousTap;
 
   @override
@@ -31,7 +31,7 @@ class OrderInfoPage extends StatefulWidget {
 class _OrderInfoPageState extends State<OrderInfoPage> {
   DateTime? today = DateTime.now();
   String? fridayValue;
-  String? selectedTime;
+  // String? selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -165,92 +165,92 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 36,
-                    ),
-                    CustomText(
-                      text: 'timeToReceiveMeals'.tr,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                selectedTime = 'AM 8:00 - 10:00';
-                              });
-                            },
-                            child: Container(
-                              width: 178,
-                              height: 56,
-                              decoration: BoxDecoration(
-                                color: selectedTime == 'AM 8:00 - 10:00'
-                                    ? offWhite
-                                    : Colors.white,
-                                border: Border.all(
-                                  color: selectedTime == 'AM 8:00 - 10:00'
-                                      ? avocado
-                                      : veryLightPink,
-                                  width:
-                                      selectedTime == 'AM 8:00 - 10:00' ? 2 : 1,
-                                ),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(6)),
-                              ),
-                              alignment: Alignment.center,
-                              child: const CustomText(
-                                text: 'AM 8:00 - 10:00',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                selectedTime = 'PM 12:00 - 02:00';
-                              });
-                            },
-                            child: Container(
-                              width: 178,
-                              height: 56,
-                              decoration: BoxDecoration(
-                                color: selectedTime == 'PM 12:00 - 02:00'
-                                    ? offWhite
-                                    : Colors.white,
-                                border: Border.all(
-                                  color: selectedTime == 'PM 12:00 - 02:00'
-                                      ? avocado
-                                      : veryLightPink,
-                                  width: selectedTime == 'PM 12:00 - 02:00'
-                                      ? 2
-                                      : 1,
-                                ),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(6)),
-                              ),
-                              alignment: Alignment.center,
-                              child: const CustomText(
-                                text: 'PM 12:00 - 02:00',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // const SizedBox(
+                    //   height: 36,
+                    // ),
+                    // CustomText(
+                    //   text: 'timeToReceiveMeals'.tr,
+                    //   fontSize: 16,
+                    //   fontWeight: FontWeight.w500,
+                    // ),
+                    // const SizedBox(
+                    //   height: 16,
+                    // ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Expanded(
+                    //       child: InkWell(
+                    //         onTap: () {
+                    //           setState(() {
+                    //             selectedTime = 'AM 8:00 - 10:00';
+                    //           });
+                    //         },
+                    //         child: Container(
+                    //           width: 178,
+                    //           height: 56,
+                    //           decoration: BoxDecoration(
+                    //             color: selectedTime == 'AM 8:00 - 10:00'
+                    //                 ? offWhite
+                    //                 : Colors.white,
+                    //             border: Border.all(
+                    //               color: selectedTime == 'AM 8:00 - 10:00'
+                    //                   ? avocado
+                    //                   : veryLightPink,
+                    //               width:
+                    //                   selectedTime == 'AM 8:00 - 10:00' ? 2 : 1,
+                    //             ),
+                    //             borderRadius:
+                    //                 const BorderRadius.all(Radius.circular(6)),
+                    //           ),
+                    //           alignment: Alignment.center,
+                    //           child: const CustomText(
+                    //             text: 'AM 8:00 - 10:00',
+                    //             fontSize: 14,
+                    //             fontWeight: FontWeight.w400,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 16,
+                    //     ),
+                    //     Expanded(
+                    //       child: InkWell(
+                    //         onTap: () {
+                    //           setState(() {
+                    //             selectedTime = 'PM 12:00 - 02:00';
+                    //           });
+                    //         },
+                    //         child: Container(
+                    //           width: 178,
+                    //           height: 56,
+                    //           decoration: BoxDecoration(
+                    //             color: selectedTime == 'PM 12:00 - 02:00'
+                    //                 ? offWhite
+                    //                 : Colors.white,
+                    //             border: Border.all(
+                    //               color: selectedTime == 'PM 12:00 - 02:00'
+                    //                   ? avocado
+                    //                   : veryLightPink,
+                    //               width: selectedTime == 'PM 12:00 - 02:00'
+                    //                   ? 2
+                    //                   : 1,
+                    //             ),
+                    //             borderRadius:
+                    //                 const BorderRadius.all(Radius.circular(6)),
+                    //           ),
+                    //           alignment: Alignment.center,
+                    //           child: const CustomText(
+                    //             text: 'PM 12:00 - 02:00',
+                    //             fontSize: 14,
+                    //             fontWeight: FontWeight.w400,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: 36,
                     ),
@@ -343,10 +343,9 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                   return CustomButton(
                     onPressed: () {
                       if (widget.hasCombination) {
-                        if (selectedTime != null && fridayValue != null) {
+                        if (fridayValue != null) {
                           widget.onNextTap(
                             DateFormat('dd/MM/yyyy').format(today!),
-                            selectedTime!,
                             fridayValue!,
                           );
                         } else {
@@ -354,7 +353,6 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                         }
                       } else {
                         widget.onNextTap(
-                          '',
                           '',
                           '',
                         );

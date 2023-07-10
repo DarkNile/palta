@@ -84,7 +84,6 @@ class CheckoutService {
 
   static Future<bool> saveCalendar({
     required String date,
-    required String time,
     required String fridayOn,
   }) async {
     final getStorage = GetStorage();
@@ -93,7 +92,7 @@ class CheckoutService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
-      Uri.parse('${baseUrl}route=checkout/cart/calendarsave&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/calendar/calendarsave'),
       headers: {
         "Accept": "application/json",
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
@@ -101,12 +100,16 @@ class CheckoutService {
       },
       body: json.encode({
         'calendar_start': date,
-        'calendar_time': time,
         'friday_on': fridayOn,
       }),
     );
     print('response status code: ${response.statusCode}');
     if (response.statusCode == 200) {
+      print(json.encode({
+        'calendar_start': date,
+        'friday_on': fridayOn,
+      }));
+      print(response.body);
       return true;
     } else {
       return false;
