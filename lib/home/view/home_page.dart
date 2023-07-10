@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CustomBottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
-            if (index == 4) {
+            if (index == 4 || index == 2) {
               if (customerId != null &&
                   customerId!.isNotEmpty &&
                   customerId == _profileController.user.value.id.toString()) {
@@ -129,6 +129,7 @@ class _HomePageState extends State<HomePage> {
               ),
               AssessmentScreen(
                 homeController: _homeController,
+                profileController: _profileController,
               ),
               SubscriptionScreen(
                 profileController: _profileController,

@@ -4,6 +4,7 @@ import 'package:palta/auth/models/user.dart';
 import 'package:palta/profile/models/address.dart';
 import 'package:palta/profile/models/calendar.dart';
 import 'package:palta/profile/models/city.dart';
+import 'package:palta/profile/models/contact.dart';
 import 'package:palta/profile/models/country.dart';
 import 'package:palta/profile/models/tracking_order.dart';
 import 'package:palta/profile/models/wallet.dart';
@@ -32,6 +33,8 @@ class ProfileController extends GetxController {
   var isCalendarLoading = false.obs;
   var calendar = <Calendar>[].obs;
   var isRequestOffLoading = false.obs;
+  var isConactNadaLoading = false.obs;
+  var contact = Contact().obs;
 
   Future<User?> getAccount() async {
     try {
@@ -337,6 +340,24 @@ class ProfileController extends GetxController {
       return false;
     } finally {
       isRequestOffLoading(false);
+    }
+  }
+
+  Future<Contact?> contactNada() async {
+    try {
+      isConactNadaLoading(true);
+      final data = await ProfileService.contactNada();
+      if (data != null) {
+        contact(data);
+        return contact.value;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isConactNadaLoading(false);
     }
   }
 }

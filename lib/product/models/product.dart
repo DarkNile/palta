@@ -76,6 +76,8 @@ class Product {
   Customtabs? customTabs;
   List<dynamic>? recurrings;
   List<SizeOption>? option;
+  dynamic total;
+  String? orderProductId;
 
   Product({
     this.id,
@@ -149,6 +151,8 @@ class Product {
     this.reviews,
     this.recurrings,
     this.option,
+    this.total,
+    this.orderProductId,
   });
 
   Product.fromJson(Map<String, dynamic> json) {
@@ -236,6 +240,8 @@ class Product {
     option = json["option"] == null
         ? null
         : (json["option"] as List).map((e) => SizeOption.fromJson(e)).toList();
+    total = json["total"];
+    orderProductId = json["order_product_id"];
   }
 
   Map<String, dynamic> toJson() {
@@ -329,6 +335,8 @@ class Product {
     if (option != null) {
       data["option"] = option?.map((e) => e.toJson()).toList();
     }
+    data["total"] = total;
+    data["order_product_id"] = orderProductId;
     return data;
   }
 }

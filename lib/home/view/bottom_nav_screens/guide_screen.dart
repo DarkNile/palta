@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_info.dart';
 import 'package:palta/home/widgets/custom_guide_item.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 
@@ -40,12 +41,12 @@ class GuideScreen extends StatelessWidget {
                   date: homeController.guidances[index].dateAvailable!,
                   image: homeController.guidances[index].originalImage!,
                   onTap: () {
-                    // Get.to(
-                    //   () => SubscriptionInfo(
-                    //     hasCombination: false,
-                    //     program: homeController.guidances[index],
-                    //   ),
-                    // );
+                    Get.to(
+                      () => SubscriptionInfo(
+                        hasCombination: false,
+                        program: homeController.guidances[index],
+                      ),
+                    );
                   },
                 );
               },

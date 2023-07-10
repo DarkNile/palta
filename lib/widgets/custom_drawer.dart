@@ -179,7 +179,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     title: 'contactUs',
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 16,
                   ),
                   Center(
                     child: DropdownButtonFormField<String>(
@@ -247,7 +247,27 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         }),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 16,
+                  ),
+                  CustomDrawerTile(
+                    onTap: () async {
+                      await launchUrlString(
+                          'whatsapp://send?phone=+966540246740');
+                    },
+                    title: 'customerService',
+                    subtitle: CustomText(
+                      text: 'complaint'.tr,
+                      fontSize: 11,
+                    ),
+                    leading: Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: SvgPicture.asset(
+                        'assets/icons/whatsapp.svg',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
                   ),
                   Center(
                     child: CustomText(
@@ -263,7 +283,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   Center(child: SvgPicture.asset('assets/icons/payments.svg')),
                   const SizedBox(
-                    height: 24,
+                    height: 16,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

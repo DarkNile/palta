@@ -8,6 +8,7 @@ import 'package:palta/constants/urls.dart';
 import 'package:palta/profile/models/address.dart';
 import 'package:palta/profile/models/calendar.dart';
 import 'package:palta/profile/models/city.dart';
+import 'package:palta/profile/models/contact.dart';
 import 'package:palta/profile/models/country.dart';
 import 'package:palta/profile/models/tracking_order.dart';
 import 'package:palta/profile/models/wallet.dart';
@@ -499,6 +500,32 @@ class ProfileService {
       var errorMessage = jsonDecode(response.body)['error'];
       print(errorMessage);
       return false;
+    }
+  }
+
+  static Future<Contact?> contactNada() async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse('${baseUrl}route=rest/support&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      Map<String, dynamic> data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return Contact.fromJson(data);
+    } else {
+      var errorMessage = jsonDecode(response.body)['error'];
+      print(errorMessage);
+      return null;
     }
   }
 }

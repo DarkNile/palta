@@ -258,12 +258,10 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       onPreviousTap: () {
                         Get.back();
                       },
-                      onNextTap:
-                          (String date, String time, String fridayOn) async {
+                      onNextTap: (String date, String fridayOn) async {
                         final isSuccess =
                             await _checkoutController.saveCalendar(
                           date: date,
-                          time: time,
                           fridayOn: fridayOn,
                         );
                         if (isSuccess) {
