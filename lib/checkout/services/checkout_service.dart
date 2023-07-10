@@ -522,6 +522,7 @@ class CheckoutService {
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];
+      print('${baseUrl}route=rest/confirm/confirm&language=$lang');
       print('data: $data');
       if (data is List) {
         return null;
@@ -554,6 +555,7 @@ class CheckoutService {
     );
     print('response status code: ${response.statusCode}');
     if (response.statusCode == 200) {
+      print('${baseUrl}route=rest/confirm/saveOrderToDatabase&language=$lang');
       return true;
     } else {
       return false;
