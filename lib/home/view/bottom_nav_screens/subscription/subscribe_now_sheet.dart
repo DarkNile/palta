@@ -215,13 +215,6 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
           if (selectedPrice != null)
             CustomButton(
               onPressed: () async {
-                setState(() {
-                  selectedDayIndex = null;
-                  selectedNumberIndex = null;
-                  selectedPrice = null;
-                  option1Id = null;
-                  option2Id = null;
-                });
                 Get.back();
                 final isSuccess = await widget.checkoutController.addToCart(
                   productId: widget.program.id.toString(),

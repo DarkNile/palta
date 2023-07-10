@@ -169,12 +169,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: widget.homeController.programs[index].name!,
                   subtitle: widget.homeController.programs[index].description!,
                   image: widget.homeController.programs[index].originalImage!,
-                  icon: programIcons[index],
+                  icon: widget.homeController.programs.length > 3
+                      ? 'muscle'
+                      : programIcons[index],
                   onTap: () {
                     Get.to(
                       () => SubscriptionInfo(
                         program: widget.homeController.programs[index],
-                        icon: programIcons[index],
+                        icon: widget.homeController.programs.length > 3
+                            ? 'muscle'
+                            : programIcons[index],
                         hasCombination: true,
                       ),
                     );
