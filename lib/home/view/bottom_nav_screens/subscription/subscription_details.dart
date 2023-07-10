@@ -41,6 +41,8 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                 orderId: widget.order.orderId!,
                 orderProductId: widget.order.products![index].orderProductId!,
               );
+              print(widget.order.orderId!);
+              print(widget.order.products![index].orderProductId!);
               Get.to(
                 () => CalendarScreen(
                   productName: widget.order.products![index].name!,

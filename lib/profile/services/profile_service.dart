@@ -449,7 +449,7 @@ class ProfileService {
     print(customerId);
     final response = await http.get(
       Uri.parse(
-          '${baseUrl}route=rest/calendar/calendar&order_id=$orderId&order_product_id=$orderProductId&customer_id=$customerId&date=$date&language=$lang'),
+          '${baseUrl}route=rest/calendar/calendar&order_id=$orderId&order_product_id=$orderProductId&customer_id=$customerId'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
