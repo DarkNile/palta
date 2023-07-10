@@ -41,9 +41,13 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                 orderId: widget.order.orderId!,
                 orderProductId: widget.order.products![index].orderProductId!,
               );
-              Get.to(() => CalendarScreen(
-                    name: widget.order.products![index].name!,
-                  ));
+              Get.to(
+                () => CalendarScreen(
+                  productName: widget.order.products![index].name!,
+                  orderId: widget.order.orderId!,
+                  orderProductId: widget.order.products![index].orderProductId!,
+                ),
+              );
             },
             child: Card(
               elevation: 2,
@@ -137,9 +141,14 @@ class _SubscriptionDetailsState extends State<SubscriptionDetails> {
                           orderProductId:
                               widget.order.products![index].orderProductId!,
                         );
-                        Get.to(() => CalendarScreen(
-                              name: widget.order.products![index].name!,
-                            ));
+                        Get.to(
+                          () => CalendarScreen(
+                            productName: widget.order.products![index].name!,
+                            orderId: widget.order.orderId!,
+                            orderProductId:
+                                widget.order.products![index].orderProductId!,
+                          ),
+                        );
                       },
                       child: SvgPicture.asset(
                         'assets/icons/calendar.svg',

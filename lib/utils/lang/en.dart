@@ -328,4 +328,11 @@ const Map<String, String> en = {
   'program': 'Program',
   'meal': 'Meal',
   'startsWith': 'Starts with',
+  'calendarDate': 'Calendar Date',
+  'breakfastMeal': 'Breakfast Meal',
+  'lunchMeal': 'Lunch Meal',
+  'dinnerMeal': 'Dinner Meal',
+  'snacks': 'Snacks',
+  'otherMeals': 'Other Meals',
+  'requestOff': 'requestOff',
 };

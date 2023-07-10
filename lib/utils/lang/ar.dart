@@ -309,4 +309,11 @@ const Map<String, String> ar = {
   'program': 'البرنامج',
   'meal': 'وجبة',
   'startsWith': 'بدءا من',
+  'calendarDate': 'تاريخ التقويم',
+  'breakfastMeal': 'وجبة الإفطار ',
+  'lunchMeal': 'وجبة الغداء',
+  'dinnerMeal': 'وجبة العشاء',
+  'snacks': 'وجبات خفيفة',
+  'otherMeals': 'وجبات أخرى',
+  'requestOff': 'طلب إلغاء',
 };
