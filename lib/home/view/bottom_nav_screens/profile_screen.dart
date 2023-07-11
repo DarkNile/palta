@@ -5,6 +5,7 @@ import 'package:palta/auth/controllers/auth_controller.dart';
 import 'package:palta/auth/view/change_password_screen.dart';
 import 'package:palta/auth/view/edit_details_screen.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/notification_screen.dart';
 import 'package:palta/home/view/static_pages/general_articles_screen.dart';
 import 'package:palta/home/widgets/custom_profile_item.dart';
@@ -19,12 +20,14 @@ import 'package:palta/widgets/custom_text.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
     super.key,
+    required this.homeController,
     required this.profileController,
     required this.authController,
   });
 
   final ProfileController profileController;
   final AuthController authController;
+  final HomeController homeController;
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +182,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             CustomProfileItem(
               onTap: () {
-                //  Get.to(() => const GeneralArticlesScreen(homeController: homeController));
+                  Get.to(() => GeneralArticlesScreen(homeController: homeController, allUsers: false,));
               },
               title: 'myArticlesTitle',
               subtitle: 'myArticlesSubTitle',
