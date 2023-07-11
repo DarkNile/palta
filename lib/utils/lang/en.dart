@@ -335,6 +335,9 @@ const Map<String, String> en = {
   'snacks': 'Snacks',
   'otherMeals': 'Other Meals',
   'requestOff': 'Request Off',
+  'successRequestOff': 'Request Off Sent Successfully!',
+  'errorRequestOff': 'An error occured! Please try again later...',
+  'back': 'Back',
 
   // Articles
   'articles': 'Articles',

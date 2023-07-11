@@ -6,8 +6,8 @@ import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/static_pages/general_articles_details_screen.dart';
 import 'package:palta/home/widgets/custom_guide_item.dart';
-import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_body_title.dart';
+import 'package:palta/widgets/custom_header.dart';
 
 class GeneralArticlesScreen extends StatefulWidget {
   const GeneralArticlesScreen(
@@ -46,27 +46,16 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: CustomHeader(
+        title: (widget.allUsers) ? 'articles'.tr : 'myArticlesTitle'.tr,
+      ),
       body: Column(
         children: [
-          Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.bottomCenter,
-            children: [
-              const CustomAppBar(
-                isFromOnboarding: true,
-                isFromStaticPage: true,
-              ),
-              Positioned(
-                top: 100,
-                child: CustomBodyTitle(
-                  title:
-                      (widget.allUsers) ? 'articles'.tr : 'myArticlesTitle'.tr,
-                ),
-              ),
-            ],
+          CustomBodyTitle(
+            title: (widget.allUsers) ? 'articles'.tr : 'myArticlesTitle'.tr,
           ),
           const SizedBox(
-            height: 24,
+            height: 26,
           ),
           Obx(() {
             if (widget.homeController.isArticlesLoading.value) {
