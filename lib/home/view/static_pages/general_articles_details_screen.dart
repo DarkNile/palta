@@ -41,7 +41,8 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  left: 20,
+                  right: Directionality.of(context) == TextDirection.ltr ? null : 20,
+                  left: Directionality.of(context) == TextDirection.ltr ? 20 : null,
                   top: 40,
                   child: customBackButton(),
                 ),
@@ -85,7 +86,7 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
             Get.back();
           },
           child: const Icon(
-            Icons.chevron_right,
+            Icons.chevron_left,
             color: Colors.black,
           ),
         ),
