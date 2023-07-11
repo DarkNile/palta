@@ -61,9 +61,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                   isChecked = value!;
                                 });
                                 if (isChecked) {
-                                  dates.add('11/07/2023');
+                                  dates.add(_profileController
+                                      .calendar[index].calendarDate);
                                 } else {
-                                  dates.remove('11/07/2023');
+                                  dates.remove(_profileController
+                                      .calendar[index].calendarDate);
                                 }
                               }),
                           const SizedBox(
@@ -80,10 +82,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       flex: 2,
                                       child: CustomText(
-                                        text: 'Tue - 2023-07-11',
+                                        text: _profileController
+                                            .calendar[index].calendarDate,
                                       ),
                                     ),
                                   ],
@@ -97,11 +100,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       flex: 2,
                                       child: CustomText(
-                                        text:
-                                            'مناقيش -توست بالبيستو والاجبان  -بيتزا بيض  -بان كيك',
+                                        text: _profileController
+                                            .calendar[index].breakfast,
                                       ),
                                     ),
                                   ],
@@ -115,12 +118,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       flex: 2,
                                       child: CustomText(
                                         text:
-                                            'كلوب ساندوتش  -فول مدمس بالطحينة',
-                                      ),
+                                        _profileController
+                                            .calendar[index].lunch,                                      ),
                                     ),
                                   ],
                                 ),
@@ -133,11 +136,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       flex: 2,
                                       child: CustomText(
-                                        text: 'فول مدمس بالطحينة',
-                                      ),
+                                        text: _profileController
+                                            .calendar[index].dinner,                                      ),
                                     ),
                                   ],
                                 ),
@@ -150,11 +153,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       flex: 2,
                                       child: CustomText(
-                                        text: 'حمص بالشمندر',
-                                      ),
+                                        text: _profileController
+                                            .calendar[index].snaks,                                      ),
                                     ),
                                   ],
                                 ),
@@ -167,11 +170,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    const Expanded(
+                                     Expanded(
                                       flex: 2,
                                       child: CustomText(
-                                        text: 'توست بالبيستو والاجبان',
-                                      ),
+                                        text: _profileController
+                                            .calendar[index].other!,                                      ),
                                     ),
                                   ],
                                 ),
