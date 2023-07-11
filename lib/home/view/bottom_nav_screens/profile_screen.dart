@@ -6,7 +6,6 @@ import 'package:palta/auth/view/change_password_screen.dart';
 import 'package:palta/auth/view/edit_details_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/notification_screen.dart';
-import 'package:palta/home/view/static_pages/general_articles_screen.dart';
 import 'package:palta/home/widgets/custom_profile_item.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/profile/view/address_screen.dart';
@@ -171,7 +170,9 @@ class ProfileScreen extends StatelessWidget {
             ),
             CustomProfileItem(
               onTap: () {
-                Get.to(() => const NotificationScreen(),);
+                Get.to(
+                  () => const NotificationScreen(),
+                );
               },
               title: 'myNotificationsTitle',
               subtitle: 'myNotificationsSubTitle',
