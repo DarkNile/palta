@@ -8,7 +8,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onTapBack;
 
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(80);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       backgroundColor: Colors.white,
       centerTitle: true,
-      toolbarHeight: 60,
+      toolbarHeight: 80,
       title: Image.asset(
         'assets/images/logo.png',
         width: 117.5,
@@ -31,7 +31,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
           }
         },
         icon: const Icon(
-          Icons.arrow_back_outlined,
+          Icons.arrow_back_ios,
           color: Colors.black,
           size: 24,
         ),
