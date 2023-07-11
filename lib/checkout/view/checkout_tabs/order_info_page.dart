@@ -29,7 +29,7 @@ class OrderInfoPage extends StatefulWidget {
 }
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
-  DateTime? today = DateTime.now();
+  DateTime today = DateTime.now();
   String? fridayValue;
   // String? selectedTime;
 
@@ -145,18 +145,23 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text: DateFormat('dd/MM/yyyy').format(today!),
+                            text: DateFormat('dd/MM/yyyy').format(today),
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
                           InkWell(
                             onTap: () async {
-                              today = await showDatePicker(
+                              DateTime? selectedDate = await showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
                                 lastDate: DateTime(2030, 12, 31),
                               );
+
+                              if (selectedDate != null) {
+                                today = selectedDate;
+                              }
+
                               setState(() {});
                             },
                             child:
@@ -344,7 +349,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                       if (widget.hasCombination) {
                         if (fridayValue != null) {
                           widget.onNextTap(
-                            DateFormat('dd/MM/yyyy').format(today!),
+                            DateFormat('dd/MM/yyyy').format(today),
                             fridayValue!,
                           );
                         } else {
