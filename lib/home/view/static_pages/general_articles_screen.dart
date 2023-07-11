@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
@@ -9,18 +10,27 @@ import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 
 class GeneralArticlesScreen extends StatefulWidget {
-  const GeneralArticlesScreen({super.key, required this.homeController});
+  const GeneralArticlesScreen(
+      {super.key, required this.homeController, required this.allUsers});
 
   final HomeController homeController;
+  final bool allUsers;
 
   @override
   State<GeneralArticlesScreen> createState() => _GeneralArticlesScreenState();
 }
 
 class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
+  void _getArticles() {
+    final GetStorage getStorage = GetStorage();
+    final userId = getStorage.read('customerId');
+    widget.homeController
+        .getArticles(userId: (widget.allUsers) ? 'all' : userId);
+  }
+
   @override
   void initState() {
-    widget.homeController.getArticles(userId: 'all');
+    _getArticles();
     super.initState();
   }
 
@@ -33,29 +43,29 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const Stack(
+           Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,
             children: [
-              CustomAppBar(
+              const CustomAppBar(
                 isFromOnboarding: true,
                 isFromStaticPage: true,
               ),
+              Positioned(
+                top: 100,
+                child: CustomBodyTitle(
+                  title: 'articles'.tr,
+                ),
+              ),
             ],
           ),
-          CustomBodyTitle(
-            title: 'articles'.tr,
-          ),
           const SizedBox(
-            height: 40,
+            height: 24,
           ),
           Obx(() {
             if (widget.homeController.isArticlesLoading.value) {
@@ -69,18 +79,21 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemBuilder: (context, index) {
                   String dateFormat = formatDateTime(
-                    widget.homeController.articles[index].dateCreated,);
+                    widget.homeController.articles[index].dateCreated,
+                  );
                   return CustomGuideItem(
                     title: widget.homeController.articles[index].name.tr,
                     date: dateFormat,
                     image: widget.homeController.articles[index].image,
                     onTap: () {
-                      Get.to(GeneralArticlesDetailsScreen(
-                        dateCreated: dateFormat,
-                        description: widget.homeController.articles[index].description,
-                        name: widget.homeController.articles[index].name,
-                        imageUrl: widget.homeController.articles[index].image,
-                      ));
+                      Get.to(() => GeneralArticlesDetailsScreen(
+                            dateCreated: dateFormat,
+                            description: widget
+                                .homeController.articles[index].description,
+                            name: widget.homeController.articles[index].name,
+                            imageUrl:
+                                widget.homeController.articles[index].image,
+                          ));
                     },
                   );
                 },
