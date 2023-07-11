@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/widgets/custom_checkout_item.dart';
 import 'package:palta/constants/colors.dart';
@@ -258,7 +259,9 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         height: 8,
                       ),
                       CustomText(
-                        text: widget.checkoutController.order!.shippingCode!,
+                        text: (GetStorage().read('lang') == 'ar')
+                            ? 'شحن مجاني'
+                            : widget.checkoutController.order!.shippingCode!,
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
                       ),

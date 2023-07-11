@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/constants/extensions.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
@@ -29,8 +30,9 @@ class OrderInfoPage extends StatefulWidget {
 }
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
-  DateTime? today = DateTime.now();
+  DateTime today = DateTime.now();
   String? fridayValue;
+
   // String? selectedTime;
 
   @override
@@ -47,6 +49,9 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
               ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
+                itemCount: widget.checkoutController.cart!.products!.isEmpty
+                    ? 0
+                    : widget.checkoutController.cart!.products!.length,
                 itemBuilder: (context, index) {
                   return Card(
                     shape: const RoundedRectangleBorder(
@@ -58,15 +63,53 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(6),
                               topRight: Radius.circular(6)),
-                          child: CachedNetworkImage(
-                            imageUrl: widget.checkoutController.cart!
-                                .products![index].originalImage!,
-                            height: 96,
-                            width: width,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) {
-                              return const CustomLoadingWidget();
-                            },
+                          child: Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: widget.checkoutController.cart!
+                                    .products![index].originalImage!,
+                                height: 96,
+                                width: width,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) {
+                                  return const CustomLoadingWidget();
+                                },
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.white60,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      widget.checkoutController.isCartLoading
+                                          .value = true;
+                                      widget.checkoutController
+                                          .deleteCartItem(
+                                        productId: widget.checkoutController.cart!
+                                            .products![index].id,
+                                      )
+                                          .then((value) {
+                                        widget.checkoutController
+                                            .getCartItems()
+                                            .whenComplete(
+                                              () => widget.checkoutController
+                                                  .isCartLoading.value = false,
+                                            );
+                                        // TODO: refresh UI: Last Item refuse to cleared
+                                        print('Deleted Successfully');
+                                        print('Products cart length----------> : '
+                                            '${widget.checkoutController.cart!.products!.length}');
+                                      });
+                                    },
+                                    icon: const Icon(
+                                        Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(
@@ -115,7 +158,6 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                     height: 28,
                   );
                 },
-                itemCount: widget.checkoutController.cart!.products!.length,
               ),
               if (widget.hasCombination)
                 Column(
@@ -145,18 +187,23 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text: DateFormat('dd/MM/yyyy').format(today!),
+                            text: DateFormat('dd/MM/yyyy').format(today),
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
                           InkWell(
                             onTap: () async {
-                              today = await showDatePicker(
+                              DateTime? selectedDate = await showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
                                 lastDate: DateTime(2030, 12, 31),
                               );
+
+                              if (selectedDate != null) {
+                                today = selectedDate;
+                              }
+
                               setState(() {});
                             },
                             child:
@@ -344,7 +391,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                       if (widget.hasCombination) {
                         if (fridayValue != null) {
                           widget.onNextTap(
-                            DateFormat('dd/MM/yyyy').format(today!),
+                            DateFormat('dd/MM/yyyy').format(today),
                             fridayValue!,
                           );
                         } else {

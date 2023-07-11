@@ -112,48 +112,54 @@ class AssessmentScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Container(
-                      width: 90.0,
-                      height: 90.0,
-                      decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/Ellipse 199.png'),
-                          fit: BoxFit.cover,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 90,
+                        width: 90,
+                        decoration: BoxDecoration(
+                          image: const DecorationImage(
+                            image: AssetImage('assets/images/Ellipse 199.png'),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50.0)),
+                          border: Border.all(
+                              color: Colors.white,
+                              width: 5.0,
+                              strokeAlign: BorderSide.strokeAlignInside),
                         ),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(50.0)),
-                        border: Border.all(
-                            color: Colors.white,
-                            width: 5.0,
-                            strokeAlign: BorderSide.strokeAlignInside),
                       ),
                     ),
                     const SizedBox(
-                      width: 32,
+                      width: 30,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SvgPicture.asset('assets/icons/doubleQoutes.svg'),
-                        const SizedBox(
-                          height: 13,
-                        ),
-                        CustomText(
-                          text: 'captainNada'.tr,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        const SizedBox(
-                          height: 13,
-                        ),
-                        SizedBox(
-                          width: width * 0.6,
-                          child: CustomText(
-                            text: 'iOfferYou'.tr,
-                            fontSize: 14,
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SvgPicture.asset('assets/icons/doubleQoutes.svg'),
+                          const SizedBox(
+                            height: 13,
                           ),
-                        ),
-                      ],
+                          CustomText(
+                            text: 'captainNada'.tr,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          const SizedBox(
+                            height: 13,
+                          ),
+                          SizedBox(
+                            width: width * 0.6,
+                            child: CustomText(
+                              text: 'iOfferYou'.tr,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),

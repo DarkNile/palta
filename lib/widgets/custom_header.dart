@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:palta/widgets/custom_text.dart';
 
 class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
   const CustomHeader({super.key, required this.title, this.onTapBack});
@@ -18,11 +17,10 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       centerTitle: true,
       toolbarHeight: 60,
-      title: CustomText(
-        text: title,
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-        textAlign: TextAlign.center,
+      title: Image.asset(
+        'assets/images/logo.png',
+        width: 117.5,
+        height: 51,
       ),
       leading: IconButton(
         onPressed: () {

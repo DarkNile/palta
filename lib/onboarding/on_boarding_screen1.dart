@@ -63,12 +63,13 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                         fontWeight: FontWeight.w300,
                       ),
                       const SizedBox(
-                        height: 58,
+                        height: 38,
                       ),
                       SizedBox(
                         height: 8,
                         child: ListView.separated(
                           shrinkWrap: true,
+                          itemCount: 3,
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
@@ -88,7 +89,6 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                               width: 8,
                             );
                           },
-                          itemCount: 3,
                         ),
                       ),
                     ],
@@ -96,7 +96,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 36)
-                      .copyWith(bottom: 40),
+                      .copyWith(bottom: 30),
                   child: CustomOutlinedButton(
                     onPressed: () {
                       Navigator.push(

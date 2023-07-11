@@ -36,7 +36,7 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
 
   String formatDateTime(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);
-    DateFormat formatter = DateFormat('yyyy/MM/dd');
+    DateFormat formatter = DateFormat('dd/MM/yyyy ');
     String formattedDate = formatter.format(dateTime);
     return formattedDate;
   }
@@ -48,7 +48,7 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-           Stack(
+          Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,
             children: [
@@ -59,7 +59,8 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
               Positioned(
                 top: 100,
                 child: CustomBodyTitle(
-                  title: 'articles'.tr,
+                  title:
+                      (widget.allUsers) ? 'articles'.tr : 'myArticlesTitle'.tr,
                 ),
               ),
             ],
