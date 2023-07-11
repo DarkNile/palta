@@ -53,7 +53,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       CustomText(
                         textAlign: TextAlign.center,
@@ -63,32 +63,36 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                         fontWeight: FontWeight.w300,
                       ),
                       const SizedBox(
-                        height: 58,
+                        height: 50,
                       ),
                       SizedBox(
                         height: 8,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              height: 8,
-                              width: 8,
-                              decoration: BoxDecoration(
-                                color: _currentIndex == index
-                                    ? oliveGreen
-                                    : lightGrey2,
-                                shape: BoxShape.circle,
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              width: 8,
-                            );
-                          },
-                          itemCount: 3,
+                        child: Localizations.override(
+                          context: context,
+                          locale: Locale('en'),
+                          child: ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 8,
+                                width: 8,
+                                decoration: BoxDecoration(
+                                  color: _currentIndex == index
+                                      ? oliveGreen
+                                      : lightGrey2,
+                                  shape: BoxShape.circle,
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                width: 8,
+                              );
+                            },
+                            itemCount: 3,
+                          ),
                         ),
                       ),
                     ],
@@ -99,6 +103,7 @@ class _OnBoardingScreen2State extends State<OnBoardingScreen2> {
                       .copyWith(bottom: 40),
                   child: CustomOutlinedButton(
                     onPressed: () {
+                      print(_currentIndex);
                       Navigator.push(
                         context,
                         PageTransition(

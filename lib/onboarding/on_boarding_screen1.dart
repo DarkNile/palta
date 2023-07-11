@@ -99,6 +99,7 @@ class _OnBoardingScreen1State extends State<OnBoardingScreen1> {
                       .copyWith(bottom: 40),
                   child: CustomOutlinedButton(
                     onPressed: () {
+                      print('ssssssssssss========> $_currentIndex');
                       Navigator.push(
                         context,
                         PageTransition(
