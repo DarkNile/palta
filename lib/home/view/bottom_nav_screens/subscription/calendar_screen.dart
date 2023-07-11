@@ -53,7 +53,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   shrinkWrap: true,
-                  itemCount: 10,
+                  itemCount: _profileController.calendar.length,
                   separatorBuilder: (context, index) {
                     return const SizedBox(
                       height: 16,
