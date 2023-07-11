@@ -235,10 +235,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             orderProductId: widget.orderProductId,
                           )
                           .then(
-                            (value) => AppUtil.successToast(
+                            (value){ AppUtil.successToast(
                               context,
                               'Subscription done Successfully',
-                            ),
+                            );
+                              _profileController.getCalendar(
+                                  orderId: widget.orderId,
+                                  orderProductId: widget.orderProductId,
+                              );
+                              },
                           )
                           .catchError((error){
                         AppUtil.errorToast(
