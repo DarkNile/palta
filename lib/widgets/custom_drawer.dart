@@ -6,6 +6,7 @@ import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/static_pages/contact_us_page.dart';
+import 'package:palta/home/view/static_pages/general_articles_screen.dart';
 import 'package:palta/home/view/static_pages/static_page.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_card.dart';
@@ -130,6 +131,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       },
                       title: 'signIn',
                     ),
+                  CustomDrawerTile(
+                    onTap: () {
+                      Get.to(() => GeneralArticlesScreen(homeController: _homeController,));
+                    },
+                    title: 'articles',
+                  ),
                   CustomDrawerTile(
                     onTap: () {
                       _homeController.getStaticPage(id: '12');

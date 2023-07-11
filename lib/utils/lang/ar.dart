@@ -316,4 +316,14 @@ const Map<String, String> ar = {
   'snacks': 'وجبات خفيفة',
   'otherMeals': 'وجبات أخرى',
   'requestOff': 'طلب إلغاء',
+
+// Articles
+'articles': 'مقالات عامة',
+'myArticlesTitle': 'مقالاتي',
+'myArticlesSubTitle': 'قم بتصفح المقالات الخاصة بك',
+
+// My Notifications
+'myNotificationsTitle': 'تنبيهاتي',
+'myNotificationsSubTitle': 'تابع التنبيهات',
+
 };

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:palta/constants/urls.dart';
+import 'package:palta/home/models/articles.dart';
 import 'package:palta/home/models/category.dart';
 import 'package:palta/home/models/combination.dart';
 import 'package:palta/home/models/location.dart';
@@ -411,4 +412,61 @@ class HomeService {
       return null;
     }
   }
+
+
+  // -----------------<Articles>---------------------
+
+  static Future<List<ArticlesModel>?> getArticles({
+    required String id,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse('${baseUrl}route=rest/blogpost&user=$id'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      List<dynamic> data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return data.map((article) => ArticlesModel.fromJson(article)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<ArticlesModel>?> getArticlesDetails({
+    required String id,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse('${baseUrl}route=rest/blogpost&blog_id=id'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('My articles --------------------------------');
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      List<dynamic> data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return data.map((article) => ArticlesModel.fromJson(article)).toList();
+    }  else {
+      return null;
+    }
+  }
+
 }

@@ -335,4 +335,13 @@ const Map<String, String> en = {
   'snacks': 'Snacks',
   'otherMeals': 'Other Meals',
   'requestOff': 'requestOff',
+
+  // Articles
+  'articles': 'Articles',
+  'myArticlesTitle': 'My Articles',
+  'myArticlesSubTitle': 'Browse My Articles',
+
+  // My Notifications
+  'myNotificationsTitle': 'My Notifications',
+  'myNotificationsSubTitle': 'Check My Notifications',
 };
