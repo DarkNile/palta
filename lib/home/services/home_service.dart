@@ -425,7 +425,7 @@ class HomeService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('${baseUrl}route=rest/blogpost&user=$id'),
+      Uri.parse('${baseUrl}route=rest/blogpost&user=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -451,7 +451,7 @@ class HomeService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('${baseUrl}route=rest/blogpost&blog_id=id'),
+      Uri.parse('${baseUrl}route=rest/blogpost&blog_id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
