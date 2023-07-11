@@ -31,7 +31,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
           }
         },
         icon: const Icon(
-          Icons.arrow_back_outlined,
+          Icons.chevron_left,
           color: Colors.black,
           size: 24,
         ),
