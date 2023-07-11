@@ -26,36 +26,36 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
 
   String formatDateTime(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);
-    DateFormat formatter = DateFormat('yyyy/MM/dd');
+    DateFormat formatter = DateFormat('dd/MM/yyyy');
     String formattedDate = formatter.format(dateTime);
     return formattedDate;
   }
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const Stack(
+          Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,
             children: [
-              CustomAppBar(
+              const CustomAppBar(
                 isFromOnboarding: true,
                 isFromStaticPage: true,
               ),
+              Positioned(
+                top: 100,
+                child: CustomBodyTitle(
+                  title: 'articles'.tr,
+                ),
+              ),
             ],
           ),
-          CustomBodyTitle(
-            title: 'articles'.tr,
-          ),
           const SizedBox(
-            height: 40,
+            height: 24,
           ),
           Obx(() {
             if (widget.homeController.isArticlesLoading.value) {
@@ -66,21 +66,24 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
             return Expanded(
               child: ListView.separated(
                 shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemBuilder: (context, index) {
                   String dateFormat = formatDateTime(
-                    widget.homeController.articles[index].dateCreated,);
+                    widget.homeController.articles[index].dateCreated,
+                  );
                   return CustomGuideItem(
-                    title: widget.homeController.articles[index].name.tr,
+                    title: widget.homeController.articles[index].name,
                     date: dateFormat,
                     image: widget.homeController.articles[index].image,
                     onTap: () {
-                      Get.to(GeneralArticlesDetailsScreen(
-                        dateCreated: dateFormat,
-                        description: widget.homeController.articles[index].description,
-                        name: widget.homeController.articles[index].name,
-                        imageUrl: widget.homeController.articles[index].image,
-                      ));
+                      Get.to(() => GeneralArticlesDetailsScreen(
+                            dateCreated: dateFormat,
+                            description: widget
+                                .homeController.articles[index].description,
+                            name: widget.homeController.articles[index].name,
+                            imageUrl:
+                                widget.homeController.articles[index].image,
+                          ));
                     },
                   );
                 },
