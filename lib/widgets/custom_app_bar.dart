@@ -123,43 +123,25 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       width: 117.5,
                       height: 51,
                     ),
-                    SizedBox(
-                      width: 60,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              // TODO: Navigate To CheckOut Screen: (Null Operator Bug)
-                           //   Get.to(()=> CheckoutScreen(hasCombination: false));
-                            },
-                            child: SvgPicture.asset(
-                              'assets/icons/cart.svg',
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              if (customerId != null &&
-                                  customerId!.isNotEmpty &&
-                                  customerId ==
-                                      _profileController.user.value.id.toString()) {
-                                Get.to(
-                                      () => const NotificationScreen(),
-                                );
-                              }
-                            },
-                            child: widget.isFromNotification
-                                ? SvgPicture.asset(
+                    InkWell(
+                      onTap: () {
+                        if (customerId != null &&
+                            customerId!.isNotEmpty &&
+                            customerId ==
+                                _profileController.user.value.id.toString()) {
+                          Get.to(
+                            () => const NotificationScreen(),
+                          );
+                        }
+                      },
+                      child: widget.isFromNotification
+                          ? SvgPicture.asset(
                               'assets/icons/notification_green.svg',
                             )
-                                : SvgPicture.asset(
+                          : SvgPicture.asset(
                               'assets/icons/notification.svg',
                             ),
-                          ),
-                        ],
-                      ),
                     ),
-
                   ],
                 ),
         ),

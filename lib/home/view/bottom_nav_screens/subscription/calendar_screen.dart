@@ -25,16 +25,7 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   final _profileController = Get.put(ProfileController());
   List<String> dates = [];
-  List<bool>? isCheckedList;
-
-  @override
-  void initState() {
-    isCheckedList = List.generate(
-      _profileController.calendar.length,
-      (index) => false,
-    );
-    super.initState();
-  }
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +42,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           children: [
             Expanded(
               child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16)
+                      .copyWith(top: 16),
                   shrinkWrap: true,
                   itemCount: _profileController.calendar.length,
                   separatorBuilder: (context, index) {
@@ -72,18 +64,20 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Checkbox(
-                                value: isCheckedList![index],
+                                value: dates.contains(_profileController
+                                    .calendar[index].calendarDate),
                                 onChanged: (value) {
                                   setState(() {
-                                    isCheckedList![index] = value!;
+                                    isChecked = value!;
+                                    if (isChecked) {
+                                      dates.add(_profileController
+                                          .calendar[index].calendarDate);
+                                    } else {
+                                      dates.remove(_profileController
+                                          .calendar[index].calendarDate);
+                                    }
                                   });
-                                  if (isCheckedList![index]) {
-                                    dates.add(_profileController
-                                        .calendar[index].calendarDate);
-                                  } else {
-                                    dates.remove(_profileController
-                                        .calendar[index].calendarDate);
-                                  }
+                                  print(dates);
                                 }),
                             const SizedBox(
                               width: 8,
@@ -222,35 +216,38 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   }
                   return CustomButton(
                     title: 'requestOff'.tr,
-                    onPressed: () {
+                    onPressed: () async {
                       print(dates);
                       print(widget.orderId);
                       print(widget.orderProductId);
-
-                      //
-                      _profileController
-                          .requestOff(
-                            dates: dates,
-                            orderId: widget.orderId,
-                            orderProductId: widget.orderProductId,
-                          )
-                          .then(
-                            (value){ AppUtil.successToast(
-                              context,
-                              'Subscription done Successfully',
-                            );
-                              _profileController.getCalendar(
-                                  orderId: widget.orderId,
-                                  orderProductId: widget.orderProductId,
-                              );
-                              },
-                          )
-                          .catchError((error){
-                        AppUtil.errorToast(
-                          context,
-                          'Error occurred while request off, please try again later...',
+                      final isSuccess = await _profileController.requestOff(
+                        dates: dates,
+                        orderId: widget.orderId,
+                        orderProductId: widget.orderProductId,
+                      );
+                      if (isSuccess) {
+                        if (context.mounted) {
+                          AppUtil.successToast(
+                            context,
+                            'successRequestOff'.tr,
+                          );
+                        }
+                        _profileController.getCalendar(
+                          orderId: widget.orderId,
+                          orderProductId: widget.orderProductId,
                         );
-                      });
+                        setState(() {
+                          dates.clear();
+                          isChecked = false;
+                        });
+                      } else {
+                        if (context.mounted) {
+                          AppUtil.errorToast(
+                            context,
+                            'errorRequestOff'.tr,
+                          );
+                        }
+                      }
                     },
                   );
                 }),
