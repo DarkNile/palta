@@ -63,15 +63,53 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(6),
                               topRight: Radius.circular(6)),
-                          child: CachedNetworkImage(
-                            imageUrl: widget.checkoutController.cart!
-                                .products![index].originalImage!,
-                            height: 96,
-                            width: width,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) {
-                              return const CustomLoadingWidget();
-                            },
+                          child: Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: widget.checkoutController.cart!
+                                    .products![index].originalImage!,
+                                height: 96,
+                                width: width,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) {
+                                  return const CustomLoadingWidget();
+                                },
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.white60,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      widget.checkoutController.isCartLoading
+                                          .value = true;
+                                      widget.checkoutController
+                                          .deleteCartItem(
+                                        productId: widget.checkoutController.cart!
+                                            .products![index].id,
+                                      )
+                                          .then((value) {
+                                        widget.checkoutController
+                                            .getCartItems()
+                                            .whenComplete(
+                                              () => widget.checkoutController
+                                                  .isCartLoading.value = false,
+                                            );
+                                        // TODO: refresh UI: Last Item refuse to cleared
+                                        print('Deleted Successfully');
+                                        print('Products cart length----------> : '
+                                            '${widget.checkoutController.cart!.products!.length}');
+                                      });
+                                    },
+                                    icon: const Icon(
+                                        Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(
@@ -108,33 +146,6 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
-                        10.ph,
-                        SizedBox(
-                          width: 90,
-                          child: CustomButton(
-                            onPressed: () {
-                                widget.checkoutController.isCartLoading.value =
-                                    true;
-                                widget.checkoutController
-                                    .deleteCartItem(
-                                  productId: widget.checkoutController.cart!
-                                      .products![index].id,
-                                )
-                                    .then((value) {
-                                  widget.checkoutController
-                                      .getCartItems()
-                                      .whenComplete(
-                                        () => widget.checkoutController
-                                            .isCartLoading.value = false,
-                                      );
-                                  print('Deleted Successfully');
-                                  print('sssssssssss----------> : ${widget.checkoutController.cartItems.value}');
-                                });
-                            },
-                            backgroundColor: vermillion,
-                            title: 'Delete',
-                          ),
-                        ),
                         const SizedBox(
                           height: 26,
                         ),
