@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/constants/extensions.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
@@ -31,6 +32,7 @@ class OrderInfoPage extends StatefulWidget {
 class _OrderInfoPageState extends State<OrderInfoPage> {
   DateTime today = DateTime.now();
   String? fridayValue;
+
   // String? selectedTime;
 
   @override
@@ -47,6 +49,9 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
               ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
+                itemCount: widget.checkoutController.cart!.products!.isEmpty
+                    ? 0
+                    : widget.checkoutController.cart!.products!.length,
                 itemBuilder: (context, index) {
                   return Card(
                     shape: const RoundedRectangleBorder(
@@ -103,6 +108,33 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),
+                        10.ph,
+                        SizedBox(
+                          width: 90,
+                          child: CustomButton(
+                            onPressed: () {
+                                widget.checkoutController.isCartLoading.value =
+                                    true;
+                                widget.checkoutController
+                                    .deleteCartItem(
+                                  productId: widget.checkoutController.cart!
+                                      .products![index].id,
+                                )
+                                    .then((value) {
+                                  widget.checkoutController
+                                      .getCartItems()
+                                      .whenComplete(
+                                        () => widget.checkoutController
+                                            .isCartLoading.value = false,
+                                      );
+                                  print('Deleted Successfully');
+                                  print('sssssssssss----------> : ${widget.checkoutController.cartItems.value}');
+                                });
+                            },
+                            backgroundColor: vermillion,
+                            title: 'Delete',
+                          ),
+                        ),
                         const SizedBox(
                           height: 26,
                         ),
@@ -115,7 +147,6 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                     height: 28,
                   );
                 },
-                itemCount: widget.checkoutController.cart!.products!.length,
               ),
               if (widget.hasCombination)
                 Column(
