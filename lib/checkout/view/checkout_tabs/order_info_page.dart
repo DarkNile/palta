@@ -154,7 +154,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                               today = await showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
-                                firstDate: DateTime(2023, 6, 22),
+                                firstDate: DateTime.now(),
                                 lastDate: DateTime(2030, 12, 31),
                               );
                               setState(() {});
@@ -312,7 +312,6 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.only(bottom: 28),
           alignment: Alignment.bottomCenter,
           color: Colors.white,
           width: width,
