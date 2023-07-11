@@ -542,34 +542,40 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomText(
-                            text: 'startFrom'.tr,
-                          ),
-                          Row(
-                            children: [
-                              CustomText(
-                                text:
-                                    '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
-                                fontSize: 20,
-                                color: avocado,
-                                fontWeight: FontWeight.w700,
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: CustomText(
+                                text: 'startFrom'.tr,
                               ),
-                              CustomText(
-                                text: 'riyal'.tr,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
+                            ),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  CustomText(
+                                    text:
+                                        '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
+                                    fontSize: 20,
+                                    color: avocado,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  CustomText(
+                                    text: 'riyal'.tr,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                ],
                               ),
-                            ],
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
-                      const Spacer(),
-                      SizedBox(
-                        width: 248,
+                      Expanded(
+                        flex: 2,
                         child: CustomButton(
                           onPressed: () async {
                             if (customerId != null &&
@@ -617,7 +623,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                           },
                           title: 'subscribeNow'.tr,
                         ),
-                      )
+                      ),
                     ]),
               ))
         ],
