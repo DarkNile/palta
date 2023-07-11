@@ -1,3 +1,4 @@
+import 'package:palta/home/models/articles.dart';
 import 'package:palta/home/models/combination.dart';
 import 'package:palta/home/models/sub_combination.dart';
 import 'package:palta/product/controllers/product_controller.dart';
@@ -44,6 +45,9 @@ class HomeController extends GetxController {
   var subCombinations = <SubCombination>[].obs;
   var isSubCombinationsLoading = false.obs;
 
+  var isArticlesLoading = false.obs;
+  var articles = <ArticlesModel>[].obs;
+
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
       isBannersLoading(true);
@@ -77,6 +81,26 @@ class HomeController extends GetxController {
       return null;
     } finally {
       isCategoriesLoading(false);
+    }
+  }
+
+  // -------------------<get Articles>----------------------
+
+  Future<List<ArticlesModel>?> getArticles({required String userId}) async {
+    try {
+      isArticlesLoading(true);
+      final data = await HomeService.getArticles(id: userId);
+      if (data != null) {
+        articles(data);
+        return articles;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isArticlesLoading(false);
     }
   }
 
