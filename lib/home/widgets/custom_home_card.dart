@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:palta/constants/extensions.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class CustomHomeCard extends StatelessWidget {
@@ -33,12 +34,16 @@ class CustomHomeCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SvgPicture.asset('assets/icons/$icon.svg'),
-            CustomText(
-              text: title.tr,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
+            Expanded(child: SvgPicture.asset('assets/icons/$icon.svg')),
+            Expanded(
+              child: CustomText(
+                text: title.tr,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                textOverflow: TextOverflow.visible,
+              ),
             ),
+            40.ph,
           ],
         ),
       ),
