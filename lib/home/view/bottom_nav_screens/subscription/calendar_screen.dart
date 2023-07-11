@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_header.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -23,8 +24,17 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   final _profileController = Get.put(ProfileController());
-  bool isChecked = false;
   List<String> dates = [];
+  List<bool>? isCheckedList;
+
+  @override
+  void initState() {
+    isCheckedList = List.generate(
+      _profileController.calendar.length,
+      (index) => false,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +72,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Checkbox(
-                                value: isChecked,
+                                value: isCheckedList![index],
                                 onChanged: (value) {
                                   setState(() {
-                                    isChecked = value!;
+                                    isCheckedList![index] = value!;
                                   });
-                                  if (isChecked) {
+                                  if (isCheckedList![index]) {
                                     dates.add(_profileController
                                         .calendar[index].calendarDate);
                                   } else {
@@ -216,12 +226,26 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       print(dates);
                       print(widget.orderId);
                       print(widget.orderProductId);
+
                       //
-                      _profileController.requestOff(
-                        dates: dates,
-                        orderId: widget.orderId,
-                        orderProductId: widget.orderProductId,
-                      );
+                      _profileController
+                          .requestOff(
+                            dates: dates,
+                            orderId: widget.orderId,
+                            orderProductId: widget.orderProductId,
+                          )
+                          .then(
+                            (value) => AppUtil.successToast(
+                              context,
+                              'Subscription done Successfully',
+                            ),
+                          )
+                          .catchError((error){
+                        AppUtil.errorToast(
+                          context,
+                          'Error occurred while request off, please try again later...',
+                        );
+                      });
                     },
                   );
                 }),
