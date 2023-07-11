@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
@@ -9,24 +10,33 @@ import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 
 class GeneralArticlesScreen extends StatefulWidget {
-  const GeneralArticlesScreen({super.key, required this.homeController});
+  const GeneralArticlesScreen(
+      {super.key, required this.homeController, required this.allUsers});
 
   final HomeController homeController;
+  final bool allUsers;
 
   @override
   State<GeneralArticlesScreen> createState() => _GeneralArticlesScreenState();
 }
 
 class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
+  void _getArticles() {
+    final GetStorage getStorage = GetStorage();
+    final userId = getStorage.read('customerId');
+    widget.homeController
+        .getArticles(userId: (widget.allUsers) ? 'all' : userId);
+  }
+
   @override
   void initState() {
-    widget.homeController.getArticles(userId: 'all');
+    _getArticles();
     super.initState();
   }
 
   String formatDateTime(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);
-    DateFormat formatter = DateFormat('dd/MM/yyyy');
+    DateFormat formatter = DateFormat('yyyy/MM/dd');
     String formattedDate = formatter.format(dateTime);
     return formattedDate;
   }
@@ -38,7 +48,7 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Stack(
+           Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.bottomCenter,
             children: [
@@ -66,13 +76,13 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
             return Expanded(
               child: ListView.separated(
                 shrinkWrap: true,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemBuilder: (context, index) {
                   String dateFormat = formatDateTime(
                     widget.homeController.articles[index].dateCreated,
                   );
                   return CustomGuideItem(
-                    title: widget.homeController.articles[index].name,
+                    title: widget.homeController.articles[index].name.tr,
                     date: dateFormat,
                     image: widget.homeController.articles[index].image,
                     onTap: () {
