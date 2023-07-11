@@ -138,6 +138,7 @@ class _HomePageState extends State<HomePage> {
                 homeController: _homeController,
               ),
               ProfileScreen(
+                homeController: _homeController,
                 profileController: _profileController,
                 authController: _authController,
               ),
