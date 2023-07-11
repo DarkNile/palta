@@ -177,35 +177,37 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                             const SizedBox(
                               width: 18,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  text: widget.checkoutController.order!
-                                      .shippingAddress!,
-                                  fontSize: 14,
-                                ),
-                                CustomText(
-                                  text:
-                                      '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                CustomText(
-                                  text:
-                                      '${widget.checkoutController.order!.shippingFirstName!} ${widget.checkoutController.order!.shippingLastName!}',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                ),
-                                CustomText(
-                                  text: widget.checkoutController.order!.phone!,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                    text: widget.checkoutController.order!
+                                        .shippingAddress!,
+                                    fontSize: 14,
+                                  ),
+                                  CustomText(
+                                    text:
+                                        '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  CustomText(
+                                    text:
+                                        '${widget.checkoutController.order!.shippingFirstName!} ${widget.checkoutController.order!.shippingLastName!}',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                  CustomText(
+                                    text: widget.checkoutController.order!.phone!,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

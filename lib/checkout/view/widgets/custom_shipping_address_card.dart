@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/constants/extensions.dart';
 import 'package:palta/profile/models/address.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,60 +48,67 @@ class CustomShippingAddressCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Transform.scale(
-                    scale: 1.2,
-                    child: Checkbox(
-                      fillColor: MaterialStateProperty.all(pineGreen),
-                      checkColor: Colors.white,
-                      value: isChecked,
-                      shape: const CircleBorder(),
-                      onChanged: onChanged,
+                  Expanded(
+                    flex: 1,
+                    child: Transform.scale(
+                      scale: 1.2,
+                      child: Checkbox(
+                        fillColor: MaterialStateProperty.all(pineGreen),
+                        checkColor: Colors.white,
+                        value: isChecked,
+                        shape: const CircleBorder(),
+                        onChanged: onChanged,
+                      ),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: address.address,
-                        color: almostBlack,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      SizedBox(
-                        width: width * 0.7,
-                        child: CustomText(
-                          text:
-                              '${address.city} - ${address.zone} - ${address.country.tr}',
+                  15.pw,
+                  Expanded(
+                    flex: 8,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          text: address.address,
+                          color: almostBlack,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        SizedBox(
+                          width: width * 0.7,
+                          child: CustomText(
+                            text:
+                                '${address.city} - ${address.zone} - ${address.country.tr}',
+                            color: brownishGrey,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: width * 0.7,
+                          height: 1,
+                          color: lighGrey,
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        CustomText(
+                          text: '${address.firstName} ${address.lastName}',
                           color: brownishGrey,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Container(
-                        width: width * 0.7,
-                        height: 1,
-                        color: lighGrey,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomText(
-                        text: '${address.firstName} ${address.lastName}',
-                        color: brownishGrey,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      CustomText(
-                        text: phoneNumber,
-                        color: almostBlack,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        CustomText(
+                          text: phoneNumber,
+                          color: almostBlack,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
