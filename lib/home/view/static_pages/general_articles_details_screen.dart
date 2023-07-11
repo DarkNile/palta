@@ -24,6 +24,7 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 16),
         child: Column(
           children: [
             Stack(
@@ -41,8 +42,12 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  right: Directionality.of(context) == TextDirection.ltr ? null : 20,
-                  left: Directionality.of(context) == TextDirection.ltr ? 20 : null,
+                  right: Directionality.of(context) == TextDirection.ltr
+                      ? null
+                      : 20,
+                  left: Directionality.of(context) == TextDirection.ltr
+                      ? 20
+                      : null,
                   top: 40,
                   child: customBackButton(),
                 ),

@@ -334,7 +334,7 @@ const Map<String, String> en = {
   'dinnerMeal': 'Dinner Meal',
   'snacks': 'Snacks',
   'otherMeals': 'Other Meals',
-  'requestOff': 'requestOff',
+  'requestOff': 'Request Off',
 
   // Articles
   'articles': 'Articles',
