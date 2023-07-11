@@ -133,7 +133,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ),
                   CustomDrawerTile(
                     onTap: () {
-                      Get.to(() => GeneralArticlesScreen(homeController: _homeController,));
+                      Get.to(() => GeneralArticlesScreen(
+                            homeController: _homeController,
+                            allUsers: true,
+                          ));
                     },
                     title: 'articles',
                   ),
