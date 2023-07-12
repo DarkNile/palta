@@ -347,4 +347,7 @@ const Map<String, String> en = {
   // My Notifications
   'myNotificationsTitle': 'My Notifications',
   'myNotificationsSubTitle': 'Check My Notifications',
+
+  // Reviews & Rating
+  'reviews': 'Reviews',
 };
