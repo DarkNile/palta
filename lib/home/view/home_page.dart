@@ -56,11 +56,7 @@ class _HomePageState extends State<HomePage> {
     _profileController.getUserOrders();
     _homeController.getGuidances();
     _profileController.getAccount();
-    if (customerId == null || customerId!.isEmpty) {
-      _checkoutController.clearCart();
-    } else {
-      _checkoutController.getCartItems();
-    }
+    _checkoutController.getCartItems();
     checkAppVersion();
   }
 
