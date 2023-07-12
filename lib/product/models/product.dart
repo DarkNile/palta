@@ -36,7 +36,6 @@ class Product {
   String? specialEndDate;
   List<dynamic>? discounts;
   List<Options>? options;
-  List<MealData>? mealData;
   String? minimum;
   String? metaTitle;
   String? metaDescription;
@@ -80,6 +79,8 @@ class Product {
   List<SizeOption>? option;
   dynamic total;
   String? orderProductId;
+  List<MealDataModel>? mealData;
+
 
   Product({
     this.id,
@@ -155,11 +156,14 @@ class Product {
     this.option,
     this.total,
     this.orderProductId,
-    this.mealData,
   });
 
   Product.fromJson(Map<String, dynamic> json) {
-    mealData = json['meal_data'];
+    if (json['meal_data'] != null && json['meal_data'] is List) {
+      mealData = (json['meal_data'] as List)
+          .map((e) => MealDataModel.fromJson(e))
+          .toList();
+    }
     id = json["id"] ?? json['key'] ?? json['product_id'];
     productId = json["product_id"];
     name = json["name"];

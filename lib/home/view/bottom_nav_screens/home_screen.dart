@@ -53,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,96 +60,97 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(
             height: 90,
           ),
-          Stack(
-            clipBehavior: Clip.none,
-            alignment: AlignmentDirectional.topEnd,
-            children: [
-              Obx(() {
-                if (widget.homeController.isBannersLoading.value) {
-                  return SizedBox(
-                    width: width,
-                    height: 380,
-                    child: const CustomLoadingWidget(),
-                  );
-                }
-                return CarouselSlider.builder(
-                    itemCount: widget.homeController.banners.length,
-                    options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                      height: 380,
-                      viewportFraction: 1,
-                      enableInfiniteScroll: false,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _activeIndex = index;
-                        });
-                      },
-                    ),
-                    itemBuilder: (context, index, page) {
-                      return Stack(
-                        alignment: AlignmentDirectional.bottomStart,
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: widget.homeController.banners[index]
-                                ['image'],
-                            width: width,
-                            height: 379,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) {
-                              return const CustomLoadingWidget();
-                            },
-                          ),
-                          Positioned(
-                            bottom: 51,
-                            right: AppUtil.rtlDirection(context) ? 29 : 0,
-                            left: AppUtil.rtlDirection(context) ? 0 : 29,
-                            child: CustomAnimatedSmoothIndicator(
-                              count: widget.homeController.banners.length,
-                              activeIndex: _activeIndex,
-                            ),
-                          ),
-                        ],
-                      );
+      SizedBox(
+        height: 470,
+        child: Stack(
+          clipBehavior: Clip.none,
+          alignment: AlignmentDirectional.topStart,
+          children: [
+            Obx(() {
+              if (widget.homeController.isBannersLoading.value) {
+                return SizedBox(
+                  width: width,
+                  height: 370,
+                  child: const CustomLoadingWidget(),
+                );
+              }
+              return CarouselSlider.builder(
+                itemCount: widget.homeController.banners.length,
+                options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  autoPlay: true,
+                  height: 370,
+                  viewportFraction: 1,
+                  enableInfiniteScroll: false,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      _activeIndex = index;
                     });
-              }),
-              Container(
-                margin: EdgeInsets.only(
-                  top: height / 2.1,
-                  right:
-                      Directionality.of(context) == TextDirection.ltr ? 10 : 0,
-                  left:
-                      Directionality.of(context) == TextDirection.ltr ? 0 : 10,
+                  },
                 ),
-                child: Positioned(
-                  left: 16,
-                  right: 16,
-                  top: 339,
-                  bottom: -100,
-                  child: SizedBox(
-                    height: 140,
-                    child: ListView.separated(
-                      itemCount: 3,
-                      shrinkWrap: true,
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          width: 12,
-                        );
-                      },
-                      itemBuilder: (context, index) {
-                        return CustomHomeCard(
-                          title: titles[index],
-                          icon: icons[index],
-                        );
-                      },
+                itemBuilder: (context, index, page) {
+                  return Stack(
+                    alignment: AlignmentDirectional.bottomStart,
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl:
+                        widget.homeController.banners[index]['image'],
+                        width: width,
+                        height: 379,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) {
+                          return const CustomLoadingWidget();
+                        },
+                      ),
+                      Positioned(
+                        bottom: 51,
+                        right: AppUtil.rtlDirection(context) ? 29 : 0,
+                        left: AppUtil.rtlDirection(context) ? 0 : 29,
+                        child: CustomAnimatedSmoothIndicator(
+                          count: widget.homeController.banners.length,
+                          activeIndex: _activeIndex,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }),
+            Positioned.fill(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        height: 140,
+                        child: ListView.separated(
+                          itemCount: 3,
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              width: 12,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            return CustomHomeCard(
+                              title: titles[index],
+                              icon: icons[index],
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
+      ),
           const SizedBox(
             height: 30,
           ),

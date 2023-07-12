@@ -22,11 +22,12 @@ class ReviewsScreen extends StatefulWidget {
 class _ReviewsScreenState extends State<ReviewsScreen> {
   ProfileController profileController = Get.put(ProfileController());
   HomeController homeController = Get.put(HomeController());
-  late String customerId;
+  String? customerId;
 
   @override
   void initState() {
-    customerId = GetStorage().read('customerId');
+    final GetStorage getStorage = GetStorage();
+    customerId = getStorage.read('customerId') ?? '';
     super.initState();
   }
 
@@ -128,7 +129,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
             ),
             builder: (BuildContext context) {
               bool isGuest() {
-                if (customerId.isNotEmpty &&
+                if (customerId!.isNotEmpty &&
                     customerId == profileController.user.value.id.toString()) {
                   return true;
                 }
@@ -137,7 +138,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 
               return RatingBottomSheetBuilder(
                 isGuest: isGuest(),
-                customerId: customerId,
+                customerId: customerId!,
               );
             },
           );
