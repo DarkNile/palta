@@ -34,7 +34,8 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    return widget.checkoutController.cart!.products!.isEmpty
+    return widget.checkoutController.cart == null ||
+            widget.checkoutController.cart!.products!.isEmpty
         ? Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

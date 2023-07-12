@@ -35,14 +35,14 @@ class CustomNotificationItem extends StatelessWidget {
       title: CustomText(
         text: title,
         fontSize: 12,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
         color: brownishGrey,
       ),
       subtitle: CustomText(
         text: subtitle,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
-        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        color: almostBlack,
       ),
     );
   }

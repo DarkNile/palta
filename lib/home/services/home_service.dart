@@ -417,7 +417,6 @@ class HomeService {
     }
   }
 
-
   // -----------------<Articles>---------------------
 
   static Future<List<ArticlesModel>?> getArticles({
@@ -468,23 +467,24 @@ class HomeService {
       List<dynamic> data = jsonDecode(response.body)['data'];
       print('data: $data');
       return data.map((article) => ArticlesModel.fromJson(article)).toList();
-    }  else {
+    } else {
       return null;
     }
   }
 
-
   // ------------------------------------------<Notifications>------------------------------
 
-  static Future<List<NotificationsModel>?> getNotifications() async{
+  static Future<List<NotificationsModel>?> getNotifications() async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
     print(token);
     final String? lang = getStorage.read('lang');
-    final String? customerId = getStorage.read('customerId');
     print(lang);
+    final String? customerId = getStorage.read('customerId');
+    print(customerId);
     final response = await http.get(
-      Uri.parse('${baseUrl}route=rest/notifications&customer_id=2'),
+      Uri.parse(
+          '${baseUrl}route=rest/notifications&customer_id=$customerId&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -495,7 +495,9 @@ class HomeService {
     if (jsonDecode(response.body)['success'] == 1) {
       List<dynamic> data = jsonDecode(response.body)['data'];
       print('Notifications Data: $data');
-      return data.map((notification) => NotificationsModel.fromJson(notification)).toList();
+      return data
+          .map((notification) => NotificationsModel.fromJson(notification))
+          .toList();
     } else {
       return null;
     }
@@ -503,7 +505,8 @@ class HomeService {
 
   // ---------------------------------------<Rating & Reviews>-----------------------------
 
-  static Future<List<ReviewModel>?> postRatingAndReview({required String blogId, required ReviewModel reviewModel}) async{
+  static Future<List<ReviewModel>?> postRatingAndReview(
+      {required String blogId, required ReviewModel reviewModel}) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
     print(token);
@@ -527,5 +530,4 @@ class HomeService {
       return null;
     }
   }
-
 }
