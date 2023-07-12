@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/constants/extensions.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/widgets/cutom_notification_item.dart';
 import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({
-    super.key,
-  });
+class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key, required this.homeController});
+
+  final HomeController homeController;
+
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  @override
+  void initState() {
+    widget.homeController.getNotifications();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,25 +46,40 @@ class NotificationScreen extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: 7,
-              separatorBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24),
-                  child: Divider(
-                    color: lightGrey2,
+          Obx(
+            () => (widget.homeController.isNotificationsLoading.value)
+                ? Column(
+                    children: [
+                      90.ph,
+                      const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ],
+                  )
+                : Expanded(
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: widget.homeController.notifications.length,
+                      separatorBuilder: (context, index) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24),
+                          child: Divider(
+                            color: lightGrey2,
+                          ),
+                        );
+                      },
+                      itemBuilder: (context, index) {
+                        return CustomNotificationItem(
+                          title: widget.homeController.extractDateFromText(
+                              text: widget
+                                  .homeController.notifications[index].title),
+                          seen: widget.homeController.notifications[index].seen,
+                          subtitle:
+                              widget.homeController.notifications[index].title,
+                        );
+                      },
+                    ),
                   ),
-                );
-              },
-              itemBuilder: (context, index) {
-                return const CustomNotificationItem(
-                  title: '10/12/2023',
-                  subtitle: 'تم انتهاء اشتراكك في برنامج النحت والتنسيق',
-                );
-              },
-            ),
           ),
         ],
       ),
