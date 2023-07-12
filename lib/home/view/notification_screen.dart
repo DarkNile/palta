@@ -4,6 +4,7 @@ import 'package:palta/constants/colors.dart';
 import 'package:palta/constants/extensions.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/widgets/cutom_notification_item.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 
@@ -70,12 +71,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       },
                       itemBuilder: (context, index) {
                         return CustomNotificationItem(
-                          title: widget.homeController.extractDateFromText(
-                              text: widget
-                                  .homeController.notifications[index].title),
+                          title: AppUtil().formatDateTime(widget
+                              .homeController.notifications[index].date),
                           seen: widget.homeController.notifications[index].seen,
                           subtitle:
-                              widget.homeController.notifications[index].title,
+                              widget.homeController.notifications[index].title.trim(),
                         );
                       },
                     ),
