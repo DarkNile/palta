@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:palta/checkout/controllers/checkout_controller.dart';
+import 'package:palta/checkout/view/checkout_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/notification_screen.dart';
@@ -35,6 +37,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   late String? customerId;
   final _profileController = Get.put(ProfileController());
   final _homeController = Get.put(HomeController());
+  final _checkoutController = Get.put(CheckoutController());
 
   @override
   void initState() {
@@ -125,24 +128,70 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       width: 117.5,
                       height: 51,
                     ),
-                    InkWell(
-                      onTap: () {
-                        if (customerId != null &&
-                            customerId!.isNotEmpty &&
-                            customerId ==
-                                _profileController.user.value.id.toString()) {
-                          Get.to(
-                            () => NotificationScreen(homeController: _homeController),
-                          );
-                        }
-                      },
-                      child: widget.isFromNotification
-                          ? SvgPicture.asset(
-                              'assets/icons/notification_green.svg',
-                            )
-                          : SvgPicture.asset(
-                              'assets/icons/notification.svg',
-                            ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Get.to(() => const CheckoutScreen());
+                          },
+                          icon: Stack(
+                            alignment: Alignment.bottomCenter,
+                            clipBehavior: Clip.none,
+                            children: [
+                              const Icon(
+                                Icons.shopping_cart_outlined,
+                                color: Colors.black,
+                                size: 24,
+                              ),
+                              Positioned.directional(
+                                textDirection: Directionality.of(context),
+                                bottom: -15,
+                                end: 15,
+                                child: Container(
+                                  width: 18,
+                                  height: 18,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: avocado,
+                                  ),
+                                  child: Obx(() {
+                                    return CustomText(
+                                      text: _checkoutController.cartItems.value
+                                          .toString(),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      textAlign: TextAlign.center,
+                                    );
+                                  }),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            if (customerId != null &&
+                                customerId!.isNotEmpty &&
+                                customerId ==
+                                    _profileController.user.value.id
+                                        .toString()) {
+                              Get.to(
+                                () => NotificationScreen(
+                                    homeController: _homeController),
+                              );
+                            }
+                          },
+                          child: widget.isFromNotification
+                              ? SvgPicture.asset(
+                                  'assets/icons/notification_green.svg',
+                                )
+                              : SvgPicture.asset(
+                                  'assets/icons/notification.svg',
+                                ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

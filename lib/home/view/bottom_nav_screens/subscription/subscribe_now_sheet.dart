@@ -226,9 +226,7 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                 );
                 if (isSuccess) {
                   Get.to(
-                    () => const CheckoutScreen(
-                      hasCombination: true,
-                    ),
+                    () => const CheckoutScreen(),
                   );
 
                   FirebaseAnalytics.instance.logAddToCart(

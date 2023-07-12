@@ -1,3 +1,4 @@
+import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -22,6 +23,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _authController = Get.put(AuthController());
   final _profileController = Get.put(ProfileController());
+  final _checkoutController = Get.put(CheckoutController());
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -156,6 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                       if (user != null) {
                         _profileController.getAccount();
+                        _checkoutController.getCartItems();
                         Get.offAll(() => const HomePage());
                       }
                     }
