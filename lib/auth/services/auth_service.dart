@@ -301,7 +301,6 @@ class AuthService {
       final getStorage = GetStorage();
       getStorage.remove('token');
       getStorage.remove('customerId');
-      // replace with splash
       Get.offAll(const HomePage());
     }
   }
