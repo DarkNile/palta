@@ -30,103 +30,114 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
   TextEditingController reviewTextController = TextEditingController();
   HomeController homeController = Get.put(HomeController());
   ProfileController profileController = Get.put(ProfileController());
-  late int rating;
+  int rating = 3;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                (widget.isGuest)
-                    ? Container()
-                    : CustomTextField(
-                        controller: guestNameController,
-                        labelText: 'guestName'.tr,
-                        validator: true,
-                        prefixIcon: const Icon(Icons.person_outline),
+    return Form(
+      key: formKey,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 20.0,
+          right: 20.0,
+          top: 20.0,
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+
+        ),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Obx(
+             () {
+              return Column(
+                children: [
+                  (widget.isGuest)
+                      ? Container()
+                      : CustomTextField(
+                          controller: guestNameController,
+                          labelText: 'guestName'.tr,
+                          validator: true,
+                          prefixIcon: const Icon(Icons.person_outline),
+                        ),
+                  20.ph,
+                  CustomTextField(
+                    controller: reviewTextController,
+                    hintText: 'review'.tr,
+                    maxLines: 6,
+                    validator: true,
+                  ),
+                  20.ph,
+                  Row(
+                    children: [
+                      CustomText(
+                        text: 'rating'.tr,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
                       ),
-                20.ph,
-                CustomTextField(
-                  controller: reviewTextController,
-                  hintText: 'review'.tr,
-                  maxLines: 6,
-                  validator: true,
-                ),
-                20.ph,
-                Row(
-                  children: [
-                    CustomText(
-                      text: 'rating'.tr,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                    const CustomText(
-                      text: ':',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
-                    RatingBar.builder(
-                      initialRating: 3,
-                      minRating: 1,
-                      tapOnlyMode: true,
-                      direction: Axis.horizontal,
-                      allowHalfRating: false,
-                      itemCount: 5,
-                      itemSize: 25,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
+                      const CustomText(
+                        text: ':',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
                       ),
-                      onRatingUpdate: (rating) {
-                        this.rating = rating.toInt();
-                        print(rating);
-                      },
-                    ),
-                  ],
-                ),
-                20.ph,
-                CustomOutlinedButton(
-                  title: 'addReview'.tr,
-                  onPressed: () {
-                    homeController
-                        .postReviews(
-                          blogId: '2'
-                          // customerId
-                          ,
-                          reviewModel: ReviewModel(
-                            customerName: (widget.isGuest)
-                                ? guestNameController.text
-                                : '${profileController.user.value.firstName} '
-                                '${profileController.user.value.lastName}',
-                            reviewText: reviewTextController.text,
-                            rating: rating,
-                          ),
+                      RatingBar.builder(
+                        initialRating: 3,
+                        minRating: 1,
+                        tapOnlyMode: true,
+                        direction: Axis.horizontal,
+                        allowHalfRating: false,
+                        itemCount: 5,
+                        itemSize: 25,
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) => const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          this.rating = rating.toInt();
+                          print(rating);
+                        },
+                      ),
+                    ],
+                  ),
+                  20.ph,
+                  (homeController.isReviewsLoading.value)
+                      ? const Center(
+                          child: CircularProgressIndicator(),
                         )
-                        .whenComplete(
-                          () => AppUtil.successToast(
-                            context,
-                            'Review Added Successfully, Thank you.',
-                          ),
-                        )
-                        .catchError((e) => AppUtil.errorToast(
-                              context,
-                              'Something wrong happened, please try again later...',
-                            ));
-                  },
-                ),
-                20.ph,
-              ],
-            ),
+                      : CustomOutlinedButton(
+                          title: 'addReview'.tr,
+                          onPressed: () {
+                            if(formKey.currentState!.validate()){
+                              homeController
+                                  .postReviews(
+                                blogId: '2'
+                                // customerId
+                                ,
+                                reviewModel: ReviewModel(
+                                  customerName: (widget.isGuest)
+                                      ? guestNameController.text
+                                      : '${profileController.user.value.firstName} '
+                                      '${profileController.user.value.lastName}',
+                                  reviewText: reviewTextController.text,
+                                  rating: rating,
+                                ),
+                              )
+                                  .whenComplete(
+                                    () => AppUtil.successToast(
+                                  context,
+                                  'Review Added Successfully, Thank you.',
+                                ),
+                              )
+                                  .catchError((e) => AppUtil.errorToast(
+                                context,
+                                'Something wrong happened, please try again later...',
+                              ));
+                            }
+                          },
+                        ),
+                  20.ph,
+                ],
+              );
+            }
           ),
         ),
       ),
