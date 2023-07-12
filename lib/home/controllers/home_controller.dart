@@ -1,6 +1,7 @@
 import 'package:palta/home/models/articles.dart';
 import 'package:palta/home/models/combination.dart';
 import 'package:palta/home/models/notifications.dart';
+import 'package:palta/home/models/review.dart';
 import 'package:palta/home/models/sub_combination.dart';
 import 'package:palta/product/controllers/product_controller.dart';
 import 'package:get/get.dart';
@@ -51,6 +52,10 @@ class HomeController extends GetxController {
 
   RxBool isNotificationsLoading = false.obs;
   RxList<NotificationsModel> notifications = <NotificationsModel>[].obs;
+
+  RxBool isReviewsLoading = false.obs;
+  RxList<ReviewModel> reviews = <ReviewModel>[].obs;
+
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
@@ -105,6 +110,30 @@ class HomeController extends GetxController {
       return null;
     } finally {
       isArticlesLoading(false);
+    }
+  }
+
+  // -----------------------------<Reviews & Rating>----------------------------
+
+
+  Future<List<ReviewModel>?> getReviews({
+    required String blogId,
+    required ReviewModel reviewModel,
+  }) async {
+    try {
+      isReviewsLoading(true);
+      final data = await HomeService.postRatingAndReview(blogId: blogId, reviewModel: reviewModel);
+      if (data != null) {
+        reviews(data);
+        return reviews;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isReviewsLoading(false);
     }
   }
 
