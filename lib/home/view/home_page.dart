@@ -1,5 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/auth/view/login_screen.dart';
+import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/guide_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_screen.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
   final _homeController = Get.put(HomeController());
   final _profileController = Get.put(ProfileController());
   final _authController = Get.put(AuthController());
+  final _checkoutController = Get.put(CheckoutController());
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   late PageController _pageController;
   late int _currentIndex;
@@ -54,6 +56,11 @@ class _HomePageState extends State<HomePage> {
     _profileController.getUserOrders();
     _homeController.getGuidances();
     _profileController.getAccount();
+    if (customerId == null || customerId!.isEmpty) {
+      _checkoutController.clearCart();
+    } else {
+      _checkoutController.getCartItems();
+    }
     checkAppVersion();
   }
 

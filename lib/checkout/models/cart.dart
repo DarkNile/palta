@@ -20,6 +20,7 @@ class Cart {
   dynamic hasDownload;
   dynamic hasRecurringProducts;
   Currency? currency;
+  String? isCombination;
 
   Cart({
     this.weight,
@@ -39,6 +40,7 @@ class Cart {
     this.hasDownload,
     this.hasRecurringProducts,
     this.currency,
+    this.isCombination,
   });
 
   Cart.fromJson(Map<String, dynamic> json) {
@@ -64,6 +66,7 @@ class Cart {
     hasRecurringProducts = json["has_recurring_products"];
     currency =
         json["currency"] == null ? null : Currency.fromJson(json["currency"]);
+    isCombination = json["is_combination"];
   }
 
   Map<String, dynamic> toJson() {
@@ -93,6 +96,7 @@ class Cart {
     if (currency != null) {
       data["currency"] = currency?.toJson();
     }
+    data["is_combination"] = isCombination;
     return data;
   }
 }
