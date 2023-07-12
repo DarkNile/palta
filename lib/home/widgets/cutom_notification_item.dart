@@ -8,9 +8,11 @@ class CustomNotificationItem extends StatelessWidget {
     super.key,
     required this.title,
     required this.subtitle,
+    required this.seen,
   });
   final String title;
   final String subtitle;
+  final String seen;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class CustomNotificationItem extends StatelessWidget {
           color: iceBlue,
         ),
         child: SvgPicture.asset(
-          'assets/icons/notification.svg',
+        (seen == '0')?'assets/icons/notification_off.svg':'assets/icons/notification.svg',
         ),
       ),
       title: CustomText(
