@@ -3,18 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class MealInfoPopup extends StatelessWidget {
-  const MealInfoPopup({
+   MealInfoPopup({
     super.key,
-    required this.title,
+     required this.mealIndex,
+     required this.programIndex,
+     required this.title,
     required this.image,
   });
 
-  final String title;
-  final String image;
+   final int mealIndex;
+   final int programIndex;
+   final String title;
+   final String image;
+
+  final HomeController homeController = Get.put(HomeController());
+
+  // homeController.programs[programIndex].mealData![mealIndex].calories;
 
   @override
   Widget build(BuildContext context) {
