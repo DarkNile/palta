@@ -1,4 +1,4 @@
-import 'package:palta/home/models/meal.dart';
+import 'package:palta/home/models/meal_model.dart';
 import 'package:palta/product/models/custom_tabs.dart';
 import 'package:palta/product/models/options.dart';
 import 'package:palta/product/models/product_category.dart';
