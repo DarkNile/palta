@@ -27,6 +27,7 @@ class SubscriptionInfo extends StatefulWidget {
     this.fromAssessment = false,
     required this.hasCombination,
     required this.program,
+    required this.programIndex,
     this.icon,
   });
 
@@ -34,6 +35,7 @@ class SubscriptionInfo extends StatefulWidget {
   final bool hasCombination;
   final Product program;
   final String? icon;
+  final int programIndex;
 
   @override
   State<SubscriptionInfo> createState() => _SubscriptionInfoState();
@@ -288,6 +290,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 },
                                 itemBuilder: (context, index) {
                                   return Meal(
+                                    programIndex: widget.programIndex,
+                                    mealIndex: index,
                                     title: _homeController
                                         .breakfastMeals[index].name!,
                                     image: _homeController
@@ -341,7 +345,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 },
                                 itemBuilder: (context, index) {
                                   return Meal(
-                                    title:
+                                    programIndex: widget.programIndex,
+                                    mealIndex: index,                                    title:
                                         _homeController.lunchMeals[index].name!,
                                     image: _homeController
                                         .lunchMeals[index].originalImage!,
@@ -394,7 +399,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 },
                                 itemBuilder: (context, index) {
                                   return Meal(
-                                    title: _homeController
+                                    programIndex: widget.programIndex,
+                                    mealIndex: index,                                    title: _homeController
                                         .dinnerMeals[index].name!,
                                     image: _homeController
                                         .dinnerMeals[index].originalImage!,
