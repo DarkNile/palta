@@ -328,4 +328,7 @@ const Map<String, String> ar = {
 // My Notifications
   'myNotificationsTitle': 'تنبيهاتي',
   'myNotificationsSubTitle': 'تابع التنبيهات',
+
+  // Reviews & Rating
+  'reviews': 'التقييمات ',
 };

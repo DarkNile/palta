@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/static_pages/general_articles_details_screen.dart';
 import 'package:palta/home/widgets/custom_guide_item.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_header.dart';
 
@@ -34,12 +34,6 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
     super.initState();
   }
 
-  String formatDateTime(String dateTimeString) {
-    DateTime dateTime = DateTime.parse(dateTimeString);
-    DateFormat formatter = DateFormat('dd/MM/yyyy ');
-    String formattedDate = formatter.format(dateTime);
-    return formattedDate;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +62,7 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
                 shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemBuilder: (context, index) {
-                  String dateFormat = formatDateTime(
+                  String dateFormat = AppUtil().formatDateTime(
                     widget.homeController.articles[index].dateCreated,
                   );
                   return CustomGuideItem(
