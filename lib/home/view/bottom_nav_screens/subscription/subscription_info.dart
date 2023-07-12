@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/svg.dart';
@@ -614,6 +615,22 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                     () => const CheckoutScreen(
                                       hasCombination: false,
                                     ),
+                                  );
+                                  FirebaseAnalytics.instance.logAddToCart(
+                                    items: [
+                                      AnalyticsEventItem(
+                                        itemId: widget.program.id.toString(),
+                                        itemName: widget.program.name,
+                                        price: double.parse(
+                                            widget.program.price.toString()),
+                                        currency: 'SAR',
+                                        quantity: int.parse(
+                                            widget.program.quantity.toString()),
+                                      ),
+                                    ],
+                                    value: double.parse(
+                                        widget.program.price.toString()),
+                                    currency: 'SAR',
                                   );
                                 }
                               }
