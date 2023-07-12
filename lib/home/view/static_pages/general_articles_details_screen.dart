@@ -35,7 +35,6 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
                   clipper: CustomAppBarClipPath(),
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
-                    fit: BoxFit.cover,
                     width: double.infinity,
                     height: 300,
                     placeholder: (context, url) {
