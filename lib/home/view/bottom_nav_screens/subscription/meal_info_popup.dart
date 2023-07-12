@@ -21,7 +21,7 @@ class MealInfoPopup extends StatelessWidget {
    final String title;
    final String image;
 
-  final HomeController homeController = Get.put(HomeController());
+   HomeController homeController = Get.put(HomeController());
 
   // homeController.programs[programIndex].mealData![mealIndex].calories;
 

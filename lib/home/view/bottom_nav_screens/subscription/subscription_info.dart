@@ -346,7 +346,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 itemBuilder: (context, index) {
                                   return Meal(
                                     programIndex: widget.programIndex,
-                                    mealIndex: index,                                    title:
+                                    mealIndex: index,
+                                    title:
                                         _homeController.lunchMeals[index].name!,
                                     image: _homeController
                                         .lunchMeals[index].originalImage!,
@@ -400,7 +401,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 itemBuilder: (context, index) {
                                   return Meal(
                                     programIndex: widget.programIndex,
-                                    mealIndex: index,                                    title: _homeController
+                                    mealIndex: index,
+                                    title: _homeController
                                         .dinnerMeals[index].name!,
                                     image: _homeController
                                         .dinnerMeals[index].originalImage!,
