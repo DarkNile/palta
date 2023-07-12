@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:flutter_flushbar/flutter_flushbar.dart';
@@ -232,5 +233,12 @@ class AppUtil {
       margin: const EdgeInsets.all(8),
       borderRadius: BorderRadius.circular(10),
     ).show(context);
+  }
+
+  String formatDateTime(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString);
+    DateFormat formatter = DateFormat('dd/MM/yyyy ');
+    String formattedDate = formatter.format(dateTime);
+    return formattedDate;
   }
 }
