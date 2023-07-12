@@ -20,10 +20,7 @@ import 'package:palta/widgets/custom_text.dart';
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({
     super.key,
-    required this.hasCombination,
   });
-
-  final bool hasCombination;
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -254,7 +251,6 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                     }
                     return OrderInfoPage(
                       checkoutController: _checkoutController,
-                      hasCombination: widget.hasCombination,
                       onPreviousTap: () {
                         Get.back();
                       },

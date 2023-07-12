@@ -612,9 +612,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 );
                                 if (isSuccess) {
                                   Get.to(
-                                    () => const CheckoutScreen(
-                                      hasCombination: false,
-                                    ),
+                                    () => const CheckoutScreen(),
                                   );
                                   FirebaseAnalytics.instance.logAddToCart(
                                     items: [
