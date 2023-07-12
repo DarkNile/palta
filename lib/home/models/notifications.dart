@@ -2,11 +2,13 @@ class NotificationsModel {
   final String customerId;
   final String title;
   final String seen;
+  final String date;
 
   NotificationsModel({
     required this.customerId,
     required this.title,
     required this.seen,
+    required this.date,
 
   });
 
@@ -15,11 +17,7 @@ class NotificationsModel {
         customerId: json['customer_id'],
         title: json['text'],
         seen: json['seen'],
+        date: json['send_date'],
       );
 
-  Map<String, dynamic> toJson() => {
-    'customer_id': customerId,
-    'text': title,
-    'seen': seen,
-  };
 }
