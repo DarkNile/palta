@@ -10,12 +10,16 @@ import 'package:palta/widgets/custom_text.dart';
 class Meal extends StatelessWidget {
   const Meal({
     super.key,
+    required this.mealIndex,
+    required this.programIndex,
     required this.title,
     required this.image,
     required this.description,
     required this.price,
   });
 
+  final int mealIndex;
+  final int programIndex;
   final String title;
   final String image;
   final String description;
@@ -29,6 +33,8 @@ class Meal extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return MealInfoPopup(
+                mealIndex: mealIndex,
+                programIndex: programIndex,
                 title: title,
                 image: image,
               );

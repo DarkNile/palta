@@ -116,7 +116,7 @@ class HomeController extends GetxController {
   // -----------------------------<Reviews & Rating>----------------------------
 
 
-  Future<List<ReviewModel>?> getReviews({
+  Future<List<ReviewModel>?> postReviews({
     required String blogId,
     required ReviewModel reviewModel,
   }) async {

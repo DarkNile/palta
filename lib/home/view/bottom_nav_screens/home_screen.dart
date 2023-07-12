@@ -53,19 +53,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          const SizedBox(
+            height: 90,
+          ),
           Stack(
             clipBehavior: Clip.none,
-            alignment: AlignmentDirectional.bottomStart,
+            alignment: AlignmentDirectional.topEnd,
             children: [
               Obx(() {
                 if (widget.homeController.isBannersLoading.value) {
                   return SizedBox(
                     width: width,
-                    height: 379,
+                    height: 380,
                     child: const CustomLoadingWidget(),
                   );
                 }
@@ -74,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     options: CarouselOptions(
                       enlargeCenterPage: true,
                       autoPlay: true,
-                      height: 379,
+                      height: 380,
                       viewportFraction: 1,
                       enableInfiniteScroll: false,
                       onPageChanged: (index, reason) {
@@ -110,35 +114,45 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     });
               }),
-              Positioned(
-                left: 16,
-                right: 16,
-                top: 339,
-                bottom: -100,
-                child: SizedBox(
-                  height: 140,
-                  child: ListView.separated(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        width: 12,
-                      );
-                    },
-                    itemBuilder: (context, index) {
-                      return CustomHomeCard(
-                        title: titles[index],
-                        icon: icons[index],
-                      );
-                    },
+              Container(
+                margin: EdgeInsets.only(
+                  top: height / 2.1,
+                  right:
+                      Directionality.of(context) == TextDirection.ltr ? 10 : 0,
+                  left:
+                      Directionality.of(context) == TextDirection.ltr ? 0 : 10,
+                ),
+                child: Positioned(
+                  left: 16,
+                  right: 16,
+                  top: 339,
+                  bottom: -100,
+                  child: SizedBox(
+                    height: 140,
+                    child: ListView.separated(
+                      itemCount: 3,
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          width: 12,
+                        );
+                      },
+                      itemBuilder: (context, index) {
+                        return CustomHomeCard(
+                          title: titles[index],
+                          icon: icons[index],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(
-            height: 134,
+            height: 30,
           ),
           CustomText(
             text: 'subscribeToProgram'.tr,
@@ -175,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Get.to(
                       () => SubscriptionInfo(
+                        programIndex: index,
                         program: widget.homeController.programs[index],
                         icon: widget.homeController.programs.length > 3
                             ? 'muscle'

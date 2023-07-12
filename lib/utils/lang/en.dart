@@ -350,4 +350,12 @@ const Map<String, String> en = {
 
   // Reviews & Rating
   'reviews': 'Reviews',
+  'addReview': 'Add Review',
+  'review': 'Review',
+  'rating': 'Rating',
+
+
+
+  // guest name for text field
+  'guestName': 'Guest Name',
 };

@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/extensions.dart';
+import 'package:palta/home/view/static_pages/reviews_screen.dart';
 import 'package:palta/widgets/custom_app_bar_clip_path.dart';
+import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
 
@@ -33,7 +35,6 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
                   clipper: CustomAppBarClipPath(),
                   child: CachedNetworkImage(
                     imageUrl: imageUrl,
-                    fit: BoxFit.cover,
                     width: double.infinity,
                     height: 300,
                     placeholder: (context, url) {
@@ -66,6 +67,16 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
               fontSize: 14,
             ),
             15.ph,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: CustomButton(
+                title: 'reviews'.tr,
+                onPressed: () {
+                  Get.to(()=> const ReviewsScreen());
+                },
+              ),
+            ),
+            20.ph,
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,

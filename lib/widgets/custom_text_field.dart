@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
     Key? key,
     this.controller,
     this.hintText,
+    this.labelText,
     this.onFieldSubmitted,
     this.textInputType = TextInputType.text,
     this.obscureText = false,
@@ -28,6 +29,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType textInputType;
   final String? hintText;
+  final String? labelText;
   final Function()? onTap;
   final Function(String v)? onChanged;
   final Function(String v)? onFieldSubmitted;
@@ -76,6 +78,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         isDense: true,
         counterStyle: const TextStyle(fontSize: 0, height: 0),
+        labelText: labelText,
         hintText: hintText,
         hintStyle: const TextStyle(
           fontSize: 12,

@@ -330,5 +330,11 @@ const Map<String, String> ar = {
   'myNotificationsSubTitle': 'تابع التنبيهات',
 
   // Reviews & Rating
-  'reviews': 'التقييمات ',
+  'reviews': 'المراجعات ',
+  'addReview': 'اضافة مراجعة',
+  'review': 'مراجعة',
+  'rating': 'تقييم',
+
+  // guest name for text field
+  'guestName': 'اسم المستخدم',
 };
