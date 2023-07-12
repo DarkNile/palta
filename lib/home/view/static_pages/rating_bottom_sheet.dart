@@ -8,7 +8,6 @@ import 'package:palta/widgets/custom_outlined_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
 
-
 class RatingBottomSheetBuilder extends StatefulWidget {
   const RatingBottomSheetBuilder(
       {Key? key, required this.isGuest, required this.customerId})
@@ -30,15 +29,11 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
   HomeController homeController = Get.put(HomeController());
   late int rating;
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: MediaQuery
-            .of(context)
-            .viewInsets
-            .bottom,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Form(
         key: formKey,
@@ -51,11 +46,11 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
                 (widget.isGuest)
                     ? Container()
                     : CustomTextField(
-                  controller: guestNameController,
-                  labelText: 'guestName'.tr,
-                  validator: true,
-                  prefixIcon: const Icon(Icons.person_outline),
-                ),
+                        controller: guestNameController,
+                        labelText: 'guestName'.tr,
+                        validator: true,
+                        prefixIcon: const Icon(Icons.person_outline),
+                      ),
                 20.ph,
                 CustomTextField(
                   controller: reviewTextController,
@@ -85,8 +80,7 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
                       itemCount: 5,
                       itemSize: 25,
                       itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) =>
-                      const Icon(
+                      itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
@@ -101,12 +95,16 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
                 CustomOutlinedButton(
                   title: 'addReview'.tr,
                   onPressed: () {
-                    homeController.postReviews(blogId: '2'
+                    homeController.postReviews(
+                      blogId: '2'
                       // customerId
                       ,
                       reviewModel: ReviewModel(
-                          customerName: guestNameController.text, reviewText: reviewTextController.text,
-                          rating: rating),);
+                        customerName: guestNameController.text,
+                        reviewText: reviewTextController.text,
+                        rating: rating,
+                      ),
+                    );
                   },
                 ),
                 20.ph,
