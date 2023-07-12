@@ -431,7 +431,9 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         } else if (_checkoutController.order!.paymentCode! ==
                             'cod') {
                           final isSuccess =
-                              await _checkoutController.saveOrderToDatabase();
+                              await _checkoutController.saveOrderToDatabase(
+                            order: _checkoutController.order!,
+                          );
                           if (isSuccess) {
                             Get.offAll(
                               () => ThankYouScreen(
@@ -502,7 +504,9 @@ class _CheckoutScreenState extends State<CheckoutScreen>
           if (event["status"] == "success") {
             var transactionDetails = event["data"];
             print(transactionDetails);
-            _checkoutController.saveOrderToDatabase();
+            _checkoutController.saveOrderToDatabase(
+              order: _checkoutController.order!,
+            );
             Get.offAll(() => ThankYouScreen(
                   order: _checkoutController.order!,
                 ));

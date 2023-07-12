@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
@@ -228,6 +229,20 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                     () => const CheckoutScreen(
                       hasCombination: true,
                     ),
+                  );
+
+                  FirebaseAnalytics.instance.logAddToCart(
+                    items: [
+                      AnalyticsEventItem(
+                        itemId: widget.program.id.toString(),
+                        itemName: widget.program.name,
+                        price: double.parse(selectedPrice.toString()),
+                        currency: 'SAR',
+                        quantity: int.parse(widget.program.quantity.toString()),
+                      ),
+                    ],
+                    value: double.parse(selectedPrice.toString()),
+                    currency: 'SAR',
                   );
                 }
               },

@@ -48,7 +48,9 @@ class PaymentWebviewScreen extends StatelessWidget {
 
                 if (request.url.contains('thankyou')) {
                   final isSuccess =
-                      await checkoutController.saveOrderToDatabase();
+                      await checkoutController.saveOrderToDatabase(
+                    order: order,
+                  );
                   if (isSuccess) {
                     Get.offAll(
                       () => ThankYouScreen(

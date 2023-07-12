@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/checkout/models/cart.dart';
@@ -326,11 +327,36 @@ class CheckoutController extends GetxController {
     }
   }
 
-  Future<bool> saveOrderToDatabase() async {
+  Future<bool> saveOrderToDatabase({
+    required Order order,
+  }) async {
     try {
       isSavingOrderLoading(true);
       final isSuccess = await CheckoutService.saveOrderToDatabase();
       if (isSuccess) {
+        var items = <AnalyticsEventItem>[];
+        for (var i = 0; i < order.products!.length; i++) {
+          items.add(
+            AnalyticsEventItem(
+              itemId: order.products![i].id.toString(),
+              itemName: order.products![i].name,
+              price: double.parse(order.products![i].price
+                  .toString()
+                  .split('ر.س')
+                  .join()
+                  .split(',')
+                  .join()),
+              currency: 'SAR',
+              quantity: int.parse(order.products![i].quantity.toString()),
+            ),
+          );
+        }
+        FirebaseAnalytics.instance.logPurchase(
+          transactionId: order.orderId.toString(),
+          value: double.parse(order.total.toString()),
+          currency: 'SAR',
+          items: items,
+        );
         clearCart();
       }
       return isSuccess;
