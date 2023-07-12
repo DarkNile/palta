@@ -1,5 +1,6 @@
 import 'package:palta/home/models/articles.dart';
 import 'package:palta/home/models/combination.dart';
+import 'package:palta/home/models/notifications.dart';
 import 'package:palta/home/models/sub_combination.dart';
 import 'package:palta/product/controllers/product_controller.dart';
 import 'package:get/get.dart';
@@ -47,6 +48,9 @@ class HomeController extends GetxController {
 
   var isArticlesLoading = false.obs;
   var articles = <ArticlesModel>[].obs;
+
+  RxBool isNotificationsLoading = false.obs;
+  RxList<NotificationsModel> notifications = <NotificationsModel>[].obs;
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
@@ -103,6 +107,46 @@ class HomeController extends GetxController {
       isArticlesLoading(false);
     }
   }
+
+  // -------------------<get Notifications>----------------------
+
+  Future<List<NotificationsModel>?> getNotifications() async {
+    try {
+      isNotificationsLoading(true);
+      final data = await HomeService.getNotifications();
+      if (data != null) {
+        notifications(data);
+        return notifications;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isNotificationsLoading(false);
+    }
+  }
+
+  // -----------------------------<extract date from notification text>--------------------------
+
+  String extractDateFromText({required String text}) {
+    String matchText = text;
+    RegExp regExp = RegExp(r'\d{4}-\d{2}-\d{2}');
+    Match? match = regExp.firstMatch(matchText);
+
+    String date = '';
+    if (match != null) {
+      date = match.group(0)!;
+    }
+
+    List<String> dateParts = date.split('-');
+    date = '${dateParts[0]}/${dateParts[1]}/${dateParts[2]}';
+    print(date);
+    return date;
+  }
+
+  // ----------------------------------------------------------------
 
   Future<List<Product>?> getPrograms() async {
     try {
