@@ -106,7 +106,8 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
                           reviewModel: ReviewModel(
                             customerName: (widget.isGuest)
                                 ? guestNameController.text
-                                : '${profileController.user.value.firstName} ${profileController.user.value.lastName}',
+                                : '${profileController.user.value.firstName} '
+                                '${profileController.user.value.lastName}',
                             reviewText: reviewTextController.text,
                             rating: rating,
                           ),
