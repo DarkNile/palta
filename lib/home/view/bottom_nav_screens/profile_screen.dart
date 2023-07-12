@@ -178,7 +178,7 @@ class ProfileScreen extends StatelessWidget {
                 CustomProfileItem(
                   onTap: () {
                     Get.to(
-                      () => const NotificationScreen(),
+                      () => NotificationScreen(homeController: homeController),
                     );
                   },
                   title: 'myNotificationsTitle',

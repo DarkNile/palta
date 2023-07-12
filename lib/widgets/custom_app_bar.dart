@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/notification_screen.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_app_bar_clip_path.dart';
@@ -33,6 +34,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   final getStorage = GetStorage();
   late String? customerId;
   final _profileController = Get.put(ProfileController());
+  final _homeController = Get.put(HomeController());
 
   @override
   void initState() {
@@ -130,7 +132,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                             customerId ==
                                 _profileController.user.value.id.toString()) {
                           Get.to(
-                            () => const NotificationScreen(),
+                            () => NotificationScreen(homeController: _homeController),
                           );
                         }
                       },
