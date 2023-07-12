@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:palta/constants/extensions.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/models/review.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_outlined_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
@@ -27,6 +29,7 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
 
   TextEditingController reviewTextController = TextEditingController();
   HomeController homeController = Get.put(HomeController());
+  ProfileController profileController = Get.put(ProfileController());
   late int rating;
 
   @override
@@ -95,16 +98,29 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
                 CustomOutlinedButton(
                   title: 'addReview'.tr,
                   onPressed: () {
-                    homeController.postReviews(
-                      blogId: '2'
-                      // customerId
-                      ,
-                      reviewModel: ReviewModel(
-                        customerName: guestNameController.text,
-                        reviewText: reviewTextController.text,
-                        rating: rating,
-                      ),
-                    );
+                    homeController
+                        .postReviews(
+                          blogId: '2'
+                          // customerId
+                          ,
+                          reviewModel: ReviewModel(
+                            customerName: (widget.isGuest)
+                                ? guestNameController.text
+                                : '${profileController.user.value.firstName} ${profileController.user.value.lastName}',
+                            reviewText: reviewTextController.text,
+                            rating: rating,
+                          ),
+                        )
+                        .whenComplete(
+                          () => AppUtil.successToast(
+                            context,
+                            'Review Added Successfully, Thank you.',
+                          ),
+                        )
+                        .catchError((e) => AppUtil.errorToast(
+                              context,
+                              'Something wrong happened, please try again later...',
+                            ));
                   },
                 ),
                 20.ph,
