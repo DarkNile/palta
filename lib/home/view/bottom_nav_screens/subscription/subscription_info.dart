@@ -10,6 +10,7 @@ import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/checkout_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:palta/home/services/apps_flyer_service.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription/meal.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription/subscribe_now_sheet.dart';
 import 'package:palta/home/widgets/custom_home_card.dart';
@@ -644,6 +645,14 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                         widget.program.price.toString()),
                                     currency: 'SAR',
                                   );
+                                  AppsFlyerService.logAddToCart(
+                                      id: widget.program.id.toString(),
+                                      name: widget.program.name!,
+                                      price: double.parse(
+                                          widget.program.price.toString()),
+                                      currency: 'SAR',
+                                      quantity: int.parse(
+                                          widget.program.quantity.toString()));
                                 }
                               }
                             } else {

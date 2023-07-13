@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:android_id/android_id.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
@@ -20,7 +24,6 @@ import 'package:palta/product/view/products_screen.dart';
 import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_bottom_navigation_bar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-// import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, this.pageIndex});
@@ -159,16 +162,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> checkAppVersion() async {
-    // String? deviceId;
-    // if (Platform.isIOS) {
-    //   var deviceInfo = DeviceInfoPlugin();
-    //   var iosDeviceInfo = await deviceInfo.iosInfo;
-    //   deviceId = iosDeviceInfo.identifierForVendor;
-    // } else if (Platform.isAndroid) {
-    //   const androidId = AndroidId();
-    //   deviceId = await androidId.getId();
-    // }
-    // print('Device ID: $deviceId'); // unique Device ID
+    String? deviceId;
+    if (Platform.isIOS) {
+      var deviceInfo = DeviceInfoPlugin();
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      deviceId = iosDeviceInfo.identifierForVendor;
+    } else if (Platform.isAndroid) {
+      const androidId = AndroidId();
+      deviceId = await androidId.getId();
+    }
+    print('Device ID: $deviceId'); // unique Device ID
     // var doc = await FirebaseFirestore.instance
     //     .collection('Devices')
     //     .doc(deviceId)
@@ -271,12 +274,10 @@ class _HomePageState extends State<HomePage> {
   // Future<void> initAppsFlyer() async {
   //   final AppsFlyerOptions options = AppsFlyerOptions(
   //     afDevKey: 'pYfv6d6JdZPUoZFKNstWzj',
-  //     // appId: '',
+  //     appId: Platform.isAndroid ? 'com.DigitalPartner.palta' : '6450650134',
   //     showDebug: true,
   //   );
   //   appsflyerSdk = AppsflyerSdk(options);
-  //   // appsflyerSdk.initSdk();
-  //   String? uid = await appsflyerSdk.getAppsFlyerUID();
-  //   print(uid);
+  //   appsflyerSdk.initSdk();
   // }
 }

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/constants/primary_green.dart';
+import 'package:palta/home/services/apps_flyer_service.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/splash/splash_screen_1.dart';
 import 'package:palta/utils/translations.dart';
@@ -49,6 +50,7 @@ void main() async {
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   await GetStorage.init();
+  await AppsFlyerService.initAppsFlyer();
   runApp(Phoenix(child: const MyApp()));
 }
 

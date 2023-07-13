@@ -5,6 +5,7 @@ import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/checkout_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:palta/home/services/apps_flyer_service.dart';
 import 'package:palta/product/models/product.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -242,6 +243,12 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                     value: double.parse(selectedPrice.toString()),
                     currency: 'SAR',
                   );
+                  AppsFlyerService.logAddToCart(
+                      id: widget.program.id.toString(),
+                      name: widget.program.name!,
+                      price: double.parse(selectedPrice.toString()),
+                      currency: 'SAR',
+                      quantity: int.parse(widget.program.quantity.toString()));
                 }
               },
               title: 'continueSubscribing'.tr,
