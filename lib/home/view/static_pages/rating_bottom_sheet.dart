@@ -127,14 +127,14 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
                               Get.back();
                               AppUtil.successToast(
                                 context,
-                                'Review Added Successfully, Thank you.',
+                                'reviewAddedSuccess'.tr,
                               );
                               homeController
                                   .getReviewAndRating(blogId: widget.blogId)
                                   .whenComplete(() => Get.back());
                             }).catchError((e) => AppUtil.errorToast(
                                       context,
-                                      'Something wrong happened, please try again later...',
+                                      'reviewAddedError'.tr,
                                     ));
                           }
                         },
