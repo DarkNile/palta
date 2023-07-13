@@ -159,7 +159,6 @@ class Product {
   });
 
   Product.fromJson(Map<String, dynamic> json) {
-    mealData = json['meal_data'];
     id = json["id"] ?? json['key'] ?? json['product_id'];
     productId = json["product_id"];
     name = json["name"];
@@ -246,6 +245,9 @@ class Product {
         : (json["option"] as List).map((e) => SizeOption.fromJson(e)).toList();
     total = json["total"];
     orderProductId = json["order_product_id"];
+    mealData = json["meal_data"] == null
+        ? null
+        : (json["meal_data"] as List).map((e) => MealData.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -344,5 +346,3 @@ class Product {
     return data;
   }
 }
-
-
