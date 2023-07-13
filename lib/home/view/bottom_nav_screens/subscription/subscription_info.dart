@@ -300,6 +300,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                         .breakfastMeals[index].description!,
                                     price: _homeController
                                         .breakfastMeals[index].priceFormated!,
+                                    mealData: _homeController
+                                        .breakfastMeals[index].mealData!,
                                   );
                                 }),
                           );
@@ -355,6 +357,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                         .lunchMeals[index].description!,
                                     price: _homeController
                                         .lunchMeals[index].priceFormated!,
+                                    mealData: _homeController
+                                        .lunchMeals[index].mealData!,
                                   );
                                 }),
                           );
@@ -410,6 +414,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                         .dinnerMeals[index].description!,
                                     price: _homeController
                                         .dinnerMeals[index].priceFormated!,
+                                    mealData: _homeController
+                                        .dinnerMeals[index].mealData!,
                                   );
                                 }),
                           );

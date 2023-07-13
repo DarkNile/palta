@@ -1,4 +1,3 @@
-import 'package:palta/home/models/meal_model.dart';
 import 'package:palta/product/models/custom_tabs.dart';
 import 'package:palta/product/models/options.dart';
 import 'package:palta/product/models/product_category.dart';
@@ -79,7 +78,7 @@ class Product {
   List<SizeOption>? option;
   dynamic total;
   String? orderProductId;
-  List<MealDataModel>? mealData;
+  dynamic mealData;
 
   Product({
     this.id,
@@ -158,11 +157,6 @@ class Product {
   });
 
   Product.fromJson(Map<String, dynamic> json) {
-    if (json['meal_data'] != null && json['meal_data'] is List) {
-      mealData = (json['meal_data'] as List)
-          .map((e) => MealDataModel.fromJson(e))
-          .toList();
-    }
     id = json["id"] ?? json['key'] ?? json['product_id'];
     productId = json["product_id"];
     name = json["name"];
@@ -249,6 +243,7 @@ class Product {
         : (json["option"] as List).map((e) => SizeOption.fromJson(e)).toList();
     total = json["total"];
     orderProductId = json["order_product_id"];
+    mealData = json["meal_data"];
   }
 
   Map<String, dynamic> toJson() {
@@ -344,6 +339,7 @@ class Product {
     }
     data["total"] = total;
     data["order_product_id"] = orderProductId;
+    data["meal_data"] = mealData;
     return data;
   }
 }
