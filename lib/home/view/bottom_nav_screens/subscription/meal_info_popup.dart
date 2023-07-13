@@ -8,18 +8,18 @@ import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class MealInfoPopup extends StatelessWidget {
-   MealInfoPopup({
+  MealInfoPopup({
     super.key,
-     required this.mealIndex,
-     required this.programIndex,
-     required this.title,
+    required this.mealIndex,
+    required this.programIndex,
+    required this.title,
     required this.image,
   });
 
-   final int mealIndex;
-   final int programIndex;
-   final String title;
-   final String image;
+  final int mealIndex;
+  final int programIndex;
+  final String title;
+  final String image;
 
   final HomeController homeController = Get.put(HomeController());
 
@@ -112,9 +112,10 @@ class MealInfoPopup extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: iceBlue,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: CustomText(
-                      text: '220',
+                      text: homeController.programs[programIndex]
+                              .mealData![mealIndex].calories.toString(),
                       fontSize: 14,
                     ),
                   ),
@@ -139,9 +140,10 @@ class MealInfoPopup extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: iceBlue,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: CustomText(
-                      text: '40',
+                      text: homeController.programs[programIndex]
+                          .mealData![mealIndex].carbohydrates.toString(),
                       fontSize: 14,
                     ),
                   ),
@@ -166,9 +168,10 @@ class MealInfoPopup extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: iceBlue,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: CustomText(
-                      text: '15',
+                      text: homeController.programs[programIndex]
+                          .mealData![mealIndex].fat.toString(),
                       fontSize: 14,
                     ),
                   ),
@@ -193,9 +196,10 @@ class MealInfoPopup extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: iceBlue,
                   ),
-                  child: const Center(
+                  child: Center(
                     child: CustomText(
-                      text: '30',
+                      text: homeController.programs[programIndex]
+                          .mealData![mealIndex].protein.toString(),
                       fontSize: 14,
                     ),
                   ),
