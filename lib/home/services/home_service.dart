@@ -446,7 +446,7 @@ class HomeService {
   }
 
   static Future<List<ArticlesModel>?> getArticlesDetails({
-    required String id,
+    required int blogId,
   }) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
@@ -454,7 +454,7 @@ class HomeService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('${baseUrl}route=rest/blogpost&blog_id=$id&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/blogpost&blog_id=$blogId&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -467,6 +467,58 @@ class HomeService {
       List<dynamic> data = jsonDecode(response.body)['data'];
       print('data: $data');
       return data.map((article) => ArticlesModel.fromJson(article)).toList();
+    } else {
+      return null;
+    }
+  }
+
+  // ---------------------------------------<Rating & Reviews>-----------------------------
+
+  static Future<bool?> postRatingAndReview(
+      {required ReviewModel reviewModel}) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/blogreview/add'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+      body: jsonEncode(reviewModel.toJson()),
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      return true;
+    } else {
+      return null;
+    }
+  }
+
+
+  static Future<List<ReviewModel>?> getRatingAndReview(
+      {required int blogId}) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse('${baseUrl}route=rest/blogreview&blog_id=$blogId'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      List<dynamic> data = jsonDecode(response.body)['data'];
+      print('Review Data: $data');
+      return data.map((review) => ReviewModel.fromJson(review)).toList();
     } else {
       return null;
     }
@@ -503,31 +555,5 @@ class HomeService {
     }
   }
 
-  // ---------------------------------------<Rating & Reviews>-----------------------------
 
-  static Future<List<ReviewModel>?> postRatingAndReview(
-      {required String blogId, required ReviewModel reviewModel}) async {
-    final getStorage = GetStorage();
-    final String? token = getStorage.read('token');
-    print(token);
-    final String? lang = getStorage.read('lang');
-    print(lang);
-    final response = await http.post(
-      Uri.parse('${baseUrl}route=feed/rest_api/reviews&id=$blogId'),
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-      },
-      body: jsonEncode(reviewModel.toJson()),
-    );
-    print('response status code: ${response.statusCode}');
-    if (jsonDecode(response.body)['success'] == 1) {
-      List<dynamic> data = jsonDecode(response.body)['data'];
-      print('Notifications Data: $data');
-      return data.map((review) => ReviewModel.fromJson(review)).toList();
-    } else {
-      return null;
-    }
-  }
 }
