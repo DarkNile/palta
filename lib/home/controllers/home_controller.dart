@@ -50,11 +50,16 @@ class HomeController extends GetxController {
   var isArticlesLoading = false.obs;
   var articles = <ArticlesModel>[].obs;
 
+  var isArticlesDetailsLoading = false.obs;
+  var articlesDetails = <ArticlesModel>[].obs;
+
   RxBool isNotificationsLoading = false.obs;
   RxList<NotificationsModel> notifications = <NotificationsModel>[].obs;
 
   RxBool isReviewsLoading = false.obs;
   RxList<ReviewModel> reviews = <ReviewModel>[].obs;
+  RxBool isPostReviewsLoading = false.obs;
+  RxBool postReview = false.obs;
 
 
   Future<List<dynamic>?> getBanners({required String id}) async {
@@ -113,16 +118,51 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<List<ArticlesModel>?> getArticlesDetails({required int blogId}) async {
+    try {
+      isArticlesDetailsLoading(true);
+      final data = await HomeService.getArticlesDetails(blogId: blogId);
+      if (data != null) {
+        articlesDetails(data);
+        return articlesDetails;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isArticlesDetailsLoading(false);
+    }
+  }
+
   // -----------------------------<Reviews & Rating>----------------------------
 
 
-  Future<List<ReviewModel>?> postReviews({
-    required String blogId,
+  Future<RxBool?> postReviewsAndRating({
     required ReviewModel reviewModel,
   }) async {
     try {
+      isPostReviewsLoading(true);
+      final data = await HomeService.postRatingAndReview(reviewModel: reviewModel);
+      if (data != null) {
+        postReview(data);
+        return postReview;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isPostReviewsLoading(false);
+    }
+  }
+
+  Future<RxList<ReviewModel>?> getReviewAndRating({required int blogId}) async {
+    try {
       isReviewsLoading(true);
-      final data = await HomeService.postRatingAndReview(blogId: blogId, reviewModel: reviewModel);
+      final data = await HomeService.getRatingAndReview(blogId: blogId);
       if (data != null) {
         reviews(data);
         return reviews;
@@ -136,6 +176,7 @@ class HomeController extends GetxController {
       isReviewsLoading(false);
     }
   }
+
 
   // -------------------<get Notifications>----------------------
 

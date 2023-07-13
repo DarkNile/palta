@@ -71,6 +71,8 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
                     image: widget.homeController.articles[index].image,
                     onTap: () {
                       Get.to(() => GeneralArticlesDetailsScreen(
+                        blogIndex: index,
+                            homeController: widget.homeController,
                             dateCreated: dateFormat,
                             description: widget
                                 .homeController.articles[index].description,
