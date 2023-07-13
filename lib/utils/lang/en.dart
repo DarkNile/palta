@@ -358,4 +358,9 @@ const Map<String, String> en = {
 
   // guest name for text field
   'guestName': 'Guest Name',
+
+  // for add review toast
+  'reviewAddedSuccess': 'Review Added Successfully, Thank you.',
+  'reviewAddedError' : 'Something wrong happened, please try again later...',
+
 };
