@@ -15,7 +15,7 @@ class GeneralArticlesDetailsScreen extends StatefulWidget {
     required this.imageUrl,
     required this.dateCreated,
     required this.description,
-    required this.blogIndex,
+    required this.blogId,
     required this.homeController,
     required this.name,
   }) : super(key: key);
@@ -25,7 +25,7 @@ class GeneralArticlesDetailsScreen extends StatefulWidget {
   final String description;
   final String dateCreated;
   final HomeController homeController;
-  final int blogIndex;
+  final String blogId;
 
   @override
   State<GeneralArticlesDetailsScreen> createState() =>
@@ -36,7 +36,7 @@ class _GeneralArticlesDetailsScreenState
     extends State<GeneralArticlesDetailsScreen> {
   @override
   void initState() {
-    widget.homeController.getArticlesDetails(blogId: widget.blogIndex);
+    widget.homeController.getArticlesDetails(blogId: widget.blogId);
     super.initState();
   }
 
@@ -102,7 +102,9 @@ class _GeneralArticlesDetailsScreenState
               child: CustomOutlinedButton(
                 title: 'reviews'.tr,
                 onPressed: () {
-                  Get.to(() => ReviewsScreen(blogIndex: widget.blogIndex,));
+                  Get.to(() => ReviewsScreen(
+                        blogId: widget.blogId,
+                      ));
                 },
               ),
             ),

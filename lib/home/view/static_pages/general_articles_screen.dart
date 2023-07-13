@@ -34,7 +34,6 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -71,7 +70,8 @@ class _GeneralArticlesScreenState extends State<GeneralArticlesScreen> {
                     image: widget.homeController.articles[index].image,
                     onTap: () {
                       Get.to(() => GeneralArticlesDetailsScreen(
-                        blogIndex: index,
+                            blogId:
+                                widget.homeController.articles[index].postId,
                             homeController: widget.homeController,
                             dateCreated: dateFormat,
                             description: widget

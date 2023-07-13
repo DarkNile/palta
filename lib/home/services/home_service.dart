@@ -446,7 +446,7 @@ class HomeService {
   }
 
   static Future<List<ArticlesModel>?> getArticlesDetails({
-    required int blogId,
+    required String blogId,
   }) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
@@ -498,16 +498,16 @@ class HomeService {
     }
   }
 
-
   static Future<List<ReviewModel>?> getRatingAndReview(
-      {required int blogId}) async {
+      {required String blogId}) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
     print(token);
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('${baseUrl}route=rest/blogreview&blog_id=$blogId'),
+      Uri.parse(
+          '${baseUrl}route=rest/blogreview&blog_id=$blogId&language=$lang'),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
@@ -554,6 +554,4 @@ class HomeService {
       return null;
     }
   }
-
-
 }

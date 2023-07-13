@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -13,9 +12,9 @@ import 'package:palta/widgets/custom_header.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class ReviewsScreen extends StatefulWidget {
-  const ReviewsScreen({Key? key, required this.blogIndex}) : super(key: key);
+  const ReviewsScreen({Key? key, required this.blogId}) : super(key: key);
 
-  final int blogIndex;
+  final String blogId;
 
   @override
   State<ReviewsScreen> createState() => _ReviewsScreenState();
@@ -30,7 +29,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   void initState() {
     final GetStorage getStorage = GetStorage();
     customerId = getStorage.read('customerId') ?? '';
-    homeController.getReviewAndRating(blogId: 17);
+    homeController.getReviewAndRating(blogId: widget.blogId);
     // blogId supposed to equal Widget.blogIndex but do it after the api modified
 
     super.initState();
@@ -101,23 +100,28 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                               (indexList) => Icon(
                                 (indexList <
                                         int.parse(
-                                          homeController.reviews[index].rating
+                                          homeController
+                                              .reviews[index].reviewRating
                                               .toString(),
                                         ))
                                     ? Icons.star
                                     : Icons.star_border,
                                 color: (indexList <
-                                    int.parse(
-                                      homeController.reviews[index].rating
-                                          .toString(),
-                                    )) ? Colors.amber : Colors.grey,
+                                        int.parse(
+                                          homeController
+                                              .reviews[index].reviewRating
+                                              .toString(),
+                                        ))
+                                    ? Colors.amber
+                                    : Colors.grey,
                               ),
                             ),
                           ],
                         ),
                         10.ph,
-                         CustomText(
-                          text: homeController.reviews[index].reviewText.toString(),
+                        CustomText(
+                          text: homeController.reviews[index].reviewText
+                              .toString(),
                           fontWeight: FontWeight.w600,
                           fontSize: 13,
                           color: brownishGrey,
@@ -156,7 +160,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 
               return RatingBottomSheetBuilder(
                 isGuest: isGuest(),
-                blogId: widget.blogIndex,
+                blogId: widget.blogId,
                 customerId: customerId!,
               );
             },
