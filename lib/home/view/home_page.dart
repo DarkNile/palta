@@ -20,6 +20,7 @@ import 'package:palta/product/view/products_screen.dart';
 import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_bottom_navigation_bar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+// import 'package:appsflyer_sdk/appsflyer_sdk.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, this.pageIndex});
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   late int _currentIndex;
   final _checker = AppVersionChecker();
   late String? customerId;
+  // late AppsflyerSdk appsflyerSdk;
 
   @override
   void initState() {
@@ -58,6 +60,7 @@ class _HomePageState extends State<HomePage> {
     _profileController.getAccount();
     _checkoutController.getCartItems();
     checkAppVersion();
+    // initAppsFlyer();
   }
 
   @override
@@ -264,4 +267,16 @@ class _HomePageState extends State<HomePage> {
     //   });
     // }
   }
+
+  // Future<void> initAppsFlyer() async {
+  //   final AppsFlyerOptions options = AppsFlyerOptions(
+  //     afDevKey: 'pYfv6d6JdZPUoZFKNstWzj',
+  //     // appId: '',
+  //     showDebug: true,
+  //   );
+  //   appsflyerSdk = AppsflyerSdk(options);
+  //   // appsflyerSdk.initSdk();
+  //   String? uid = await appsflyerSdk.getAppsFlyerUID();
+  //   print(uid);
+  // }
 }

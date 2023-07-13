@@ -61,7 +61,6 @@ class HomeController extends GetxController {
   RxBool isPostReviewsLoading = false.obs;
   RxBool postReview = false.obs;
 
-
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
       isBannersLoading(true);
@@ -118,7 +117,8 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<List<ArticlesModel>?> getArticlesDetails({required int blogId}) async {
+  Future<List<ArticlesModel>?> getArticlesDetails(
+      {required String blogId}) async {
     try {
       isArticlesDetailsLoading(true);
       final data = await HomeService.getArticlesDetails(blogId: blogId);
@@ -138,13 +138,13 @@ class HomeController extends GetxController {
 
   // -----------------------------<Reviews & Rating>----------------------------
 
-
   Future<RxBool?> postReviewsAndRating({
     required ReviewModel reviewModel,
   }) async {
     try {
       isPostReviewsLoading(true);
-      final data = await HomeService.postRatingAndReview(reviewModel: reviewModel);
+      final data =
+          await HomeService.postRatingAndReview(reviewModel: reviewModel);
       if (data != null) {
         postReview(data);
         return postReview;
@@ -159,7 +159,8 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<RxList<ReviewModel>?> getReviewAndRating({required int blogId}) async {
+  Future<RxList<ReviewModel>?> getReviewAndRating(
+      {required String blogId}) async {
     try {
       isReviewsLoading(true);
       final data = await HomeService.getRatingAndReview(blogId: blogId);
@@ -176,7 +177,6 @@ class HomeController extends GetxController {
       isReviewsLoading(false);
     }
   }
-
 
   // -------------------<get Notifications>----------------------
 

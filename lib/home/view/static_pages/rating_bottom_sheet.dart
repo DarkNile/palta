@@ -12,11 +12,14 @@ import 'package:palta/widgets/custom_text_field.dart';
 
 class RatingBottomSheetBuilder extends StatefulWidget {
   const RatingBottomSheetBuilder(
-      {Key? key, required this.isGuest, required this.customerId, required this.blogId})
+      {Key? key,
+      required this.isGuest,
+      required this.customerId,
+      required this.blogId})
       : super(key: key);
   final bool isGuest;
   final String customerId;
-  final int blogId;
+  final String blogId;
 
   @override
   State<RatingBottomSheetBuilder> createState() =>
@@ -109,23 +112,25 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
                             homeController
                                 .postReviewsAndRating(
                               reviewModel: ReviewModel(
+                                blogId: widget.blogId,
+                                customerId: widget.customerId,
                                 customerName: (widget.isGuest == false)
                                     ? guestNameController.text
                                     : '${profileController.user.value.firstName} '
                                         '${profileController.user.value.lastName}',
                                 reviewText: reviewTextController.text,
-                                rating: rating.toString(),
-                                blogId: '17',
-                                customerId: widget.customerId,
+                                reviewRating: rating.toString(),
+                                status: '1',
                               ),
                             )
                                 .whenComplete(() {
+                              Get.back();
                               AppUtil.successToast(
                                 context,
                                 'Review Added Successfully, Thank you.',
                               );
                               homeController
-                                  .getReviewAndRating(blogId: 17)
+                                  .getReviewAndRating(blogId: widget.blogId)
                                   .whenComplete(() => Get.back());
                             }).catchError((e) => AppUtil.errorToast(
                                       context,

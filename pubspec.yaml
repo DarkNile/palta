@@ -64,6 +64,7 @@ dependencies:
   intl: ^0.18.1
   dotted_line: ^3.2.2
   firebase_analytics: ^10.4.3
+  # appsflyer_sdk: ^6.11.3
 
 dev_dependencies:
   flutter_test:

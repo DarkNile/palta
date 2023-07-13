@@ -9,23 +9,33 @@ class ArticleDataList {
 }
 
 class ArticlesModel {
-  final String name;
+  final String postId;
+  final String customerId;
   final String image;
+  final String name;
   final String description;
   final String dateCreated;
+  final String views;
 
-  ArticlesModel(
-      {required this.name,
-      required this.image,
-      required this.description,
-      required this.dateCreated});
+  ArticlesModel({
+    required this.postId,
+    required this.customerId,
+    required this.image,
+    required this.name,
+    required this.description,
+    required this.dateCreated,
+    required this.views,
+  });
 
   factory ArticlesModel.fromJson(Map<String, dynamic> json) {
     return ArticlesModel(
-      description: json['description'],
-      name: json['name'],
+      postId: json['post_id'],
+      customerId: json['customer_id'],
       image: json['image'],
+      name: json['name'],
+      description: json['description'],
       dateCreated: json['date_created'],
+      views: json['views'],
     );
   }
 }
