@@ -7,6 +7,7 @@ import 'package:palta/checkout/models/cart.dart';
 import 'package:palta/checkout/models/order.dart';
 import 'package:palta/checkout/models/payment_method.dart';
 import 'package:palta/checkout/services/checkout_service.dart';
+import 'package:palta/home/services/apps_flyer_service.dart';
 
 import '../models/shipping_method.dart';
 
@@ -234,7 +235,7 @@ class CheckoutController extends GetxController {
       isPaymentMethodsLoading(true);
       final data = await CheckoutService.getPaymentMethods(context: context);
       if (data != null) {
-        if (Platform.isAndroid) {
+        if (Platform.isAndroid || Platform.isIOS) {
           data.removeWhere((element) => element.code == 'paytabs_applepay');
         }
         paymentMethods(data);
@@ -335,6 +336,7 @@ class CheckoutController extends GetxController {
       final isSuccess = await CheckoutService.saveOrderToDatabase();
       if (isSuccess) {
         var items = <AnalyticsEventItem>[];
+        // Map<String, dynamic> flyer = {};
         for (var i = 0; i < order.products!.length; i++) {
           items.add(
             AnalyticsEventItem(
@@ -350,12 +352,30 @@ class CheckoutController extends GetxController {
               quantity: int.parse(order.products![i].quantity.toString()),
             ),
           );
+          // flyer.addAll({
+          //   'af_content_id': order.products![i].id.toString(),
+          //   'af_content': order.products![i].name,
+          //   'af_price': double.parse(order.products![i].price
+          //       .toString()
+          //       .split('ر.س')
+          //       .join()
+          //       .split(',')
+          //       .join()),
+          //   'af_currency': 'SAR',
+          //   'af_quantity': int.parse(order.products![i].quantity.toString()),
+          // });
         }
         FirebaseAnalytics.instance.logPurchase(
           transactionId: order.orderId.toString(),
           value: double.parse(order.total.toString()),
           currency: 'SAR',
           items: items,
+        );
+        AppsFlyerService.logPurchase(
+          orderId: order.orderId.toString(),
+          price: double.parse(order.total.toString()),
+          currency: 'SAR',
+          quantity: order.products!.length,
         );
         clearCart();
       }
