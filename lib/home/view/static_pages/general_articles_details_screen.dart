@@ -2,25 +2,43 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/extensions.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/static_pages/reviews_screen.dart';
 import 'package:palta/widgets/custom_app_bar_clip_path.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_outlined_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 
-class GeneralArticlesDetailsScreen extends StatelessWidget {
-  const GeneralArticlesDetailsScreen(
-      {Key? key,
-      required this.imageUrl,
-      required this.dateCreated,
-      required this.description,
-      required this.name})
-      : super(key: key);
+class GeneralArticlesDetailsScreen extends StatefulWidget {
+  const GeneralArticlesDetailsScreen({
+    Key? key,
+    required this.imageUrl,
+    required this.dateCreated,
+    required this.description,
+    required this.blogIndex,
+    required this.homeController,
+    required this.name,
+  }) : super(key: key);
 
   final String imageUrl;
   final String name;
   final String description;
   final String dateCreated;
+  final HomeController homeController;
+  final int blogIndex;
+
+  @override
+  State<GeneralArticlesDetailsScreen> createState() =>
+      _GeneralArticlesDetailsScreenState();
+}
+
+class _GeneralArticlesDetailsScreenState
+    extends State<GeneralArticlesDetailsScreen> {
+  @override
+  void initState() {
+    widget.homeController.getArticlesDetails(blogId: widget.blogIndex);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +52,7 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
                 ClipPath(
                   clipper: CustomAppBarClipPath(),
                   child: CachedNetworkImage(
-                    imageUrl: imageUrl,
+                    imageUrl: widget.imageUrl,
                     fit: BoxFit.cover,
                     height: 300,
                     placeholder: (context, url) {
@@ -56,13 +74,13 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
             ),
             40.ph,
             CustomText(
-              text: name.tr,
+              text: widget.name.tr,
               fontWeight: FontWeight.bold,
               fontSize: 22,
             ),
             5.ph,
             CustomText(
-              text: dateCreated,
+              text: widget.dateCreated,
               fontWeight: FontWeight.w500,
               fontSize: 14,
             ),
@@ -73,7 +91,7 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
                 vertical: 5,
               ),
               child: CustomText(
-                text: description.tr.split('<br>').join().trim(),
+                text: widget.description.tr.split('<br>').join().trim(),
                 fontWeight: FontWeight.w400,
                 fontSize: 14,
               ),
@@ -84,7 +102,7 @@ class GeneralArticlesDetailsScreen extends StatelessWidget {
               child: CustomOutlinedButton(
                 title: 'reviews'.tr,
                 onPressed: () {
-                  Get.to(()=> const ReviewsScreen());
+                  Get.to(() => ReviewsScreen(blogIndex: widget.blogIndex,));
                 },
               ),
             ),
