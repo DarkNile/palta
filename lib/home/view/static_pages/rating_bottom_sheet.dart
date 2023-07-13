@@ -12,10 +12,11 @@ import 'package:palta/widgets/custom_text_field.dart';
 
 class RatingBottomSheetBuilder extends StatefulWidget {
   const RatingBottomSheetBuilder(
-      {Key? key, required this.isGuest, required this.customerId})
+      {Key? key, required this.isGuest, required this.customerId, required this.blogId})
       : super(key: key);
   final bool isGuest;
   final String customerId;
+  final int blogId;
 
   @override
   State<RatingBottomSheetBuilder> createState() =>
@@ -42,103 +43,101 @@ class _RatingBottomSheetBuilderState extends State<RatingBottomSheetBuilder> {
           right: 20.0,
           top: 20.0,
           bottom: MediaQuery.of(context).viewInsets.bottom,
-
         ),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Obx(
-             () {
-              return Column(
-                children: [
-                  (widget.isGuest)
-                      ? Container()
-                      : CustomTextField(
-                          controller: guestNameController,
-                          labelText: 'guestName'.tr,
-                          validator: true,
-                          prefixIcon: const Icon(Icons.person_outline),
-                        ),
-                  20.ph,
-                  CustomTextField(
-                    controller: reviewTextController,
-                    hintText: 'review'.tr,
-                    maxLines: 6,
-                    validator: true,
-                  ),
-                  20.ph,
-                  Row(
-                    children: [
-                      CustomText(
-                        text: 'rating'.tr,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+          child: Obx(() {
+            return Column(
+              children: [
+                (widget.isGuest)
+                    ? Container()
+                    : CustomTextField(
+                        controller: guestNameController,
+                        labelText: 'guestName'.tr,
+                        validator: true,
+                        prefixIcon: const Icon(Icons.person_outline),
                       ),
-                      const CustomText(
-                        text: ':',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                20.ph,
+                CustomTextField(
+                  controller: reviewTextController,
+                  hintText: 'review'.tr,
+                  maxLines: 6,
+                  validator: true,
+                ),
+                20.ph,
+                Row(
+                  children: [
+                    CustomText(
+                      text: 'rating'.tr,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                    const CustomText(
+                      text: ':',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                    RatingBar.builder(
+                      initialRating: 3,
+                      minRating: 1,
+                      tapOnlyMode: true,
+                      direction: Axis.horizontal,
+                      allowHalfRating: false,
+                      itemCount: 5,
+                      itemSize: 25,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
                       ),
-                      RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        tapOnlyMode: true,
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 5,
-                        itemSize: 25,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) {
-                          this.rating = rating.toInt();
-                          print(rating);
+                      onRatingUpdate: (rating) {
+                        this.rating = rating.toInt();
+                        print(rating);
+                      },
+                    ),
+                  ],
+                ),
+                20.ph,
+                (homeController.isReviewsLoading.value)
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomOutlinedButton(
+                        title: 'addReview'.tr,
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            homeController
+                                .postReviewsAndRating(
+                              reviewModel: ReviewModel(
+                                customerName: (widget.isGuest == false)
+                                    ? guestNameController.text
+                                    : '${profileController.user.value.firstName} '
+                                        '${profileController.user.value.lastName}',
+                                reviewText: reviewTextController.text,
+                                rating: rating.toString(),
+                                blogId: '17',
+                                customerId: widget.customerId,
+                              ),
+                            )
+                                .whenComplete(() {
+                              AppUtil.successToast(
+                                context,
+                                'Review Added Successfully, Thank you.',
+                              );
+                              homeController
+                                  .getReviewAndRating(blogId: 17)
+                                  .whenComplete(() => Get.back());
+                            }).catchError((e) => AppUtil.errorToast(
+                                      context,
+                                      'Something wrong happened, please try again later...',
+                                    ));
+                          }
                         },
                       ),
-                    ],
-                  ),
-                  20.ph,
-                  (homeController.isReviewsLoading.value)
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : CustomOutlinedButton(
-                          title: 'addReview'.tr,
-                          onPressed: () {
-                            if(formKey.currentState!.validate()){
-                              homeController
-                                  .postReviews(
-                                blogId: '2'
-                                // customerId
-                                ,
-                                reviewModel: ReviewModel(
-                                  customerName: (widget.isGuest)
-                                      ? guestNameController.text
-                                      : '${profileController.user.value.firstName} '
-                                      '${profileController.user.value.lastName}',
-                                  reviewText: reviewTextController.text,
-                                  rating: rating,
-                                ),
-                              )
-                                  .whenComplete(
-                                    () => AppUtil.successToast(
-                                  context,
-                                  'Review Added Successfully, Thank you.',
-                                ),
-                              )
-                                  .catchError((e) => AppUtil.errorToast(
-                                context,
-                                'Something wrong happened, please try again later...',
-                              ));
-                            }
-                          },
-                        ),
-                  20.ph,
-                ],
-              );
-            }
-          ),
+                20.ph,
+              ],
+            );
+          }),
         ),
       ),
     );
