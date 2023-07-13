@@ -3,27 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
-import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class MealInfoPopup extends StatelessWidget {
-  MealInfoPopup({
+  const MealInfoPopup({
     super.key,
     required this.mealIndex,
     required this.programIndex,
     required this.title,
     required this.image,
+    required this.mealData,
   });
 
   final int mealIndex;
   final int programIndex;
   final String title;
   final String image;
-
-  final HomeController homeController = Get.put(HomeController());
-
-  // homeController.programs[programIndex].mealData![mealIndex].calories;
+  final dynamic mealData;
 
   @override
   Widget build(BuildContext context) {
@@ -97,115 +94,43 @@ class MealInfoPopup extends StatelessWidget {
             const SizedBox(
               height: 18.0,
             ),
-            Row(
-              children: [
-                CustomText(
-                  text: 'calories'.tr,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-                const Spacer(),
-                Container(
-                  width: 90,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: iceBlue,
-                  ),
-                  child: Center(
-                    child: CustomText(
-                      text: homeController.programs[programIndex]
-                              .mealData![mealIndex].calories.toString(),
-                      fontSize: 14,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                CustomText(
-                  text: 'carbohydrates'.tr,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-                const Spacer(),
-                Container(
-                  width: 90,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: iceBlue,
-                  ),
-                  child: Center(
-                    child: CustomText(
-                      text: homeController.programs[programIndex]
-                          .mealData![mealIndex].carbohydrates.toString(),
-                      fontSize: 14,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                CustomText(
-                  text: 'fat'.tr,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-                const Spacer(),
-                Container(
-                  width: 90,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: iceBlue,
-                  ),
-                  child: Center(
-                    child: CustomText(
-                      text: homeController.programs[programIndex]
-                          .mealData![mealIndex].fat.toString(),
-                      fontSize: 14,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                CustomText(
-                  text: 'protein'.tr,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                ),
-                const Spacer(),
-                Container(
-                  width: 90,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: iceBlue,
-                  ),
-                  child: Center(
-                    child: CustomText(
-                      text: homeController.programs[programIndex]
-                          .mealData![mealIndex].protein.toString(),
-                      fontSize: 14,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            if (mealData is Map)
+              ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      CustomText(
+                        text: mealData.keys.toList()[index],
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      const Spacer(),
+                      Container(
+                        width: 90,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: iceBlue,
+                        ),
+                        child: Center(
+                          child: CustomText(
+                            text: mealData.values.toList()[index],
+                            fontSize: 14,
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 16,
+                  );
+                },
+                itemCount: mealData.keys.length,
+              ),
             const SizedBox(
               height: 48.0,
             ),

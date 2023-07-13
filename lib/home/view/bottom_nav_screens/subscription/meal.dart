@@ -16,6 +16,7 @@ class Meal extends StatelessWidget {
     required this.image,
     required this.description,
     required this.price,
+    required this.mealData,
   });
 
   final int mealIndex;
@@ -24,6 +25,7 @@ class Meal extends StatelessWidget {
   final String image;
   final String description;
   final String price;
+  final dynamic mealData;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class Meal extends StatelessWidget {
                 programIndex: programIndex,
                 title: title,
                 image: image,
+                mealData: mealData,
               );
             });
       },
