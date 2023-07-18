@@ -651,8 +651,8 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                       price: double.parse(
                                           widget.program.price.toString()),
                                       currency: 'SAR',
-                                      quantity: int.parse(
-                                          widget.program.quantity.toString()));
+                                      quantity: 1,
+                                  );
                                 }
                               }
                             } else {

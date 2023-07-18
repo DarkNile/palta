@@ -248,7 +248,8 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                       name: widget.program.name!,
                       price: double.parse(selectedPrice.toString()),
                       currency: 'SAR',
-                      quantity: int.parse(widget.program.quantity.toString()));
+                      quantity: 1,
+                  );
                 }
               },
               title: 'continueSubscribing'.tr,
