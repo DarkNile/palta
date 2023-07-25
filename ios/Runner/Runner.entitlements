@@ -4,9 +4,9 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
-	<key>com.apple.developer.in-app-payments</key>
+	<key>com.apple.developer.applesignin</key>
 	<array>
-		<string>merchant.com.DigitalPartner.palta</string>
+		<string>Default</string>
 	</array>
 </dict>
 </plist>

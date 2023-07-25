@@ -47,6 +47,7 @@ const Map<String, String> ar = {
   'signUp': 'تسجيل',
   'verifyPhoneNumber': 'تأكيد رقم الجوال',
   'otpSent': 'تم إرسال كود التحقق على بريد',
+  'otpSent2': 'تم إرسال كود التحقق على رقم',
   'verify': 'تأكيد',
   'resendCode': 'إعادة إرسال الكود',
   'verificationCode': 'كود التحقق',
@@ -340,5 +341,5 @@ const Map<String, String> ar = {
 
   // for add review toast
   'reviewAddedSuccess': 'تمت إضافة المراجعة بنجاح ، شكرًا لك.',
-  'reviewAddedError' : 'حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا ...',
+  'reviewAddedError': 'حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا ...',
 };

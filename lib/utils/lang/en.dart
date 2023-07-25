@@ -49,6 +49,7 @@ const Map<String, String> en = {
   'signUp': 'Sign up',
   'verifyPhoneNumber': 'Verify Phone Number',
   'otpSent': 'Verification code has been sent to email',
+  'otpSent2': 'Verification code has been sent to number',
   'verify': 'Verify',
   'resendCode': 'Resend Code',
   'verificationCode': 'Verification Code',
@@ -354,13 +355,10 @@ const Map<String, String> en = {
   'review': 'Review',
   'rating': 'Rating',
 
-
-
   // guest name for text field
   'guestName': 'Guest Name',
 
   // for add review toast
   'reviewAddedSuccess': 'Review Added Successfully, Thank you.',
-  'reviewAddedError' : 'Something wrong happened, please try again later...',
-
+  'reviewAddedError': 'Something wrong happened, please try again later...',
 };
