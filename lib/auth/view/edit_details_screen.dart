@@ -62,7 +62,10 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CustomHeader(title: 'editDetailsTitle'.tr),
+      appBar: CustomHeader(
+        title: 'editDetailsTitle'.tr,
+        showBackButton: false,
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,

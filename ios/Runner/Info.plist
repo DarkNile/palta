@@ -62,5 +62,14 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.916400402118-pgf8hn298nmbspogtlnnj2li5u99nrom</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:palta/splash/splash_screen_2.dart';
@@ -15,6 +16,9 @@ class SplashScreen1 extends StatefulWidget {
 }
 
 class _SplashScreen1State extends State<SplashScreen1> {
+  final getStorage = GetStorage();
+  final checkoutController = Get.put(CheckoutController());
+
   double turns = -1 / 14;
   bool dishAnimation = false;
   bool logoApear = false;
@@ -38,6 +42,12 @@ class _SplashScreen1State extends State<SplashScreen1> {
   }
 
   Future<void> animateSplash() async {
+    final String? token = getStorage.read('token');
+    if (token == null || token.isEmpty) {
+      checkoutController.clearCart();
+    } else {
+      checkoutController.getCartItems();
+    }
     Future.delayed(
         const Duration(
           milliseconds: 50,

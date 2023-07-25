@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
-  const CustomHeader({super.key, required this.title, this.onTapBack});
+  const CustomHeader(
+      {super.key,
+      required this.title,
+      this.onTapBack,
+      this.showBackButton = true});
 
   final String title;
   final VoidCallback? onTapBack;
+  final bool showBackButton;
 
   @override
   Size get preferredSize => const Size.fromHeight(80);
@@ -22,20 +27,22 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
         width: 117.5,
         height: 51,
       ),
-      leading: IconButton(
-        onPressed: () {
-          if (onTapBack != null) {
-            onTapBack!();
-          } else {
-            Get.back();
-          }
-        },
-        icon: const Icon(
-          Icons.arrow_back_ios,
-          color: Colors.black,
-          size: 24,
-        ),
-      ),
+      leading: showBackButton
+          ? IconButton(
+              onPressed: () {
+                if (onTapBack != null) {
+                  onTapBack!();
+                } else {
+                  Get.back();
+                }
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+                size: 24,
+              ),
+            )
+          : null,
     );
   }
 }
