@@ -63,7 +63,6 @@ class _HomePageState extends State<HomePage> {
     _profileController.getAccount();
     _checkoutController.getCartItems();
     checkAppVersion();
-    // initAppsFlyer();
   }
 
   @override
@@ -270,14 +269,4 @@ class _HomePageState extends State<HomePage> {
     //   });
     // }
   }
-
-  // Future<void> initAppsFlyer() async {
-  //   final AppsFlyerOptions options = AppsFlyerOptions(
-  //     afDevKey: 'pYfv6d6JdZPUoZFKNstWzj',
-  //     appId: Platform.isAndroid ? 'com.DigitalPartner.palta' : '6450650134',
-  //     showDebug: true,
-  //   );
-  //   appsflyerSdk = AppsflyerSdk(options);
-  //   appsflyerSdk.initSdk();
-  // }
 }

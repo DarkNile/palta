@@ -6,14 +6,39 @@ import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
+import 'package:in_app_review/in_app_review.dart';
 
-class ThankYouScreen extends StatelessWidget {
+class ThankYouScreen extends StatefulWidget {
   const ThankYouScreen({
     super.key,
     required this.order,
   });
 
   final Order order;
+
+  @override
+  State<ThankYouScreen> createState() => _ThankYouScreenState();
+}
+
+class _ThankYouScreenState extends State<ThankYouScreen> {
+  final InAppReview inAppReview = InAppReview.instance;
+
+  @override
+  void initState() {
+    Future.delayed(
+      const Duration(
+        seconds: 3,
+      ),
+      () => rateApp(),
+    );
+    super.initState();
+  }
+
+  Future<void> rateApp() async {
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +88,7 @@ class ThankYouScreen extends StatelessWidget {
                 ),
                 Center(
                   child: CustomText(
-                    text: order.email!,
+                    text: widget.order.email!,
                     fontWeight: FontWeight.w400,
                     textAlign: TextAlign.center,
                   ),

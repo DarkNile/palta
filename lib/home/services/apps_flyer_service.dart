@@ -28,6 +28,7 @@ class AppsFlyerService {
       'af_price': price,
       'af_currency': currency,
       'af_quantity': quantity,
+      'af_revenue': price,
     });
   }
 
@@ -42,6 +43,7 @@ class AppsFlyerService {
       'af_price': price,
       'af_currency': currency,
       'af_quantity': quantity,
+      'af_revenue': price,
     });
   }
 }

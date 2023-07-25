@@ -245,6 +245,71 @@ class AuthService {
     }
   }
 
+  static Future<bool> verifyPhone({
+    required String customerId,
+    required String phone,
+    required BuildContext context,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response = await http.post(Uri.parse('${baseUrl}route=rest/phoneotp'),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        },
+        body: json.encode({
+          'cutomer_id': customerId,
+          'telephone': phone.trim(),
+        }));
+
+    if (jsonDecode(response.body)['success'] == 1) {
+      print(jsonDecode(response.body));
+      return true;
+    } else {
+      var errorMessage = jsonDecode(response.body)['error'];
+      if (context.mounted) {
+        AppUtil.errorToast(context, errorMessage[0]);
+      }
+      return false;
+    }
+  }
+
+  static Future<bool> verifyOTP({
+    required String customerId,
+    required String phone,
+    required String otp,
+    required BuildContext context,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response =
+        await http.post(Uri.parse('${baseUrl}route=rest/phoneotp/check_otp'),
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer $token',
+              "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+            },
+            body: jsonEncode({
+              'cutomer_id': customerId,
+              'telephone': phone.trim(),
+              'otp': otp,
+            }));
+
+    if (jsonDecode(response.body)['success'] == 1) {
+      print(jsonDecode(response.body));
+      return true;
+    } else {
+      var errorMessage = jsonDecode(response.body)['error'];
+      if (context.mounted) {
+        AppUtil.errorToast(context, errorMessage[0]);
+      }
+      return false;
+    }
+  }
+
   static Future<User?> loginUsingSocialMedia({
     required String email,
     required String accessToken,
@@ -258,7 +323,7 @@ class AuthService {
       Uri.parse('${baseUrl}route=rest/login/socialLogin&language=$lang'),
       body: json.encode({
         "email": email.trim(),
-        "social_access_token": accessToken,
+        "access_token": accessToken,
         "provider": provider,
       }),
     );
