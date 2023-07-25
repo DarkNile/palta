@@ -16,8 +16,8 @@ class SplashScreen1 extends StatefulWidget {
 }
 
 class _SplashScreen1State extends State<SplashScreen1> {
-  final _getStorage = GetStorage();
-  final _checkoutController = Get.put(CheckoutController());
+  final getStorage = GetStorage();
+  final checkoutController = Get.put(CheckoutController());
 
   double turns = -1 / 14;
   bool dishAnimation = false;
@@ -42,11 +42,11 @@ class _SplashScreen1State extends State<SplashScreen1> {
   }
 
   Future<void> animateSplash() async {
-    final String? token = _getStorage.read('token');
+    final String? token = getStorage.read('token');
     if (token == null || token.isEmpty) {
-      _checkoutController.clearCart();
+      checkoutController.clearCart();
     } else {
-      _checkoutController.getCartItems();
+      checkoutController.getCartItems();
     }
     Future.delayed(
         const Duration(
