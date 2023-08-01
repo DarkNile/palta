@@ -342,4 +342,5 @@ const Map<String, String> ar = {
   // for add review toast
   'reviewAddedSuccess': 'تمت إضافة المراجعة بنجاح ، شكرًا لك.',
   'reviewAddedError': 'حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا ...',
+  'loginToCoupon': 'قم بتسجيل الدخول الأن للحصول على الكوبون',
 };

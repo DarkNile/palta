@@ -13,6 +13,7 @@ import 'package:palta/checkout/view/checkout_tabs/shipping_method_page.dart';
 import 'package:palta/checkout/view/payment_webview_screen.dart';
 import 'package:palta/checkout/view/thank_you_screen.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -30,6 +31,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
     with TickerProviderStateMixin {
   final _checkoutController = Get.put(CheckoutController());
   final _profileController = Get.put(ProfileController());
+  final _homeController = Get.put(HomeController());
   late TabController _tabController;
   int _tabIndex = 0;
 
@@ -369,6 +371,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                           );
                           if (isSuccess) {
                             if (context.mounted) {
+                              _homeController.getCoupon();
                               _checkoutController.confirmOrder(
                                   context: context);
                             }
@@ -380,7 +383,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         });
                   }),
                   Obx(() {
-                    if (_checkoutController.isConfirmOrderLoading.value) {
+                    if (_homeController.isCouponLoading.value ||
+                        _checkoutController.isConfirmOrderLoading.value) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
@@ -393,6 +397,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         _tabController.animateTo(_tabIndex);
                       },
                       checkoutController: _checkoutController,
+                      homeController: _homeController,
                       onEditInfoTap: () {
                         setState(() {
                           _tabIndex = 0;

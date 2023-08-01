@@ -109,6 +109,7 @@ class AppUtil {
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           height: 2,
+                          color: pineGreen,
                         ),
                   titlePadding: title is String && title.isEmpty
                       ? const EdgeInsets.all(0)

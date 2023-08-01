@@ -361,4 +361,5 @@ const Map<String, String> en = {
   // for add review toast
   'reviewAddedSuccess': 'Review Added Successfully, Thank you.',
   'reviewAddedError': 'Something wrong happened, please try again later...',
+  'loginToCoupon': 'Sign in now to receive your coupon',
 };
