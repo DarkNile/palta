@@ -429,19 +429,6 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                                 order: _checkoutController.order!,
                                 checkoutController: _checkoutController,
                               ));
-                        } else if (_checkoutController.order!.paymentCode! ==
-                            'cod') {
-                          final isSuccess =
-                              await _checkoutController.saveOrderToDatabase(
-                            order: _checkoutController.order!,
-                          );
-                          if (isSuccess) {
-                            Get.offAll(
-                              () => ThankYouScreen(
-                                order: _checkoutController.order!,
-                              ),
-                            );
-                          }
                         } else {
                           applePay(
                             double.parse(_checkoutController.order!.total
