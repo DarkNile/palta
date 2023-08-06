@@ -13,7 +13,7 @@ const Map<String, String> ar = {
   'smartAssessment': 'التقييم الذكي',
   'smartAssessmentDescription':
       'لمعرفة النظام الغذائي المناسب لطبيعة جسمك، من سعرات حرارية ونسبة دهون ومن ثم يتم ترشيح برنامج غذائي خاص بك',
-  'startAssessment': 'ابدأ التقييم الأن',
+  'startAssessment': 'ابدأ التقييم الآن',
   'home': 'الرئيسية',
   'categories': 'الأقسام',
   'orders': 'طلباتي',
@@ -177,7 +177,7 @@ const Map<String, String> ar = {
   'confirmOrder': 'إتمام الطلب',
   'confirmPayment': 'إتمام الدفع',
   'failure': 'توجد مشكلة اثناء عملية الدفع ولم يتم اتمام طلبك!',
-  'redirect': 'جاري تحويلكم الأن...',
+  'redirect': 'جاري تحويلكم الآن...',
   'emptyCart': 'سلة التسوق فارغة',
   'confirmByEmail': 'تم إرسال تأكيد طلبك إلى بريدك الإلكتروني',
   'orderNumber': 'رقم الطلب',
@@ -202,14 +202,15 @@ const Map<String, String> ar = {
   'nutritionFacts': 'الحقائق الغذائية',
   'versionTitle':
       'أنت تستخدم نسخة قديمة للتطبيق، برجاء التحديث أولاً للاستمرار',
-  'updateNow': 'التحديث الأن',
+  'updateNow': 'التحديث الآن',
   'congratulationsCoupon':
-      'مبروك! لقد حصلت على قسيمة شراء بخصم ٢٠٪ عند تسوقك الأن',
-  'shopNow': 'تسوق الأن',
+      'مبروك! لقد حصلت على قسيمة شراء بخصم ٢٠٪ عند تسوقك الآن',
+  'shopNow': 'تسوق الآن',
   'assessment': 'التقييم',
   'subscriptions': 'إشتراكاتي',
   'guides': 'إرشاداتي',
   'notificationsAndAlerts': 'الإشعارات و التنبيهات',
+  'noNotifications': 'لا يوجد تنبيهات',
   'changePassword': 'تغيير كلمة المرور',
   'changeOwnPassword': 'تغيير كلمة المرور الخاصة بي',
   'passwordChangeSuccessfully': 'تم تغيير كلمة المرور بنجاح',
@@ -225,7 +226,7 @@ const Map<String, String> ar = {
   'nutritionalAdvice': 'استشارات غذائية',
   'nutritionalAdviceDescription':
       'للانتقال الى حياة صحية فقد تحتاج الى استشارات و دعم و نحن هنا لمساعدتك',
-  'startNow': 'ابدأ الأن',
+  'startNow': 'ابدأ الآن',
   'changeMeals': 'تغيير الوجبات',
   'subscriptionInfo': 'معلومات الإشتراك',
   /////// ASSES
@@ -342,5 +343,5 @@ const Map<String, String> ar = {
   // for add review toast
   'reviewAddedSuccess': 'تمت إضافة المراجعة بنجاح ، شكرًا لك.',
   'reviewAddedError': 'حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا ...',
-  'loginToCoupon': 'قم بتسجيل الدخول الأن للحصول على الكوبون',
+  'loginToCoupon': 'قم بتسجيل الدخول الآن للحصول على الكوبون',
 };

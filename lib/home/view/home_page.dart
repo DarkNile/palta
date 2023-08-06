@@ -197,6 +197,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           barrierDismissible: false,
+          showClose: false,
         );
       }
     });

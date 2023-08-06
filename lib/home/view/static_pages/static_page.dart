@@ -44,6 +44,9 @@ class StaticPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 40,
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -57,6 +60,9 @@ class StaticPage extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),

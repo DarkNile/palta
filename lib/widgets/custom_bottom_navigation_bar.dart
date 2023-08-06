@@ -34,9 +34,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
       items: [
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              currentIndex == 0
-                  ? 'assets/icons/home_green.svg'
-                  : 'assets/icons/home.svg',
+              // currentIndex == 0
+              //     ? 'assets/icons/home_green.svg'
+              //     : 'assets/icons/home_2.svg',
+              'assets/icons/home_2.svg',
+              colorFilter: ColorFilter.mode(
+                currentIndex == 0 ? avocado : darkGrey,
+                BlendMode.srcIn,
+              ),
             ),
             label: 'home'.tr),
         BottomNavigationBarItem(

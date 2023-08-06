@@ -56,8 +56,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
         elevation: 10,
         child: Container(
           width: width,
-          height: widget.isFromOnboarding ? 158 : 128,
+          // height: widget.isFromOnboarding ? 158 : 128,
+          height: 128,
           color: Colors.white,
+          margin: const EdgeInsets.only(top: 20),
           padding: const EdgeInsets.symmetric(horizontal: 16),
           alignment: Alignment.center,
           child: widget.isFromOnboarding

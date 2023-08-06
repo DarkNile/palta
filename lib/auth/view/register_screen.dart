@@ -34,250 +34,259 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          left: 28,
-          right: 28,
-        ),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.only(
+            left: 28,
+            right: 28,
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: 'createAccount'.tr,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: AppUtil.rtlDirection(context)
+                            ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                            : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                Row(
                   children: [
-                    CustomText(
-                      text: 'createAccount'.tr,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            text: 'firstName'.tr,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          const SizedBox(
+                            height: 9,
+                          ),
+                          CustomTextField(
+                            controller: _firstNameController,
+                            hintText: 'firstName'.tr,
+                            textInputType: TextInputType.name,
+                          ),
+                        ],
+                      ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: AppUtil.rtlDirection(context)
-                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                    const SizedBox(
+                      width: 9,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            text: 'lastName'.tr,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          const SizedBox(
+                            height: 9,
+                          ),
+                          CustomTextField(
+                            controller: _lastNameController,
+                            hintText: 'lastName'.tr,
+                            textInputType: TextInputType.name,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text: 'firstName'.tr,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
+                const SizedBox(
+                  height: 24,
+                ),
+                CustomText(
+                  text: 'emailAddress'.tr,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                CustomTextField(
+                  controller: _emailController,
+                  hintText: 'emailAddress'.tr,
+                  textInputType: TextInputType.emailAddress,
+                  prefixIcon: const Icon(Icons.person),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                CustomText(
+                  text: 'phoneNumber'.tr,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+                const SizedBox(
+                  height: 9,
+                ),
+                CustomTextField(
+                  controller: _phoneNumberController,
+                  hintText: 'phoneNumber'.tr,
+                  maxLength: 9,
+                  textInputType: TextInputType.phone,
+                  prefixIcon: AppUtil.rtlDirection(context)
+                      ? null
+                      : const Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: CountryCodePicker(
+                            enabled: false,
+                            initialSelection: 'SA',
+                          ),
                         ),
-                        const SizedBox(
-                          height: 9,
-                        ),
-                        CustomTextField(
-                          controller: _firstNameController,
-                          hintText: 'firstName'.tr,
-                          textInputType: TextInputType.name,
-                        ),
-                      ],
+                  suffixIcon: AppUtil.rtlDirection(context)
+                      ? const Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: CountryCodePicker(
+                            enabled: false,
+                            initialSelection: 'SA',
+                          ),
+                        )
+                      : null,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                CustomText(
+                  text: 'password'.tr,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                CustomTextField(
+                  controller: _passwordController,
+                  hintText: 'password'.tr,
+                  obscureText: _isPasswordHidden,
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordHidden = !_isPasswordHidden;
+                      });
+                    },
+                    icon: Icon(
+                      _isPasswordHidden
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                   ),
-                  const SizedBox(
-                    width: 9,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          text: 'lastName'.tr,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        const SizedBox(
-                          height: 9,
-                        ),
-                        CustomTextField(
-                          controller: _lastNameController,
-                          hintText: 'lastName'.tr,
-                          textInputType: TextInputType.name,
-                        ),
-                      ],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                CustomText(
+                  text: 'passwordConfirmation'.tr,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                CustomTextField(
+                  controller: _passwordConfirmationController,
+                  hintText: 'passwordConfirmation'.tr,
+                  obscureText: _isPasswordConfirmationHidden,
+                  prefixIcon: const Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isPasswordConfirmationHidden =
+                            !_isPasswordConfirmationHidden;
+                      });
+                    },
+                    icon: Icon(
+                      _isPasswordConfirmationHidden
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              CustomText(
-                text: 'emailAddress'.tr,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              CustomTextField(
-                controller: _emailController,
-                hintText: 'emailAddress'.tr,
-                textInputType: TextInputType.emailAddress,
-                prefixIcon: const Icon(Icons.person),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              CustomText(
-                text: 'phoneNumber'.tr,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-              const SizedBox(
-                height: 9,
-              ),
-              CustomTextField(
-                controller: _phoneNumberController,
-                hintText: 'phoneNumber'.tr,
-                maxLength: 9,
-                textInputType: TextInputType.phone,
-                prefixIcon: AppUtil.rtlDirection(context)
-                    ? null
-                    : const Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: CountryCodePicker(
-                          enabled: false,
-                          initialSelection: 'SA',
-                        ),
-                      ),
-                suffixIcon: AppUtil.rtlDirection(context)
-                    ? const Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: CountryCodePicker(
-                          enabled: false,
-                          initialSelection: 'SA',
-                        ),
-                      )
-                    : null,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              CustomText(
-                text: 'password'.tr,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              CustomTextField(
-                controller: _passwordController,
-                hintText: 'password'.tr,
-                obscureText: _isPasswordHidden,
-                prefixIcon: const Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isPasswordHidden = !_isPasswordHidden;
-                    });
-                  },
-                  icon: Icon(
-                    _isPasswordHidden ? Icons.visibility : Icons.visibility_off,
-                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              CustomText(
-                text: 'passwordConfirmation'.tr,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              CustomTextField(
-                controller: _passwordConfirmationController,
-                hintText: 'passwordConfirmation'.tr,
-                obscureText: _isPasswordConfirmationHidden,
-                prefixIcon: const Icon(Icons.lock),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isPasswordConfirmationHidden =
-                          !_isPasswordConfirmationHidden;
-                    });
-                  },
-                  icon: Icon(
-                    _isPasswordConfirmationHidden
-                        ? Icons.visibility
-                        : Icons.visibility_off,
-                  ),
+                const SizedBox(
+                  height: 40,
                 ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Obx(() {
-                if (_authController.isRegisterLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return CustomButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      if (!AppUtil.isEmailValidate(_emailController.text)) {
-                        AppUtil.errorToast(context, "invalidEmail".tr);
-                        return;
+                Obx(() {
+                  if (_authController.isRegisterLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return CustomButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        if (!AppUtil.isEmailValidate(_emailController.text)) {
+                          AppUtil.errorToast(context, "invalidEmail".tr);
+                          return;
+                        }
+                        if (!AppUtil.isPhoneValidate(
+                            _phoneNumberController.text)) {
+                          AppUtil.errorToast(context, "invalidPhone".tr);
+                          return;
+                        }
+                        if (!AppUtil.isPasswordValidate(
+                            _passwordController.text,
+                            _passwordConfirmationController.text)) {
+                          AppUtil.errorToast(context, "invalidPassword".tr);
+                          return;
+                        }
+                        if (!AppUtil.isPasswordLengthValidate(
+                            _passwordController.text)) {
+                          AppUtil.errorToast(
+                              context, "invalidPasswordLength".tr);
+                          return;
+                        }
+                        final user = await _authController.register(
+                          firstName: _firstNameController.text,
+                          lastName: _lastNameController.text,
+                          email: _emailController.text,
+                          telephone: _phoneNumberController.text,
+                          password: _passwordController.text,
+                          confirm: _passwordConfirmationController.text,
+                          context: context,
+                        );
+                        if (user != null) {
+                          _profileController.getAccount();
+                          _checkoutController.getCartItems();
+                          Get.offAll(() => const HomePage());
+                        }
                       }
-                      if (!AppUtil.isPhoneValidate(
-                          _phoneNumberController.text)) {
-                        AppUtil.errorToast(context, "invalidPhone".tr);
-                        return;
-                      }
-                      if (!AppUtil.isPasswordValidate(_passwordController.text,
-                          _passwordConfirmationController.text)) {
-                        AppUtil.errorToast(context, "invalidPassword".tr);
-                        return;
-                      }
-                      if (!AppUtil.isPasswordLengthValidate(
-                          _passwordController.text)) {
-                        AppUtil.errorToast(context, "invalidPasswordLength".tr);
-                        return;
-                      }
-                      final user = await _authController.register(
-                        firstName: _firstNameController.text,
-                        lastName: _lastNameController.text,
-                        email: _emailController.text,
-                        telephone: _phoneNumberController.text,
-                        password: _passwordController.text,
-                        confirm: _passwordConfirmationController.text,
-                        context: context,
-                      );
-                      if (user != null) {
-                        _profileController.getAccount();
-                        _checkoutController.getCartItems();
-                        Get.offAll(() => const HomePage());
-                      }
-                    }
-                  },
-                  title: 'signUp'.tr,
-                );
-              }),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+                    },
+                    title: 'signUp'.tr,
+                  );
+                }),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),

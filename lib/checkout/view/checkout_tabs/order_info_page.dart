@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
@@ -28,8 +29,15 @@ class OrderInfoPage extends StatefulWidget {
 }
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
+  final _homeController = Get.put(HomeController());
   DateTime today = DateTime.now();
   String? fridayValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeController.getCoupon();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +52,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24)
-                    .copyWith(bottom: 16),
+                    .copyWith(bottom: 40),
                 child: CustomButton(
                   onPressed: () {
                     Get.back();
@@ -280,7 +288,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                         ],
                       ),
                     const SizedBox(
-                      height: 108,
+                      height: 120,
                     ),
                   ],
                 ),
@@ -289,9 +297,9 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                 alignment: Alignment.bottomCenter,
                 color: Colors.white,
                 width: width,
-                height: 80,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                height: 100,
+                padding: const EdgeInsets.symmetric(horizontal: 16)
+                    .copyWith(bottom: 40),
                 child: Row(
                   children: [
                     Expanded(

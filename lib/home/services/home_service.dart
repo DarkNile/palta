@@ -630,6 +630,10 @@ class HomeService {
         'customer_id': customerId,
       }),
     );
+    print(jsonEncode({
+      'coupon': coupon,
+      'customer_id': customerId,
+    }));
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       print('success');

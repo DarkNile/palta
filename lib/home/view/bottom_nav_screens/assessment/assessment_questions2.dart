@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 import 'assessment_questions3.dart';
@@ -70,12 +71,14 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
           ),
           Container(
             width: width,
-            height: 40,
+            height: 50,
             color: pineGreen,
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
-              vertical: 8,
             ),
+            alignment: AppUtil.rtlDirection(context)
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             child: CustomText(
               text: 'q2'.tr,
               color: Colors.white,
@@ -90,7 +93,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       right: 16,
                       left: 16,
                     ),
@@ -123,7 +126,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(6)),
                                 ),
-                                child: Container(
+                                child: SizedBox(
                                   width: width * 0.4,
                                   height: 112,
                                   child: Column(
@@ -338,7 +341,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                 ),
                 const Expanded(
                     child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 17),
+                  padding: EdgeInsets.symmetric(horizontal: 17),
                   child: Divider(
                     height: 20,
                     thickness: 1,

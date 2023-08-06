@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions2.dart';
 import 'package:palta/home/view/home_page.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class AssessmentQuestion1 extends StatefulWidget {
@@ -78,22 +79,21 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
               ),
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              width: width,
-              height: 40,
-              color: pineGreen,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 8,
-              ),
-              child: CustomText(
-                text: 'q1'.tr,
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+          Container(
+            width: width,
+            height: 50,
+            color: pineGreen,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            alignment: AppUtil.rtlDirection(context)
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            child: CustomText(
+              text: 'q1'.tr,
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
           Expanded(
@@ -310,7 +310,7 @@ class _AssessmentQuestion1State extends State<AssessmentQuestion1> {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 17),
               child: Row(

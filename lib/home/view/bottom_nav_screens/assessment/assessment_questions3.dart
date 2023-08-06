@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 import 'assessment_questions4.dart';
@@ -71,12 +72,14 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
           ),
           Container(
             width: width,
-            height: 40,
+            height: 50,
             color: pineGreen,
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
-              vertical: 8,
             ),
+            alignment: AppUtil.rtlDirection(context)
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
             child: CustomText(
               text: 'q3'.tr,
               color: Colors.white,
@@ -201,7 +204,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                 )),
                 InkWell(
                   onTap: () {
-                    Get.offAll(HomePage());
+                    Get.offAll(const HomePage());
                   },
                   child: CustomText(
                     text: 'cancel'.tr,

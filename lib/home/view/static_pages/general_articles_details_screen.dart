@@ -108,7 +108,7 @@ class _GeneralArticlesDetailsScreenState
                 },
               ),
             ),
-            10.ph,
+            20.ph,
           ],
         ),
       ),

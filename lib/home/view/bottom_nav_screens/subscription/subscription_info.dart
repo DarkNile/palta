@@ -255,219 +255,228 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                 ]),
                           )
                         : Container(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20, right: 28, left: 28),
-                          child: CustomText(
-                            text: 'breakfastDishes'.tr,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 21,
-                        ),
-                        Obx(() {
-                          if (_homeController.isInfoLoading.value) {
-                            return const CustomLoadingWidget();
-                          }
-                          return SizedBox(
-                            height: 225,
-                            width: double.infinity,
-                            child: ListView.separated(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                itemCount:
-                                    _homeController.breakfastMeals.length,
-                                scrollDirection: Axis.horizontal,
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    width: 17,
-                                  );
-                                },
-                                itemBuilder: (context, index) {
-                                  return Meal(
-                                    programIndex: widget.programIndex,
-                                    mealIndex: index,
-                                    title: _homeController
-                                        .breakfastMeals[index].name!,
-                                    image: _homeController
-                                        .breakfastMeals[index].originalImage!,
-                                    description: _homeController
-                                        .breakfastMeals[index].description!,
-                                    price: _homeController
-                                        .breakfastMeals[index].priceFormated!,
-                                    mealData: _homeController
-                                        .breakfastMeals[index].mealData!,
-                                  );
-                                }),
-                          );
-                        }),
-                      ],
-                    ),
-                    const Divider(
-                      thickness: 6,
-                      color: paleGrey,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20, right: 28, left: 28),
-                          child: CustomText(
-                            text: 'lunchDishes'.tr,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 21,
-                        ),
-                        Obx(() {
-                          if (_homeController.isInfoLoading.value) {
-                            return const CustomLoadingWidget();
-                          }
-                          return SizedBox(
-                            height: 225,
-                            width: double.infinity,
-                            child: ListView.separated(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                itemCount: _homeController.lunchMeals.length,
-                                scrollDirection: Axis.horizontal,
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    width: 17,
-                                  );
-                                },
-                                itemBuilder: (context, index) {
-                                  return Meal(
-                                    programIndex: widget.programIndex,
-                                    mealIndex: index,
-                                    title:
-                                        _homeController.lunchMeals[index].name!,
-                                    image: _homeController
-                                        .lunchMeals[index].originalImage!,
-                                    description: _homeController
-                                        .lunchMeals[index].description!,
-                                    price: _homeController
-                                        .lunchMeals[index].priceFormated!,
-                                    mealData: _homeController
-                                        .lunchMeals[index].mealData!,
-                                  );
-                                }),
-                          );
-                        }),
-                      ],
-                    ),
-                    const Divider(
-                      thickness: 6,
-                      color: paleGrey,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20, right: 28, left: 28),
-                          child: CustomText(
-                            text: 'dinnerDishes'.tr,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 21,
-                        ),
-                        Obx(() {
-                          if (_homeController.isInfoLoading.value) {
-                            return const CustomLoadingWidget();
-                          }
-                          return SizedBox(
-                            height: 225,
-                            width: double.infinity,
-                            child: ListView.separated(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                itemCount: _homeController.dinnerMeals.length,
-                                scrollDirection: Axis.horizontal,
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    width: 17,
-                                  );
-                                },
-                                itemBuilder: (context, index) {
-                                  return Meal(
-                                    programIndex: widget.programIndex,
-                                    mealIndex: index,
-                                    title: _homeController
-                                        .dinnerMeals[index].name!,
-                                    image: _homeController
-                                        .dinnerMeals[index].originalImage!,
-                                    description: _homeController
-                                        .dinnerMeals[index].description!,
-                                    price: _homeController
-                                        .dinnerMeals[index].priceFormated!,
-                                    mealData: _homeController
-                                        .dinnerMeals[index].mealData!,
-                                  );
-                                }),
-                          );
-                        }),
-                      ],
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 31, right: 28, left: 28),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                    if (widget.hasCombination)
+                      Column(
                         children: [
-                          Center(
-                              child: CustomText(
-                            text: 'throughAccountYouCanControl'.tr,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            textAlign: TextAlign.center,
-                          )),
-                          const SizedBox(
-                            height: 21,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 20, right: 28, left: 28),
+                                child: CustomText(
+                                  text: 'breakfastDishes'.tr,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 21,
+                              ),
+                              Obx(() {
+                                if (_homeController.isInfoLoading.value) {
+                                  return const CustomLoadingWidget();
+                                }
+                                return SizedBox(
+                                  height: 180,
+                                  width: double.infinity,
+                                  child: ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      itemCount:
+                                          _homeController.breakfastMeals.length,
+                                      scrollDirection: Axis.horizontal,
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 17,
+                                        );
+                                      },
+                                      itemBuilder: (context, index) {
+                                        return Meal(
+                                          programIndex: widget.programIndex,
+                                          mealIndex: index,
+                                          title: _homeController
+                                              .breakfastMeals[index].name!,
+                                          image: _homeController
+                                              .breakfastMeals[index]
+                                              .originalImage!,
+                                          description: _homeController
+                                              .breakfastMeals[index]
+                                              .description!,
+                                          price: _homeController
+                                              .breakfastMeals[index]
+                                              .priceFormated!,
+                                          mealData: _homeController
+                                              .breakfastMeals[index].mealData!,
+                                        );
+                                      }),
+                                );
+                              }),
+                            ],
                           ),
-                          SizedBox(
-                            height: 140,
-                            child: ListView.separated(
-                              itemCount: 3,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              separatorBuilder: (context, index) {
-                                return const SizedBox(
-                                  width: 12,
+                          const Divider(
+                            thickness: 6,
+                            color: paleGrey,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 20, right: 28, left: 28),
+                                child: CustomText(
+                                  text: 'lunchDishes'.tr,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 21,
+                              ),
+                              Obx(() {
+                                if (_homeController.isInfoLoading.value) {
+                                  return const CustomLoadingWidget();
+                                }
+                                return SizedBox(
+                                  height: 180,
+                                  width: double.infinity,
+                                  child: ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      itemCount:
+                                          _homeController.lunchMeals.length,
+                                      scrollDirection: Axis.horizontal,
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 17,
+                                        );
+                                      },
+                                      itemBuilder: (context, index) {
+                                        return Meal(
+                                          programIndex: widget.programIndex,
+                                          mealIndex: index,
+                                          title: _homeController
+                                              .lunchMeals[index].name!,
+                                          image: _homeController
+                                              .lunchMeals[index].originalImage!,
+                                          description: _homeController
+                                              .lunchMeals[index].description!,
+                                          price: _homeController
+                                              .lunchMeals[index].priceFormated!,
+                                          mealData: _homeController
+                                              .lunchMeals[index].mealData!,
+                                        );
+                                      }),
                                 );
-                              },
-                              itemBuilder: (context, index) {
-                                return CustomHomeCard(
-                                  title: titles[index],
-                                  icon: icons[index],
+                              }),
+                            ],
+                          ),
+                          const Divider(
+                            thickness: 6,
+                            color: paleGrey,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 20, right: 28, left: 28),
+                                child: CustomText(
+                                  text: 'dinnerDishes'.tr,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 21,
+                              ),
+                              Obx(() {
+                                if (_homeController.isInfoLoading.value) {
+                                  return const CustomLoadingWidget();
+                                }
+                                return SizedBox(
+                                  height: 180,
+                                  width: double.infinity,
+                                  child: ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16),
+                                      itemCount:
+                                          _homeController.dinnerMeals.length,
+                                      scrollDirection: Axis.horizontal,
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 17,
+                                        );
+                                      },
+                                      itemBuilder: (context, index) {
+                                        return Meal(
+                                          programIndex: widget.programIndex,
+                                          mealIndex: index,
+                                          title: _homeController
+                                              .dinnerMeals[index].name!,
+                                          image: _homeController
+                                              .dinnerMeals[index]
+                                              .originalImage!,
+                                          description: _homeController
+                                              .dinnerMeals[index].description!,
+                                          price: _homeController
+                                              .dinnerMeals[index]
+                                              .priceFormated!,
+                                          mealData: _homeController
+                                              .dinnerMeals[index].mealData!,
+                                        );
+                                      }),
                                 );
-                              },
+                              }),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 31, right: 28, left: 28),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Center(
+                                    child: CustomText(
+                                  text: 'throughAccountYouCanControl'.tr,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  textAlign: TextAlign.center,
+                                )),
+                                const SizedBox(
+                                  height: 21,
+                                ),
+                                SizedBox(
+                                  height: 140,
+                                  child: ListView.separated(
+                                    itemCount: 3,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    separatorBuilder: (context, index) {
+                                      return const SizedBox(
+                                        width: 12,
+                                      );
+                                    },
+                                    itemBuilder: (context, index) {
+                                      return CustomHomeCard(
+                                        title: titles[index],
+                                        icon: icons[index],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 140,
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 80,
-                    ),
                   ],
                 ),
                 if (widget.icon != null)
@@ -553,7 +562,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 width: width,
-                height: 80,
+                height: 120,
                 color: Colors.white,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -564,28 +573,24 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Expanded(
-                              child: CustomText(
-                                text: 'startFrom'.tr,
-                              ),
+                            CustomText(
+                              text: 'startFrom'.tr,
                             ),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  CustomText(
-                                    text:
-                                        '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
-                                    fontSize: 20,
-                                    color: avocado,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                  CustomText(
-                                    text: 'riyal'.tr,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                  ),
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                CustomText(
+                                  text:
+                                      '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
+                                  fontSize: 20,
+                                  color: avocado,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                CustomText(
+                                  text: 'riyal'.tr,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                ),
+                              ],
                             )
                           ],
                         ),
@@ -646,12 +651,12 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                     currency: 'SAR',
                                   );
                                   AppsFlyerService.logAddToCart(
-                                      id: widget.program.id.toString(),
-                                      name: widget.program.name!,
-                                      price: double.parse(
-                                          widget.program.price.toString()),
-                                      currency: 'SAR',
-                                      quantity: 1,
+                                    id: widget.program.id.toString(),
+                                    name: widget.program.name!,
+                                    price: double.parse(
+                                        widget.program.price.toString()),
+                                    currency: 'SAR',
+                                    quantity: 1,
                                   );
                                 }
                               }

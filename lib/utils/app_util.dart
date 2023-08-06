@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:palta/constants/colors.dart';
@@ -103,13 +104,34 @@ class AppUtil {
                   ),
                   title: title is Widget
                       ? title
-                      : CustomText(
-                          text: title,
-                          textAlign: TextAlign.center,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          height: 2,
-                          color: pineGreen,
+                      : Column(
+                          children: [
+                            if (showClose)
+                              Align(
+                                alignment: AppUtil.rtlDirection(context)
+                                    ? Alignment.topRight
+                                    : Alignment.topLeft,
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: SvgPicture.asset(
+                                      'assets/icons/close.svg'),
+                                ),
+                              ),
+                            if (showClose)
+                              const SizedBox(
+                                height: 8,
+                              ),
+                            CustomText(
+                              text: title,
+                              textAlign: TextAlign.center,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              height: 2,
+                              color: pineGreen,
+                            ),
+                          ],
                         ),
                   titlePadding: title is String && title.isEmpty
                       ? const EdgeInsets.all(0)
