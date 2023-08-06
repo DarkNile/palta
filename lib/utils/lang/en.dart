@@ -216,6 +216,7 @@ const Map<String, String> en = {
   'subscriptions': 'Subscriptions',
   'guides': 'Guidances',
   'notificationsAndAlerts': 'Notifications & Alerts',
+  'noNotifications': 'There are no notifications',
   'changePassword': 'Change Password',
   'changeOwnPassword': 'Change my own password',
   'passwordChangeSuccessfully': 'Your password has changed successfully',

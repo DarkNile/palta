@@ -51,193 +51,198 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: CustomHeader(title: 'editAddress'.tr),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomBodyTitle(
-              title: 'editAddress'.tr,
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: 'firstName'.tr,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              const SizedBox(
-                                height: 9,
-                              ),
-                              CustomTextField(
-                                controller: _firstNameController,
-                                hintText: 'firstName'.tr,
-                                textInputType: TextInputType.name,
-                              ),
-                            ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: CustomHeader(title: 'editAddress'.tr),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomBodyTitle(
+                title: 'editAddress'.tr,
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: 'firstName'.tr,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                const SizedBox(
+                                  height: 9,
+                                ),
+                                CustomTextField(
+                                  controller: _firstNameController,
+                                  hintText: 'firstName'.tr,
+                                  textInputType: TextInputType.name,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 9,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: 'lastName'.tr,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              const SizedBox(
-                                height: 9,
-                              ),
-                              CustomTextField(
-                                controller: _lastNameController,
-                                hintText: 'lastName'.tr,
-                                textInputType: TextInputType.name,
-                              ),
-                            ],
+                          const SizedBox(
+                            width: 9,
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 26,
-                    ),
-                    CustomText(
-                      text: 'country'.tr,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    CustomTextField(
-                      initialValue: 'Saudia Arabia'.tr,
-                      readOnly: true,
-                    ),
-                    const SizedBox(
-                      height: 26,
-                    ),
-                    CustomText(
-                      text: 'zone'.tr,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    CustomDropDown(
-                        value: zone,
-                        hintText: 'zone'.tr,
-                        items: _profileController.zones,
-                        onChanged: (value) {
-                          zone = value;
-                          isZoneChanged = true;
-                          _profileController.getCitiesByZoneId(
-                              zoneId: zone!.zoneId);
-                        }),
-                    const SizedBox(
-                      height: 26,
-                    ),
-                    CustomText(
-                      text: 'city'.tr,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Obx(() {
-                      if (_profileController.isCitiesLoading.value) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      city = isZoneChanged
-                          ? null
-                          : _profileController.cities.firstWhereOrNull((e) =>
-                              e.name == widget.address.city ||
-                              e.nameAr == widget.address.city);
-                      return CustomDropDown(
-                          value: city,
-                          hintText: 'city'.tr,
-                          items: _profileController.cities,
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: 'lastName'.tr,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                const SizedBox(
+                                  height: 9,
+                                ),
+                                CustomTextField(
+                                  controller: _lastNameController,
+                                  hintText: 'lastName'.tr,
+                                  textInputType: TextInputType.name,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      CustomText(
+                        text: 'country'.tr,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomTextField(
+                        initialValue: 'Saudia Arabia'.tr,
+                        readOnly: true,
+                      ),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      CustomText(
+                        text: 'zone'.tr,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomDropDown(
+                          value: zone,
+                          hintText: 'zone'.tr,
+                          items: _profileController.zones,
                           onChanged: (value) {
-                            city = value;
-                          });
-                    }),
-                    const SizedBox(
-                      height: 26,
-                    ),
-                    CustomText(
-                      text: 'district'.tr,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    const SizedBox(
-                      height: 9,
-                    ),
-                    CustomTextField(
-                      controller: _districtController,
-                      hintText: 'district'.tr,
-                      textInputType: TextInputType.text,
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Obx(() {
-                      if (_profileController.isEditingAddress.value) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      return CustomButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final isSuccess =
-                                await _profileController.editAddress(
-                              id: widget.address.id,
-                              context: context,
-                              firstName: _firstNameController.text,
-                              lastName: _lastNameController.text,
-                              city: city!.name,
-                              address: _districtController.text,
-                              countryId: 184,
-                              zoneId: int.parse(zone!.zoneId),
-                            );
-                            if (isSuccess) {
-                              Get.back();
+                            zone = value;
+                            isZoneChanged = true;
+                            _profileController.getCitiesByZoneId(
+                                zoneId: zone!.zoneId);
+                          }),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      CustomText(
+                        text: 'city'.tr,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Obx(() {
+                        if (_profileController.isCitiesLoading.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        city = isZoneChanged
+                            ? null
+                            : _profileController.cities.firstWhereOrNull((e) =>
+                                e.name == widget.address.city ||
+                                e.nameAr == widget.address.city);
+                        return CustomDropDown(
+                            value: city,
+                            hintText: 'city'.tr,
+                            items: _profileController.cities,
+                            onChanged: (value) {
+                              city = value;
+                            });
+                      }),
+                      const SizedBox(
+                        height: 26,
+                      ),
+                      CustomText(
+                        text: 'district'.tr,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      const SizedBox(
+                        height: 9,
+                      ),
+                      CustomTextField(
+                        controller: _districtController,
+                        hintText: 'district'.tr,
+                        textInputType: TextInputType.text,
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Obx(() {
+                        if (_profileController.isEditingAddress.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return CustomButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              final isSuccess =
+                                  await _profileController.editAddress(
+                                id: widget.address.id,
+                                context: context,
+                                firstName: _firstNameController.text,
+                                lastName: _lastNameController.text,
+                                city: city!.name,
+                                address: _districtController.text,
+                                countryId: 184,
+                                zoneId: int.parse(zone!.zoneId),
+                              );
+                              if (isSuccess) {
+                                Get.back();
+                              }
                             }
-                          }
-                        },
-                        title: 'save'.tr,
-                      );
-                    }),
-                  ],
+                          },
+                          title: 'save'.tr,
+                        );
+                      }),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 27,
-            ),
-          ],
+              const SizedBox(
+                height: 27,
+              ),
+            ],
+          ),
         ),
       ),
     );

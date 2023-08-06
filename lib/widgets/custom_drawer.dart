@@ -309,9 +309,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         height: 36,
                         radius: 18,
                       ),
-
                       const SizedBox(
-                        width: 24,
+                        width: 8,
                       ),
                       CustomCard(
                         icon: 'twitter',
@@ -322,19 +321,30 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         height: 36,
                         radius: 18,
                       ),
-                      // const SizedBox(
-                      //   width: 8,
-                      // ),
-                      // CustomCard(
-                      //   icon: 'facebook_icon',
-                      //   onTap: () async {
-                      //     await launchUrlString(
-                      //         'https://www.facebook.com/');
-                      //   },
-                      //   width: 36,
-                      //   height: 36,
-                      //   radius: 18,
-                      // ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      InkWell(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(18)),
+                        onTap: () async {
+                          await launchUrlString(
+                              'https://www.tiktok.com/@paltaksa?_t=8eX66cuv16M&_r=1');
+                        },
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(18)),
+                            border: Border.all(
+                              color: lighGrey,
+                            ),
+                          ),
+                          child: Image.asset('assets/images/tiktok.png'),
+                        ),
+                      )
                     ],
                   ),
                   const SizedBox(

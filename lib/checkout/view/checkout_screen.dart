@@ -371,7 +371,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                           );
                           if (isSuccess) {
                             if (context.mounted) {
-                              _homeController.getCoupon();
+                              // _homeController.getCoupon();
                               _checkoutController.confirmOrder(
                                   context: context);
                             }

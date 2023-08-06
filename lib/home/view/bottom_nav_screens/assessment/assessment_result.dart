@@ -49,6 +49,9 @@ class _AssessmentResultState extends State<AssessmentResult> {
               fontSize: 16,
               fontWeight: FontWeight.w400,
             )),
+            const SizedBox(
+              height: 24,
+            ),
             Card(
                 elevation: 4,
                 color: Colors.white,

@@ -37,7 +37,7 @@ class AssessmentScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 130,
+                  height: 150,
                 ),
                 CustomText(
                   text: 'assessment'.tr,
@@ -46,7 +46,7 @@ class AssessmentScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 20,
                 ),
                 Card(
                   elevation: 4,

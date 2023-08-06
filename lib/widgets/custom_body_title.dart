@@ -8,7 +8,7 @@ class CustomBodyTitle extends StatelessWidget {
   const CustomBodyTitle({
     super.key,
     required this.title,
-    this.height = 60,
+    this.height = 80,
   });
 
   final String title;
@@ -22,10 +22,11 @@ class CustomBodyTitle extends StatelessWidget {
         padding: EdgeInsets.only(
           right: AppUtil.rtlDirection(context) ? 23 : 0,
           left: AppUtil.rtlDirection(context) ? 0 : 23,
-          top: 24,
+          top: 50,
+          bottom: 20,
         ),
         width: MediaQuery.of(context).size.width,
-        height: height,
+        // height: height,
         color: pineGreen,
         child: CustomText(
           text: title,
