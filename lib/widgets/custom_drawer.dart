@@ -262,7 +262,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   CustomDrawerTile(
                     onTap: () async {
                       await launchUrlString(
-                          'whatsapp://send?phone=+966540246740');
+                          'whatsapp://send?phone=+966568425221');
                     },
                     title: 'customerService',
                     subtitle: CustomText(
