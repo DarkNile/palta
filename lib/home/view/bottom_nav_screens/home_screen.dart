@@ -58,102 +58,115 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
-            height: 90,
+            height: 100,
           ),
-      SizedBox(
-        height: 470,
-        child: Stack(
-          clipBehavior: Clip.none,
-          alignment: AlignmentDirectional.topStart,
-          children: [
-            Obx(() {
-              if (widget.homeController.isBannersLoading.value) {
-                return SizedBox(
-                  width: width,
-                  height: 370,
-                  child: const CustomLoadingWidget(),
-                );
-              }
-              return CarouselSlider.builder(
-                itemCount: widget.homeController.banners.length,
-                options: CarouselOptions(
-                  enlargeCenterPage: true,
-                  autoPlay: true,
-                  height: 370,
-                  viewportFraction: 1,
-                  enableInfiniteScroll: false,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _activeIndex = index;
-                    });
-                  },
-                ),
-                itemBuilder: (context, index, page) {
-                  return Stack(
-                    alignment: AlignmentDirectional.bottomStart,
-                    children: [
-                      CachedNetworkImage(
-                        imageUrl:
-                        widget.homeController.banners[index]['image'],
-                        width: width,
-                        height: 379,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) {
-                          return const CustomLoadingWidget();
-                        },
-                      ),
-                      Positioned(
-                        bottom: 51,
-                        right: AppUtil.rtlDirection(context) ? 29 : 0,
-                        left: AppUtil.rtlDirection(context) ? 0 : 29,
-                        child: CustomAnimatedSmoothIndicator(
-                          count: widget.homeController.banners.length,
-                          activeIndex: _activeIndex,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              );
-            }),
-            Positioned.fill(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: SizedBox(
-                        height: 140,
-                        child: ListView.separated(
-                          itemCount: 3,
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              width: 12,
-                            );
-                          },
-                          itemBuilder: (context, index) {
-                            return CustomHomeCard(
-                              title: titles[index],
-                              icon: icons[index],
-                            );
-                          },
-                        ),
-                      ),
+          SizedBox(
+            // height: 470,
+            child: Column(
+              // clipBehavior: Clip.none,
+              // alignment: AlignmentDirectional.topStart,
+              children: [
+                Obx(() {
+                  if (widget.homeController.isBannersLoading.value) {
+                    return SizedBox(
+                      width: width,
+                      height: 370,
+                      child: const CustomLoadingWidget(),
+                    );
+                  }
+                  return CarouselSlider.builder(
+                    itemCount: widget.homeController.banners.length,
+                    options: CarouselOptions(
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      height: 370,
+                      viewportFraction: 1,
+                      enableInfiniteScroll: false,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _activeIndex = index;
+                        });
+                      },
                     ),
+                    itemBuilder: (context, index, page) {
+                      return Stack(
+                        alignment: AlignmentDirectional.bottomStart,
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl: widget.homeController.banners[index]
+                                ['image'],
+                            width: width,
+                            height: 379,
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) {
+                              return const CustomLoadingWidget();
+                            },
+                          ),
+                          Positioned(
+                            bottom: 51,
+                            right: AppUtil.rtlDirection(context) ? 29 : 0,
+                            left: AppUtil.rtlDirection(context) ? 0 : 29,
+                            child: CustomAnimatedSmoothIndicator(
+                              count: widget.homeController.banners.length,
+                              activeIndex: _activeIndex,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   );
-                },
-              ),
+                }),
+                // Positioned.fill(
+                //   child: LayoutBuilder(
+                //     builder: (context, constraints) {
+                //       return
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  // child: Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: SizedBox(
+                  //     height: 140,
+                  //     child: ListView.separated(
+                  //       itemCount: 3,
+                  //       shrinkWrap: true,
+                  //       // physics: const BouncingScrollPhysics(),
+                  //       physics: const NeverScrollableScrollPhysics(),
+                  //       scrollDirection: Axis.horizontal,
+                  //       separatorBuilder: (context, index) {
+                  //         return const SizedBox(
+                  //           width: 12,
+                  //         );
+                  //       },
+                  //       itemBuilder: (context, index) {
+                  //         return CustomHomeCard(
+                  //           title: titles[index],
+                  //           icon: icons[index],
+                  //         );
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
+                  child: Row(
+                    children: [
+                      for (int i = 0; i < titles.length; i++)
+                        Expanded(
+                          child: CustomHomeCard(
+                            title: titles[i],
+                            icon: icons[i],
+                          ),
+                        ),
+                    ],
+                  ),
+                  //     );
+                  //   },
+                  // ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-          const SizedBox(
-            height: 30,
           ),
+          // const SizedBox(
+          //   height: 30,
+          // ),
           CustomText(
             text: 'subscribeToProgram'.tr,
             textAlign: TextAlign.center,
