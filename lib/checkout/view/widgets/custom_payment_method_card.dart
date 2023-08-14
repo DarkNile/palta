@@ -47,19 +47,19 @@ class CustomPaymentMethodCard extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            if (paymentMethod.code == 'cod')
-              Image.asset(
-                'assets/images/cod.png',
-                height: 36,
-              )
-            else if (paymentMethod.code == 'paytabs_creditcard')
+            if (paymentMethod.code == 'paytabs_creditcard')
               Image.asset(
                 'assets/images/cards.png',
                 height: 36,
               )
-            else
+            else if (paymentMethod.code == 'paytabs_applepay')
               Image.asset(
                 'assets/images/apple_pay_btn.png',
+                height: 36,
+              )
+            else
+              Image.asset(
+                'assets/images/cod.png',
                 height: 36,
               ),
           ],

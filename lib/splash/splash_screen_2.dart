@@ -69,7 +69,7 @@ class _SplashScreen2State extends State<SplashScreen2> {
                   width: width * 0.4,
                 ),
                 const CustomText(
-                  text: 'Healthy Food',
+                  text: 'Healthy & Tasty',
                   color: pineGreen,
                   fontSize: 14,
                   fontWeight: FontWeight.w300,

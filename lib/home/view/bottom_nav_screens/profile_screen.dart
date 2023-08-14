@@ -14,8 +14,10 @@ import 'package:palta/profile/view/address_screen.dart';
 import 'package:palta/profile/view/wallet_screen.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_body_title.dart';
+import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_outlined_button.dart';
 import 'package:palta/widgets/custom_text.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
@@ -31,8 +33,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Obx(() {
-      if (profileController.isProfileLoading.value) {
+      if (profileController.isProfileLoading.value ||
+          profileController.isConactNadaLoading.value) {
         return const Center(
           child: CircularProgressIndicator(),
         );
@@ -58,15 +62,8 @@ class ProfileScreen extends StatelessWidget {
                     bottom: 14,
                   ),
                   width: MediaQuery.of(context).size.width,
-                  // height: 163,
                   height: 100,
                   color: pineGreen,
-                  // child: CustomText(
-                  //   text: 'profile'.tr,
-                  //   fontSize: 16,
-                  //   fontWeight: FontWeight.w500,
-                  //   color: Colors.white,
-                  // ),
                 ),
                 Positioned(
                   bottom: -63,
@@ -157,13 +154,108 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 80,
             ),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       flex: 1,
+            //       child: Image.asset('assets/images/Ellipse 199.png'),
+            //     ),
+            //     const SizedBox(
+            //       width: 30,
+            //     ),
+            //     Expanded(
+            //       flex: 2,
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           SvgPicture.asset('assets/icons/doubleQoutes.svg'),
+            //           const SizedBox(
+            //             height: 13,
+            //           ),
+            //           CustomText(
+            //             text: 'yourConsultant'.tr,
+            //             fontSize: 22,
+            //             fontWeight: FontWeight.w600,
+            //           ),
+            //           const SizedBox(
+            //             height: 13,
+            //           ),
+            //           SizedBox(
+            //             width: width * 0.6,
+            //             child: CustomText(
+            //               text: 'iOfferYou'.tr,
+            //               fontSize: 14,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     )
+            //   ],
+            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(24)),
+                  border: Border.all(
+                    color: pineGreen,
+                    width: 0.5,
+                  ),
+                ),
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomText(
+                      text: 'yourConsultant'.tr,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: pineGreen,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    CustomText(
+                      text: 'iOfferYou'.tr,
+                      fontSize: 12,
+                      color: brownGrey,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.1),
+                      child: CustomButton(
+                        radius: 12,
+                        onPressed: () async {
+                          final contact = await profileController.contactNada();
+                          if (contact != null) {
+                            await launchUrlString(
+                                'whatsapp://send?phone=${contact.phone!}');
+                          }
+                        },
+                        title: 'AskForNutritionalAdvice'.tr,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
             CustomProfileItem(
               onTap: () {
-                Get.to(() => const WalletScreen());
+                Get.to(
+                  () => EditDetailsScreen(
+                    profileController: profileController,
+                  ),
+                );
               },
-              title: 'walletBalance',
-              subtitle: 'checkYourBalance',
-              icon: 'wallet',
+              title: 'editDetailsTitle',
+              subtitle: 'editDetailsSubtitle',
+              icon: 'edit',
             ),
             CustomProfileItem(
               onTap: () {
@@ -196,15 +288,11 @@ class ProfileScreen extends StatelessWidget {
             ),
             CustomProfileItem(
               onTap: () {
-                Get.to(
-                  () => EditDetailsScreen(
-                    profileController: profileController,
-                  ),
-                );
+                Get.to(() => const WalletScreen());
               },
-              title: 'editDetailsTitle',
-              subtitle: 'editDetailsSubtitle',
-              icon: 'edit',
+              title: 'walletBalance',
+              subtitle: 'checkYourBalance',
+              icon: 'wallet',
             ),
             CustomProfileItem(
               onTap: () {
@@ -272,6 +360,9 @@ class ProfileScreen extends StatelessWidget {
                 Icons.person_off_outlined,
                 color: Colors.black,
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),
