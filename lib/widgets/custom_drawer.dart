@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
+import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_info.dart';
 import 'package:palta/home/view/static_pages/contact_us_page.dart';
 import 'package:palta/home/view/static_pages/general_articles_screen.dart';
 import 'package:palta/home/view/static_pages/static_page.dart';
-import 'package:palta/profile/controllers/profile_controller.dart';
+import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_card.dart';
 import 'package:palta/widgets/custom_app_bar_clip_path.dart';
 import 'package:palta/widgets/custom_drawer_item.dart';
@@ -22,11 +22,17 @@ class CustomDrawer extends StatefulWidget {
     required this.onProfileTileTap,
     required this.onHomeTileTap,
     required this.onCategoryTileTap,
+    required this.onGuideTileTap,
+    required this.onAssessmentTap,
+    required this.programIcons,
   });
 
   final VoidCallback onProfileTileTap;
   final VoidCallback onHomeTileTap;
   final Function(String, String) onCategoryTileTap;
+  final VoidCallback onGuideTileTap;
+  final VoidCallback onAssessmentTap;
+  final List<String> programIcons;
 
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();
@@ -34,11 +40,12 @@ class CustomDrawer extends StatefulWidget {
 
 class _CustomDrawerState extends State<CustomDrawer> {
   final _homeController = Get.put(HomeController());
-  final _profileController = Get.put(ProfileController());
   String lang = 'ar';
   bool showCategories = false;
   final getStorage = GetStorage();
   late String? customerId;
+  bool showPrograms = false;
+  bool showPolicies = false;
 
   @override
   void initState() {
@@ -74,7 +81,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       height: 5.7,
                     ),
                     const CustomText(
-                      text: 'Healthy Food',
+                      text: 'Healthy & Tasty',
                       fontSize: 14,
                       fontWeight: FontWeight.w300,
                       textAlign: TextAlign.center,
@@ -96,10 +103,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     onTap: widget.onHomeTileTap,
                     title: 'home',
                   ),
-                  if (customerId != null &&
-                      customerId!.isNotEmpty &&
-                      customerId == _profileController.user.value.id.toString())
-                    Container()
+                  // if (customerId != null &&
+                  //     customerId!.isNotEmpty &&
+                  //     customerId == _profileController.user.value.id.toString())
+                  //   Container()
                   // Obx(() {
                   //   if (_profileController.isProfileLoading.value) {
                   //     return const Center(
@@ -124,13 +131,70 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   //     ),
                   //   );
                   // }),
-                  else
-                    CustomDrawerTile(
-                      onTap: () {
-                        Get.to(() => const LoginScreen());
-                      },
-                      title: 'signIn',
+                  // else
+                  //   CustomDrawerTile(
+                  //     onTap: () {
+                  //       Get.to(() => const LoginScreen());
+                  //     },
+                  //     title: 'signIn',
+                  //   ),
+                  CustomDrawerTile(
+                    onTap: () {
+                      setState(() {
+                        showPrograms = !showPrograms;
+                      });
+                    },
+                    title: 'programs',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    trailing: Icon(
+                      showPrograms
+                          ? Icons.keyboard_arrow_down
+                          : AppUtil.rtlDirection(context)
+                              ? Icons.keyboard_arrow_left
+                              : Icons.keyboard_arrow_right,
+                      color: darkGrey,
                     ),
+                  ),
+                  if (showPrograms)
+                    ListView.builder(
+                      itemCount: _homeController.programs.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.all(0),
+                      itemBuilder: (context, index) {
+                        return CustomDrawerTile(
+                          onTap: () {
+                            Get.to(
+                              () => SubscriptionInfo(
+                                programIndex: index,
+                                program: _homeController.programs[index],
+                                icon: _homeController.programs.length > 3
+                                    ? 'muscle'
+                                    : widget.programIcons[index],
+                                hasCombination: true,
+                              ),
+                            );
+                          },
+                          title: _homeController.programs[index].name!,
+                        );
+                      },
+                    ),
+                  CustomDrawerTile(
+                    onTap: () {
+                      _homeController.getStaticPage(id: '12');
+                      Get.to(() => StaticPage(homeController: _homeController));
+                    },
+                    title: 'aboutUs',
+                  ),
+                  CustomDrawerTile(
+                    onTap: widget.onGuideTileTap,
+                    title: 'guides',
+                  ),
+                  CustomDrawerTile(
+                    onTap: widget.onAssessmentTap,
+                    title: 'smartAssessment',
+                  ),
                   CustomDrawerTile(
                     onTap: () {
                       Get.to(() => GeneralArticlesScreen(
@@ -142,45 +206,66 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   CustomDrawerTile(
                     onTap: () {
-                      _homeController.getStaticPage(id: '12');
-                      Get.to(() => StaticPage(homeController: _homeController));
+                      setState(() {
+                        showPolicies = !showPolicies;
+                      });
                     },
-                    title: 'aboutUs',
+                    title: 'policies',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    trailing: Icon(
+                      showPolicies
+                          ? Icons.keyboard_arrow_down
+                          : AppUtil.rtlDirection(context)
+                              ? Icons.keyboard_arrow_left
+                              : Icons.keyboard_arrow_right,
+                      color: darkGrey,
+                    ),
                   ),
+                  if (showPolicies)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomDrawerTile(
+                          onTap: () {
+                            _homeController.getStaticPage(id: '16');
+                            Get.to(() =>
+                                StaticPage(homeController: _homeController));
+                          },
+                          title: 'deliveryPolicy',
+                        ),
+                        CustomDrawerTile(
+                          onTap: () {
+                            _homeController.getStaticPage(id: '3');
+                            Get.to(() =>
+                                StaticPage(homeController: _homeController));
+                          },
+                          title: 'privacyPolicy',
+                        ),
+                        CustomDrawerTile(
+                          onTap: () {
+                            _homeController.getStaticPage(id: '5');
+                            Get.to(() =>
+                                StaticPage(homeController: _homeController));
+                          },
+                          title: 'termsAndConditions',
+                        ),
+                        CustomDrawerTile(
+                          onTap: () {
+                            _homeController.getStaticPage(id: '7');
+                            Get.to(() =>
+                                StaticPage(homeController: _homeController));
+                          },
+                          title: 'refundPolicy',
+                        ),
+                      ],
+                    ),
                   CustomDrawerTile(
                     onTap: () {
                       _homeController.getStaticPage(id: '11');
                       Get.to(() => StaticPage(homeController: _homeController));
                     },
                     title: 'commonQuestions',
-                  ),
-                  CustomDrawerTile(
-                    onTap: () {
-                      _homeController.getStaticPage(id: '5');
-                      Get.to(() => StaticPage(homeController: _homeController));
-                    },
-                    title: 'termsAndConditions',
-                  ),
-                  CustomDrawerTile(
-                    onTap: () {
-                      _homeController.getStaticPage(id: '3');
-                      Get.to(() => StaticPage(homeController: _homeController));
-                    },
-                    title: 'privacyPolicy',
-                  ),
-                  CustomDrawerTile(
-                    onTap: () {
-                      _homeController.getStaticPage(id: '16');
-                      Get.to(() => StaticPage(homeController: _homeController));
-                    },
-                    title: 'deliveryPolicy',
-                  ),
-                  CustomDrawerTile(
-                    onTap: () {
-                      _homeController.getStaticPage(id: '7');
-                      Get.to(() => StaticPage(homeController: _homeController));
-                    },
-                    title: 'refundPolicy',
                   ),
                   CustomDrawerTile(
                     onTap: () {

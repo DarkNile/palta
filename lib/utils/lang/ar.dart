@@ -74,7 +74,7 @@ const Map<String, String> ar = {
   'returnProductSubtitle': 'يمكنك إرجاع وإستبدال المنتجات',
   'mailingListTitle': 'القائمة البريدية',
   'mailingListSubtitle': 'إشتراك / إلغاء الإشتراك',
-  'editDetailsTitle': 'تعديل بياناتي',
+  'editDetailsTitle': 'بياناتي',
   'editDetailsSubtitle': 'تعديل بيانات التسجيل',
   'logout': 'خروج',
   'layout': 'العرض',
@@ -230,8 +230,9 @@ const Map<String, String> ar = {
   'changeMeals': 'تغيير الوجبات',
   'subscriptionInfo': 'معلومات الإشتراك',
   /////// ASSES
-  'iOfferYou': 'مرحبا اقدم لكم الخدمات الصحية التي تعزز من أسلوب حياتك',
-  'AskForNutritionalAdvice': 'أطلب استشارة غذائية',
+  'yourConsultant': 'مستشارك الصحي',
+  'iOfferYou': 'استشاراتك الصحية والرياضية من متخصصين بالتا المعتمدين',
+  'AskForNutritionalAdvice': 'اطلب استشارتك',
   'q1': 'السؤال الأول',
   'whatIsGoal': 'ماهو هدفك .؟',
   'chooseYourGoal': 'إختر هدفك لمعرفة أي نظام غذائي يناسبك',
@@ -344,4 +345,7 @@ const Map<String, String> ar = {
   'reviewAddedSuccess': 'تمت إضافة المراجعة بنجاح ، شكرًا لك.',
   'reviewAddedError': 'حدث خطأ ما ، يرجى المحاولة مرة أخرى لاحقًا ...',
   'loginToCoupon': 'قم بتسجيل الدخول الآن للحصول على الكوبون',
+  'programs': 'البرامج الغذائية',
+  'programs2': 'البرامج',
+  'policies': 'السياسات',
 };

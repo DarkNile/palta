@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
@@ -77,9 +76,12 @@ class CustomProgramCard extends StatelessWidget {
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(40)),
+                          image: DecorationImage(
+                            image: AssetImage('assets/icons/subscribe.png'),
+                          ),
                         ),
                         alignment: Alignment.center,
-                        child: SvgPicture.asset('assets/icons/$icon.svg'),
+                        // child: SvgPicture.asset('assets/icons/$icon.svg'),
                       ),
                     ),
                   )

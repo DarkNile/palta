@@ -11,7 +11,7 @@ import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
 import 'package:dotted_line/dotted_line.dart';
 
-class OrderSummaryPage extends StatelessWidget {
+class OrderSummaryPage extends StatefulWidget {
   const OrderSummaryPage({
     super.key,
     required this.checkoutController,
@@ -32,6 +32,25 @@ class OrderSummaryPage extends StatelessWidget {
   final VoidCallback onConfirmOrderTap;
   final VoidCallback onPreviousTap;
   final HomeController homeController;
+
+  @override
+  State<OrderSummaryPage> createState() => _OrderSummaryPageState();
+}
+
+class _OrderSummaryPageState extends State<OrderSummaryPage> {
+  late bool isFirstCouponFound;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.homeController.coupon.value != 'null') {
+      widget.checkoutController.couponController.value.text =
+          widget.homeController.coupon.value;
+      isFirstCouponFound = true;
+    } else {
+      isFirstCouponFound = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +81,7 @@ class OrderSummaryPage extends StatelessWidget {
                             color: pineGreen,
                           ),
                           InkWell(
-                            onTap: onEditInfoTap,
+                            onTap: widget.onEditInfoTap,
                             child: CustomText(
                               text: 'edit'.tr,
                               fontSize: 12,
@@ -85,7 +104,8 @@ class OrderSummaryPage extends StatelessWidget {
                       ListView.separated(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         shrinkWrap: true,
-                        itemCount: checkoutController.order!.products!.length,
+                        itemCount:
+                            widget.checkoutController.order!.products!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) {
                           return const SizedBox(
@@ -94,7 +114,8 @@ class OrderSummaryPage extends StatelessWidget {
                         },
                         itemBuilder: (context, index) {
                           return CustomCheckoutItem(
-                            product: checkoutController.order!.products![index],
+                            product: widget
+                                .checkoutController.order!.products![index],
                           );
                         },
                       ),
@@ -126,7 +147,7 @@ class OrderSummaryPage extends StatelessWidget {
                             color: pineGreen,
                           ),
                           InkWell(
-                            onTap: onEditAddressTap,
+                            onTap: widget.onEditAddressTap,
                             child: CustomText(
                               text: 'edit'.tr,
                               fontSize: 12,
@@ -169,13 +190,13 @@ class OrderSummaryPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    text: checkoutController
-                                        .order!.shippingAddress!,
+                                    text: widget.checkoutController.order!
+                                        .shippingAddress!,
                                     fontSize: 14,
                                   ),
                                   CustomText(
                                     text:
-                                        '${checkoutController.order!.shippingCity!} - ${checkoutController.order!.shippingZone!} - ${checkoutController.order!.shippingCountry!.tr}',
+                                        '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,
                                   ),
@@ -184,12 +205,13 @@ class OrderSummaryPage extends StatelessWidget {
                                   ),
                                   CustomText(
                                     text:
-                                        '${checkoutController.order!.shippingFirstName!} ${checkoutController.order!.shippingLastName!}',
+                                        '${widget.checkoutController.order!.shippingFirstName!} ${widget.checkoutController.order!.shippingLastName!}',
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,
                                   ),
                                   CustomText(
-                                    text: checkoutController.order!.phone!,
+                                    text:
+                                        widget.checkoutController.order!.phone!,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -227,7 +249,7 @@ class OrderSummaryPage extends StatelessWidget {
                             color: pineGreen,
                           ),
                           InkWell(
-                            onTap: onEditShippingTap,
+                            onTap: widget.onEditShippingTap,
                             child: CustomText(
                               text: 'edit'.tr,
                               fontSize: 12,
@@ -250,7 +272,7 @@ class OrderSummaryPage extends StatelessWidget {
                       CustomText(
                         text: (GetStorage().read('lang') == 'ar')
                             ? 'شحن مجاني'
-                            : checkoutController.order!.shippingCode!,
+                            : widget.checkoutController.order!.shippingCode!,
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
                       ),
@@ -282,7 +304,7 @@ class OrderSummaryPage extends StatelessWidget {
                             color: pineGreen,
                           ),
                           InkWell(
-                            onTap: onEditPaymentTap,
+                            onTap: widget.onEditPaymentTap,
                             child: CustomText(
                               text: 'edit'.tr,
                               fontSize: 12,
@@ -302,12 +324,12 @@ class OrderSummaryPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      if (checkoutController.order!.paymentCode == 'cod')
+                      if (widget.checkoutController.order!.paymentCode == 'cod')
                         Image.asset(
                           'assets/images/cod.png',
                           height: 36,
                         )
-                      else if (checkoutController.order!.paymentCode ==
+                      else if (widget.checkoutController.order!.paymentCode ==
                           'paytabs_creditcard')
                         Image.asset(
                           'assets/images/cards.png',
@@ -352,94 +374,103 @@ class OrderSummaryPage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      Obx(() {
-                        if (homeController.coupon.value != 'null') {
-                          return CustomTextField(
-                            initialValue: homeController.coupon.value,
-                            readOnly: true,
-                          );
-                        } else {
-                          return Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: CustomTextField(
-                                  controller:
-                                      checkoutController.couponController.value,
-                                  validator: false,
-                                  hintText: 'couponCode'.tr,
-                                  textInputType: TextInputType.text,
-                                  readOnly:
-                                      checkoutController.isCouponAdded.value
-                                          ? true
-                                          : false,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Obx(() {
-                                  if (checkoutController
-                                      .isCouponLoading.value) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
-                                  return ElevatedButton(
-                                    onPressed: () {
-                                      if (checkoutController
-                                          .isCouponAdded.value) {
-                                        checkoutController.deleteCoupon(
-                                          context: context,
-                                        );
-                                      } else {
-                                        checkoutController.addCoupon(
-                                          context: context,
-                                          coupon: checkoutController
-                                              .couponController.value.text,
-                                        );
-                                      }
-                                    },
-                                    style: ButtonStyle(
-                                        elevation: MaterialStateProperty.all(0),
-                                        backgroundColor: MaterialStateProperty.all(
-                                            checkoutController.isCouponAdded.value
-                                                ? vermillion
-                                                : almostBlack),
-                                        foregroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.white),
-                                        fixedSize: MaterialStateProperty.all(
-                                            const Size.fromHeight(54)),
-                                        shape: MaterialStateProperty.all(
-                                            const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4))))),
-                                    child: CustomText(
-                                      text:
-                                          checkoutController.isCouponAdded.value
-                                              ? 'remove'.tr
-                                              : 'apply'.tr,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
+                      // Obx(() {
+                      // if (homeController.coupon.value != 'null') {
+                      //   return CustomTextField(
+                      //     initialValue: homeController.coupon.value,
+                      //     readOnly: true,
+                      //   );
+                      // }
+                      // else {
+                      // return
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: CustomTextField(
+                              onChanged: (v) {
+                                setState(() {
+                                  isFirstCouponFound = false;
+                                });
+                              },
+                              controller: widget
+                                  .checkoutController.couponController.value,
+                              validator: false,
+                              hintText: 'couponCode'.tr,
+                              textInputType: TextInputType.text,
+                              readOnly:
+                                  widget.checkoutController.isCouponAdded.value
+                                      ? true
+                                      : false,
+                            ),
+                          ),
+                          if (!isFirstCouponFound)
+                            const SizedBox(
+                              width: 8,
+                            ),
+                          if (!isFirstCouponFound)
+                            Expanded(
+                              flex: 1,
+                              child: Obx(() {
+                                if (widget
+                                    .checkoutController.isCouponLoading.value) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
                                   );
-                                }),
-                              ),
-                            ],
-                          );
-                        }
-                      }),
+                                }
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    if (widget.checkoutController.isCouponAdded
+                                        .value) {
+                                      widget.checkoutController.deleteCoupon(
+                                        context: context,
+                                      );
+                                    } else {
+                                      widget.checkoutController.addCoupon(
+                                        context: context,
+                                        coupon: widget.checkoutController
+                                            .couponController.value.text,
+                                      );
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(0),
+                                      backgroundColor: MaterialStateProperty.all(
+                                          widget.checkoutController.isCouponAdded.value
+                                              ? vermillion
+                                              : almostBlack),
+                                      foregroundColor: MaterialStateProperty.all(
+                                          Colors.white),
+                                      fixedSize: MaterialStateProperty.all(
+                                          const Size.fromHeight(54)),
+                                      shape: MaterialStateProperty.all(
+                                          const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4))))),
+                                  child: CustomText(
+                                    text: widget.checkoutController
+                                            .isCouponAdded.value
+                                        ? 'remove'.tr
+                                        : 'apply'.tr,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              }),
+                            ),
+                        ],
+                      ),
+                      // }
+                      //}),
                       const SizedBox(
                         height: 28,
                       ),
                       ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: checkoutController.order!.totals!.length,
+                          itemCount:
+                              widget.checkoutController.order!.totals!.length,
                           separatorBuilder: (context, index) {
                             return const Padding(
                               padding: EdgeInsets.symmetric(vertical: 8),
@@ -453,14 +484,14 @@ class OrderSummaryPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                  text: checkoutController
-                                      .order!.totals![index].title!,
+                                  text: widget.checkoutController.order!
+                                      .totals![index].title!,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400,
                                 ),
                                 CustomText(
-                                  text: checkoutController
-                                      .order!.totals![index].text!,
+                                  text: widget.checkoutController.order!
+                                      .totals![index].text!,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -490,7 +521,7 @@ class OrderSummaryPage extends StatelessWidget {
                                   children: [
                                     TextSpan(
                                       text:
-                                          '${checkoutController.order!.total.toStringAsFixed(2)} ',
+                                          '${widget.checkoutController.order!.total.toStringAsFixed(2)} ',
                                       style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.w700,
@@ -551,7 +582,7 @@ class OrderSummaryPage extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: CustomButton(
-                    onPressed: onPreviousTap,
+                    onPressed: widget.onPreviousTap,
                     title: 'previous'.tr,
                     backgroundColor: paleGrey,
                     foregroundColor: darkGrey,
@@ -563,7 +594,7 @@ class OrderSummaryPage extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: CustomButton(
-                    onPressed: onConfirmOrderTap,
+                    onPressed: widget.onConfirmOrderTap,
                     title: 'confirmOrder'.tr,
                     backgroundColor: avocado,
                   ),

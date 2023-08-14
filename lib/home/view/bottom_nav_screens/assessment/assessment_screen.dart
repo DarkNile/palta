@@ -1,4 +1,3 @@
-import 'package:flutter_svg/svg.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions1.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_text.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../../widgets/custom_outlined_button.dart';
 
@@ -65,11 +63,11 @@ class AssessmentScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
-                          height: 1,
+                          height: 20,
                         ),
                         Image.asset('assets/images/dish.png'),
                         const SizedBox(
-                          height: 21,
+                          height: 20,
                         ),
                         RichText(
                           text: TextSpan(children: [
@@ -92,7 +90,7 @@ class AssessmentScreen extends StatelessWidget {
                           ]),
                         ),
                         const SizedBox(
-                          height: 21,
+                          height: 20,
                         ),
                         CustomOutlinedButton(
                           onPressed: () {
@@ -101,91 +99,12 @@ class AssessmentScreen extends StatelessWidget {
                           title: 'startAssessment'.tr,
                         ),
                         const SizedBox(
-                          height: 35,
+                          height: 40,
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 42,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        height: 90,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/Ellipse 199.png'),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(50.0)),
-                          border: Border.all(
-                              color: Colors.white,
-                              width: 5.0,
-                              strokeAlign: BorderSide.strokeAlignInside),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SvgPicture.asset('assets/icons/doubleQoutes.svg'),
-                          const SizedBox(
-                            height: 13,
-                          ),
-                          CustomText(
-                            text: 'captainNada'.tr,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          const SizedBox(
-                            height: 13,
-                          ),
-                          SizedBox(
-                            width: width * 0.6,
-                            child: CustomText(
-                              text: 'iOfferYou'.tr,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 35,
-                ),
-                Obx(() {
-                  if (profileController.isConactNadaLoading.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: CustomOutlinedButton(
-                      onPressed: () async {
-                        final contact = await profileController.contactNada();
-                        if (contact != null) {
-                          await launchUrlString(
-                              'whatsapp://send?phone=${contact.phone!}');
-                        }
-                      },
-                      title: 'AskForNutritionalAdvice'.tr,
-                    ),
-                  );
-                }),
               ],
             ),
           ),

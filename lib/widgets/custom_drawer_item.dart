@@ -10,12 +10,18 @@ class CustomDrawerTile extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.leading,
+    this.trailing,
+    this.fontSize,
+    this.fontWeight,
   });
 
   final VoidCallback onTap;
   final String title;
   final Widget? subtitle;
   final Widget? leading;
+  final Widget? trailing;
+  final double? fontSize;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +31,15 @@ class CustomDrawerTile extends StatelessWidget {
       splashColor: lighGrey,
       title: CustomText(
         text: title.tr,
-        fontSize: 16,
-        fontWeight: FontWeight.w400,
+        fontSize: fontSize ?? 14,
+        fontWeight: fontWeight ?? FontWeight.w400,
       ),
       contentPadding: const EdgeInsets.all(0),
       minVerticalPadding: 0,
       minLeadingWidth: 0,
       subtitle: subtitle,
       leading: leading,
+      trailing: trailing,
     );
   }
 }

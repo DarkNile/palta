@@ -13,7 +13,6 @@ import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/services/apps_flyer_service.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription/meal.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription/subscribe_now_sheet.dart';
-import 'package:palta/home/widgets/custom_home_card.dart';
 import 'package:palta/product/models/product.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/widgets/custom_button.dart';
@@ -88,7 +87,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                       ),
                     ),
                     SizedBox(
-                      height: height * 0.05,
+                      height: height * 0.06,
                     ),
                     Center(
                       child: CustomText(
@@ -433,45 +432,45 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                               }),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 31, right: 28, left: 28),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Center(
-                                    child: CustomText(
-                                  text: 'throughAccountYouCanControl'.tr,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  textAlign: TextAlign.center,
-                                )),
-                                const SizedBox(
-                                  height: 21,
-                                ),
-                                SizedBox(
-                                  height: 140,
-                                  child: ListView.separated(
-                                    itemCount: 3,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    separatorBuilder: (context, index) {
-                                      return const SizedBox(
-                                        width: 12,
-                                      );
-                                    },
-                                    itemBuilder: (context, index) {
-                                      return CustomHomeCard(
-                                        title: titles[index],
-                                        icon: icons[index],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(
+                          //       top: 31, right: 28, left: 28),
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     mainAxisAlignment: MainAxisAlignment.start,
+                          //     children: [
+                          //       Center(
+                          //           child: CustomText(
+                          //         text: 'throughAccountYouCanControl'.tr,
+                          //         fontSize: 18,
+                          //         fontWeight: FontWeight.w600,
+                          //         textAlign: TextAlign.center,
+                          //       )),
+                          //       const SizedBox(
+                          //         height: 21,
+                          //       ),
+                          //       SizedBox(
+                          //         height: 140,
+                          //         child: ListView.separated(
+                          //           itemCount: 3,
+                          //           shrinkWrap: true,
+                          //           scrollDirection: Axis.horizontal,
+                          //           separatorBuilder: (context, index) {
+                          //             return const SizedBox(
+                          //               width: 12,
+                          //             );
+                          //           },
+                          //           itemBuilder: (context, index) {
+                          //             return CustomHomeCard(
+                          //               title: titles[index],
+                          //               icon: icons[index],
+                          //             );
+                          //           },
+                          //         ),
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           const SizedBox(
                             height: 140,
                           ),
@@ -483,23 +482,46 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                   Positioned(
                     top: height * 0.27,
                     right: width * 0.38,
-                    child: Container(
-                      width: 90.0,
-                      height: 90.0,
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: lightGrey2,
-                              blurRadius: 4,
-                              spreadRadius: 2,
-                              offset: Offset(0, 3))
-                        ],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    // child: Container(
+                    //   width: 90.0,
+                    //   height: 90.0,
+                    //   padding: const EdgeInsets.all(10),
+                    //   decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //         image:
+                    //             AssetImage('assets/icons/${widget.icon}.png')),
+                    //     // boxShadow: [
+                    //     //   BoxShadow(
+                    //     //       color: lightGrey2,
+                    //     //       blurRadius: 4,
+                    //     //       spreadRadius: 2,
+                    //     //       offset: Offset(0, 3))
+                    //     // ],
+                    //     color: Colors.white,
+                    //     borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    //   ),
+                    //   // child:
+                    //   // SvgPicture.asset('assets/icons/${widget.icon}.svg'),
+                    //   // Image.asset('assets/icons/${widget.icon}.png'),
+                    // ),
+                    child: Card(
+                      color: Colors.white,
+                      elevation: 10,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(45)),
                       ),
-                      child:
-                          SvgPicture.asset('assets/icons/${widget.icon}.svg'),
+                      child: Container(
+                        width: 90,
+                        height: 90,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(45)),
+                          image: DecorationImage(
+                            image: AssetImage('assets/icons/subscribe.png'),
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                      ),
                     ),
                   ),
                 Positioned(

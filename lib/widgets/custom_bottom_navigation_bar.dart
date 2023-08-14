@@ -45,33 +45,41 @@ class CustomBottomNavigationBar extends StatelessWidget {
             ),
             label: 'home'.tr),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              currentIndex == 1
-                  ? 'assets/icons/assessment_green.svg'
-                  : 'assets/icons/assessment.svg',
-            ),
-            label: 'assessment'.tr),
+          // icon: SvgPicture.asset(
+          //   currentIndex == 1
+          //       ? 'assets/icons/assessment_green.svg'
+          //       : 'assets/icons/assessment.svg',
+          // ),
+          icon: Icon(
+            Icons.food_bank,
+            color: currentIndex == 1 ? avocado : darkGrey,
+          ),
+          label: 'programs2'.tr,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              currentIndex == 2
-                  ? 'assets/icons/subscription_green.svg'
-                  : 'assets/icons/subscription.svg',
-            ),
-            label: 'subscriptions'.tr),
+          icon: SvgPicture.asset(
+            currentIndex == 2
+                ? 'assets/icons/subscription_green.svg'
+                : 'assets/icons/subscription.svg',
+          ),
+          label: 'subscriptions'.tr,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              currentIndex == 3
-                  ? 'assets/icons/guide_green.svg'
-                  : 'assets/icons/guide.svg',
-            ),
-            label: 'guides'.tr),
+          icon: SvgPicture.asset(
+            currentIndex == 3
+                ? 'assets/icons/guide_green.svg'
+                : 'assets/icons/guide.svg',
+          ),
+          label: 'guides'.tr,
+        ),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              currentIndex == 4
-                  ? 'assets/icons/profile_green.svg'
-                  : 'assets/icons/profile.svg',
-            ),
-            label: 'profile'.tr),
+          icon: SvgPicture.asset(
+            currentIndex == 4
+                ? 'assets/icons/profile_green.svg'
+                : 'assets/icons/profile.svg',
+          ),
+          label: 'profile'.tr,
+        ),
       ],
       onTap: onTap,
     );

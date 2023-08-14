@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Center(
                   child: CustomText(
-                    text: 'Healthy Food',
+                    text: 'Healthy & Tasty',
                     color: pineGreen,
                     textAlign: TextAlign.center,
                     fontSize: 14,

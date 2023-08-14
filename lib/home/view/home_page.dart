@@ -7,9 +7,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions1.dart';
 import 'package:palta/home/view/bottom_nav_screens/guide_screen.dart';
-import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/profile_screen.dart';
+import 'package:palta/home/view/bottom_nav_screens/programs_screen.dart';
 import 'package:palta/home/view/bottom_nav_screens/subscription/subscription_screen.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -71,6 +72,8 @@ class _HomePageState extends State<HomePage> {
     _pageController.dispose();
   }
 
+  final List<String> _programIcons = ['muscle', 'fitness', 'weight'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +83,19 @@ class _HomePageState extends State<HomePage> {
               ? paleGrey
               : Colors.white,
       drawer: CustomDrawer(
+        programIcons: _programIcons,
+        onGuideTileTap: () {
+          Get.back();
+          setState(() {
+            _currentIndex = 3;
+          });
+          _pageController.jumpToPage(_currentIndex);
+        },
+        onAssessmentTap: () {
+          Get.to(
+            () => const AssessmentQuestion1(),
+          );
+        },
         onProfileTileTap: () {
           Get.back();
           setState(() {
@@ -134,10 +150,15 @@ class _HomePageState extends State<HomePage> {
             children: [
               HomeScreen(
                 homeController: _homeController,
+                programIcons: _programIcons,
               ),
-              AssessmentScreen(
+              // AssessmentScreen(
+              //   homeController: _homeController,
+              //   profileController: _profileController,
+              // ),
+              ProgramsScreen(
                 homeController: _homeController,
-                profileController: _profileController,
+                programIcons: _programIcons,
               ),
               SubscriptionScreen(
                 profileController: _profileController,

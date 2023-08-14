@@ -177,19 +177,17 @@ class AuthService {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
     print(token);
-    final String? lang = getStorage.read('lang');
-    print(lang);
-    final response = await http.post(
-        Uri.parse('${baseUrl}route=rest/forgotten/check_otp&language=$lang'),
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-        },
-        body: jsonEncode({
-          'email': email.trim(),
-          'activation_code': activationCode,
-        }));
+    final response =
+        await http.post(Uri.parse('${baseUrl}route=rest/forgotten/check_otp'),
+            headers: {
+              'Accept': 'application/json',
+              'Authorization': 'Bearer $token',
+              "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+            },
+            body: jsonEncode({
+              'email': email.trim(),
+              'activation_code': activationCode,
+            }));
 
     if (jsonDecode(response.body)['success'] == 1) {
       print(jsonDecode(response.body));
@@ -260,12 +258,18 @@ class AuthService {
           "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
         },
         body: json.encode({
-          'cutomer_id': customerId,
+          'customer_id': customerId,
           'telephone': phone.trim(),
         }));
 
+    print(json.encode({
+      'customer_id': customerId,
+      'telephone': phone.trim(),
+    }));
+
+    print(jsonDecode(response.body));
+
     if (jsonDecode(response.body)['success'] == 1) {
-      print(jsonDecode(response.body));
       return true;
     } else {
       var errorMessage = jsonDecode(response.body)['error'];
@@ -293,13 +297,19 @@ class AuthService {
               "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
             },
             body: jsonEncode({
-              'cutomer_id': customerId,
+              'customer_id': customerId,
               'telephone': phone.trim(),
               'otp': otp,
             }));
 
+    print(jsonEncode({
+      'customer_id': customerId,
+      'telephone': phone.trim(),
+      'otp': otp,
+    }));
+    print(jsonDecode(response.body));
+
     if (jsonDecode(response.body)['success'] == 1) {
-      print(jsonDecode(response.body));
       return true;
     } else {
       var errorMessage = jsonDecode(response.body)['error'];

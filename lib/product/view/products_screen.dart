@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/models/category.dart';
+import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions1.dart';
 
 import 'package:palta/home/view/home_page.dart';
 
@@ -84,6 +85,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
     sizeController.dispose();
   }
 
+  final List<String> _programIcons = ['muscle', 'fitness', 'weight'];
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -94,6 +97,17 @@ class _ProductsScreenState extends State<ProductsScreen> {
         scaffoldKey: _scaffoldKey,
       ),
       drawer: CustomDrawer(
+        programIcons: _programIcons,
+        onGuideTileTap: () {
+          Get.offAll(() => const HomePage(
+                pageIndex: 3,
+              ));
+        },
+        onAssessmentTap: () {
+          Get.to(
+            () => const AssessmentQuestion1(),
+          );
+        },
         onProfileTileTap: () {
           Get.offAll(() => const HomePage(
                 pageIndex: 4,

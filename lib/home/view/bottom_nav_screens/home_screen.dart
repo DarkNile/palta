@@ -15,9 +15,14 @@ import 'package:palta/widgets/custom_outlined_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.homeController});
+  const HomeScreen({
+    super.key,
+    required this.homeController,
+    required this.programIcons,
+  });
 
   final HomeController homeController;
+  final List<String> programIcons;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -48,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'body_program_2',
     'body_program_3'
   ];
-  final List<String> programIcons = ['muscle', 'fitness', 'weight'];
 
   @override
   Widget build(BuildContext context) {
@@ -196,17 +200,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: widget.homeController.programs[index].name!,
                   subtitle: widget.homeController.programs[index].description!,
                   image: widget.homeController.programs[index].originalImage!,
-                  icon: widget.homeController.programs.length > 3
-                      ? 'muscle'
-                      : programIcons[index],
+                  // icon: widget.homeController.programs.length > 3
+                  //     ? 'muscle'
+                  //     : widget.programIcons[index],
+                  icon: 'subscribe',
                   onTap: () {
                     Get.to(
                       () => SubscriptionInfo(
                         programIndex: index,
                         program: widget.homeController.programs[index],
-                        icon: widget.homeController.programs.length > 3
-                            ? 'muscle'
-                            : programIcons[index],
+                        // icon: widget.homeController.programs.length > 3
+                        //     ? 'muscle'
+                        //     : widget.programIcons[index],
+                        icon: 'subscribe',
                         hasCombination: true,
                       ),
                     );

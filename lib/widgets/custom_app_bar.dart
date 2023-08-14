@@ -93,7 +93,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                             height: 1,
                           ),
                           const CustomText(
-                            text: 'Healthy Food',
+                            text: 'Healthy & Tasty',
                             fontSize: 14,
                             fontWeight: FontWeight.w300,
                             textAlign: TextAlign.center,

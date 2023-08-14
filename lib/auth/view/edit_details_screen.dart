@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:palta/auth/controllers/auth_controller.dart';
 import 'package:palta/auth/view/verify_phone_screen.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/utils/app_util.dart';
@@ -36,6 +37,7 @@ class EditDetailsScreen extends StatefulWidget {
 
 class _EditDetailsScreenState extends State<EditDetailsScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _authController = Get.put(AuthController());
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
   late final TextEditingController _emailController;
@@ -220,11 +222,20 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
 
                               if (isSuccess) {
                                 await widget.profileController.getAccount();
-                                if (widget.isFromSocialLogin) {
-                                  Get.to(() => VerifyPhoneScreen(
-                                        customerId: widget.customerId!,
-                                        phone: _phoneNumberController.text,
-                                      ));
+                                if (widget.isFromSocialLogin &&
+                                    context.mounted) {
+                                  final isOTPSentSuccess =
+                                      await _authController.verifyPhone(
+                                    customerId: widget.customerId!,
+                                    phone: _phoneNumberController.text,
+                                    context: context,
+                                  );
+                                  if (isOTPSentSuccess) {
+                                    Get.to(() => VerifyPhoneScreen(
+                                          customerId: widget.customerId!,
+                                          phone: _phoneNumberController.text,
+                                        ));
+                                  }
                                 } else {
                                   Get.back();
                                 }

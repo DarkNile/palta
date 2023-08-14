@@ -429,12 +429,25 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                                 order: _checkoutController.order!,
                                 checkoutController: _checkoutController,
                               ));
-                        } else {
+                        } else if (_checkoutController.order!.paymentCode! ==
+                            'paytabs_applepay') {
                           applePay(
                             double.parse(_checkoutController.order!.total
                                 .toStringAsFixed(2)),
                             _checkoutController.order!.orderId!.toString(),
                           );
+                        } else {
+                          final isSuccess =
+                              await _checkoutController.saveOrderToDatabase(
+                            order: _checkoutController.order!,
+                          );
+                          if (isSuccess) {
+                            Get.offAll(
+                              () => ThankYouScreen(
+                                order: _checkoutController.order!,
+                              ),
+                            );
+                          }
                         }
                       },
                     );
@@ -492,12 +505,18 @@ class _CheckoutScreenState extends State<CheckoutScreen>
           if (event["status"] == "success") {
             var transactionDetails = event["data"];
             print(transactionDetails);
-            _checkoutController.saveOrderToDatabase(
-              order: _checkoutController.order!,
-            );
-            Get.offAll(() => ThankYouScreen(
-                  order: _checkoutController.order!,
-                ));
+            print('${transactionDetails["isSuccess"]}');
+            if (transactionDetails["isSuccess"]) {
+              print("successful transaction");
+              _checkoutController.saveOrderToDatabase(
+                order: _checkoutController.order!,
+              );
+              Get.offAll(() => ThankYouScreen(
+                    order: _checkoutController.order!,
+                  ));
+            } else {
+              print("failed transaction");
+            }
           } else if (event["status"] == "error") {
             // Handle error here.
             print(event["status"]);

@@ -9,20 +9,22 @@ class CustomButton extends StatelessWidget {
     required this.title,
     this.backgroundColor,
     this.foregroundColor,
+    this.radius,
   });
 
   final VoidCallback onPressed;
   final String title;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(6)))),
+        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius ?? 6)))),
         elevation: MaterialStateProperty.all(0),
         fixedSize: MaterialStateProperty.all(
           Size(
