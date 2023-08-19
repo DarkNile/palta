@@ -367,4 +367,12 @@ const Map<String, String> en = {
   'programs': 'Nutritional Programs',
   'programs2': 'Programs',
   'policies': 'Policies',
+  'whyPalta': 'Why Palta ..?',
+  'whyPaltaDescription':
+      'Palta recipes are prepared using carefully selected healthy recipes',
+  'healthGuidelines': 'Health Guidelines',
+  'understandYourBody':
+      'We understand your body and then support you and your mind, we hope to enhance your lifestyle',
+  'captainInstructions':
+      'Captain Nada\'s instructions help you build an integrated healthy life, starting with a healthy diet, exercise, and more',
 };

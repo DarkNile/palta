@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:palta/constants/extensions.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class CustomHomeCard extends StatelessWidget {
@@ -28,25 +27,29 @@ class CustomHomeCard extends StatelessWidget {
       // width: 176,
       height: 140,
       // padding: const EdgeInsets.all(15),
-      margin: const EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       // decoration: const BoxDecoration(
       //   color: Colors.white,
       //   borderRadius: BorderRadius.all(Radius.circular(6)),
       // ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Row(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(child: SvgPicture.asset('assets/icons/$icon.svg')),
+          SvgPicture.asset(
+            'assets/icons/$icon.svg',
+          ),
+          const SizedBox(
+            width: 8,
+          ),
           Expanded(
             child: CustomText(
               text: title.tr,
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w400,
               textOverflow: TextOverflow.visible,
             ),
           ),
-          40.ph,
         ],
       ),
       // ),

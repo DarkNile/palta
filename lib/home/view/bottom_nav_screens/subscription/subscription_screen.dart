@@ -25,11 +25,11 @@ class SubscriptionScreen extends StatelessWidget {
           title: 'subscriptions'.tr,
         ),
         Obx(() {
-          if (profileController.isUserOrdersLoading.value) {
+          if (profileController.isUserOrdersByStatusLoading.value) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (profileController.userOrders.isEmpty) {
+          } else if (profileController.userOrdersByStatus.isEmpty) {
             return Center(
               child: Lottie.asset(
                 'assets/lottie/no_orders.json',
@@ -44,14 +44,15 @@ class SubscriptionScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 itemBuilder: (context, index) {
                   return CustomSubscriptionCard(
-                    status: profileController.userOrders[index].status!,
-                    title: profileController.userOrders[index].name!,
-                    date: profileController.userOrders[index].dateAdded!,
-                    image: profileController
-                        .userOrders[index].products!.first.originalImage!,
+                    status: profileController.userOrdersByStatus[index].status!,
+                    title: profileController.userOrdersByStatus[index].name!,
+                    date:
+                        profileController.userOrdersByStatus[index].dateAdded!,
+                    image: profileController.userOrdersByStatus[index].products!
+                        .first.originalImage!,
                     onInfoTap: () {
                       Get.to(() => SubscriptionDetails(
-                          order: profileController.userOrders[index]));
+                          order: profileController.userOrdersByStatus[index]));
                     },
                   );
                 },
@@ -60,7 +61,7 @@ class SubscriptionScreen extends StatelessWidget {
                     height: 20,
                   );
                 },
-                itemCount: profileController.userOrders.length,
+                itemCount: profileController.userOrdersByStatus.length,
               ),
             ),
           );
