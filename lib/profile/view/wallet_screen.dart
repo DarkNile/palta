@@ -58,19 +58,19 @@ class _WalletScreenState extends State<WalletScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomText(
-                      text: 'currentBalance'.tr,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    const Divider(
-                      color: darkGrey,
-                    ),
-                    const SizedBox(
-                      height: 51.5,
-                    ),
+                    // CustomText(
+                    //   text: 'currentBalance'.tr,
+                    //   fontWeight: FontWeight.w400,
+                    // ),
+                    // const SizedBox(
+                    //   height: 16,
+                    // ),
+                    // const Divider(
+                    //   color: darkGrey,
+                    // ),
+                    // const SizedBox(
+                    //   height: 51.5,
+                    // ),
                     Container(
                       width: 44,
                       height: 44,
@@ -105,7 +105,11 @@ class _WalletScreenState extends State<WalletScreen> {
                     ),
                     CustomButton(
                       onPressed: () {
-                        Get.offAll(() => const HomePage());
+                        Get.offAll(
+                          () => const HomePage(
+                            pageIndex: 1,
+                          ),
+                        );
                       },
                       title: 'continueShopping'.tr,
                     ),

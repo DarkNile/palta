@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
@@ -30,6 +31,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _activeIndex = 0;
+  int _secondActiveIndex = 0;
 
   final List<String> titles = [
     'possibilityToChange',
@@ -125,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //     builder: (context, constraints) {
                 //       return
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   // child: Align(
                   //   alignment: Alignment.bottomCenter,
                   //   child: SizedBox(
@@ -168,9 +170,26 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          // const SizedBox(
-          //   height: 30,
-          // ),
+          CustomText(
+            text: 'whyPalta'.tr,
+            textAlign: TextAlign.center,
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+            color: avocado,
+          ),
+          SizedBox(
+            width: width * 0.8,
+            child: CustomText(
+              text: 'whyPaltaDescription'.tr,
+              textAlign: TextAlign.center,
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+              color: darkGrey,
+            ),
+          ),
+          const SizedBox(
+            height: 28,
+          ),
           CustomText(
             text: 'subscribeToProgram'.tr,
             textAlign: TextAlign.center,
@@ -287,7 +306,116 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SizedBox(
-            height: 46,
+            height: 40,
+          ),
+          ClipPath(
+            clipper: WaveClipperTwo(reverse: true),
+            child: ClipPath(
+              clipper: WaveClipperOne(reverse: false),
+              child: Container(
+                width: width,
+                color: pineGreen,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: CustomText(
+                        text: 'healthGuidelines'.tr,
+                        color: avocado,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: CustomText(
+                        text: 'understandYourBody'.tr,
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: CustomText(
+                        text: 'captainInstructions'.tr,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Obx(() {
+                      if (widget.homeController.isBannersLoading.value) {
+                        return SizedBox(
+                          width: width,
+                          height: 370,
+                          child: const CustomLoadingWidget(),
+                        );
+                      }
+                      return CarouselSlider.builder(
+                        itemCount: widget.homeController.guideBanners.length,
+                        options: CarouselOptions(
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          height: 370,
+                          viewportFraction: 1,
+                          enableInfiniteScroll: false,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _secondActiveIndex = index;
+                            });
+                          },
+                        ),
+                        itemBuilder: (context, index, page) {
+                          return Stack(
+                            alignment: AlignmentDirectional.bottomStart,
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: widget.homeController
+                                    .guideBanners[index]['image'],
+                                width: width,
+                                height: 379,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) {
+                                  return const CustomLoadingWidget();
+                                },
+                              ),
+                              Positioned(
+                                bottom: 51,
+                                right: AppUtil.rtlDirection(context) ? 29 : 0,
+                                left: AppUtil.rtlDirection(context) ? 0 : 29,
+                                child: CustomAnimatedSmoothIndicator(
+                                  count:
+                                      widget.homeController.guideBanners.length,
+                                  activeIndex: _secondActiveIndex,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 40,
           ),
         ],
       ),

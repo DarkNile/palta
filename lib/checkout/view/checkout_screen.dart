@@ -423,6 +423,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         _tabController.animateTo(3);
                       },
                       onConfirmOrderTap: () async {
+                        print(
+                            'order number: ${_checkoutController.order!.orderId}');
                         if (_checkoutController.order!.paymentCode! ==
                             'paytabs_creditcard') {
                           Get.to(() => PaymentWebviewScreen(

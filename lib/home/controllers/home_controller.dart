@@ -13,6 +13,7 @@ import 'package:palta/product/models/product.dart';
 class HomeController extends GetxController {
   var isBannersLoading = false.obs;
   var banners = [].obs; //7
+  var guideBanners = [].obs; // 9
   var honeyBanner = [].obs; //10
   var oliveOilBanner = [].obs; //11
   var oliveBanner = [].obs; //12
@@ -70,8 +71,13 @@ class HomeController extends GetxController {
       isBannersLoading(true);
       final data = await HomeService.getBanners(id: id);
       if (data != null) {
-        banners(data);
-        return banners;
+        if (id == '7') {
+          banners(data);
+          return banners;
+        } else {
+          guideBanners(data);
+          return guideBanners;
+        }
       } else {
         return null;
       }

@@ -33,26 +33,20 @@ class CustomBottomNavigationBar extends StatelessWidget {
       ),
       items: [
         BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              // currentIndex == 0
-              //     ? 'assets/icons/home_green.svg'
-              //     : 'assets/icons/home_2.svg',
-              'assets/icons/home_2.svg',
-              colorFilter: ColorFilter.mode(
-                currentIndex == 0 ? avocado : darkGrey,
-                BlendMode.srcIn,
-              ),
-            ),
-            label: 'home'.tr),
+          icon: Image.asset(
+            'assets/icons/my_home.png',
+            color: currentIndex == 0 ? avocado : darkGrey,
+            width: 24,
+            height: 24,
+          ),
+          label: 'home'.tr,
+        ),
         BottomNavigationBarItem(
-          // icon: SvgPicture.asset(
-          //   currentIndex == 1
-          //       ? 'assets/icons/assessment_green.svg'
-          //       : 'assets/icons/assessment.svg',
-          // ),
-          icon: Icon(
-            Icons.food_bank,
+          icon: Image.asset(
+            'assets/icons/programs.png',
             color: currentIndex == 1 ? avocado : darkGrey,
+            width: 24,
+            height: 24,
           ),
           label: 'programs2'.tr,
         ),

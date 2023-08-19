@@ -55,11 +55,12 @@ class _HomePageState extends State<HomePage> {
     _pageController = PageController(initialPage: widget.pageIndex ?? 0);
     _currentIndex = widget.pageIndex ?? 0;
     _homeController.getBanners(id: '7');
+    _homeController.getBanners(id: '9');
     _homeController.getPrograms();
     _homeController.getInfo(mealType: '1');
     _homeController.getInfo(mealType: '2');
     _homeController.getInfo(mealType: '3');
-    _profileController.getUserOrders();
+    _profileController.getUserOrdersByStatus(orderStatus: '2');
     _homeController.getGuidances();
     _profileController.getAccount();
     _checkoutController.getCartItems();
