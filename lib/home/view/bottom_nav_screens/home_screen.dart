@@ -102,16 +102,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             imageUrl: widget.homeController.banners[index]
                                 ['image'],
                             width: width,
-                            height: 379,
+                            height: 350,
                             fit: BoxFit.cover,
                             placeholder: (context, url) {
                               return const CustomLoadingWidget();
                             },
                           ),
                           Positioned(
-                            bottom: 51,
-                            right: AppUtil.rtlDirection(context) ? 29 : 0,
-                            left: AppUtil.rtlDirection(context) ? 0 : 29,
+                            bottom: 40,
+                            right: AppUtil.rtlDirection(context) ? 40 : 0,
+                            left: AppUtil.rtlDirection(context) ? 0 : 40,
                             child: CustomAnimatedSmoothIndicator(
                               count: widget.homeController.banners.length,
                               activeIndex: _activeIndex,

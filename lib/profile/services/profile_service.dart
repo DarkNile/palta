@@ -492,6 +492,11 @@ class ProfileService {
       }),
     );
     print('response status code: ${response.statusCode}');
+    print(jsonEncode({
+      'dates': dates,
+      'order_id': orderId,
+      'order_product_id': orderProductId,
+    }));
     if (jsonDecode(response.body)['success'] == 1) {
       List<dynamic> data = jsonDecode(response.body)['data'];
       print('data: $data');

@@ -65,16 +65,25 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           children: [
                             Checkbox(
                                 value: dates.contains(_profileController
-                                    .calendar[index].calendarDate),
+                                    .calendar[index].calendarDate
+                                    .split(' - ')
+                                    .last
+                                    .trim()),
                                 onChanged: (value) {
                                   setState(() {
                                     isChecked = value!;
                                     if (isChecked) {
                                       dates.add(_profileController
-                                          .calendar[index].calendarDate);
+                                          .calendar[index].calendarDate
+                                          .split(' - ')
+                                          .last
+                                          .trim());
                                     } else {
                                       dates.remove(_profileController
-                                          .calendar[index].calendarDate);
+                                          .calendar[index].calendarDate
+                                          .split(' - ')
+                                          .last
+                                          .trim());
                                     }
                                   });
                                   print(dates);
