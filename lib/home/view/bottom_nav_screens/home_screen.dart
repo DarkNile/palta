@@ -217,7 +217,9 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 return CustomProgramCard(
                   title: widget.homeController.programs[index].name!,
-                  subtitle: widget.homeController.programs[index].description!,
+                  // subtitle: widget.homeController.programs[index].description!,
+                  subtitle:
+                      widget.homeController.programs[index].mealData.toString(),
                   image: widget.homeController.programs[index].originalImage!,
                   // icon: widget.homeController.programs.length > 3
                   //     ? 'muscle'

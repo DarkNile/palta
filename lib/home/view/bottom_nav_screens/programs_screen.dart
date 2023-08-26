@@ -47,7 +47,8 @@ class ProgramsScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CustomProgramCard(
                   title: homeController.programs[index].name!,
-                  subtitle: homeController.programs[index].description!,
+                  // subtitle: homeController.programs[index].description!,
+                  subtitle: homeController.programs[index].mealData.toString(),
                   image: homeController.programs[index].originalImage!,
                   // icon: homeController.programs.length > 3
                   //     ? 'muscle'
