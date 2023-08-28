@@ -6,7 +6,7 @@ class Meal extends StatelessWidget {
   const Meal({
     super.key,
     required this.mealIndex,
-    required this.programIndex,
+    // required this.programIndex,
     required this.title,
     required this.image,
     required this.description,
@@ -15,7 +15,7 @@ class Meal extends StatelessWidget {
   });
 
   final int mealIndex;
-  final int programIndex;
+  // final int programIndex;
   final String title;
   final String image;
   final String description;

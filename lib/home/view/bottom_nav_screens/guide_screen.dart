@@ -43,7 +43,7 @@ class GuideScreen extends StatelessWidget {
                   onTap: () {
                     Get.to(
                       () => SubscriptionInfo(
-                        programIndex: index,
+                        // programIndex: index,
                         hasCombination: false,
                         program: homeController.guidances[index],
                       ),

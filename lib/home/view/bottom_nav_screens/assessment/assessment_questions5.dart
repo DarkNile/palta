@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/bottom_nav_screens/assessment/assessment_questions6.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/utils/app_util.dart';
@@ -15,6 +16,8 @@ class AssessmentQuestion5 extends StatefulWidget {
 }
 
 class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
+  final _homeController = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -111,6 +114,7 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
                     children: [
                       InkWell(
                         onTap: () {
+                          _homeController.step6('1');
                           Get.to(() => const AssessmentQuestion6());
                         },
                         child: Card(
@@ -149,6 +153,7 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
                       ),
                       InkWell(
                         onTap: () {
+                          _homeController.step6('2');
                           Get.to(() => const AssessmentQuestion6());
                         },
                         child: Card(
@@ -192,6 +197,7 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
                     children: [
                       InkWell(
                         onTap: () {
+                          _homeController.step6('3');
                           Get.to(() => const AssessmentQuestion6());
                         },
                         child: Card(
@@ -230,6 +236,7 @@ class _AssessmentQuestion5State extends State<AssessmentQuestion5> {
                       ),
                       InkWell(
                         onTap: () {
+                          _homeController.step6('4');
                           Get.to(() => const AssessmentQuestion6());
                         },
                         child: Card(

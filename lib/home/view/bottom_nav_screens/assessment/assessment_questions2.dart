@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -15,6 +16,8 @@ class AssessmentQuestion2 extends StatefulWidget {
 }
 
 class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
+  final _homeController = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -117,6 +120,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         children: [
                           InkWell(
                             onTap: () {
+                              _homeController.step2('1');
                               Get.to(() => const AssessmentQuestion3());
                             },
                             child: Card(
@@ -150,6 +154,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                           ),
                           InkWell(
                             onTap: () {
+                              _homeController.step2('2');
                               Get.to(() => const AssessmentQuestion3());
                             },
                             child: Card(
@@ -188,6 +193,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         children: [
                           InkWell(
                             onTap: () {
+                              _homeController.step2('3');
                               Get.to(() => const AssessmentQuestion3());
                             },
                             child: Card(
@@ -221,6 +227,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                           ),
                           InkWell(
                             onTap: () {
+                              _homeController.step2('4');
                               Get.to(() => const AssessmentQuestion3());
                             },
                             child: Card(
@@ -259,6 +266,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                         children: [
                           InkWell(
                             onTap: () {
+                              _homeController.step2('5');
                               Get.to(() => const AssessmentQuestion3());
                             },
                             child: Card(
@@ -292,6 +300,7 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                           ),
                           InkWell(
                             onTap: () {
+                              _homeController.step2('6');
                               Get.to(() => const AssessmentQuestion3());
                             },
                             child: Card(
@@ -307,8 +316,8 @@ class _AssessmentQuestion2State extends State<AssessmentQuestion2> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const CustomText(
-                                        text: '60',
+                                      CustomText(
+                                        text: 'above70'.tr,
                                         fontSize: 18,
                                       ),
                                       CustomText(

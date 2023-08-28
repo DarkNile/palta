@@ -276,9 +276,9 @@ const Map<String, String> en = {
   'howActiveYou': 'How physically active are you?',
   'numberExerciseDuringWeek':
       'The number of times you exercise during the week',
-  'exercise7': 'Exercise 5 -7 times',
-  'exercise5': 'Exercise 3 -5 times',
-  'exercise2': 'Exercise 2 -1 times',
+  'exercise7': 'Exercise 5 - 7 times',
+  'exercise5': 'Exercise 3 - 5 times',
+  'exercise2': 'Exercise 1 - 2 times',
   'withoutActivity': 'Without any activity',
   'perWeek': 'per week',
   'q6': 'Sixth Question',
@@ -375,4 +375,9 @@ const Map<String, String> en = {
       'We understand your body and then support you and your mind, we hope to enhance your lifestyle',
   'captainInstructions':
       'Captain Nada\'s instructions help you build an integrated healthy life, starting with a healthy diet, exercise, and more',
+  'cleanBody': 'Clean body from toxins',
+  'above70': '70 and above',
+  'bmi': 'BMI',
+  'kg': 'kg',
+  'cm': 'cm',
 };

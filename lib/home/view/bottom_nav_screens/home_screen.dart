@@ -228,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Get.to(
                       () => SubscriptionInfo(
-                        programIndex: index,
+                        // programIndex: index,
                         program: widget.homeController.programs[index],
                         // icon: widget.homeController.programs.length > 3
                         //     ? 'muscle'
