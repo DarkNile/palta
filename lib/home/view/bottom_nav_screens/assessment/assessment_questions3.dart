@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -16,6 +17,8 @@ class AssessmentQuestion3 extends StatefulWidget {
 }
 
 class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
+  final _homeController = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -118,6 +121,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                         children: [
                           InkWell(
                             onTap: () {
+                              _homeController.step3('1');
                               Get.to(() => const AssessmentQuestion4());
                             },
                             child: Card(
@@ -150,6 +154,7 @@ class _AssessmentQuestion3State extends State<AssessmentQuestion3> {
                           ),
                           InkWell(
                             onTap: () {
+                              _homeController.step3('2');
                               Get.to(() => const AssessmentQuestion4());
                             },
                             child: Card(

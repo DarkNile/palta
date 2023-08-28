@@ -57,7 +57,7 @@ class ProgramsScreen extends StatelessWidget {
                   onTap: () {
                     Get.to(
                       () => SubscriptionInfo(
-                        programIndex: index,
+                        // programIndex: index,
                         program: homeController.programs[index],
                         // icon: homeController.programs.length > 3
                         //     ? 'muscle'

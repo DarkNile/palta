@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:palta/home/models/articles.dart';
+import 'package:palta/home/models/assessment.dart';
 import 'package:palta/home/models/combination.dart';
 import 'package:palta/home/models/notifications.dart';
 import 'package:palta/home/models/review.dart';
@@ -65,6 +67,42 @@ class HomeController extends GetxController {
   var isCreatingCouponLoading = false.obs;
   var isCouponLoading = false.obs;
   var coupon = ''.obs;
+
+  var isAssessmentLoading = false.obs;
+  var assessmentResult = Assessment().obs;
+  var step1 = ''.obs;
+  var step2 = ''.obs;
+  var step3 = ''.obs;
+  var step5 = ''.obs;
+  var step6 = ''.obs;
+  var heightController = TextEditingController().obs;
+  var weightController = TextEditingController().obs;
+
+  Future<Assessment?> assessment() async {
+    try {
+      isAssessmentLoading(true);
+      final data = await HomeService.assessment(
+        step1: step1.value,
+        step2: step2.value,
+        step3: step3.value,
+        step5: step5.value,
+        step6: step6.value,
+        height: heightController.value.text,
+        weight: weightController.value.text,
+      );
+      if (data != null) {
+        assessmentResult(data);
+        return assessmentResult.value;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isAssessmentLoading(false);
+    }
+  }
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {

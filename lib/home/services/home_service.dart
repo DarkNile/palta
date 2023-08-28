@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:palta/constants/urls.dart';
 import 'package:palta/home/models/articles.dart';
+import 'package:palta/home/models/assessment.dart';
 import 'package:palta/home/models/category.dart';
 import 'package:palta/home/models/combination.dart';
 import 'package:palta/home/models/location.dart';
@@ -639,6 +640,56 @@ class HomeService {
       print('success');
     } else {
       print('error');
+    }
+  }
+
+  static Future<Assessment?> assessment({
+    required String step1,
+    required String step2,
+    required String step3,
+    required String step5,
+    required String step6,
+    required String height,
+    required String weight,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/assessment'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+      body: jsonEncode({
+        'step_1': step1,
+        'step_2': step2,
+        'step_3': step3,
+        'step_5': step5,
+        'step_6': step6,
+        'height': height,
+        'weight': weight,
+      }),
+    );
+
+    print(jsonEncode({
+      'step_1': step1,
+      'step_2': step2,
+      'step_3': step3,
+      'step_5': step5,
+      'step_6': step6,
+      'height': height,
+      'weight': weight,
+    }));
+    print('response status code: ${response.statusCode}');
+
+    if (jsonDecode(response.body)['success'] == 1) {
+      Map<String, dynamic> data = jsonDecode(response.body)['data'];
+      print('Assessment Data: $data');
+      return Assessment.fromJson(data);
+    } else {
+      return null;
     }
   }
 }

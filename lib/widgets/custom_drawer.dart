@@ -167,7 +167,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           onTap: () {
                             Get.to(
                               () => SubscriptionInfo(
-                                programIndex: index,
+                                // programIndex: index,
                                 program: _homeController.programs[index],
                                 icon: _homeController.programs.length > 3
                                     ? 'muscle'
