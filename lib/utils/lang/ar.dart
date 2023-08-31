@@ -361,4 +361,5 @@ const Map<String, String> ar = {
   'bmi': 'مؤشر كتلة الجسم',
   'kg': 'كج',
   'cm': 'سم',
+  'browseGuidlances': 'تصفح الإرشادات',
 };

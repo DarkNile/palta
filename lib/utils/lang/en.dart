@@ -380,4 +380,5 @@ const Map<String, String> en = {
   'bmi': 'BMI',
   'kg': 'kg',
   'cm': 'cm',
+  'browseGuidlances': 'Browse Guidlances',
 };
