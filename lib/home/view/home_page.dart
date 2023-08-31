@@ -152,6 +152,12 @@ class _HomePageState extends State<HomePage> {
               HomeScreen(
                 homeController: _homeController,
                 programIcons: _programIcons,
+                onBrowsePressed: () {
+                  setState(() {
+                    _currentIndex = 3;
+                  });
+                  _pageController.jumpToPage(_currentIndex);
+                },
               ),
               // AssessmentScreen(
               //   homeController: _homeController,

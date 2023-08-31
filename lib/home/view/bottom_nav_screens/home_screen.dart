@@ -20,10 +20,12 @@ class HomeScreen extends StatefulWidget {
     super.key,
     required this.homeController,
     required this.programIcons,
+    required this.onBrowsePressed,
   });
 
   final HomeController homeController;
   final List<String> programIcons;
+  final VoidCallback onBrowsePressed;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -417,7 +419,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SizedBox(
-            height: 40,
+            height: 24,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: CustomOutlinedButton(
+              onPressed: widget.onBrowsePressed,
+              title: 'browseGuidlances'.tr,
+            ),
+          ),
+          const SizedBox(
+            height: 24,
           ),
         ],
       ),
