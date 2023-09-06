@@ -29,15 +29,15 @@ class OrderInfoPage extends StatefulWidget {
 }
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
-  final _homeController = Get.put(HomeController());
+  // final _homeController = Get.put(HomeController());
   DateTime today = DateTime.now();
   String? fridayValue;
 
-  @override
-  void initState() {
-    super.initState();
-    _homeController.getCoupon();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _homeController.getCoupon();
+  // }
 
   @override
   Widget build(BuildContext context) {

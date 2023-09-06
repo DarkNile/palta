@@ -64,9 +64,9 @@ class HomeController extends GetxController {
   RxBool isPostReviewsLoading = false.obs;
   RxBool postReview = false.obs;
 
-  var isCreatingCouponLoading = false.obs;
-  var isCouponLoading = false.obs;
-  var coupon = ''.obs;
+  // var isCreatingCouponLoading = false.obs;
+  // var isCouponLoading = false.obs;
+  // var coupon = ''.obs;
 
   var isAssessmentLoading = false.obs;
   var assessmentResult = Assessment().obs;
@@ -266,38 +266,38 @@ class HomeController extends GetxController {
 
   // ----------------------------------------------------------------
 
-  Future<String?> createCoupon({
-    required String customerId,
-  }) async {
-    try {
-      isCreatingCouponLoading(true);
-      final data = await HomeService.createCoupon(customerId: customerId);
-      return data;
-    } catch (e) {
-      print(e);
-      return null;
-    } finally {
-      isCreatingCouponLoading(false);
-    }
-  }
+  // Future<String?> createCoupon({
+  //   required String customerId,
+  // }) async {
+  //   try {
+  //     isCreatingCouponLoading(true);
+  //     final data = await HomeService.createCoupon(customerId: customerId);
+  //     return data;
+  //   } catch (e) {
+  //     print(e);
+  //     return null;
+  //   } finally {
+  //     isCreatingCouponLoading(false);
+  //   }
+  // }
 
-  Future<String?> getCoupon() async {
-    try {
-      isCouponLoading(true);
-      final data = await HomeService.getCoupon();
-      if (data != null) {
-        coupon(data);
-        return coupon.value;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print(e);
-      return null;
-    } finally {
-      isCouponLoading(false);
-    }
-  }
+  // Future<String?> getCoupon() async {
+  //   try {
+  //     isCouponLoading(true);
+  //     final data = await HomeService.getCoupon();
+  //     if (data != null) {
+  //       coupon(data);
+  //       return coupon.value;
+  //     } else {
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //     return null;
+  //   } finally {
+  //     isCouponLoading(false);
+  //   }
+  // }
 
   Future<List<Product>?> getPrograms() async {
     try {
