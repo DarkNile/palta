@@ -383,7 +383,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         });
                   }),
                   Obx(() {
-                    if (_homeController.isCouponLoading.value ||
+                    if (
+                        // _homeController.isCouponLoading.value ||
                         _checkoutController.isConfirmOrderLoading.value) {
                       return const Center(
                         child: CircularProgressIndicator(),

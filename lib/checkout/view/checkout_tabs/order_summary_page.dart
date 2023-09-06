@@ -38,19 +38,20 @@ class OrderSummaryPage extends StatefulWidget {
 }
 
 class _OrderSummaryPageState extends State<OrderSummaryPage> {
-  late bool isFirstCouponFound;
+  // late bool isFirstCouponFound;
+  bool isFirstCouponFound = false;
 
-  @override
-  void initState() {
-    super.initState();
-    if (widget.homeController.coupon.value != 'null') {
-      widget.checkoutController.couponController.value.text =
-          widget.homeController.coupon.value;
-      isFirstCouponFound = true;
-    } else {
-      isFirstCouponFound = false;
-    }
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   if (widget.homeController.coupon.value != 'null') {
+  //     widget.checkoutController.couponController.value.text =
+  //         widget.homeController.coupon.value;
+  //     isFirstCouponFound = true;
+  //   } else {
+  //     isFirstCouponFound = false;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
