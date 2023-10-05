@@ -18,19 +18,21 @@ class CustomCheckoutItem extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomText(
-              text: 'program'.tr,
-              fontSize: 14,
-            ),
-            CustomText(
-              text: product.name!,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomText(
+                text: 'program'.tr,
+                fontSize: 14,
+              ),
+              CustomText(
+                text: product.name!,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ],
+          ),
         ),
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(8)),

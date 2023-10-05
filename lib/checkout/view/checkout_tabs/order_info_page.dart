@@ -31,7 +31,7 @@ class OrderInfoPage extends StatefulWidget {
 class _OrderInfoPageState extends State<OrderInfoPage> {
   // final _homeController = Get.put(HomeController());
   DateTime today = DateTime.now();
-  String? fridayValue;
+  // String? fridayValue;
 
   // @override
   // void initState() {
@@ -62,294 +62,301 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
               ),
             ],
           )
-        : Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: [
-              SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListView.separated(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount:
-                          widget.checkoutController.cart!.products!.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
-                          color: Colors.white,
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(6),
-                                    topRight: Radius.circular(6)),
-                                child: Stack(
-                                  children: [
-                                    CachedNetworkImage(
-                                      imageUrl: widget.checkoutController.cart!
-                                          .products![index].originalImage!,
-                                      height: 96,
-                                      width: width,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) {
-                                        return const CustomLoadingWidget();
-                                      },
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: CircleAvatar(
-                                        radius: 20,
-                                        backgroundColor: lightGrey2,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            widget.checkoutController
-                                                .deleteCartItem(
-                                                    productId: widget
-                                                        .checkoutController
-                                                        .cart!
-                                                        .products![index]
-                                                        .id
-                                                        .toString());
-                                            setState(() {
-                                              widget.checkoutController.cart!
-                                                  .products!
-                                                  .remove(widget
+        : Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (widget.checkoutController.cart!.isCombination! == 'true')
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // const SizedBox(
+                      //   height: 36,
+                      // ),
+                      CustomText(
+                        text: 'subscriptionStartDate'.tr,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Container(
+                        width: width,
+                        height: 56,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: veryLightPink),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6)),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomText(
+                              text: DateFormat('dd/MM/yyyy').format(today),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                DateTime? selectedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime(2030, 12, 31),
+                                );
+
+                                if (selectedDate != null) {
+                                  setState(() {
+                                    today = selectedDate;
+                                  });
+                                }
+                              },
+                              child:
+                                  SvgPicture.asset('assets/icons/calendar.svg'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // const SizedBox(
+                      //   height: 36,
+                      // ),
+                      // CustomText(
+                      //   text: 'fridayReceiving'.tr,
+                      //   fontSize: 16,
+                      //   fontWeight: FontWeight.w500,
+                      // ),
+                      // const SizedBox(
+                      //   height: 21,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Expanded(
+                      //       child: RadioListTile(
+                      //         dense: true,
+                      //         contentPadding: const EdgeInsets.all(0),
+                      //         title: CustomText(
+                      //           text: 'yes'.tr,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w400,
+                      //         ),
+                      //         value: 'yes',
+                      //         groupValue: fridayValue,
+                      //         onChanged: (value) {
+                      //           setState(() {
+                      //             fridayValue = value;
+                      //           });
+                      //         },
+                      //       ),
+                      //     ),
+                      //     Expanded(
+                      //       child: RadioListTile(
+                      //         dense: true,
+                      //         contentPadding: const EdgeInsets.all(0),
+                      //         title: CustomText(
+                      //           text: 'no'.tr,
+                      //           fontSize: 16,
+                      //           fontWeight: FontWeight.w400,
+                      //         ),
+                      //         value: 'no',
+                      //         groupValue: fridayValue,
+                      //         onChanged: (value) {
+                      //           setState(() {
+                      //             fridayValue = value;
+                      //           });
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                    ],
+                  ),
+                // const SizedBox(
+                //   height: 16,
+                // ),
+                Expanded(
+                  child: ListView.separated(
+                    // physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: widget.checkoutController.cart!.products!.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(8))),
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(6),
+                                  topRight: Radius.circular(6)),
+                              child: Stack(
+                                children: [
+                                  CachedNetworkImage(
+                                    imageUrl: widget.checkoutController.cart!
+                                        .products![index].originalImage!,
+                                    height: 96,
+                                    width: width,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) {
+                                      return const CustomLoadingWidget();
+                                    },
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CircleAvatar(
+                                      radius: 20,
+                                      backgroundColor: lightGrey2,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          widget.checkoutController
+                                              .deleteCartItem(
+                                                  productId: widget
                                                       .checkoutController
                                                       .cart!
-                                                      .products![index]);
-                                            });
-                                          },
-                                          icon: const Icon(
-                                            Icons.delete,
-                                            color: vermillion,
-                                          ),
+                                                      .products![index]
+                                                      .id
+                                                      .toString());
+                                          setState(() {
+                                            widget.checkoutController.cart!
+                                                .products!
+                                                .remove(widget
+                                                    .checkoutController
+                                                    .cart!
+                                                    .products![index]);
+                                          });
+                                        },
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          color: vermillion,
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
+                            ),
+                            const SizedBox(
+                              height: 17,
+                            ),
+                            CustomText(
+                              text:
+                                  '${widget.checkoutController.cart!.products![index].name!} (${widget.checkoutController.cart!.products![index].quantity})',
+                              textAlign: TextAlign.center,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            if (widget.checkoutController.cart!.products![index]
+                                        .option !=
+                                    null &&
+                                widget.checkoutController.cart!.products![index]
+                                    .option!.isNotEmpty)
                               const SizedBox(
-                                height: 17,
+                                height: 10,
                               ),
+                            if (widget.checkoutController.cart!.products![index]
+                                        .option !=
+                                    null &&
+                                widget.checkoutController.cart!.products![index]
+                                    .option!.isNotEmpty)
                               CustomText(
-                                text:
-                                    '${widget.checkoutController.cart!.products![index].name!} (${widget.checkoutController.cart!.products![index].quantity})',
+                                text: widget.checkoutController.cart!
+                                    .products![index].option!.first.value
+                                    .split('</br>:')
+                                    .join(),
                                 textAlign: TextAlign.center,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
                               ),
-                              if (widget.checkoutController.cart!
-                                          .products![index].option !=
-                                      null &&
-                                  widget.checkoutController.cart!
-                                      .products![index].option!.isNotEmpty)
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              if (widget.checkoutController.cart!
-                                          .products![index].option !=
-                                      null &&
-                                  widget.checkoutController.cart!
-                                      .products![index].option!.isNotEmpty)
-                                CustomText(
-                                  text: widget.checkoutController.cart!
-                                      .products![index].option!.first.value
-                                      .split('</br>:')
-                                      .join(),
-                                  textAlign: TextAlign.center,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              const SizedBox(
-                                height: 26,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 28,
-                        );
-                      },
-                    ),
-                    if (widget.checkoutController.cart!.isCombination! ==
-                        'true')
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 36,
-                          ),
-                          CustomText(
-                            text: 'subscriptionStartDate'.tr,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Container(
-                            width: width,
-                            height: 56,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: veryLightPink),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(6)),
+                            const SizedBox(
+                              height: 16,
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomText(
-                                  text: DateFormat('dd/MM/yyyy').format(today),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    DateTime? selectedDate =
-                                        await showDatePicker(
-                                      context: context,
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime.now(),
-                                      lastDate: DateTime(2030, 12, 31),
-                                    );
-
-                                    if (selectedDate != null) {
-                                      setState(() {
-                                        today = selectedDate;
-                                      });
-                                    }
-                                  },
-                                  child: SvgPicture.asset(
-                                      'assets/icons/calendar.svg'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 36,
-                          ),
-                          CustomText(
-                            text: 'fridayReceiving'.tr,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          const SizedBox(
-                            height: 21,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: RadioListTile(
-                                  dense: true,
-                                  contentPadding: const EdgeInsets.all(0),
-                                  title: CustomText(
-                                    text: 'yes'.tr,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  value: 'yes',
-                                  groupValue: fridayValue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      fridayValue = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                child: RadioListTile(
-                                  dense: true,
-                                  contentPadding: const EdgeInsets.all(0),
-                                  title: CustomText(
-                                    text: 'no'.tr,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                  value: 'no',
-                                  groupValue: fridayValue,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      fridayValue = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    const SizedBox(
-                      height: 120,
-                    ),
-                  ],
+                          ],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 16,
+                      );
+                    },
+                  ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                color: Colors.white,
-                width: width,
-                height: 100,
-                padding: const EdgeInsets.symmetric(horizontal: 16)
-                    .copyWith(bottom: 40),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: CustomButton(
-                        onPressed: widget.onPreviousTap,
-                        title: 'cancel'.tr,
-                        backgroundColor: paleGrey,
-                        foregroundColor: darkGrey,
+
+                // const SizedBox(
+                //   height: 120,
+                // ),
+                // const Spacer(),
+                // const SizedBox(
+                //   height: 16,
+                // ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  color: Colors.white,
+                  width: width,
+                  height: 80,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: CustomButton(
+                          onPressed: widget.onPreviousTap,
+                          title: 'cancel'.tr,
+                          backgroundColor: paleGrey,
+                          foregroundColor: darkGrey,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 9,
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Obx(() {
-                        if (widget.checkoutController.isSavingCalendar.value) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return CustomButton(
-                          onPressed: () {
-                            if (widget
-                                    .checkoutController.cart!.isCombination! ==
-                                'true') {
-                              if (fridayValue != null) {
+                      const SizedBox(
+                        width: 9,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Obx(() {
+                          if (widget
+                              .checkoutController.isSavingCalendar.value) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return CustomButton(
+                            onPressed: () {
+                              if (widget.checkoutController.cart!
+                                      .isCombination! ==
+                                  'true') {
+                                print(DateFormat('dd/MM/yyyy').format(today));
+                                // if (fridayValue != null) {
                                 widget.onNextTap(
                                   DateFormat('dd/MM/yyyy').format(today),
-                                  fridayValue!,
+                                  'no',
                                 );
+                                // } else {
+                                //   AppUtil.errorToast(context, 'completeInfo'.tr);
+                                // }
                               } else {
-                                AppUtil.errorToast(context, 'completeInfo'.tr);
+                                widget.onNextTap(
+                                  '',
+                                  '',
+                                );
                               }
-                            } else {
-                              widget.onNextTap(
-                                '',
-                                '',
-                              );
-                            }
-                          },
-                          title: 'next'.tr,
-                        );
-                      }),
-                    ),
-                  ],
+                            },
+                            title: 'next'.tr,
+                          );
+                        }),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
           );
   }
 }

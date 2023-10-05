@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
 import 'package:palta/auth/view/verify_phone_screen.dart';
+import 'package:palta/constants/colors.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_body_title.dart';
@@ -21,6 +22,7 @@ class EditDetailsScreen extends StatefulWidget {
     this.phone,
     this.isFromSocialLogin = false,
     this.customerId,
+    this.disableEmail = true,
   });
 
   final ProfileController profileController;
@@ -30,6 +32,7 @@ class EditDetailsScreen extends StatefulWidget {
   final String? phone;
   final bool isFromSocialLogin;
   final String? customerId;
+  final bool disableEmail;
 
   @override
   State<EditDetailsScreen> createState() => _EditDetailsScreenState();
@@ -83,6 +86,21 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                 const SizedBox(
                   height: 40,
                 ),
+                if (!widget.disableEmail)
+                  Center(
+                    child: CustomText(
+                      text: 'emailMarketing'.tr,
+                      textAlign: TextAlign.center,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      height: 1.5,
+                      color: vermillion,
+                    ),
+                  ),
+                if (!widget.disableEmail)
+                  const SizedBox(
+                    height: 40,
+                  ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
@@ -152,7 +170,8 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                         hintText: 'emailAddress'.tr,
                         textInputType: TextInputType.emailAddress,
                         prefixIcon: const Icon(Icons.alternate_email),
-                        readOnly: widget.isFromSocialLogin,
+                        readOnly:
+                            widget.isFromSocialLogin && widget.disableEmail,
                       ),
                       const SizedBox(
                         height: 26,
@@ -193,7 +212,8 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                         height: 40,
                       ),
                       Obx(() {
-                        if (widget.profileController.isProfileLoading.value) {
+                        if (widget.profileController.isProfileLoading.value ||
+                            _authController.isVerifyPhoneLoading.value) {
                           return const Center(
                               child: CircularProgressIndicator());
                         }
@@ -231,10 +251,12 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                                     context: context,
                                   );
                                   if (isOTPSentSuccess) {
-                                    Get.to(() => VerifyPhoneScreen(
-                                          customerId: widget.customerId!,
-                                          phone: _phoneNumberController.text,
-                                        ));
+                                    Get.to(
+                                      () => VerifyPhoneScreen(
+                                        customerId: widget.customerId!,
+                                        phone: _phoneNumberController.text,
+                                      ),
+                                    );
                                   }
                                 } else {
                                   Get.back();

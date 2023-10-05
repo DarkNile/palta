@@ -21,8 +21,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/cart/cart&language=$lang'),
       headers: {
         "Accept": "application/json",
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-        'Authorization': 'Bearer $token'
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
       },
     );
     print('response status code: ${response.statusCode}');
@@ -54,8 +55,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/cart/cart&language=$lang'),
       headers: {
         "Accept": "application/json",
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-        'Authorization': 'Bearer $token'
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
       },
       body: hasCombination
           ? json.encode({
@@ -103,8 +105,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/calendar/calendarsave'),
       headers: {
         "Accept": "application/json",
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-        'Authorization': 'Bearer $token'
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
       },
       body: json.encode({
         'calendar_start': date,
@@ -137,8 +140,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/cart/cart&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-        'Authorization': 'Bearer $token'
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
       },
       body: json.encode({
         'key': productId,
@@ -166,8 +170,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/cart/cart&key=$productId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-        'Authorization': 'Bearer $token'
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
       },
     );
     print('response status code: ${response.statusCode}');
@@ -189,8 +194,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/cart/emptycart&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
-        'Authorization': 'Bearer $token'
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
       },
     );
     print('response status code: ${response.statusCode}');
@@ -216,8 +222,9 @@ class CheckoutService {
           '${baseUrl}route=rest/shipping_address/shippingaddress&existing=1&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
       body: jsonEncode({
         "address_id": addressId,
@@ -252,8 +259,9 @@ class CheckoutService {
           '${baseUrl}route=rest/payment_address/paymentaddress&existing=1&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
       body: jsonEncode({
         "address_id": addressId,
@@ -287,8 +295,9 @@ class CheckoutService {
           '${baseUrl}route=rest/shipping_method/shippingmethods&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -323,8 +332,9 @@ class CheckoutService {
             '${baseUrl}route=rest/shipping_method/shippingmethods&language=$lang'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          "Cookie":
+              "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
         },
         body: jsonEncode({
           "shipping_method": shippingMethodCode,
@@ -363,8 +373,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/payment_method/payments&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -398,8 +409,9 @@ class CheckoutService {
             '${baseUrl}route=rest/payment_method/payments&language=$lang'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          "Cookie":
+              "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
         },
         body: jsonEncode({
           "payment_method": paymentMethodCode,
@@ -441,8 +453,9 @@ class CheckoutService {
         Uri.parse('${baseUrl}route=rest/cart/coupon&language=$lang'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          "Cookie":
+              "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
         },
         body: jsonEncode(
           {
@@ -482,8 +495,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/cart/coupon&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
 
@@ -514,8 +528,9 @@ class CheckoutService {
       Uri.parse('${baseUrl}route=rest/confirm/confirm&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
 
@@ -549,8 +564,9 @@ class CheckoutService {
           '${baseUrl}route=rest/confirm/saveOrderToDatabase&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
