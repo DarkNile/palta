@@ -273,74 +273,74 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     },
                     title: 'contactUs',
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Center(
-                    child: DropdownButtonFormField<String>(
-                        icon: Container(),
-                        decoration: const InputDecoration(
-                          isDense: true,
-                          prefixIcon: Icon(Icons.language),
-                          prefixIconColor: Colors.black,
-                          suffixIcon: Icon(Icons.keyboard_arrow_down),
-                          suffixIconColor: Colors.black,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: darkGrey,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: darkGrey,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: darkGrey,
-                            ),
-                          ),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            borderSide: BorderSide(
-                              color: darkGrey,
-                            ),
-                          ),
-                        ),
-                        items: [
-                          DropdownMenuItem(
-                            value: 'ar',
-                            child: CustomText(
-                              text: 'arabicLanguage'.tr,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          DropdownMenuItem(
-                            value: 'en-gb',
-                            child: CustomText(
-                              text: 'englishLanguage'.tr,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                        value: Get.locale!.languageCode,
-                        onChanged: (String? value) {
-                          setState(() {
-                            lang = value!;
-                          });
-                          Get.updateLocale(Locale(lang));
-                          final getStorage = GetStorage();
-                          getStorage.write('lang', lang);
-                          Get.deleteAll(force: true);
-                          Phoenix.rebirth(Get.context!);
-                          Get.reset();
-                        }),
-                  ),
+                  // const SizedBox(
+                  //   height: 16,
+                  // ),
+                  // Center(
+                  //   child: DropdownButtonFormField<String>(
+                  //       icon: Container(),
+                  //       decoration: const InputDecoration(
+                  //         isDense: true,
+                  //         prefixIcon: Icon(Icons.language),
+                  //         prefixIconColor: Colors.black,
+                  //         suffixIcon: Icon(Icons.keyboard_arrow_down),
+                  //         suffixIconColor: Colors.black,
+                  //         border: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: darkGrey,
+                  //           ),
+                  //         ),
+                  //         focusedBorder: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: darkGrey,
+                  //           ),
+                  //         ),
+                  //         enabledBorder: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: darkGrey,
+                  //           ),
+                  //         ),
+                  //         disabledBorder: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.all(Radius.circular(8)),
+                  //           borderSide: BorderSide(
+                  //             color: darkGrey,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       items: [
+                  //         DropdownMenuItem(
+                  //           value: 'ar',
+                  //           child: CustomText(
+                  //             text: 'arabicLanguage'.tr,
+                  //             fontSize: 16,
+                  //             fontWeight: FontWeight.w400,
+                  //           ),
+                  //         ),
+                  //         DropdownMenuItem(
+                  //           value: 'en-gb',
+                  //           child: CustomText(
+                  //             text: 'englishLanguage'.tr,
+                  //             fontSize: 16,
+                  //             fontWeight: FontWeight.w400,
+                  //           ),
+                  //         ),
+                  //       ],
+                  //       value: Get.locale!.languageCode,
+                  //       onChanged: (String? value) {
+                  //         setState(() {
+                  //           lang = value!;
+                  //         });
+                  //         Get.updateLocale(Locale(lang));
+                  //         final getStorage = GetStorage();
+                  //         getStorage.write('lang', lang);
+                  //         Get.deleteAll(force: true);
+                  //         Phoenix.rebirth(Get.context!);
+                  //         Get.reset();
+                  //       }),
+                  // ),
                   const SizedBox(
                     height: 16,
                   ),

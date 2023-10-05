@@ -1,10 +1,10 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/widgets/custom_text.dart';
-import 'package:flutter_flushbar/flutter_flushbar.dart';
 
 class AppUtil {
   static bool rtlDirection(context) {

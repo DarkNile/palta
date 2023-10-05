@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -28,8 +29,8 @@ class AuthService {
         Uri.parse('${baseUrl}route=rest/register/register&language=$lang'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          // "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
         },
         body: json.encode({
           'firstname': firstName.trim(),
@@ -46,7 +47,7 @@ class AuthService {
     if (jsonDecode(response.body)['success'] == 1) {
       Map<String, dynamic> user = jsonDecode(response.body)['data'];
       print(user);
-      String token = user['access_token'];
+      String token = user['session_id'];
       print(token);
       var customerId = user['customer_id'];
       print(customerId);
@@ -78,8 +79,8 @@ class AuthService {
         Uri.parse('${baseUrl}route=rest/login/login&language=$lang'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          // "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
         },
         body: json.encode({
           'email': email.trim(),
@@ -92,7 +93,7 @@ class AuthService {
     if (jsonDecode(response.body)['success'] == 1) {
       Map<String, dynamic> user = jsonDecode(response.body)['data'];
       print(user);
-      String token = user['access_token'];
+      String token = user['session_id'];
       print(token);
       var customerId = user['customer_id'];
       print(customerId);
@@ -120,17 +121,20 @@ class AuthService {
       Uri.parse('${baseUrl}route=rest/logout/logout&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print("response.statusCode");
     print(response.statusCode);
     print(response.body);
-    if (jsonDecode(response.body)['success'] == 1) {
+    if (response.statusCode == 200) {
       getStorage.remove('token');
       getStorage.remove('customerId');
-      Get.offAll(() => const HomePage());
+      // Get.offAll(() => const HomePage());
+      Get.deleteAll(force: true);
+      Phoenix.rebirth(Get.context!);
+      Get.reset();
     } else {
       var errorMessage = jsonDecode(response.body)['error'];
       if (context.mounted) {
@@ -150,8 +154,8 @@ class AuthService {
         Uri.parse('${baseUrl}route=rest/forgotten/forgotten&language=$lang'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: json.encode({
           'email': email.trim(),
@@ -181,8 +185,8 @@ class AuthService {
         await http.post(Uri.parse('${baseUrl}route=rest/forgotten/check_otp'),
             headers: {
               'Accept': 'application/json',
-              'Authorization': 'Bearer $token',
-              "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+              // 'Authorization': 'Bearer $token',
+              "Cookie": "OCSESSID=$token; currency=SAR;",
             },
             body: jsonEncode({
               'email': email.trim(),
@@ -216,8 +220,8 @@ class AuthService {
         Uri.parse('${baseUrl}route=rest/account/password&language=$lang'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: jsonEncode({
           'email': email.trim(),
@@ -254,8 +258,8 @@ class AuthService {
     final response = await http.post(Uri.parse('${baseUrl}route=rest/phoneotp'),
         headers: {
           'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+          // 'Authorization': 'Bearer $token',
+          "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: json.encode({
           'customer_id': customerId,
@@ -293,8 +297,8 @@ class AuthService {
         await http.post(Uri.parse('${baseUrl}route=rest/phoneotp/check_otp'),
             headers: {
               'Accept': 'application/json',
-              'Authorization': 'Bearer $token',
-              "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+              // 'Authorization': 'Bearer $token',
+              "Cookie": "OCSESSID=$token; currency=SAR;",
             },
             body: jsonEncode({
               'customer_id': customerId,
@@ -335,8 +339,8 @@ class AuthService {
       Uri.parse('${baseUrl}route=rest/login/socialLogin&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        // "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
       body: json.encode({
         "email": email.trim(),
@@ -348,8 +352,12 @@ class AuthService {
     if (jsonDecode(response.body)['success'] == 1) {
       Map<String, dynamic> user = jsonDecode(response.body)['data'];
       print(user);
+      String? token = user['session_id'];
+      print(token);
       var customerId = user['customer_id'];
+      print(customerId);
       final getStorage = GetStorage();
+      getStorage.write('token', token);
       getStorage.write('customerId', customerId.toString());
       return User.fromJson(user);
     } else {
@@ -372,8 +380,8 @@ class AuthService {
       Uri.parse('${baseUrl}route=rest/account/deleteUser&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print("response.statusCode");

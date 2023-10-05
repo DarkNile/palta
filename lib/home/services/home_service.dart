@@ -28,8 +28,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=feed/rest_api/banners&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -52,8 +53,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=feed/rest_api/categories&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -77,8 +79,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/products&limit=50&page=1&product_type=1&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -104,8 +107,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/products&limit=50&page=1&product_type=2&meal_type=$mealType&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -129,8 +133,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/products&limit=50&page=1&product_type=3&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -156,8 +161,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/combinationmain&id=$productId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -186,8 +192,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/combinationsub&id=$productId&option1_id=$optionId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -213,8 +220,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/categories&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -240,8 +248,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/products&category=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -264,8 +273,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/wishlist/wishlist&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -290,8 +300,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/wishlist/wishlist&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('${baseUrl}route=rest/wishlist/wishlist&id=$id&language=$lang');
@@ -318,8 +329,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/wishlist/wishlist&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -348,8 +360,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/contact/send&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
       body: jsonEncode({
         "name": "$firstName $lastName",
@@ -380,8 +393,9 @@ class HomeService {
           '${baseUrl}route=feed/rest_api/information&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -404,8 +418,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=feed/rest_api/locations&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -432,8 +447,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/blogpost&user=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -458,8 +474,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/blogpost&blog_id=$blogId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('My articles --------------------------------');
@@ -486,8 +503,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/blogreview/add'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
       body: jsonEncode(reviewModel.toJson()),
     );
@@ -511,8 +529,9 @@ class HomeService {
           '${baseUrl}route=rest/blogreview&blog_id=$blogId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -540,8 +559,9 @@ class HomeService {
           '${baseUrl}route=rest/notifications&customer_id=$customerId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -659,8 +679,9 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/assessment'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
       body: jsonEncode({
         'step_1': step1,
