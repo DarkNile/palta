@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
     _homeController.getGuidances();
     _profileController.getAccount();
     _checkoutController.getCartItems();
+    _profileController.contactNada();
     checkAppVersion();
   }
 

@@ -3,12 +3,14 @@ class Contact {
   final String? msg;
   final String? phoneNada;
   final String? msgNada;
+  final String? showSubscription;
 
   Contact({
     this.phone,
     this.msg,
     this.phoneNada,
     this.msgNada,
+    this.showSubscription,
   });
 
   factory Contact.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class Contact {
       msg: json['msg'],
       phoneNada: json['phone_nada'],
       msgNada: json['msg_nada'],
+      showSubscription: json['show_subscription'],
     );
   }
 
@@ -26,6 +29,7 @@ class Contact {
       'msg': msg,
       'phone_nada': phoneNada,
       'msg_nada': msgNada,
+      'show_subscription': showSubscription,
     };
   }
 }
