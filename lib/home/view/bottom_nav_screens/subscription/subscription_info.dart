@@ -580,134 +580,115 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Obx(() {
-              if (_profileController.isConactNadaLoading.value) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: CircularProgressIndicator(),
-                );
-              }
-
-              return _profileController.contact.value.showSubscription! ==
-                      'false'
-                  ? Container()
-                  : Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
-                      width: width,
-                      height: 120,
-                      color: Colors.white,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomText(
-                                    text: 'startFrom'.tr,
-                                  ),
-                                  Row(
-                                    children: [
-                                      CustomText(
-                                        text:
-                                            '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
-                                        fontSize: 20,
-                                        color: avocado,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                      CustomText(
-                                        text: 'riyal'.tr,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                      ),
-                                    ],
-                                  )
-                                ],
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              width: width,
+              height: 120,
+              color: Colors.white,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomText(
+                            text: 'startFrom'.tr,
+                          ),
+                          Row(
+                            children: [
+                              CustomText(
+                                text:
+                                    '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
+                                fontSize: 20,
+                                color: avocado,
+                                fontWeight: FontWeight.w700,
                               ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: CustomButton(
-                                onPressed: () async {
-                                  if (customerId != null &&
-                                      customerId!.isNotEmpty &&
-                                      customerId ==
-                                          _profileController.user.value.id
-                                              .toString()) {
-                                    if (widget.hasCombination) {
-                                      _homeController.getCombination(
-                                          productId:
-                                              widget.program.id.toString());
-                                      showModalBottomSheet<void>(
-                                        context: context,
-                                        backgroundColor: Colors.white,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(30),
-                                              topRight: Radius.circular(30)),
-                                        ),
-                                        builder: (BuildContext context) {
-                                          return SubscriptionNowSheet(
-                                            program: widget.program,
-                                            homeController: _homeController,
-                                            checkoutController:
-                                                _checkoutController,
-                                          );
-                                        },
-                                      );
-                                    } else {
-                                      final isSuccess =
-                                          await _checkoutController.addToCart(
-                                        productId: widget.program.id.toString(),
-                                        quantity: '1',
-                                        hasCombination: false,
-                                      );
-                                      if (isSuccess) {
-                                        Get.to(
-                                          () => const CheckoutScreen(),
-                                        );
-                                        FirebaseAnalytics.instance.logAddToCart(
-                                          items: [
-                                            AnalyticsEventItem(
-                                              itemId:
-                                                  widget.program.id.toString(),
-                                              itemName: widget.program.name,
-                                              price: double.parse(widget
-                                                  .program.price
-                                                  .toString()),
-                                              currency: 'SAR',
-                                              quantity: int.parse(widget
-                                                  .program.quantity
-                                                  .toString()),
-                                            ),
-                                          ],
-                                          value: double.parse(
-                                              widget.program.price.toString()),
-                                          currency: 'SAR',
-                                        );
-                                        AppsFlyerService.logAddToCart(
-                                          id: widget.program.id.toString(),
-                                          name: widget.program.name!,
-                                          price: double.parse(
-                                              widget.program.price.toString()),
-                                          currency: 'SAR',
-                                          quantity: 1,
-                                        );
-                                      }
-                                    }
-                                  } else {
-                                    Get.to(() => const LoginScreen());
-                                  }
+                              CustomText(
+                                text: 'riyal'.tr,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: CustomButton(
+                        onPressed: () async {
+                          if (customerId != null &&
+                              customerId!.isNotEmpty &&
+                              customerId ==
+                                  _profileController.user.value.id.toString()) {
+                            if (widget.hasCombination) {
+                              _homeController.getCombination(
+                                  productId: widget.program.id.toString());
+                              showModalBottomSheet<void>(
+                                context: context,
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(30),
+                                      topRight: Radius.circular(30)),
+                                ),
+                                builder: (BuildContext context) {
+                                  return SubscriptionNowSheet(
+                                    program: widget.program,
+                                    homeController: _homeController,
+                                    checkoutController: _checkoutController,
+                                  );
                                 },
-                                title: 'subscribeNow'.tr,
-                              ),
-                            ),
-                          ]),
-                    );
-            }),
+                              );
+                            } else {
+                              final isSuccess =
+                                  await _checkoutController.addToCart(
+                                productId: widget.program.id.toString(),
+                                quantity: '1',
+                                hasCombination: false,
+                              );
+                              if (isSuccess) {
+                                Get.to(
+                                  () => const CheckoutScreen(),
+                                );
+                                FirebaseAnalytics.instance.logAddToCart(
+                                  items: [
+                                    AnalyticsEventItem(
+                                      itemId: widget.program.id.toString(),
+                                      itemName: widget.program.name,
+                                      price: double.parse(
+                                          widget.program.price.toString()),
+                                      currency: 'SAR',
+                                      quantity: int.parse(
+                                          widget.program.quantity.toString()),
+                                    ),
+                                  ],
+                                  value: double.parse(
+                                      widget.program.price.toString()),
+                                  currency: 'SAR',
+                                );
+                                AppsFlyerService.logAddToCart(
+                                  id: widget.program.id.toString(),
+                                  name: widget.program.name!,
+                                  price: double.parse(
+                                      widget.program.price.toString()),
+                                  currency: 'SAR',
+                                  quantity: 1,
+                                );
+                              }
+                            }
+                          } else {
+                            Get.to(() => const LoginScreen());
+                          }
+                        },
+                        title: 'subscribeNow'.tr,
+                      ),
+                    ),
+                  ]),
+            ),
           ),
         ],
       ),

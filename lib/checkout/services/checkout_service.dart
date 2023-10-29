@@ -571,7 +571,35 @@ class CheckoutService {
     );
     print('response status code: ${response.statusCode}');
     if (response.statusCode == 200) {
-      print('${baseUrl}route=rest/confirm/saveOrderToDatabase&language=$lang');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<bool> addNote({required String comment}) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    print('comment from service: $comment');
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/confirm/saveComment&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+      },
+      body: jsonEncode(
+        {
+          "comment": comment,
+        },
+      ),
+    );
+    print('response status code: ${response.statusCode}');
+    if (response.statusCode == 200) {
       return true;
     } else {
       return false;

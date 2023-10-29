@@ -1,8 +1,3 @@
-import 'dart:io';
-
-import 'package:android_id/android_id.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
@@ -126,6 +121,9 @@ class _HomePageState extends State<HomePage> {
           currentIndex: _currentIndex,
           onTap: (index) {
             if (index == 4 || index == 2) {
+              print('customer id: $customerId');
+              print(
+                  'profile id: ${_profileController.user.value.id.toString()}');
               if (customerId != null &&
                   customerId!.isNotEmpty &&
                   customerId == _profileController.user.value.id.toString()) {
@@ -173,6 +171,7 @@ class _HomePageState extends State<HomePage> {
               ),
               GuideScreen(
                 homeController: _homeController,
+                profileController: _profileController,
               ),
               ProfileScreen(
                 homeController: _homeController,

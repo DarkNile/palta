@@ -35,7 +35,8 @@ class ProfileService {
     print("response.statusCode");
     print(response.statusCode);
     print('${baseUrl}route=rest/account/account');
-    print('${jsonDecode(response.body)}');
+    print('session id profile: $token');
+    print('amgad ${jsonDecode(response.body)}');
 
     if (jsonDecode(response.body)['success'] == 1) {
       Map<String, dynamic> user = jsonDecode(response.body)['data'];

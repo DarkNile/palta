@@ -348,7 +348,7 @@ class AuthService {
         "provider": provider,
       }),
     );
-    print('${jsonDecode(response.body)}');
+    print('session id: ${jsonDecode(response.body)}');
     if (jsonDecode(response.body)['success'] == 1) {
       Map<String, dynamic> user = jsonDecode(response.body)['data'];
       print(user);

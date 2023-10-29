@@ -381,4 +381,6 @@ const Map<String, String> en = {
   'kg': 'kg',
   'cm': 'cm',
   'browseGuidlances': 'Browse Guidlances',
+  'customerNotes': 'Customer Notes',
+  'ourMenu': 'Our Menu',
 };

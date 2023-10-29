@@ -425,6 +425,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       },
                       onConfirmOrderTap: () async {
                         print(
+                            'comment from controller: ${_checkoutController.notesController.value.text}');
+                        print(
                             'order number: ${_checkoutController.order!.orderId}');
                         if (_checkoutController.order!.paymentCode! ==
                             'paytabs_creditcard') {
@@ -440,8 +442,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                             _checkoutController.order!.orderId!.toString(),
                           );
                         } else {
-                          final isSuccess =
-                              await _checkoutController.saveOrderToDatabase(
+                          final isSuccess = await _checkoutController.addNote(
                             order: _checkoutController.order!,
                           );
                           if (isSuccess) {
@@ -511,7 +512,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
             print('${transactionDetails["isSuccess"]}');
             if (transactionDetails["isSuccess"]) {
               print("successful transaction");
-              _checkoutController.saveOrderToDatabase(
+              _checkoutController.addNote(
                 order: _checkoutController.order!,
               );
               Get.offAll(() => ThankYouScreen(
