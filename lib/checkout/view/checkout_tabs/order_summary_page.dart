@@ -360,6 +360,45 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
+                        text: 'customerNotes'.tr,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: pineGreen,
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      const Divider(
+                        thickness: 1,
+                        color: lighGrey,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      CustomTextField(
+                        controller:
+                            widget.checkoutController.notesController.value,
+                        hintText: 'customerNotes'.tr,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: 16,
+                    bottom: 16,
+                  ),
+                  color: veryLightPink,
+                  width: width,
+                  height: 6,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  color: Colors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
                         text: 'totalInvoice'.tr,
                         fontWeight: FontWeight.w700,
                         fontSize: 16,

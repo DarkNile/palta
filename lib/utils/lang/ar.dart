@@ -362,4 +362,6 @@ const Map<String, String> ar = {
   'kg': 'كج',
   'cm': 'سم',
   'browseGuidlances': 'تصفح الإرشادات',
+  'customerNotes': 'ملاحظات العميل',
+  'ourMenu': 'عرض المنيو',
 };

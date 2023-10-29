@@ -224,20 +224,28 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: width * 0.1),
-                      child: CustomButton(
-                        radius: 12,
-                        onPressed: () async {
-                          final contact = await profileController.contactNada();
-                          if (contact != null) {
-                            await launchUrlString(
-                                'whatsapp://send?phone=${contact.phone!}');
-                          }
-                        },
-                        title: 'AskForNutritionalAdvice'.tr,
-                      ),
-                    ),
+                    Obx(() {
+                      return profileController
+                                  .contact.value.showSubscription! ==
+                              'false'
+                          ? Container()
+                          : Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: width * 0.1),
+                              child: CustomButton(
+                                radius: 12,
+                                onPressed: () async {
+                                  final contact =
+                                      await profileController.contactNada();
+                                  if (contact != null) {
+                                    await launchUrlString(
+                                        'whatsapp://send?phone=${contact.phone!}');
+                                  }
+                                },
+                                title: 'AskForNutritionalAdvice'.tr,
+                              ),
+                            );
+                    }),
                   ],
                 ),
               ),

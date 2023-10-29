@@ -139,6 +139,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   //     title: 'signIn',
                   //   ),
                   CustomDrawerTile(
+                    onTap: () async {
+                      await launchUrlString(
+                          'https://paltaksa.com/upload/menu_pdf/Menu.pdf');
+                    },
+                    title: 'ourMenu',
+                  ),
+                  CustomDrawerTile(
                     onTap: () {
                       setState(() {
                         showPrograms = !showPrograms;

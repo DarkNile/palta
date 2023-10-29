@@ -31,6 +31,8 @@ class CheckoutController extends GetxController {
   var isSavingCalendar = false.obs;
   var isCouponAdded = false.obs;
   var couponController = TextEditingController().obs;
+  var notesController = TextEditingController().obs;
+  var isAddingNoteLoading = false.obs;
 
   Future<Cart?> getCartItems() async {
     try {
@@ -355,6 +357,27 @@ class CheckoutController extends GetxController {
       return null;
     } finally {
       isConfirmOrderLoading(false);
+    }
+  }
+
+  Future<bool> addNote({
+    required Order order,
+  }) async {
+    try {
+      isAddingNoteLoading(true);
+      print('comment from controller: ${notesController.value.text}');
+      final isSuccess = await CheckoutService.addNote(
+        comment: notesController.value.text,
+      );
+      if (isSuccess) {
+        saveOrderToDatabase(order: order);
+      }
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isAddingNoteLoading(false);
     }
   }
 
