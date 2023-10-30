@@ -179,7 +179,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 icon: _homeController.programs.length > 3
                                     ? 'muscle'
                                     : widget.programIcons[index],
-                                hasCombination: true,
+                                // hasCombination: true,
                               ),
                             );
                           },

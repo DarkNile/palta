@@ -236,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         //     ? 'muscle'
                         //     : widget.programIcons[index],
                         icon: 'subscribe',
-                        hasCombination: true,
+                        // hasCombination: true,
                       ),
                     );
                   },

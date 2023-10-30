@@ -63,7 +63,7 @@ class ProgramsScreen extends StatelessWidget {
                         //     ? 'muscle'
                         //     : programIcons[index],
                         icon: 'subscribe',
-                        hasCombination: true,
+                        // hasCombination: true,
                       ),
                     );
                   },

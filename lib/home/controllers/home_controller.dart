@@ -366,49 +366,49 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<List<Combination>?> getCombination({
-    required String productId,
-  }) async {
-    try {
-      isCombinationsLoading(true);
-      final data = await HomeService.getCombination(productId: productId);
-      if (data != null) {
-        combinations(data);
-        return combinations;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print(e);
-      return null;
-    } finally {
-      isCombinationsLoading(false);
-    }
-  }
+  // Future<List<Combination>?> getCombination({
+  //   required String productId,
+  // }) async {
+  //   try {
+  //     isCombinationsLoading(true);
+  //     final data = await HomeService.getCombination(productId: productId);
+  //     if (data != null) {
+  //       combinations(data);
+  //       return combinations;
+  //     } else {
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //     return null;
+  //   } finally {
+  //     isCombinationsLoading(false);
+  //   }
+  // }
 
-  Future<List<SubCombination>?> getSubCombination({
-    required String productId,
-    required String optionId,
-  }) async {
-    try {
-      isSubCombinationsLoading(true);
-      final data = await HomeService.getSubCombination(
-        productId: productId,
-        optionId: optionId,
-      );
-      if (data != null) {
-        subCombinations(data);
-        return subCombinations;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print(e);
-      return null;
-    } finally {
-      isSubCombinationsLoading(false);
-    }
-  }
+  // Future<List<SubCombination>?> getSubCombination({
+  //   required String productId,
+  //   required String optionId,
+  // }) async {
+  //   try {
+  //     isSubCombinationsLoading(true);
+  //     final data = await HomeService.getSubCombination(
+  //       productId: productId,
+  //       optionId: optionId,
+  //     );
+  //     if (data != null) {
+  //       subCombinations(data);
+  //       return subCombinations;
+  //     } else {
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //     return null;
+  //   } finally {
+  //     isSubCombinationsLoading(false);
+  //   }
+  // }
 
   Future<List<Category>?> getSubCategories({required String id}) async {
     try {

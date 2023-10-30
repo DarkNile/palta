@@ -28,8 +28,8 @@ class SubscriptionNowSheet extends StatefulWidget {
 
 class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
   int? selectedDayIndex;
-  int? selectedNumberIndex;
   String? selectedPrice;
+  String? selectedMainPrice;
   String? option1Id;
   String? option2Id;
 
@@ -51,170 +51,131 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
               const SizedBox(
                 height: 19,
               ),
-              Obx(() {
-                if (widget.homeController.isCombinationsLoading.value) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                widget.homeController.combinations.sort(
-                    (a, b) => int.parse(a.days).compareTo(int.parse(b.days)));
-                return SizedBox(
-                  height: 48,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectedDayIndex = index;
-                            selectedNumberIndex = null;
-                            selectedPrice = null;
-                          });
-                          widget.homeController.getSubCombination(
-                            productId: widget.program.id.toString(),
-                            optionId: widget
-                                .homeController.combinations[index].optionId,
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
+              SizedBox(
+                height: 48,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedDayIndex = index;
+                          selectedPrice = widget
+                              .program.options!.first.option![index].price;
+                          selectedMainPrice = widget
+                              .program.options!.first.option![index].mainPrice;
+                          option1Id = widget
+                              .program.options!.first.productOptionId
+                              .toString();
+                          option2Id = widget.program.options!.first
+                              .option![index].productOptionValueId
+                              .toString();
+                          print(option1Id);
+                          print(option2Id);
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:
+                              selectedDayIndex == index ? pineGreen : paleGrey,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(4)),
+                        ),
+                        width: 82,
+                        height: 48,
+                        alignment: Alignment.center,
+                        child: Center(
+                          child: CustomText(
+                            text: widget
+                                .program.options!.first.option![index].name,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            textAlign: TextAlign.center,
                             color: selectedDayIndex == index
-                                ? pineGreen
-                                : paleGrey,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(4)),
-                          ),
-                          width: 82,
-                          height: 48,
-                          alignment: Alignment.center,
-                          child: Center(
-                            child: CustomText(
-                              text: widget
-                                  .homeController.combinations[index].days,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              textAlign: TextAlign.center,
-                              color: selectedDayIndex == index
-                                  ? Colors.white
-                                  : darkGrey,
-                            ),
+                                ? Colors.white
+                                : darkGrey,
                           ),
                         ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        width: 9,
-                      );
-                    },
-                    itemCount: widget.homeController.combinations.length,
-                  ),
-                );
-              }),
-              const SizedBox(
-                height: 32,
+                      ),
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      width: 9,
+                    );
+                  },
+                  itemCount: widget.program.options!.first.option!.length,
+                ),
               ),
-              CustomText(
-                text: 'numberOfPerson'.tr,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-              const SizedBox(
-                height: 19,
-              ),
-              Obx(() {
-                if (widget.homeController.isSubCombinationsLoading.value) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                widget.homeController.subCombinations.sort((a, b) =>
-                    int.parse(a.numberOfIndividuals)
-                        .compareTo(int.parse(b.numberOfIndividuals)));
-                return SizedBox(
-                  height: 48,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectedNumberIndex = index;
-                            selectedPrice = widget
-                                .homeController.subCombinations[index].price;
-                            option1Id = widget.homeController
-                                .subCombinations[index].option1Id;
-                            option2Id = widget.homeController
-                                .subCombinations[index].option2Id;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: selectedNumberIndex == index
-                                ? pineGreen
-                                : paleGrey,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(4)),
-                          ),
-                          width: 64,
-                          height: 48,
-                          alignment: Alignment.center,
-                          child: Center(
-                            child: CustomText(
-                              text: widget.homeController.subCombinations[index]
-                                  .numberOfIndividuals,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              textAlign: TextAlign.center,
-                              color: selectedNumberIndex == index
-                                  ? Colors.white
-                                  : darkGrey,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        width: 9,
-                      );
-                    },
-                    itemCount: widget.homeController.subCombinations.length,
-                  ),
-                );
-              }),
             ],
           ),
-          if (selectedPrice != null)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          if (selectedPrice != null && selectedMainPrice != null)
+            Column(
               children: [
-                CustomText(
-                  text: 'total'.tr,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                if (selectedPrice != selectedMainPrice)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: 'priceBeforeDiscount'.tr,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      Row(
+                        children: [
+                          CustomText(
+                            text: selectedMainPrice!,
+                            fontSize: 20,
+                            color: vermillion,
+                            fontWeight: FontWeight.w700,
+                            textDecoration: TextDecoration.lineThrough,
+                          ),
+                          CustomText(
+                            text: 'riyal'.tr,
+                            fontSize: 14,
+                            color: vermillion,
+                            fontWeight: FontWeight.w400,
+                            textDecoration: TextDecoration.lineThrough,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                if (selectedPrice != selectedMainPrice)
+                  const Divider(
+                    height: 32,
+                  ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      text:
-                          '${double.parse(selectedPrice.toString()).toStringAsFixed(2)} ',
-                      fontSize: 20,
-                      color: avocado,
-                      fontWeight: FontWeight.w700,
+                      text: selectedPrice != selectedMainPrice
+                          ? 'priceAfterDiscount'.tr
+                          : 'total'.tr,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
-                    CustomText(
-                      text: 'riyal'.tr,
-                      fontSize: 14,
-                      color: avocado,
-                      fontWeight: FontWeight.w400,
+                    Row(
+                      children: [
+                        CustomText(
+                          text: selectedPrice!,
+                          fontSize: 20,
+                          color: avocado,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        CustomText(
+                          text: 'riyal'.tr,
+                          fontSize: 14,
+                          color: avocado,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-          if (selectedPrice != null)
+          if (selectedPrice != null && selectedMainPrice != null)
             CustomButton(
               onPressed: () async {
                 Get.back();
@@ -235,20 +196,23 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
                       AnalyticsEventItem(
                         itemId: widget.program.id.toString(),
                         itemName: widget.program.name,
-                        price: double.parse(selectedPrice.toString()),
+                        price: double.parse(
+                            selectedPrice.toString().split(',').join()),
                         currency: 'SAR',
-                        quantity: int.parse(widget.program.quantity.toString()),
+                        quantity: 1,
                       ),
                     ],
-                    value: double.parse(selectedPrice.toString()),
+                    value: double.parse(
+                        selectedPrice.toString().split(',').join()),
                     currency: 'SAR',
                   );
                   AppsFlyerService.logAddToCart(
-                      id: widget.program.id.toString(),
-                      name: widget.program.name!,
-                      price: double.parse(selectedPrice.toString()),
-                      currency: 'SAR',
-                      quantity: 1,
+                    id: widget.program.id.toString(),
+                    name: widget.program.name!,
+                    price: double.parse(
+                        selectedPrice.toString().split(',').join()),
+                    currency: 'SAR',
+                    quantity: 1,
                   );
                 }
               },
