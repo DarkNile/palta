@@ -4,7 +4,8 @@ class Option {
   final String name;
   final int quantity;
   final String? image;
-  final dynamic price;
+  final String price;
+  final String mainPrice;
   final dynamic priceWithoutTax;
 
   Option({
@@ -14,6 +15,7 @@ class Option {
     required this.quantity,
     this.image,
     required this.price,
+    required this.mainPrice,
     required this.priceWithoutTax,
   });
 
@@ -25,6 +27,7 @@ class Option {
       quantity: json['quantity'],
       image: json['image'],
       price: json['price'],
+      mainPrice: json['main_price'],
       priceWithoutTax: json['price_excluding_tax'],
     );
   }
@@ -37,6 +40,7 @@ class Option {
       'quantity': quantity,
       'image': image,
       'price': price,
+      'main_price': mainPrice,
       'price_excluding_tax': priceWithoutTax,
     };
   }

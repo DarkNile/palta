@@ -383,4 +383,6 @@ const Map<String, String> en = {
   'browseGuidlances': 'Browse Guidlances',
   'customerNotes': 'Customer Notes',
   'ourMenu': 'Our Menu',
+  'priceBeforeDiscount': 'Price Before Discount',
+  'priceAfterDiscount': 'Price After Discount',
 };

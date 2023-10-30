@@ -364,4 +364,6 @@ const Map<String, String> ar = {
   'browseGuidlances': 'تصفح الإرشادات',
   'customerNotes': 'ملاحظات العميل',
   'ourMenu': 'عرض المنيو',
+  'priceBeforeDiscount': 'السعر قبل الخصم',
+  'priceAfterDiscount': 'السعر بعد الخصم',
 };

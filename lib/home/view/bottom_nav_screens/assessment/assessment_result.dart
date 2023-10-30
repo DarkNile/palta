@@ -129,7 +129,7 @@ class _AssessmentResultState extends State<AssessmentResult> {
                           _homeController.assessmentResult.value.productId
                               .toString()),
                       icon: 'subscribe',
-                      hasCombination: true,
+                      // hasCombination: true,
                     ),
                   );
                 },

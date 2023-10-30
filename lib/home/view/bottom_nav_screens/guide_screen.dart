@@ -81,7 +81,7 @@ class GuideScreen extends StatelessWidget {
                             Get.to(
                               () => SubscriptionInfo(
                                 // programIndex: index,
-                                hasCombination: false,
+                                // hasCombination: false,
                                 program: homeController.guidances[index],
                               ),
                             );

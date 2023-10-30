@@ -61,9 +61,8 @@ class CheckoutService {
       },
       body: hasCombination
           ? json.encode({
-              'combination_option': {
-                '1': option1Id,
-                '5': option2Id,
+              'option': {
+                option1Id: option2Id,
               },
               'product_id': productId,
               'quantity': quantity,
@@ -75,14 +74,6 @@ class CheckoutService {
     );
     print('response status code: ${response.statusCode}');
     if (json.decode(response.body)['success'] == 1) {
-      print(json.encode({
-        'combination_option': {
-          '1': option1Id,
-          '5': option2Id,
-        },
-        'product_id': productId,
-        'quantity': quantity,
-      }));
       final data = jsonDecode(response.body)['data'];
       print('data: $data');
       return true;
