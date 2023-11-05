@@ -23,7 +23,7 @@ class CustomCheckoutItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                text: 'program'.tr,
+                text: '${'program'.tr} (${product.quantity.toString()})',
                 fontSize: 14,
               ),
               CustomText(

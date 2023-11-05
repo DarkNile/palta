@@ -15,7 +15,11 @@ import 'package:palta/checkout/view/thank_you_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
+import 'package:palta/profile/models/city.dart';
+import 'package:palta/profile/models/district.dart';
 import 'package:palta/utils/app_util.dart';
+import 'package:palta/widgets/custom_button.dart';
+import 'package:palta/widgets/custom_drop_down.dart';
 import 'package:palta/widgets/custom_text.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -34,6 +38,9 @@ class _CheckoutScreenState extends State<CheckoutScreen>
   final _homeController = Get.put(HomeController());
   late TabController _tabController;
   int _tabIndex = 0;
+  final _formKey = GlobalKey<FormState>();
+  City? city;
+  District? district;
 
   @override
   void initState() {
@@ -267,6 +274,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                             _profileController.getAddress(context: context);
                             _profileController.getCountries();
                             _profileController.getZones();
+                            _profileController.getCitiesByZoneId(
+                                zoneId: '2884');
                           }
                           setState(() {
                             _tabIndex = 1;
@@ -294,23 +303,164 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         _tabController.animateTo(_tabIndex);
                       },
                       onNextTap: (checkedIndex) async {
-                        final isSuccess =
-                            await _checkoutController.addShippingAddress(
+                        await showModalBottomSheet(
                           context: context,
-                          addressId: int.parse(
-                            _profileController.addresses[checkedIndex].id,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(24),
+                              topRight: Radius.circular(24),
+                            ),
                           ),
+                          builder: (context) {
+                            return Container(
+                              padding: const EdgeInsets.all(24),
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                      child: CustomText(
+                                        text: 'shippingAddress'.tr,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 24,
+                                    ),
+                                    CustomText(
+                                      text: 'city'.tr,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Obx(() {
+                                      if (_profileController
+                                          .isCitiesLoading.value) {
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      return CustomDropDown(
+                                        value: city,
+                                        hintText: 'city'.tr,
+                                        items: _profileController.cities,
+                                        onChanged: (value) {
+                                          city = value;
+                                          district = null;
+                                          _profileController.getDistricts(
+                                              city: city!.name);
+                                        },
+                                      );
+                                    }),
+                                    const SizedBox(
+                                      height: 24,
+                                    ),
+                                    CustomText(
+                                      text: 'district'.tr,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    Obx(() {
+                                      if (_profileController
+                                          .isDistrictsLoading.value) {
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      return CustomDropDown(
+                                        isDistrict: true,
+                                        value: district,
+                                        hintText: 'district'.tr,
+                                        items: _profileController.districts,
+                                        onChanged: (value) {
+                                          district = value;
+                                        },
+                                      );
+                                    }),
+                                    const SizedBox(
+                                      height: 40,
+                                    ),
+                                    Obx(() {
+                                      if (_profileController
+                                          .isSavingDistrict.value) {
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+                                      return CustomButton(
+                                        onPressed: () async {
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            final isSuccess =
+                                                await _profileController
+                                                    .saveDistrict(
+                                              context: context,
+                                              cityId: city!.name,
+                                              districtId: district!.districtId,
+                                            );
+                                            print(city!.name);
+                                            print(district!.districtId);
+                                            _checkoutController
+                                                .district(district!.districtAr);
+                                            if (isSuccess && context.mounted) {
+                                              final isShippingSuccess =
+                                                  await _checkoutController
+                                                      .addShippingAddress(
+                                                context: context,
+                                                addressId: int.parse(
+                                                  _profileController
+                                                      .addresses[checkedIndex]
+                                                      .id,
+                                                ),
+                                              );
+                                              if (isShippingSuccess &&
+                                                  context.mounted) {
+                                                await _checkoutController
+                                                    .getShippingMethods(
+                                                        context: context);
+                                                Get.back();
+                                                setState(() {
+                                                  _tabIndex = 2;
+                                                });
+                                                _tabController.animateTo(2);
+                                              }
+                                            }
+                                          }
+                                        },
+                                        title: 'save'.tr,
+                                      );
+                                    }),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         );
-                        if (isSuccess) {
-                          if (context.mounted) {
-                            _checkoutController.getShippingMethods(
-                                context: context);
-                          }
-                          setState(() {
-                            _tabIndex = 2;
-                          });
-                          _tabController.animateTo(2);
-                        }
+                        // final isSuccess =
+                        //     await _checkoutController.addShippingAddress(
+                        //   context: context,
+                        //   addressId: int.parse(
+                        //     _profileController.addresses[checkedIndex].id,
+                        //   ),
+                        // );
+                        // if (isSuccess) {
+                        //   if (context.mounted) {
+                        //     _checkoutController.getShippingMethods(
+                        //         context: context);
+                        //   }
+                        //   setState(() {
+                        //     _tabIndex = 2;
+                        //   });
+                        //   _tabController.animateTo(2);
+                        // }
                       },
                     );
                   }),
@@ -329,6 +479,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         _tabController.animateTo(_tabIndex);
                       },
                       onNextTap: (checkedIndex) async {
+                        print(_checkoutController
+                            .shippingMethods[checkedIndex].quote.first.code);
                         final isSuccess =
                             await _checkoutController.addShippingMethod(
                           context: context,
@@ -372,7 +524,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                           if (isSuccess) {
                             if (context.mounted) {
                               // _homeController.getCoupon();
-                              _checkoutController.confirmOrder(
+                              await _checkoutController.confirmOrder(
                                   context: context);
                             }
                             setState(() {

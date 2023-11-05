@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/profile/models/address.dart';
 import 'package:palta/profile/models/city.dart';
-import 'package:palta/profile/models/zone.dart';
+import 'package:palta/profile/models/district.dart';
+// import 'package:palta/profile/models/zone.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_drop_down.dart';
@@ -25,10 +26,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
-  late final TextEditingController _districtController;
-  late Zone? zone;
+  // late Zone? zone;
   City? city;
-  bool isZoneChanged = false;
+  District? district;
+  // bool isZoneChanged = false;
 
   @override
   void initState() {
@@ -36,9 +37,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     _firstNameController =
         TextEditingController(text: widget.address.firstName);
     _lastNameController = TextEditingController(text: widget.address.lastName);
-    _districtController = TextEditingController(text: widget.address.address);
-    zone = _profileController.zones
-        .firstWhere((e) => e.zoneId == widget.address.zoneId);
+    // zone = _profileController.zones
+    //     .firstWhere((e) => e.zoneId == widget.address.zoneId);
+    // district = _profileController.districts
+    //     .firstWhereOrNull((e) => e.districtAr == widget.address.address);
   }
 
   @override
@@ -46,7 +48,6 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
     super.dispose();
     _firstNameController.dispose();
     _lastNameController.dispose();
-    _districtController.dispose();
   }
 
   @override
@@ -139,27 +140,27 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                       const SizedBox(
                         height: 26,
                       ),
-                      CustomText(
-                        text: 'zone'.tr,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomDropDown(
-                          value: zone,
-                          hintText: 'zone'.tr,
-                          items: _profileController.zones,
-                          onChanged: (value) {
-                            zone = value;
-                            isZoneChanged = true;
-                            _profileController.getCitiesByZoneId(
-                                zoneId: zone!.zoneId);
-                          }),
-                      const SizedBox(
-                        height: 26,
-                      ),
+                      // CustomText(
+                      //   text: 'zone'.tr,
+                      //   fontSize: 12,
+                      //   fontWeight: FontWeight.w400,
+                      // ),
+                      // const SizedBox(
+                      //   height: 12,
+                      // ),
+                      // CustomDropDown(
+                      //     value: zone,
+                      //     hintText: 'zone'.tr,
+                      //     items: _profileController.zones,
+                      //     onChanged: (value) {
+                      //       zone = value;
+                      //       isZoneChanged = true;
+                      //       _profileController.getCitiesByZoneId(
+                      //           zoneId: zone!.zoneId);
+                      //     }),
+                      // const SizedBox(
+                      //   height: 26,
+                      // ),
                       CustomText(
                         text: 'city'.tr,
                         fontSize: 12,
@@ -174,17 +175,22 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                             child: CircularProgressIndicator(),
                           );
                         }
-                        city = isZoneChanged
-                            ? null
-                            : _profileController.cities.firstWhereOrNull((e) =>
-                                e.name == widget.address.city ||
-                                e.nameAr == widget.address.city);
+                        // city = isZoneChanged
+                        //     ? null
+                        // : _profileController.cities.firstWhereOrNull((e) =>
+                        //     e.name == widget.address.city ||
+                        //     e.nameAr == widget.address.city);
+                        city = _profileController.cities.firstWhereOrNull((e) =>
+                            e.name == widget.address.city ||
+                            e.nameAr == widget.address.city);
                         return CustomDropDown(
                             value: city,
                             hintText: 'city'.tr,
                             items: _profileController.cities,
                             onChanged: (value) {
                               city = value;
+                              district = null;
+                              _profileController.getDistricts(city: city!.name);
                             });
                       }),
                       const SizedBox(
@@ -196,13 +202,24 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                         fontWeight: FontWeight.w400,
                       ),
                       const SizedBox(
-                        height: 9,
+                        height: 12,
                       ),
-                      CustomTextField(
-                        controller: _districtController,
-                        hintText: 'district'.tr,
-                        textInputType: TextInputType.text,
-                      ),
+                      Obx(() {
+                        if (_profileController.isDistrictsLoading.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return CustomDropDown(
+                          isDistrict: true,
+                          value: district,
+                          hintText: 'district'.tr,
+                          items: _profileController.districts,
+                          onChanged: (value) {
+                            district = value;
+                          },
+                        );
+                      }),
                       const SizedBox(
                         height: 40,
                       ),
@@ -222,9 +239,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                                 firstName: _firstNameController.text,
                                 lastName: _lastNameController.text,
                                 city: city!.name,
-                                address: _districtController.text,
+                                address: district!.districtAr,
                                 countryId: 184,
-                                zoneId: int.parse(zone!.zoneId),
+                                // zoneId: int.parse(zone!.zoneId),
+                                zoneId: 2884,
                               );
                               if (isSuccess) {
                                 Get.back();

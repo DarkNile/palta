@@ -79,8 +79,9 @@ class CustomShippingAddressCard extends StatelessWidget {
                         SizedBox(
                           width: width * 0.7,
                           child: CustomText(
-                            text:
-                                '${address.city} - ${address.zone} - ${address.country.tr}',
+                            // text:
+                            //     '${address.city} - ${address.zone} - ${address.country.tr}',
+                            text: '${address.city} - ${address.country.tr}',
                             color: brownishGrey,
                           ),
                         ),

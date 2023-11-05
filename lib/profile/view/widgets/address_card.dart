@@ -46,7 +46,8 @@ class AddressCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: CustomText(
-              text: '${address.city} - ${address.zone} - ${address.country.tr}',
+              // text: '${address.city} - ${address.zone} - ${address.country.tr}',
+              text: '${address.city} - ${address.country.tr}',
               color: brownishGrey,
             ),
           ),

@@ -57,7 +57,8 @@ const Map<String, String> ar = {
   'riyal': 'ريال',
   'bestSelling': 'الأكثر مبيعاً',
   'shopAndEnjoy': 'تسوقي منتجاتنا واحصلي على المميزات و الخدمات التالية',
-  'freeShipping': 'شحن مجاني',
+  'freeShipping': 'توصيل مجاني',
+  'shippingCost': 'تكلفة التوصيل',
   'deliveryThreeDays': 'التوصيل خلال 3 أيام عمل فقط',
   'cashOnArrival': 'الدفع عند الاستلام',
   'payInCash': 'دفع كاش نقدى',
@@ -366,4 +367,5 @@ const Map<String, String> ar = {
   'ourMenu': 'عرض المنيو',
   'priceBeforeDiscount': 'السعر قبل الخصم',
   'priceAfterDiscount': 'السعر بعد الخصم',
+  'packagePrice': 'سعر الباقة',
 };

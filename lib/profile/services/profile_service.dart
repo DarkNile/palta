@@ -10,6 +10,7 @@ import 'package:palta/profile/models/calendar.dart';
 import 'package:palta/profile/models/city.dart';
 import 'package:palta/profile/models/contact.dart';
 import 'package:palta/profile/models/country.dart';
+import 'package:palta/profile/models/district.dart';
 import 'package:palta/profile/models/tracking_order.dart';
 import 'package:palta/profile/models/wallet.dart';
 import 'package:palta/profile/models/zone.dart';
@@ -169,6 +170,34 @@ class ProfileService {
     }
   }
 
+  static Future<List<District>?> getDistricts({
+    required String city,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse(
+          '${baseUrl}route=feed/rest_api/district&city_id=$city&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      List<dynamic> data = jsonDecode(response.body)['data']['all_cities'];
+      print('data: $data');
+      return data.map((district) => District.fromJson(district)).toList();
+    } else {
+      return null;
+    }
+  }
+
   static Future<List<Address>?> getAddress({
     required BuildContext context,
   }) async {
@@ -202,6 +231,50 @@ class ProfileService {
         AppUtil.errorToast(context, errorMessage[0]);
       }
       return null;
+    }
+  }
+
+  static Future<bool> saveDistrict({
+    required BuildContext context,
+    required String districtId,
+    required String cityId,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final String? customerId = getStorage.read('customerId');
+    print(customerId);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=feed/rest_api/saveDistrict'),
+      headers: {
+        'Accept': 'application/json',
+        // 'Authorization': 'Bearer $token',
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+      },
+      body: jsonEncode({
+        "post_district_id": districtId,
+        "post_city_id": cityId,
+      }),
+    );
+    print(jsonEncode({
+      "post_district_id": districtId,
+      "post_city_id": cityId,
+    }));
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      var data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return true;
+    } else {
+      print(response.body);
+      var errorMessage = jsonDecode(response.body)['error'];
+      if (context.mounted) {
+        AppUtil.errorToast(context, errorMessage[0]);
+      }
+      return false;
     }
   }
 
