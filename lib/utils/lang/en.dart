@@ -61,6 +61,7 @@ const Map<String, String> en = {
   'shopAndEnjoy':
       'Shop our products and get the following features and services',
   'freeShipping': 'Free Shipping',
+  'shippingCost': 'Shipping Cost',
   'deliveryThreeDays': 'Delivery within 3 working days only',
   'cashOnArrival': 'Pay upon receiving',
   'payInCash': 'Pay in cash',
@@ -385,4 +386,5 @@ const Map<String, String> en = {
   'ourMenu': 'Our Menu',
   'priceBeforeDiscount': 'Price Before Discount',
   'priceAfterDiscount': 'Price After Discount',
+  'packagePrice': 'Package Price',
 };

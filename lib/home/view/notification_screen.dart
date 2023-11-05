@@ -8,70 +8,59 @@ import 'package:palta/widgets/custom_app_bar.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_text.dart';
 
-class NotificationScreen extends StatefulWidget {
+class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key, required this.homeController});
 
   final HomeController homeController;
-
-  @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
-}
-
-class _NotificationScreenState extends State<NotificationScreen> {
-  @override
-  void initState() {
-    super.initState();
-    widget.homeController.getNotifications();
-  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.bottomCenter,
-              children: [
-                const CustomAppBar(
-                  isFromNotification: true,
+      body: Column(
+        children: [
+          Stack(
+            alignment: Alignment.bottomCenter,
+            clipBehavior: Clip.none,
+            children: [
+              const CustomAppBar(
+                isFromNotification: true,
+              ),
+              Positioned(
+                top: 110,
+                child: CustomBodyTitle(
+                  title: 'notificationsAndAlerts'.tr,
                 ),
-                Positioned(
-                  top: 120,
-                  child: CustomBodyTitle(title: 'notificationsAndAlerts'.tr),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Obx(
-              () {
-                if (widget.homeController.isNotificationsLoading.value) {
-                  return Container(
-                    margin: EdgeInsets.only(top: height * 0.25),
-                    alignment: Alignment.center,
-                    child: const CircularProgressIndicator(),
-                  );
-                } else if (widget.homeController.notifications.isEmpty) {
-                  return Container(
-                    margin: EdgeInsets.only(top: height * 0.25),
-                    alignment: Alignment.center,
-                    child: CustomText(
-                      text: 'noNotifications'.tr,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  );
-                } else {
-                  return ListView.separated(
-                    physics: const NeverScrollableScrollPhysics(),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 55,
+          ),
+          Obx(
+            () {
+              if (homeController.isNotificationsLoading.value) {
+                return Container(
+                  margin: EdgeInsets.only(top: height * 0.25),
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator(),
+                );
+              } else if (homeController.notifications.isEmpty) {
+                return Container(
+                  margin: EdgeInsets.only(top: height * 0.25),
+                  alignment: Alignment.center,
+                  child: CustomText(
+                    text: 'noNotifications'.tr,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                );
+              } else {
+                return Expanded(
+                  child: ListView.separated(
                     shrinkWrap: true,
-                    itemCount: widget.homeController.notifications.length,
+                    itemCount: homeController.notifications.length,
                     separatorBuilder: (context, index) {
                       return const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24),
@@ -83,19 +72,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     itemBuilder: (context, index) {
                       return CustomNotificationItem(
                         title: AppUtil().formatDateTime(
-                            widget.homeController.notifications[index].date),
-                        seen: widget.homeController.notifications[index].seen,
-                        subtitle: widget
-                            .homeController.notifications[index].title
-                            .trim(),
+                            homeController.notifications[index].date),
+                        seen: homeController.notifications[index].seen,
+                        subtitle:
+                            homeController.notifications[index].title.trim(),
                       );
                     },
-                  );
-                }
-              },
-            ),
-          ],
-        ),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }

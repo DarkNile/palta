@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/profile/models/city.dart';
-import 'package:palta/profile/models/zone.dart';
+import 'package:palta/profile/models/district.dart';
+// import 'package:palta/profile/models/zone.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_drop_down.dart';
@@ -22,9 +23,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _firstNameController;
   late final TextEditingController _lastNameController;
-  final _districtController = TextEditingController();
-  Zone? zone;
+  // Zone? zone;
   City? city;
+  District? district;
 
   @override
   void initState() {
@@ -40,7 +41,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     super.dispose();
     _firstNameController.dispose();
     _lastNameController.dispose();
-    _districtController.dispose();
   }
 
   @override
@@ -133,27 +133,32 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       const SizedBox(
                         height: 26,
                       ),
-                      CustomText(
-                        text: 'zone'.tr,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomDropDown(
-                          value: zone,
-                          hintText: 'zone'.tr,
-                          items: _profileController.zones,
-                          onChanged: (value) {
-                            zone = value;
-                            city = null;
-                            _profileController.getCitiesByZoneId(
-                                zoneId: zone!.zoneId);
-                          }),
-                      const SizedBox(
-                        height: 26,
-                      ),
+                      // CustomText(
+                      //   text: 'zone'.tr,
+                      //   fontSize: 12,
+                      //   fontWeight: FontWeight.w400,
+                      // ),
+                      // const SizedBox(
+                      //   height: 12,
+                      // ),
+                      // CustomTextField(
+                      //   initialValue: _profileController.zones.first.nameAr,
+                      //   readOnly: true,
+                      // ),
+                      // CustomDropDown(
+                      //     value: zone,
+                      //     hintText: 'zone'.tr,
+                      //     items: _profileController.zones,
+                      //     onChanged: (value) {
+                      //       zone = value;
+                      //       city = null;
+                      //       _profileController.getCitiesByZoneId(
+                      //           zoneId: zone!.zoneId);
+                      //       print(zone!.zoneId);
+                      //     }),
+                      // const SizedBox(
+                      //   height: 26,
+                      // ),
                       CustomText(
                         text: 'city'.tr,
                         fontSize: 12,
@@ -174,6 +179,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             items: _profileController.cities,
                             onChanged: (value) {
                               city = value;
+                              district = null;
+                              _profileController.getDistricts(city: city!.name);
                             });
                       }),
                       const SizedBox(
@@ -185,13 +192,24 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         fontWeight: FontWeight.w400,
                       ),
                       const SizedBox(
-                        height: 9,
+                        height: 12,
                       ),
-                      CustomTextField(
-                        controller: _districtController,
-                        hintText: 'district'.tr,
-                        textInputType: TextInputType.text,
-                      ),
+                      Obx(() {
+                        if (_profileController.isDistrictsLoading.value) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return CustomDropDown(
+                          isDistrict: true,
+                          value: district,
+                          hintText: 'district'.tr,
+                          items: _profileController.districts,
+                          onChanged: (value) {
+                            district = value;
+                          },
+                        );
+                      }),
                       const SizedBox(
                         height: 40,
                       ),
@@ -210,9 +228,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                                 firstName: _firstNameController.text,
                                 lastName: _lastNameController.text,
                                 city: city!.name,
-                                address: _districtController.text,
+                                address: district!.districtAr,
                                 countryId: 184,
-                                zoneId: int.parse(zone!.zoneId),
+                                // zoneId: int.parse(zone!.zoneId),
+                                zoneId: 2884,
                               );
                               if (isSuccess) {
                                 Get.back();

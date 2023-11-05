@@ -33,6 +33,7 @@ class CheckoutController extends GetxController {
   var couponController = TextEditingController().obs;
   var notesController = TextEditingController().obs;
   var isAddingNoteLoading = false.obs;
+  var district = ''.obs;
 
   Future<Cart?> getCartItems() async {
     try {
@@ -239,7 +240,6 @@ class CheckoutController extends GetxController {
       isPaymentMethodsLoading(true);
       final data = await CheckoutService.getPaymentMethods(context: context);
       if (data != null) {
-        print('mego $data');
         // if (Platform.isAndroid || Platform.isIOS) {
         //   data.removeWhere((element) =>
         //       element.code == 'paytabs_applepay' ||

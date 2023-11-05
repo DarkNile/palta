@@ -12,6 +12,7 @@ class CustomDropDown extends StatelessWidget {
     required this.hintText,
     this.enabled = true,
     this.value,
+    this.isDistrict = false,
   });
 
   final List items;
@@ -19,6 +20,7 @@ class CustomDropDown extends StatelessWidget {
   final String hintText;
   final bool enabled;
   final dynamic value;
+  final bool isDistrict;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,13 @@ class CustomDropDown extends StatelessWidget {
             (e) => DropdownMenuItem(
               value: e,
               child: CustomText(
-                text: AppUtil.rtlDirection(context) ? e.nameAr : e.name,
+                text: isDistrict
+                    ? AppUtil.rtlDirection(context)
+                        ? e.districtAr
+                        : e.districtEn
+                    : AppUtil.rtlDirection(context)
+                        ? e.nameAr
+                        : e.name,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),

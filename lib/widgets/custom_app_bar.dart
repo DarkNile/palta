@@ -185,13 +185,42 @@ class _CustomAppBarState extends State<CustomAppBar> {
                               );
                             }
                           },
-                          child: widget.isFromNotification
-                              ? SvgPicture.asset(
-                                  'assets/icons/notification_green.svg',
-                                )
-                              : SvgPicture.asset(
-                                  'assets/icons/notification.svg',
+                          child: Stack(
+                            alignment: Alignment.bottomCenter,
+                            clipBehavior: Clip.none,
+                            children: [
+                              widget.isFromNotification
+                                  ? SvgPicture.asset(
+                                      'assets/icons/notification_green.svg',
+                                    )
+                                  : SvgPicture.asset(
+                                      'assets/icons/notification.svg',
+                                    ),
+                              Positioned.directional(
+                                textDirection: Directionality.of(context),
+                                bottom: -15,
+                                end: 15,
+                                child: Container(
+                                  width: 18,
+                                  height: 18,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: avocado,
+                                  ),
+                                  child: Obx(() {
+                                    return CustomText(
+                                      text: _homeController.notifications.length
+                                          .toString(),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      textAlign: TextAlign.center,
+                                    );
+                                  }),
                                 ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

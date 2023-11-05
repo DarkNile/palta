@@ -6,6 +6,7 @@ import 'package:palta/profile/models/calendar.dart';
 import 'package:palta/profile/models/city.dart';
 import 'package:palta/profile/models/contact.dart';
 import 'package:palta/profile/models/country.dart';
+import 'package:palta/profile/models/district.dart';
 import 'package:palta/profile/models/tracking_order.dart';
 import 'package:palta/profile/models/wallet.dart';
 import 'package:palta/profile/models/zone.dart';
@@ -16,6 +17,7 @@ class ProfileController extends GetxController {
   var isCountriesLoading = false.obs;
   var isZonesLoading = false.obs;
   var isCitiesLoading = false.obs;
+  var isDistrictsLoading = false.obs;
   var isAddingAddress = false.obs;
   var isEditingAddress = false.obs;
   var isAddressLoading = false.obs;
@@ -26,6 +28,7 @@ class ProfileController extends GetxController {
   var countries = <Country>[].obs;
   var zones = <Zone>[].obs;
   var cities = <City>[].obs;
+  var districts = <District>[].obs;
   var addresses = <Address>[].obs;
   var wallet = Wallet().obs;
   var userOrders = <TrackingOrder>[].obs;
@@ -35,6 +38,7 @@ class ProfileController extends GetxController {
   var isRequestOffLoading = false.obs;
   var isConactNadaLoading = false.obs;
   var contact = Contact().obs;
+  var isSavingDistrict = false.obs;
 
   Future<User?> getAccount() async {
     try {
@@ -133,6 +137,24 @@ class ProfileController extends GetxController {
     }
   }
 
+  Future<List<District>?> getDistricts({required String city}) async {
+    try {
+      isDistrictsLoading(true);
+      final data = await ProfileService.getDistricts(city: city);
+      if (data != null) {
+        districts(data);
+        return districts;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isDistrictsLoading(false);
+    }
+  }
+
   Future<List<Address>?> getAddress({required BuildContext context}) async {
     try {
       isAddressLoading(true);
@@ -148,6 +170,30 @@ class ProfileController extends GetxController {
       return null;
     } finally {
       isAddressLoading(false);
+    }
+  }
+
+  Future<bool> saveDistrict({
+    required BuildContext context,
+    required String districtId,
+    required String cityId,
+  }) async {
+    try {
+      isSavingDistrict(true);
+      final isSuccess = await ProfileService.saveDistrict(
+        context: context,
+        districtId: districtId,
+        cityId: cityId,
+      );
+      if (context.mounted) {
+        getAddress(context: context);
+      }
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isSavingDistrict(false);
     }
   }
 

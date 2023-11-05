@@ -416,7 +416,8 @@ class CheckoutService {
       "comment": "Payment Method",
     }));
 
-    print('response status code: ${response.statusCode}');
+    print('ali response status code: ${response.statusCode}');
+    print('ali ${jsonDecode(response.body)}');
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];
       print('data: $data');
@@ -515,8 +516,9 @@ class CheckoutService {
     print(token);
     final String? lang = getStorage.read('lang');
     print(lang);
+    print('mego start');
     final response = await http.post(
-      Uri.parse('${baseUrl}route=rest/confirm/confirm&language=$lang'),
+      Uri.parse('${baseUrl}route=rest/confirm/confirm'),
       headers: {
         'Accept': 'application/json',
         // 'Authorization': 'Bearer $token',
@@ -525,14 +527,15 @@ class CheckoutService {
       },
     );
 
-    print('response status code: ${response.statusCode}');
+    print('mego response status code: ${response.statusCode}');
+    print('mego end ${response.body}');
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];
-      print('${baseUrl}route=rest/confirm/confirm&language=$lang');
       print('data: $data');
       if (data is List) {
         return null;
       }
+
       return Order.fromJson(data);
     } else {
       print(response.body);

@@ -27,6 +27,7 @@ class _AddressScreenState extends State<AddressScreen> {
       _profileController.getAddress(context: context);
       _profileController.getCountries();
       _profileController.getZones();
+      _profileController.getCitiesByZoneId(zoneId: '2884');
     });
   }
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/widgets/custom_checkout_item.dart';
 import 'package:palta/constants/colors.dart';
@@ -191,13 +190,17 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
-                                    text: widget.checkoutController.order!
-                                        .shippingAddress!,
+                                    // text: widget.checkoutController.order!
+                                    //     .shippingAddress!,
+                                    text: widget
+                                        .checkoutController.district.value,
                                     fontSize: 14,
                                   ),
                                   CustomText(
+                                    // text:
+                                    //     '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
                                     text:
-                                        '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
+                                        '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,
                                   ),
@@ -270,12 +273,28 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       const SizedBox(
                         height: 8,
                       ),
-                      CustomText(
-                        text: (GetStorage().read('lang') == 'ar')
-                            ? 'شحن مجاني'
-                            : widget.checkoutController.order!.shippingCode!,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            text: widget.checkoutController.order!
+                                        .shippingCode! ==
+                                    'free.free'
+                                ? 'freeShipping'.tr
+                                : 'shippingCost'.tr,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                          CustomText(
+                            text: widget.checkoutController.order!
+                                        .shippingCode! ==
+                                    'free.free'
+                                ? ''
+                                : '${widget.checkoutController.shippingMethods.first.quote.first.cost.toString()} ${'riyal'.tr}',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                        ],
                       ),
                     ],
                   ),

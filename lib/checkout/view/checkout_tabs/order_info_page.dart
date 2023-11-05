@@ -8,7 +8,7 @@ import 'package:palta/constants/colors.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 
 class OrderInfoPage extends StatefulWidget {
   const OrderInfoPage({
@@ -73,10 +73,46 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                       // const SizedBox(
                       //   height: 36,
                       // ),
-                      CustomText(
-                        text: 'subscriptionStartDate'.tr,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomText(
+                            text: 'subscriptionStartDate'.tr,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          Row(
+                            children: [
+                              CustomText(
+                                text: 'total'.tr,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: almostBlack,
+                              ),
+                              RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                    text:
+                                        ' ${widget.checkoutController.total.value.toStringAsFixed(2)} ',
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: green,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: 'riyal'.tr,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: green,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ]),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 16,
@@ -248,28 +284,6 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                             ),
-                            // if (widget.checkoutController.cart!.products![index]
-                            //             .option !=
-                            //         null &&
-                            //     widget.checkoutController.cart!.products![index]
-                            //         .option!.isNotEmpty)
-                            //   const SizedBox(
-                            //     height: 10,
-                            //   ),
-                            // if (widget.checkoutController.cart!.products![index]
-                            //             .option !=
-                            //         null &&
-                            //     widget.checkoutController.cart!.products![index]
-                            //         .option!.isNotEmpty)
-                            //   CustomText(
-                            //     text: widget.checkoutController.cart!
-                            //         .products![index].option!.first.value
-                            //         .split('</br>:')
-                            //         .join(),
-                            //     textAlign: TextAlign.center,
-                            //     fontSize: 14,
-                            //     fontWeight: FontWeight.w400,
-                            //   ),
                             const SizedBox(
                               height: 16,
                             ),
@@ -279,8 +293,69 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(),
+                                  if (widget.checkoutController.cart!
+                                              .products![index].option !=
+                                          null &&
+                                      widget.checkoutController.cart!
+                                          .products![index].option!.isNotEmpty)
+                                    Row(
+                                      children: [
+                                        CustomText(
+                                          text:
+                                              '${'subscriptionPeriodDays'.tr}  ',
+                                          textAlign: TextAlign.center,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                        CustomText(
+                                          text:
+                                              '(${widget.checkoutController.cart!.products![index].option!.first.value.split('</br>:').join()})',
+                                          textAlign: TextAlign.center,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ],
+                                    )
+                                  else
+                                    CustomText(
+                                      text: 'packagePrice'.tr,
+                                      textAlign: TextAlign.center,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  Row(
+                                    children: [
+                                      CustomText(
+                                        text:
+                                            '${(widget.checkoutController.cart!.products![index].priceRaw * int.parse(widget.checkoutController.cart!.products![index].quantity)).toStringAsFixed(2)} ',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                        color: almostBlack,
+                                      ),
+                                      CustomText(
+                                        text: 'riyal'.tr,
+                                        fontSize: 12,
+                                        color: black51,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Spacer(),
                                   Row(
                                     children: [
                                       InkWell(
@@ -406,6 +481,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                                       ),
                                     ],
                                   ),
+                                  const Spacer(),
                                   InkWell(
                                     onTap: () {
                                       widget.checkoutController.deleteCartItem(
