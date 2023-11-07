@@ -138,9 +138,17 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                               onTap: () async {
                                 DateTime? selectedDate = await showDatePicker(
                                   context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
-                                  lastDate: DateTime(2030, 12, 31),
+                                  initialDate: DateTime.now()
+                                      .add(const Duration(days: 2)),
+                                  firstDate: DateTime.now()
+                                      .add(const Duration(days: 2)),
+                                  lastDate: DateTime(2050, 12, 31),
+                                  selectableDayPredicate: (day) {
+                                    if (day.weekday == DateTime.friday) {
+                                      return false;
+                                    }
+                                    return true;
+                                  },
                                 );
 
                                 if (selectedDate != null) {
