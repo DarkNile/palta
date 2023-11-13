@@ -4,37 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
-import 'package:palta/auth/view/change_password_screen.dart';
+import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/view/home_page.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:palta/widgets/custom_text_field.dart';
 
-class OTPScreen extends StatefulWidget {
-  const OTPScreen({
+class RegisterOTPScreen extends StatefulWidget {
+  const RegisterOTPScreen({
     super.key,
-    this.firstName,
-    this.lastName,
+    required this.firstName,
+    required this.lastName,
     required this.email,
-    this.phoneNumber,
-    this.password,
-    this.passwordConfirmation,
+    required this.telephone,
+    required this.password,
+    required this.passwordConfirmation,
   });
 
-  final String? firstName;
-  final String? lastName;
+  final String firstName;
+  final String lastName;
   final String email;
-  final String? phoneNumber;
-  final String? password;
-  final String? passwordConfirmation;
+  final String telephone;
+  final String password;
+  final String passwordConfirmation;
 
   @override
-  State<OTPScreen> createState() => _OTPScreenState();
+  State<RegisterOTPScreen> createState() => _RegisterOTPScreenState();
 }
 
-class _OTPScreenState extends State<OTPScreen> {
+class _RegisterOTPScreenState extends State<RegisterOTPScreen> {
   final _authController = Get.put(AuthController());
+  final _profileController = Get.put(ProfileController());
+  final _checkoutController = Get.put(CheckoutController());
   final _formKey = GlobalKey<FormState>();
   final _codeController = TextEditingController();
   late Timer _timer;
@@ -94,7 +98,7 @@ class _OTPScreenState extends State<OTPScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomText(
-                        text: 'verifyEmailAddress'.tr,
+                        text: 'verifyPhoneNumber'.tr,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
@@ -117,14 +121,14 @@ class _OTPScreenState extends State<OTPScreen> {
                   height: 25,
                 ),
                 CustomText(
-                  text: 'otpSent'.tr,
+                  text: 'otpSent2'.tr,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(
                   height: 8,
                 ),
                 Text(
-                  widget.email,
+                  widget.telephone,
                   textDirection: TextDirection.ltr,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
@@ -140,24 +144,41 @@ class _OTPScreenState extends State<OTPScreen> {
                   hintText: 'verificationCode'.tr,
                   textInputType: TextInputType.number,
                   textAlign: TextAlign.center,
-                  maxLength: 4,
+                  maxLength: 5,
                 ),
                 const SizedBox(
                   height: 18,
                 ),
                 Obx(() {
-                  if (_authController.isOTPLoading.value) {
+                  if (_authController.isCheckingRegisterOtpLoading.value ||
+                      _authController.isRegisterLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   return CustomButton(
                     onPressed: () async {
-                      final isSuccess = await _authController.checkOTP(
-                        email: widget.email,
-                        activationCode: _codeController.text,
-                        context: context,
-                      );
-                      if (isSuccess) {
-                        Get.to(() => ChangePasswordScreen(email: widget.email));
+                      if (_formKey.currentState!.validate()) {
+                        final isSuccess =
+                            await _authController.checkRegisterOTP(
+                          telephone: widget.telephone,
+                          activationCode: _codeController.text,
+                          context: context,
+                        );
+                        if (isSuccess && context.mounted) {
+                          final user = await _authController.register(
+                            firstName: widget.firstName,
+                            lastName: widget.lastName,
+                            email: widget.email,
+                            telephone: widget.telephone,
+                            password: widget.password,
+                            confirm: widget.passwordConfirmation,
+                            context: context,
+                          );
+                          if (user != null) {
+                            _profileController.getAccount();
+                            _checkoutController.getCartItems();
+                            Get.offAll(() => const HomePage());
+                          }
+                        }
                       }
                     },
                     title: 'verify'.tr,
@@ -168,13 +189,13 @@ class _OTPScreenState extends State<OTPScreen> {
                 ),
                 if (_start == 0)
                   Obx(() {
-                    if (_authController.isForgetPasswordLoading.value) {
+                    if (_authController.isRegisterOtpLoading.value) {
                       return const Center(child: CircularProgressIndicator());
                     }
                     return InkWell(
                       onTap: () async {
-                        await _authController.forgetPass(
-                          email: widget.email,
+                        await _authController.registerOTP(
+                          telephone: widget.telephone,
                           context: context,
                         );
                         setState(() {

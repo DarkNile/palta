@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
+import 'package:palta/constants/colors.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/widgets/custom_body_title.dart';
 import 'package:palta/widgets/custom_button.dart';
@@ -27,6 +30,38 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
   final _authController = Get.put(AuthController());
   final _formKey = GlobalKey<FormState>();
   final _codeController = TextEditingController();
+  late Timer _timer;
+  int _start = 60;
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,38 +144,53 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                 const SizedBox(
                   height: 36,
                 ),
-                Obx(() {
-                  if (_authController.isVerifyPhoneLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return InkWell(
-                    onTap: () async {
-                      await _authController.verifyPhone(
-                        customerId: widget.customerId,
-                        phone: widget.phone,
-                        context: context,
-                      );
-                    },
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          'assets/icons/resend.svg',
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        CustomText(
-                          text: 'resendCode'.tr,
-                          textAlign: TextAlign.center,
-                          textDecoration: TextDecoration.underline,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ],
+                if (_start == 0)
+                  Obx(() {
+                    if (_authController.isVerifyPhoneLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return InkWell(
+                      onTap: () async {
+                        await _authController.verifyPhone(
+                          customerId: widget.customerId,
+                          phone: widget.phone,
+                          context: context,
+                        );
+                        setState(() {
+                          _start = 60;
+                        });
+                        startTimer();
+                      },
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/icons/resend.svg',
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          CustomText(
+                            text: 'resendCode'.tr,
+                            textAlign: TextAlign.center,
+                            textDecoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ],
+                      ),
+                    );
+                  })
+                else
+                  Center(
+                    child: CustomText(
+                      text: '${'remaining'.tr} $_start ${'seconds'.tr}',
+                      textAlign: TextAlign.center,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: avocado,
                     ),
-                  );
-                })
+                  ),
               ],
             ),
           ),

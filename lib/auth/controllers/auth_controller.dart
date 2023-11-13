@@ -14,6 +14,8 @@ class AuthController extends GetxController {
   var isVerifyPhoneLoading = false.obs;
   var isVerifyOtpLoading = false.obs;
   var user = User().obs;
+  var isRegisterOtpLoading = false.obs;
+  var isCheckingRegisterOtpLoading = false.obs;
 
   Future<User?> register({
     required String firstName,
@@ -118,6 +120,46 @@ class AuthController extends GetxController {
       return false;
     } finally {
       isOTPLoading(false);
+    }
+  }
+
+  Future<bool> registerOTP({
+    required String telephone,
+    required BuildContext context,
+  }) async {
+    try {
+      isRegisterOtpLoading(true);
+      final isSuccess = await AuthService.registerOTP(
+        telephone: telephone,
+        context: context,
+      );
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isRegisterOtpLoading(false);
+    }
+  }
+
+  Future<bool> checkRegisterOTP({
+    required String telephone,
+    required String activationCode,
+    required BuildContext context,
+  }) async {
+    try {
+      isCheckingRegisterOtpLoading(true);
+      final isSuccess = await AuthService.checkRegisterOTP(
+        telephone: telephone,
+        activationCode: activationCode,
+        context: context,
+      );
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isCheckingRegisterOtpLoading(false);
     }
   }
 
