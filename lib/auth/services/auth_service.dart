@@ -54,6 +54,9 @@ class AuthService {
       final getStorage = GetStorage();
       getStorage.write('token', token);
       getStorage.write('customerId', customerId.toString());
+      if (context.mounted) {
+        AppUtil.errorToast(context, 'registerSuccessfully');
+      }
       return User.fromJson(user);
     } else {
       print(response.body);
@@ -155,7 +158,7 @@ class AuthService {
         headers: {
           'Accept': 'application/json',
           // 'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=$token; currency=SAR;",
+          // "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: json.encode({
           'email': email.trim(),
@@ -186,7 +189,7 @@ class AuthService {
             headers: {
               'Accept': 'application/json',
               // 'Authorization': 'Bearer $token',
-              "Cookie": "OCSESSID=$token; currency=SAR;",
+              // "Cookie": "OCSESSID=$token; currency=SAR;",
             },
             body: jsonEncode({
               'email': email.trim(),
@@ -200,6 +203,79 @@ class AuthService {
       var errorMessage = jsonDecode(response.body)['error'];
       if (context.mounted) {
         AppUtil.errorToast(context, errorMessage[0]);
+      }
+      return false;
+    }
+  }
+
+  static Future<bool> registerOTP({
+    required String telephone,
+    required BuildContext context,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/registerotp'),
+      headers: {
+        'Accept': 'application/json',
+        // 'Authorization': 'Bearer $token',
+        // "Cookie": "OCSESSID=$token; currency=SAR;",
+      },
+      body: jsonEncode(
+        {
+          'telephone': telephone.trim(),
+        },
+      ),
+    );
+
+    if (jsonDecode(response.body)['success'] == 1) {
+      print(jsonDecode(response.body));
+
+      if (context.mounted) {
+        AppUtil.successToast(context, 'codeSent'.tr);
+      }
+      return true;
+    } else {
+      var errorMessage = jsonDecode(response.body)['error'];
+      if (context.mounted) {
+        AppUtil.errorToast(context, errorMessage[0]);
+      }
+      return false;
+    }
+  }
+
+  static Future<bool> checkRegisterOTP({
+    required String telephone,
+    required String activationCode,
+    required BuildContext context,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/registerotp/check'),
+      headers: {
+        'Accept': 'application/json',
+        // 'Authorization': 'Bearer $token',
+        // "Cookie": "OCSESSID=$token; currency=SAR;",
+      },
+      body: jsonEncode(
+        {
+          'telephone': telephone.trim(),
+          'activation_code': activationCode.trim(),
+        },
+      ),
+    );
+
+    print(jsonDecode(response.body));
+
+    if (jsonDecode(response.body)['success'] == 1 &&
+        jsonDecode(response.body)['data'] == 'true') {
+      return true;
+    } else {
+      if (context.mounted) {
+        AppUtil.errorToast(context, 'invalidCode'.tr);
       }
       return false;
     }
@@ -221,7 +297,7 @@ class AuthService {
         headers: {
           'Accept': 'application/json',
           // 'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=$token; currency=SAR;",
+          // "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: jsonEncode({
           'email': email.trim(),
