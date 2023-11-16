@@ -330,6 +330,7 @@ const Map<String, String> en = {
   'captainNada': 'Captain Nada',
   'timeToReceiveMeals': 'Time to receive meals',
   'fridayReceiving': 'Are you ready to receive meals on Friday?',
+  'satReceiving': 'Are you ready to receive meals on Saturday?',
   'yes': 'Yes',
   'no': 'No',
   'completeInfo': 'Please complete the information above',

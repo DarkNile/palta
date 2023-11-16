@@ -263,12 +263,11 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       onPreviousTap: () {
                         Get.back();
                       },
-                      onNextTap: (String date, String fridayOn) async {
+                      onNextTap:
+                          (String date, String fridayOn, String satOn) async {
                         final isSuccess =
                             await _checkoutController.saveCalendar(
-                          date: date,
-                          fridayOn: fridayOn,
-                        );
+                                date: date, fridayOn: fridayOn, satOn: satOn);
                         if (isSuccess) {
                           if (context.mounted) {
                             _profileController.getAddress(context: context);
