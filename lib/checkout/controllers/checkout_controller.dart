@@ -83,16 +83,14 @@ class CheckoutController extends GetxController {
     }
   }
 
-  Future<bool> saveCalendar({
-    required String date,
-    required String fridayOn,
-  }) async {
+  Future<bool> saveCalendar(
+      {required String date,
+      required String fridayOn,
+      required String satOn}) async {
     try {
       isSavingCalendar(true);
       final isSuccess = await CheckoutService.saveCalendar(
-        date: date,
-        fridayOn: fridayOn,
-      );
+          date: date, fridayOn: fridayOn, satOn: satOn);
       return isSuccess;
     } catch (e) {
       print(e);

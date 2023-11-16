@@ -311,6 +311,7 @@ const Map<String, String> ar = {
   'captainNada': 'كابتن ندى',
   'timeToReceiveMeals': 'موعد استلام الوجبات',
   'fridayReceiving': 'هل أنت جاهز لتلقي وجبات يوم الجمعة؟',
+  'satReceiving': 'هل أنت جاهز لتلقي وجبات يوم السبت؟',
   'yes': 'نعم',
   'no': 'لا',
   'completeInfo': 'من فضلك أكمل البيانات بأعلى',

@@ -83,10 +83,10 @@ class CheckoutService {
     }
   }
 
-  static Future<bool> saveCalendar({
-    required String date,
-    required String fridayOn,
-  }) async {
+  static Future<bool> saveCalendar(
+      {required String date,
+      required String fridayOn,
+      required String satOn}) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
     print(token);
@@ -100,17 +100,13 @@ class CheckoutService {
             "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
         // 'Authorization': 'Bearer $token'
       },
-      body: json.encode({
-        'calendar_start': date,
-        'friday_on': fridayOn,
-      }),
+      body: json.encode(
+          {'calendar_start': date, 'friday_on': fridayOn, 'sat_on': satOn}),
     );
     print('response status code: ${response.statusCode}');
     if (response.statusCode == 200) {
-      print(json.encode({
-        'calendar_start': date,
-        'friday_on': fridayOn,
-      }));
+      print(json.encode(
+          {'calendar_start': date, 'friday_on': fridayOn, 'sat_on': satOn}));
       print(response.body);
       return true;
     } else {
