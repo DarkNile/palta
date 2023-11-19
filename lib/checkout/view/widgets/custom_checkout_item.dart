@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:palta/constants/colors.dart';
 import 'package:palta/product/models/product.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -19,17 +19,23 @@ class CustomCheckoutItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CustomText(
-                text: '${'program'.tr} (${product.quantity.toString()})',
-                fontSize: 14,
-              ),
               CustomText(
                 text: product.name!,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              CustomText(
+                text: 'x${product.quantity.toString()}',
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: green,
               ),
             ],
           ),
