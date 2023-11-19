@@ -751,7 +751,7 @@ PODS:
     - Flutter
   - flutter_paytabs_bridge (2.4.0):
     - Flutter
-    - PayTabsSDK (= 6.4.11)
+    - PayTabsSDK (= 6.6.4)
   - flutter_share (0.0.1):
     - Flutter
   - FMDB (2.7.5):
@@ -875,7 +875,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - PayTabsSDK (6.4.11)
+  - PayTabsSDK (6.6.4)
   - PromisesObjC (2.3.1)
   - RecaptchaInterop (100.0.0)
   - sqflite (0.0.3):
@@ -1001,7 +1001,7 @@ SPEC CHECKSUMS:
   FirebaseSharedSwift: 62e248642c0582324d0390706cadd314687c116b
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_app_version_checker: 2beb5e211990c45ebfc17b81aa4d08ebd7edb757
-  flutter_paytabs_bridge: 466f082856dd1101872f07dfee2e3b1aad90cf32
+  flutter_paytabs_bridge: 9eae3b1a7aa05f4810a6231e612fcb76f53248ee
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: 4dcddfc7f102825c1c4e6422cb35567b101881a7
@@ -1014,13 +1014,13 @@ SPEC CHECKSUMS:
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
-  path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
-  PayTabsSDK: 14050f69274cdfbce0ea86c51b76642024f9f2c7
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  PayTabsSDK: 589dba67c4271335197b2cb8c44b43bd9b1faf84
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   the_apple_sign_in: 2e78c83cdb09eba07bb16dcc1f3bc12fcdc8263d
-  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
+  url_launcher_ios: bf5ce03e0e2088bad9cc378ea97fa0ed5b49673b
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
 PODFILE CHECKSUM: a54d06533d2c7a4162ac5acd4438053a76ad6ff7
