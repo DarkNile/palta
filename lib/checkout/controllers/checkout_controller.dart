@@ -35,6 +35,15 @@ class CheckoutController extends GetxController {
   var isAddingNoteLoading = false.obs;
   var district = ''.obs;
 
+  int? selectedDayIndex;
+  String? selectedPrice;
+  String? selectedMainPrice;
+  String? option1Id;
+  String? option2Id;
+
+  RxBool isSelectedPrice = RxBool(false);
+  RxBool isAddToCart = RxBool(false);
+
   Future<Cart?> getCartItems() async {
     try {
       isCartLoading(true);
@@ -66,6 +75,7 @@ class CheckoutController extends GetxController {
     String? option2Id,
   }) async {
     try {
+      isAddToCart(true);
       final isSuccess = await CheckoutService.addToCart(
         productId: productId,
         quantity: quantity,
@@ -75,10 +85,12 @@ class CheckoutController extends GetxController {
       );
       if (isSuccess) {
         getCartItems();
+        isAddToCart(false);
       }
       return isSuccess;
     } catch (e) {
       print(e);
+      isAddToCart(false);
       return false;
     }
   }
