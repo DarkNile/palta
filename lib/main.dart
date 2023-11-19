@@ -80,6 +80,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Palta',
       theme: ThemeData(
+        useMaterial3: false,
         fontFamily: 'Vazirmatn',
         primarySwatch: primaryGreen,
       ),
