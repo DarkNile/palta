@@ -14,7 +14,6 @@ import 'package:palta/widgets/custom_app_bar_clip_path.dart';
 import 'package:palta/widgets/custom_drawer_item.dart';
 import 'package:palta/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
