@@ -19,7 +19,7 @@ import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_loading_widget.dart';
 import 'package:palta/widgets/custom_text.dart';
 
-import '../../../../widgets/custom_app_bar_clip_path.dart';
+import '../../../../widgets/custom_app_bar_clip_path.dart'; //
 
 class SubscriptionInfo extends StatefulWidget {
   const SubscriptionInfo({
@@ -596,113 +596,181 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              width: width,
-              height: 120,
-              color: Colors.white,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Obx(
+              () => Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                width: width,
+                height: _checkoutController.isSelectedPrice.value ? 300 : 194,
+                color: Colors.white,
+                child: Column(
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomText(
-                            text: 'startFrom'.tr,
-                          ),
-                          Row(
+                    SubscriptionNowSheet(
+                      program: widget.program,
+                      homeController: _homeController,
+                      checkoutController: _checkoutController,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               CustomText(
-                                text:
-                                    '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
-                                fontSize: 20,
-                                color: avocado,
-                                fontWeight: FontWeight.w700,
+                                text: 'startFrom'.tr,
                               ),
-                              CustomText(
-                                text: 'riyal'.tr,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                              ),
+                              Row(
+                                children: [
+                                  CustomText(
+                                    text:
+                                        '${double.parse(widget.program.price.toString()).toStringAsFixed(2)} ',
+                                    fontSize: 20,
+                                    color: avocado,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  CustomText(
+                                    text: 'riyal'.tr,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: CustomButton(
-                        onPressed: () async {
-                          if (customerId != null &&
-                              customerId!.isNotEmpty &&
-                              customerId ==
-                                  _profileController.user.value.id.toString()) {
-                            if (widget.program.options != null &&
-                                widget.program.options!.isNotEmpty) {
-                              showModalBottomSheet<void>(
-                                context: context,
-                                backgroundColor: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30)),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: _checkoutController.isAddToCart.value
+                              ? const Center(child: CircularProgressIndicator())
+                              : CustomButton(
+                                  onPressed: () async {
+                                    if (customerId != null &&
+                                        customerId!.isNotEmpty &&
+                                        customerId ==
+                                            _profileController.user.value.id
+                                                .toString()) {
+                                      if (widget.program.options != null &&
+                                          widget.program.options!.isNotEmpty) {
+                                        if (_checkoutController.selectedPrice !=
+                                                null &&
+                                            _checkoutController
+                                                    .selectedMainPrice !=
+                                                null) {
+                                          final isSuccess =
+                                              await _checkoutController
+                                                  .addToCart(
+                                            productId:
+                                                widget.program.id.toString(),
+                                            quantity: '1',
+                                            hasCombination: true,
+                                            option1Id:
+                                                _checkoutController.option1Id,
+                                            option2Id:
+                                                _checkoutController.option2Id,
+                                          );
+                                          if (isSuccess) {
+                                            Get.to(
+                                              () => const CheckoutScreen(),
+                                            );
+
+                                            FirebaseAnalytics.instance
+                                                .logAddToCart(
+                                              items: [
+                                                AnalyticsEventItem(
+                                                  itemId: widget.program.id
+                                                      .toString(),
+                                                  itemName: widget.program.name,
+                                                  price: double.parse(
+                                                      _checkoutController
+                                                          .selectedPrice
+                                                          .toString()
+                                                          .split(',')
+                                                          .join()),
+                                                  currency: 'SAR',
+                                                  quantity: 1,
+                                                ),
+                                              ],
+                                              value: double.parse(
+                                                  _checkoutController
+                                                      .selectedPrice
+                                                      .toString()
+                                                      .split(',')
+                                                      .join()),
+                                              currency: 'SAR',
+                                            );
+                                            AppsFlyerService.logAddToCart(
+                                              id: widget.program.id.toString(),
+                                              name: widget.program.name!,
+                                              price: double.parse(
+                                                  _checkoutController
+                                                      .selectedPrice
+                                                      .toString()
+                                                      .split(',')
+                                                      .join()),
+                                              currency: 'SAR',
+                                              quantity: 1,
+                                            );
+                                          }
+                                        }
+                                      } else {
+                                        final isSuccess =
+                                            await _checkoutController.addToCart(
+                                          productId:
+                                              widget.program.id.toString(),
+                                          quantity: '1',
+                                          hasCombination: false,
+                                        );
+                                        if (isSuccess) {
+                                          Get.to(
+                                            () => const CheckoutScreen(),
+                                          );
+                                          FirebaseAnalytics.instance
+                                              .logAddToCart(
+                                            items: [
+                                              AnalyticsEventItem(
+                                                itemId: widget.program.id
+                                                    .toString(),
+                                                itemName: widget.program.name,
+                                                price: double.parse(widget
+                                                    .program.price
+                                                    .toString()),
+                                                currency: 'SAR',
+                                                quantity: int.parse(widget
+                                                    .program.quantity
+                                                    .toString()),
+                                              ),
+                                            ],
+                                            value: double.parse(widget
+                                                .program.price
+                                                .toString()),
+                                            currency: 'SAR',
+                                          );
+                                          AppsFlyerService.logAddToCart(
+                                            id: widget.program.id.toString(),
+                                            name: widget.program.name!,
+                                            price: double.parse(widget
+                                                .program.price
+                                                .toString()),
+                                            currency: 'SAR',
+                                            quantity: 1,
+                                          );
+                                        }
+                                      }
+                                    } else {
+                                      Get.to(() => const LoginScreen());
+                                    }
+                                  },
+                                  title: 'subscribeNow'.tr,
                                 ),
-                                builder: (BuildContext context) {
-                                  return SubscriptionNowSheet(
-                                    program: widget.program,
-                                    homeController: _homeController,
-                                    checkoutController: _checkoutController,
-                                  );
-                                },
-                              );
-                            } else {
-                              final isSuccess =
-                                  await _checkoutController.addToCart(
-                                productId: widget.program.id.toString(),
-                                quantity: '1',
-                                hasCombination: false,
-                              );
-                              if (isSuccess) {
-                                Get.to(
-                                  () => const CheckoutScreen(),
-                                );
-                                FirebaseAnalytics.instance.logAddToCart(
-                                  items: [
-                                    AnalyticsEventItem(
-                                      itemId: widget.program.id.toString(),
-                                      itemName: widget.program.name,
-                                      price: double.parse(
-                                          widget.program.price.toString()),
-                                      currency: 'SAR',
-                                      quantity: int.parse(
-                                          widget.program.quantity.toString()),
-                                    ),
-                                  ],
-                                  value: double.parse(
-                                      widget.program.price.toString()),
-                                  currency: 'SAR',
-                                );
-                                AppsFlyerService.logAddToCart(
-                                  id: widget.program.id.toString(),
-                                  name: widget.program.name!,
-                                  price: double.parse(
-                                      widget.program.price.toString()),
-                                  currency: 'SAR',
-                                  quantity: 1,
-                                );
-                              }
-                            }
-                          } else {
-                            Get.to(() => const LoginScreen());
-                          }
-                        },
-                        title: 'subscribeNow'.tr,
-                      ),
+                        ),
+                      ],
                     ),
-                  ]),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
