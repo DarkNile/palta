@@ -53,7 +53,7 @@ class CustomProgramCard extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: image,
                       width: width,
-                      height: 163,
+                      height: 250,
                       fit: BoxFit.cover,
                       placeholder: (context, url) {
                         return const CustomLoadingWidget();

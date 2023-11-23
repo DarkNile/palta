@@ -105,7 +105,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                         height: 14.5,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 34),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Center(
                           child: CustomText(
                             text: widget.program.description!
@@ -114,7 +114,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                             color: brownishGrey,
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                       ),
@@ -546,7 +546,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                       ),
                     ),
                   Positioned(
-                    top: 43,
+                    top: 200,
                     child: SizedBox(
                       width: width,
                       child: Padding(
@@ -782,7 +782,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
                                             Get.to(
                                               () => const CheckoutScreen(),
                                             );
-
+    
                                             FirebaseAnalytics.instance
                                                 .logAddToCart(
                                               items: [
