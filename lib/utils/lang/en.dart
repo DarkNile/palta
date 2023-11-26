@@ -395,4 +395,5 @@ const Map<String, String> en = {
   'priceBeforeDiscount': 'Price Before Discount',
   'priceAfterDiscount': 'Price After Discount',
   'packagePrice': 'Package Price',
+  'paymentFailed': 'Payment Failed!',
 };
