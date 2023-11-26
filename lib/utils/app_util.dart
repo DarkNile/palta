@@ -94,8 +94,8 @@ class AppUtil {
         context: context,
         barrierDismissible: barrierDismissible,
         builder: (context) {
-          return WillPopScope(
-            onWillPop: () async => false,
+          return PopScope(
+            canPop: false,
             child: StatefulBuilder(builder: (context, setState) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
