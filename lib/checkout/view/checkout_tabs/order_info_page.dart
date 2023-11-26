@@ -30,7 +30,7 @@ class OrderInfoPage extends StatefulWidget {
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
   // final _homeController = Get.put(HomeController());
-  DateTime today = DateTime.now();
+  DateTime initialDate = DateTime.now().add(const Duration(days: 2));
 
   String fridayValue = 'no';
   String satValue = 'no';
@@ -40,6 +40,14 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
   //   super.initState();
   //   _homeController.getCoupon();
   // }
+
+  @override
+  void initState() {
+    if (initialDate.weekday == DateTime.friday) {
+      initialDate.add(const Duration(days: 1));
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +148,8 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomText(
-                                text: DateFormat('dd/MM/yyyy').format(today),
+                                text: DateFormat('dd/MM/yyyy')
+                                    .format(initialDate),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -148,10 +157,8 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                                 onTap: () async {
                                   DateTime? selectedDate = await showDatePicker(
                                     context: context,
-                                    initialDate: DateTime.now()
-                                        .add(const Duration(days: 2)),
-                                    firstDate: DateTime.now()
-                                        .add(const Duration(days: 2)),
+                                    initialDate: initialDate,
+                                    firstDate: initialDate,
                                     lastDate: DateTime(2050, 12, 31),
                                     selectableDayPredicate: (day) {
                                       if (day.weekday == DateTime.friday) {
@@ -163,7 +170,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
 
                                   if (selectedDate != null) {
                                     setState(() {
-                                      today = selectedDate;
+                                      initialDate = selectedDate;
                                     });
                                   }
                                 },
@@ -679,11 +686,13 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                                 if (widget.checkoutController.cart!
                                         .isCombination! ==
                                     'true') {
-                                  print(DateFormat('dd/MM/yyyy').format(today));
+                                  print(DateFormat('dd/MM/yyyy')
+                                      .format(initialDate));
                                   log("-- \n fridayValue $fridayValue \n satValue $satValue \n --");
                                   // if (fridayValue != null) {
                                   widget.onNextTap(
-                                      DateFormat('dd/MM/yyyy').format(today),
+                                      DateFormat('dd/MM/yyyy')
+                                          .format(initialDate),
                                       fridayValue,
                                       satValue);
                                   // } else {
