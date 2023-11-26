@@ -339,7 +339,7 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
                                     CachedNetworkImage(
                                       imageUrl: widget.checkoutController.cart!
                                           .products![index].originalImage!,
-                                      height: 100, //96
+                                      height: 225,
                                       width: width,
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) {
