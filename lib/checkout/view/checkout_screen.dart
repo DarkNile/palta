@@ -297,6 +297,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       onPreviousTap: () {
                         setState(() {
                           _tabIndex = _tabIndex - 1;
+                          city = null;
+                          district = null;
                         });
                         _tabController.animateTo(_tabIndex);
                       },
