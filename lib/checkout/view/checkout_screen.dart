@@ -641,7 +641,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
         'SA',
         _checkoutController.order!.shippingCity!,
         _checkoutController.order!.shippingZone!,
-        '',
+        _checkoutController.order!.shippingZone!,
       ),
       shippingDetails: ShippingDetails(
         '${_checkoutController.order!.shippingFirstName!} ${_checkoutController.order!.shippingLastName!}',
@@ -651,7 +651,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
         'SA',
         _checkoutController.order!.shippingCity!,
         _checkoutController.order!.shippingZone!,
-        '',
+        _checkoutController.order!.shippingZone!,
       ),
     );
     FlutterPaytabsBridge.startCardPayment(configuration, (event) {
