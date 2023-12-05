@@ -30,7 +30,7 @@ class OrderInfoPage extends StatefulWidget {
 
 class _OrderInfoPageState extends State<OrderInfoPage> {
   // final _homeController = Get.put(HomeController());
-  DateTime initialDate = DateTime.now().add(const Duration(days: 2));
+  late DateTime initialDate;
 
   String fridayValue = 'no';
   String satValue = 'no';
@@ -43,8 +43,9 @@ class _OrderInfoPageState extends State<OrderInfoPage> {
 
   @override
   void initState() {
+    initialDate = DateTime.now().add(const Duration(days: 3));
     if (initialDate.weekday == DateTime.friday) {
-      initialDate.add(const Duration(days: 1));
+      initialDate = initialDate.add(const Duration(days: 1));
     }
     super.initState();
   }
