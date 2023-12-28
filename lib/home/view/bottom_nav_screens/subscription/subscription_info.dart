@@ -62,6 +62,7 @@ class _SubscriptionInfoState extends State<SubscriptionInfo> {
     super.initState();
     customerId = getStorage.read('customerId');
     mealShow = widget.program.mealShow?.split(',');
+    _checkoutController.isSelectedPrice.value = false;
   }
 
   @override
