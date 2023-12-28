@@ -30,6 +30,16 @@ class _SubscriptionNowSheetState extends State<SubscriptionNowSheet> {
   String? option2Id;*/
 
   @override
+  void initState() {
+    super.initState();
+    widget.checkoutController.selectedDayIndex = null;
+    widget.checkoutController.selectedPrice = null;
+    widget.checkoutController.selectedMainPrice = null;
+    widget.checkoutController.option1Id = null;
+    widget.checkoutController.option2Id = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
