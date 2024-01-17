@@ -68,6 +68,8 @@ dependencies:
   in_app_review: ^2.0.6
   flutter_custom_clippers: ^2.1.0
   hexcolor: ^3.0.1
+  flutter_inappwebview: ^5.7.1
+  tabby_flutter_inapp_sdk: ^1.4.2
 
 dev_dependencies:
   flutter_test:

@@ -258,13 +258,16 @@ class CheckoutController extends GetxController {
         // }
         if (Platform.isAndroid) {
           data.removeWhere((element) =>
-              element.code == 'paytabs_applepay' ||
-              element.code == 'tabby_cc_installments' ||
-              element.code == 'tabby_installments');
+                  element.code == 'paytabs_applepay' ||
+                  element.code == 'tabby_cc_installments'
+              // ||
+              // element.code == 'tabby_installments',
+              );
         } else {
-          data.removeWhere((element) =>
-              element.code == 'tabby_cc_installments' ||
-              element.code == 'tabby_installments');
+          data.removeWhere((element) => element.code == 'tabby_cc_installments'
+              // ||
+              // element.code == 'tabby_installments',
+              );
         }
         paymentMethods(data);
         return paymentMethods;

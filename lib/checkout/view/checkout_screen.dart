@@ -4,12 +4,14 @@ import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkLocale.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/checkout_tabs/order_info_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/order_summary_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/payment_method_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/shipping_address_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/shipping_method_page.dart';
+import 'package:palta/checkout/view/tabby_screen.dart';
 import 'package:palta/checkout/view/thank_you_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
@@ -20,6 +22,7 @@ import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_drop_down.dart';
 import 'package:palta/widgets/custom_text.dart';
+import 'package:tabby_flutter_inapp_sdk/tabby_flutter_inapp_sdk.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({
@@ -594,6 +597,13 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                                 .toStringAsFixed(2)),
                             _checkoutController.order!.orderId!.toString(),
                           );
+                        } else if (_checkoutController.order!.paymentCode! ==
+                            'tabby_installments') {
+                          tabbyPay(
+                            double.parse(_checkoutController.order!.total
+                                .toStringAsFixed(2)),
+                            _checkoutController.order!.orderId!.toString(),
+                          );
                         } else {
                           final isSuccess = await _checkoutController.addNote(
                             order: _checkoutController.order!,
@@ -615,6 +625,93 @@ class _CheckoutScreenState extends State<CheckoutScreen>
           ],
         ),
       ),
+    );
+  }
+
+  void tabbyPay(double amount, String orderId) async {
+    print('amount $amount');
+    print('orderId $orderId');
+
+    final mockPayload = Payment(
+      amount: amount.toString(),
+      currency: Currency.sar,
+      buyer: Buyer(
+        email: _checkoutController.order!.email!,
+        phone: _checkoutController.order!.phone!,
+        name:
+            '${_checkoutController.order!.shippingFirstName!} ${_checkoutController.order!.shippingLastName!}',
+      ),
+      buyerHistory: BuyerHistory(
+        loyaltyLevel: 0,
+        registeredSince: '2019-08-24T14:15:22Z',
+        wishlistCount: 0,
+      ),
+      shippingAddress: ShippingAddress(
+        city: _checkoutController.order!.shippingCity!,
+        address: _checkoutController.order!.shippingAddress!,
+        zip: _checkoutController.order!.shippingZone!,
+      ),
+      order: Order(
+        referenceId: orderId,
+        // items: [
+        //   OrderItem(
+        //     title: 'Jersey',
+        //     description: 'Jersey',
+        //     quantity: 1,
+        //     unitPrice: '10.00',
+        //     referenceId: 'uuid',
+        //     productUrl: 'http://example.com',
+        //     category: 'clothes',
+        //   )
+        // ],
+        items: _checkoutController.order!.products!
+            .map(
+              (product) => OrderItem(
+                title: product.name!,
+                quantity: int.parse(product.quantity.toString()),
+                unitPrice: '100',
+                category: '',
+              ),
+            )
+            .toList(),
+      ),
+      orderHistory: [
+        OrderHistoryItem(
+          purchasedAt: '2019-08-24T14:15:22Z',
+          amount: amount.toString(),
+          paymentMethod: OrderHistoryItemPaymentMethod.card,
+          status: OrderHistoryItemStatus.newOne,
+        )
+      ],
+    );
+
+    final session = await TabbySDK().createSession(
+      TabbyCheckoutPayload(
+        merchantCode: 'sa',
+        // merchantCode: 'sk_7411b04a-a162-4f85-9624-d4f388dea5ab',
+        lang: Lang.ar,
+        payment: mockPayload,
+      ),
+    );
+    print(session);
+
+    // openInAppBrowser(session);
+    // Get.to(
+    //   () => TabbyScreen(
+    //     price: amount.toString(),
+    //   ),
+    // );
+  }
+
+  void openInAppBrowser(TabbySession session) {
+    // print('session web ${session.availableProducts.installments!.type}');
+    TabbyWebView.showWebView(
+      context: context,
+      webUrl: session.availableProducts.installments!.webUrl,
+      onResult: (WebViewResult resultCode) {
+        print(resultCode.name);
+        // TODO: Process resultCode
+      },
     );
   }
 

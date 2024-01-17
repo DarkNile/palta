@@ -374,6 +374,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  flutter_inappwebview:
+    dependency: "direct main"
+    description:
+      name: flutter_inappwebview
+      sha256: d198297060d116b94048301ee6749cd2e7d03c1f2689783f52d210a6b7aba350
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.8.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -813,6 +821,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  tabby_flutter_inapp_sdk:
+    dependency: "direct main"
+    description:
+      name: tabby_flutter_inapp_sdk
+      sha256: "623241ff0f9f44115ef88bf3b12a5ae57aad1f7d8dd51494b12a226ed37a0151"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.2"
   term_glyph:
     dependency: transitive
     description:

@@ -11,6 +11,7 @@ import 'package:palta/home/services/apps_flyer_service.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/splash/splash_screen_1.dart';
 import 'package:palta/utils/translations.dart';
+import 'package:tabby_flutter_inapp_sdk/tabby_flutter_inapp_sdk.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -51,6 +52,12 @@ void main() async {
   ));
   await GetStorage.init();
   await AppsFlyerService.initAppsFlyer();
+  TabbySDK().setup(
+    withApiKey:
+        'pk_e3e0ca54-2144-4f6e-860d-78d208e716ca', // Put here your Api key
+    // withApiKey: 'sk_7411b04a-a162-4f85-9624-d4f388dea5ab',
+    environment: Environment.production,
+  );
   runApp(Phoenix(child: const MyApp()));
 }
 

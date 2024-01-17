@@ -355,6 +355,12 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                           'assets/images/cards.png',
                           height: 36,
                         )
+                      else if (widget.checkoutController.order!.paymentCode ==
+                          'tabby_installments')
+                        Image.asset(
+                          'assets/images/tabby.png',
+                          height: 36,
+                        )
                       else
                         Image.asset(
                           'assets/images/apple_pay_btn.png',

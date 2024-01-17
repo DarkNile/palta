@@ -33,7 +33,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Palta needs access to your camera to upload products</string>
+	<string>This allows Tabby to take a photo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This allows Tabby to select a photo</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
