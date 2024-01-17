@@ -749,6 +749,8 @@ PODS:
   - Flutter (1.0.0)
   - flutter_app_version_checker (0.0.1):
     - Flutter
+  - flutter_local_notifications (0.0.1):
+    - Flutter
   - flutter_paytabs_bridge (2.4.0):
     - Flutter
     - PayTabsSDK (= 6.6.4)
@@ -898,6 +900,7 @@ DEPENDENCIES:
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_app_version_checker (from `.symlinks/plugins/flutter_app_version_checker/ios`)
+  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_paytabs_bridge (from `.symlinks/plugins/flutter_paytabs_bridge/ios`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
   - in_app_review (from `.symlinks/plugins/in_app_review/ios`)
@@ -957,6 +960,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_app_version_checker:
     :path: ".symlinks/plugins/flutter_app_version_checker/ios"
+  flutter_local_notifications:
+    :path: ".symlinks/plugins/flutter_local_notifications/ios"
   flutter_paytabs_bridge:
     :path: ".symlinks/plugins/flutter_paytabs_bridge/ios"
   flutter_share:
@@ -1001,6 +1006,7 @@ SPEC CHECKSUMS:
   FirebaseSharedSwift: 62e248642c0582324d0390706cadd314687c116b
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_app_version_checker: 2beb5e211990c45ebfc17b81aa4d08ebd7edb757
+  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_paytabs_bridge: 9eae3b1a7aa05f4810a6231e612fcb76f53248ee
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -1025,4 +1031,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a54d06533d2c7a4162ac5acd4438053a76ad6ff7
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.14.2
