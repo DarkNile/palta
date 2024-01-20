@@ -4,14 +4,13 @@ import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkLocale.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:palta/auth/view/edit_details_screen.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
 import 'package:palta/checkout/view/checkout_tabs/order_info_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/order_summary_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/payment_method_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/shipping_address_page.dart';
 import 'package:palta/checkout/view/checkout_tabs/shipping_method_page.dart';
-import 'package:palta/checkout/view/tabby_screen.dart';
 import 'package:palta/checkout/view/thank_you_screen.dart';
 import 'package:palta/constants/colors.dart';
 import 'package:palta/home/controllers/home_controller.dart';
@@ -267,21 +266,38 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       },
                       onNextTap:
                           (String date, String fridayOn, String satOn) async {
-                        final isSuccess =
-                            await _checkoutController.saveCalendar(
-                                date: date, fridayOn: fridayOn, satOn: satOn);
-                        if (isSuccess) {
-                          if (context.mounted) {
-                            _profileController.getAddress(context: context);
-                            _profileController.getCountries();
-                            _profileController.getZones();
-                            _profileController.getCitiesByZoneId(
-                                zoneId: '2884');
+                        if (_profileController.user.value.phone != null &&
+                            _profileController.user.value.phone!.isNotEmpty) {
+                          final isSuccess =
+                              await _checkoutController.saveCalendar(
+                                  date: date, fridayOn: fridayOn, satOn: satOn);
+                          if (isSuccess) {
+                            if (context.mounted) {
+                              _profileController.getAddress(context: context);
+                              _profileController.getCountries();
+                              _profileController.getZones();
+                              _profileController.getCitiesByZoneId(
+                                  zoneId: '2884');
+                            }
+                            setState(() {
+                              _tabIndex = 1;
+                            });
+                            _tabController.animateTo(1);
                           }
-                          setState(() {
-                            _tabIndex = 1;
-                          });
-                          _tabController.animateTo(1);
+                        } else {
+                          Get.offAll(
+                            () => EditDetailsScreen(
+                              profileController: _profileController,
+                              isFromSocialLogin: true,
+                              firstName:
+                                  _profileController.user.value.firstName,
+                              lastName: _profileController.user.value.lastName,
+                              email: _profileController.user.value.email,
+                              phone: _profileController.user.value.phone,
+                              customerId:
+                                  _profileController.user.value.id.toString(),
+                            ),
+                          );
                         }
                       },
                     );
