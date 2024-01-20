@@ -57,6 +57,11 @@ class CustomPaymentMethodCard extends StatelessWidget {
                 'assets/images/apple_pay_btn.png',
                 height: 36,
               )
+            else if (paymentMethod.code == 'tabby_installments')
+              Image.asset(
+                'assets/images/tabby.png',
+                height: 36,
+              )
             else
               Image.asset(
                 'assets/images/cod.png',
