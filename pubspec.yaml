@@ -53,6 +53,7 @@ dependencies:
   flutter_app_version_checker: ^0.3.2
   firebase_core: ^2.14.0
   firebase_messaging: ^14.6.3
+  flutter_local_notifications: ^16.3.0
   device_info_plus: ^8.2.2
   android_id: ^0.3.3
   cloud_firestore: ^4.8.1
