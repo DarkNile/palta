@@ -348,7 +348,31 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   //       }),
                   // ),
                   const SizedBox(
-                    height: 16,
+                    height: 8,
+                  ),
+                  const CustomText(
+                    text: '©️ 2024 - مؤسسة محور الأفكار للخدمات التجارية',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const CustomText(
+                    text: 'سجل تجاري 4030433009',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const CustomText(
+                    text: 'رقم ضريبي 310057120600003',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  const SizedBox(
+                    height: 8,
                   ),
                   CustomDrawerTile(
                     onTap: () async {
