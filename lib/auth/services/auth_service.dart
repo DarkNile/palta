@@ -463,11 +463,13 @@ class AuthService {
     print("response.statusCode");
     print(response.statusCode);
     print(response.body);
-    if (response.statusCode == 200) {
-      final getStorage = GetStorage();
-      getStorage.remove('token');
-      getStorage.remove('customerId');
-      Get.offAll(const HomePage());
-    }
+    // if (response.statusCode == 200) {
+    // final getStorage = GetStorage();
+    getStorage.remove('token');
+    getStorage.remove('customerId');
+    Get.deleteAll(force: true);
+    Phoenix.rebirth(Get.context!);
+    Get.reset();
+    // }
   }
 }
