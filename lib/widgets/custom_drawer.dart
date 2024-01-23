@@ -351,8 +351,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     height: 8,
                   ),
                   const CustomText(
-                    text: '©️ 2024 - مؤسسة محور الأفكار للخدمات التجارية',
-                    fontSize: 14,
+                    text: '©️ مؤسسة محور الأفكار للخدمات التجارية',
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                   const SizedBox(
@@ -360,7 +360,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   const CustomText(
                     text: 'سجل تجاري 4030433009',
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                   const SizedBox(
@@ -368,7 +368,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   const CustomText(
                     text: 'رقم ضريبي 310057120600003',
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                   const SizedBox(
