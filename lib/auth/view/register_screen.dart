@@ -1,8 +1,10 @@
-import 'package:palta/auth/view/register_otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
+import 'package:palta/checkout/controllers/checkout_controller.dart';
+import 'package:palta/home/view/home_page.dart';
+import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_button.dart';
 import 'package:palta/widgets/custom_text.dart';
@@ -18,6 +20,8 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _authController = Get.put(AuthController());
+  final _profileController = Get.put(ProfileController());
+  final _checkoutController = Get.put(CheckoutController());
   final _formKey = GlobalKey<FormState>();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
@@ -232,7 +236,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: 40,
                 ),
                 Obx(() {
-                  if (_authController.isRegisterOtpLoading.value) {
+                  if (_authController.isRegisterOtpLoading.value ||
+                      _authController.isRegisterLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   return CustomButton(
@@ -259,21 +264,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               context, "invalidPasswordLength".tr);
                           return;
                         }
-                        //
-                        await _authController.registerOTP(
-                            telephone: _phoneNumberController.text,
-                            context: context);
-                        Get.to(
-                          () => RegisterOTPScreen(
-                            firstName: _firstNameController.text,
-                            lastName: _lastNameController.text,
-                            email: _emailController.text,
-                            telephone: _phoneNumberController.text,
-                            password: _passwordController.text,
-                            passwordConfirmation:
-                                _passwordConfirmationController.text,
-                          ),
+
+                        final user = await _authController.register(
+                          firstName: _firstNameController.text,
+                          lastName: _lastNameController.text,
+                          email: _emailController.text,
+                          telephone: _phoneNumberController.text,
+                          password: _passwordController.text,
+                          confirm: _passwordConfirmationController.text,
+                          context: context,
                         );
+                        if (user != null) {
+                          _profileController.getAccount();
+                          _checkoutController.getCartItems();
+                          Get.offAll(() => const HomePage());
+                        }
+                        //
+                        // await _authController.registerOTP(
+                        //     telephone: _phoneNumberController.text,
+                        //     context: context);
+                        // Get.to(
+                        //   () => RegisterOTPScreen(
+                        //     firstName: _firstNameController.text,
+                        //     lastName: _lastNameController.text,
+                        //     email: _emailController.text,
+                        //     telephone: _phoneNumberController.text,
+                        //     password: _passwordController.text,
+                        //     passwordConfirmation:
+                        //         _passwordConfirmationController.text,
+                        //   ),
+                        // );
                       }
                     },
                     title: 'signUp'.tr,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:palta/auth/controllers/auth_controller.dart';
-import 'package:palta/auth/view/verify_phone_screen.dart';
 import 'package:palta/constants/colors.dart';
+import 'package:palta/home/view/home_page.dart';
 import 'package:palta/profile/controllers/profile_controller.dart';
 import 'package:palta/utils/app_util.dart';
 import 'package:palta/widgets/custom_body_title.dart';
@@ -239,32 +239,42 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                                 email: _emailController.text,
                                 telephone: _phoneNumberController.text,
                               );
-
                               if (isSuccess) {
                                 await widget.profileController.getAccount();
                                 if (widget.isFromSocialLogin &&
                                     context.mounted) {
-                                  final isOTPSentSuccess =
-                                      await _authController.verifyPhone(
-                                    customerId: widget.customerId!,
-                                    phone: _phoneNumberController.text,
-                                    context: context,
-                                  );
-                                  if (isOTPSentSuccess) {
-                                    Get.to(
-                                      () => VerifyPhoneScreen(
-                                        customerId: widget.customerId!,
-                                        phone: _phoneNumberController.text,
-                                      ),
-                                    );
-                                  }
+                                  Get.offAll(() => const HomePage());
                                 } else {
                                   Get.back();
                                 }
                               }
+
+                              // if (isSuccess) {
+                              //   await widget.profileController.getAccount();
+                              //   if (widget.isFromSocialLogin &&
+                              //       context.mounted) {
+                              //     final isOTPSentSuccess =
+                              //         await _authController.verifyPhone(
+                              //       customerId: widget.customerId!,
+                              //       phone: _phoneNumberController.text,
+                              //       context: context,
+                              //     );
+                              //     if (isOTPSentSuccess) {
+                              //       Get.to(
+                              //         () => VerifyPhoneScreen(
+                              //           customerId: widget.customerId!,
+                              //           phone: _phoneNumberController.text,
+                              //         ),
+                              //       );
+                              //     }
+                              //   } else {
+                              //     Get.back();
+                              //   }
+                              // }
                             }
                           },
-                          title: 'verify'.tr,
+                          // title: 'verify'.tr,
+                          title: 'save'.tr,
                         );
                       }),
                     ],
