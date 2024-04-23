@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -89,6 +90,8 @@ class AppUtil {
     List<Widget> dialogBody, {
     barrierDismissible = true,
     showClose = true,
+    VoidCallback? onClose,
+    bool isCoupon = false,
   }) async {
     return await showDialog(
         context: context,
@@ -104,45 +107,74 @@ class AppUtil {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    title: title is Widget
-                        ? title
-                        : Column(
-                            children: [
-                              if (showClose)
-                                Align(
-                                  alignment: AppUtil.rtlDirection(context)
-                                      ? Alignment.topRight
-                                      : Alignment.topLeft,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                    child: SvgPicture.asset(
-                                        'assets/icons/close.svg'),
+                    title: isCoupon
+                        ? null
+                        : title is Widget
+                            ? title
+                            : Column(
+                                children: [
+                                  if (showClose)
+                                    Align(
+                                      alignment: AppUtil.rtlDirection(context)
+                                          ? Alignment.topRight
+                                          : Alignment.topLeft,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/icons/close.svg',
+                                        ),
+                                      ),
+                                    ),
+                                  if (showClose)
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                  CustomText(
+                                    text: title,
+                                    textAlign: TextAlign.center,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    height: 2,
+                                    color: pineGreen,
                                   ),
-                                ),
-                              if (showClose)
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                              CustomText(
-                                text: title,
-                                textAlign: TextAlign.center,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 2,
-                                color: pineGreen,
+                                ],
                               ),
-                            ],
-                          ),
                     titlePadding: title is String && title.isEmpty
                         ? const EdgeInsets.all(0)
                         : null,
-                    content: SingleChildScrollView(
-                      child: ListBody(
-                        children: dialogBody,
-                      ),
-                    ),
+                    contentPadding: isCoupon
+                        ? const EdgeInsets.all(0)
+                        : const EdgeInsets.all(24),
+                    content: isCoupon
+                        ? Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: Image.asset(
+                                  'assets/images/pop-up.png',
+                                  // fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                top: 16,
+                                right: 16,
+                                child: InkWell(
+                                  onTap: onClose,
+                                  child: SvgPicture.asset(
+                                    'assets/icons/close.svg',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : SingleChildScrollView(
+                            child: ListBody(
+                              children: dialogBody,
+                            ),
+                          ),
                   ),
                   // if (showClose)
                   //   Material(

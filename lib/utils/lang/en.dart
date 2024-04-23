@@ -213,6 +213,9 @@ const Map<String, String> en = {
   'updateNow': 'Update Now',
   'congratulationsCoupon':
       'Congratulations! You have got a voucher with 20% discount when you shop now',
+  'ourOffers': 'Don\'t miss our offers',
+  'discount20': 'Discount 20%',
+  'paltaPrograms': 'On all Palta monthly programs',
   'shopNow': 'Shop Now',
   'assessment': 'Assessment',
   'subscriptions': 'Subscriptions',
