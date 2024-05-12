@@ -379,4 +379,5 @@ const Map<String, String> ar = {
   'priceAfterDiscount': 'السعر بعد الخصم',
   'packagePrice': 'سعر الباقة',
   'paymentFailed': 'فشل عملية الدفع!',
+  "version": "الإصدار",
 };
