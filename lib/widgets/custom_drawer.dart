@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -9,6 +10,7 @@ import 'package:palta/home/view/static_pages/contact_us_page.dart';
 import 'package:palta/home/view/static_pages/general_articles_screen.dart';
 import 'package:palta/home/view/static_pages/static_page.dart';
 import 'package:palta/utils/app_util.dart';
+import 'package:palta/utils/app_verstion.dart';
 import 'package:palta/widgets/custom_card.dart';
 import 'package:palta/widgets/custom_app_bar_clip_path.dart';
 import 'package:palta/widgets/custom_drawer_item.dart';
@@ -461,6 +463,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                       )
                     ],
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: CustomText(
+                      text: "${'version'.tr} ${AppVersion.version}",
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   const SizedBox(
                     height: 40,

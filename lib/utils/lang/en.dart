@@ -399,4 +399,5 @@ const Map<String, String> en = {
   'priceAfterDiscount': 'Price After Discount',
   'packagePrice': 'Package Price',
   'paymentFailed': 'Payment Failed!',
+  "version": "version",
 };

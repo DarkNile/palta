@@ -17,6 +17,7 @@ import 'package:palta/constants/primary_green.dart';
 import 'package:palta/home/services/apps_flyer_service.dart';
 import 'package:palta/home/view/home_page.dart';
 import 'package:palta/splash/splash_screen_1.dart';
+import 'package:palta/utils/app_verstion.dart';
 import 'package:palta/utils/translations.dart';
 import 'package:tabby_flutter_inapp_sdk/tabby_flutter_inapp_sdk.dart';
 
@@ -70,6 +71,7 @@ void main() async {
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   await GetStorage.init();
+  await AppVersion.getVersion();
   await AppsFlyerService.initAppsFlyer();
   TabbySDK().setup(
     withApiKey:
