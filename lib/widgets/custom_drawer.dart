@@ -465,7 +465,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     ],
                   ),
                   const SizedBox(
-                    height: 12,
+                    height: 24,
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -473,10 +473,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       text: "${'version'.tr} ${AppVersion.version}",
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
+                      color: brownishGrey,
                     ),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 24,
                   ),
                 ],
               ),
