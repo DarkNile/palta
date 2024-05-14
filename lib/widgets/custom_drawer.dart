@@ -349,33 +349,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   //         Get.reset();
                   //       }),
                   // ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const CustomText(
-                    text: '©️ مؤسسة محور الأفكار للخدمات التجارية',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const CustomText(
-                    text: 'سجل تجاري 4030433009',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const CustomText(
-                    text: 'رقم ضريبي 310057120600003',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  // const SizedBox(
+                  //   height: 8,
+                  // ),
                   CustomDrawerTile(
                     onTap: () async {
                       await launchUrlString(
@@ -462,6 +438,35 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           child: Image.asset('assets/images/tiktok.png'),
                         ),
                       )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  const Center(
+                    child: CustomText(
+                      text: '©️ مؤسسة محور الأفكار للخدمات التجارية',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        text: 'سجل تجاري 4030433009',
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      CustomText(
+                        text: 'رقم ضريبي 310057120600003',
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ],
                   ),
                   const SizedBox(
