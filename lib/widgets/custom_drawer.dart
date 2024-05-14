@@ -459,12 +459,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     children: [
                       CustomText(
                         text: 'سجل تجاري 4030433009',
-                        fontSize: 11,
+                        fontSize: 10,
                         fontWeight: FontWeight.w400,
                       ),
                       CustomText(
                         text: 'رقم ضريبي 310057120600003',
-                        fontSize: 11,
+                        fontSize: 10,
                         fontWeight: FontWeight.w400,
                       ),
                     ],
