@@ -52,7 +52,7 @@ const Map<String, String> ar = {
   'resendCode': 'إعادة إرسال الكود',
   'verificationCode': 'كود التحقق',
   'customerService': 'خدمة العملاء',
-  'complaint': 'الشكاوي و الاستفسارات',
+  'complaint': 'الشكاوى و الاستفسارات',
   'viewAll': 'عرض الكل',
   'riyal': 'ريال',
   'bestSelling': 'الأكثر مبيعاً',
