@@ -349,82 +349,84 @@ class _HomePageState extends State<HomePage> {
     //     }
     //   }
     // }
-    String? deviceId;
-    if (Platform.isIOS) {
-      var deviceInfo = DeviceInfoPlugin();
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      deviceId = iosDeviceInfo.identifierForVendor;
-    } else if (Platform.isAndroid) {
-      const androidId = AndroidId();
-      deviceId = await androidId.getId();
-    }
-    print('Device ID: $deviceId'); // unique Device ID
-    var doc = await FirebaseFirestore.instance
-        .collection('Devices')
-        .doc(deviceId)
-        .get();
-    if (doc.exists) {
-      print('exists ${doc.id}');
-    } else {
-      await AppUtil.dialog2(
-        context,
-        'ourOffers'.tr,
-        [
-          CustomText(
-            text: 'discount20'.tr,
-            textAlign: TextAlign.center,
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-            color: avocado,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          CustomText(
-            text: 'paltaPrograms'.tr,
-            textAlign: TextAlign.center,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: almostBlack,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CustomText(
-                text: 'couponCode'.tr,
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: pineGreen,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              const SelectableText(
-                'PA20',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: avocado,
-                ),
-              ),
-            ],
-          ),
-        ],
-        barrierDismissible: false,
-        showClose: true,
-        isCoupon: true,
-        onClose: () async {
-          await FirebaseFirestore.instance
-              .collection('Devices')
-              .doc(deviceId)
-              .set({'deviceId': deviceId});
-          Get.back();
-        },
-      );
-    }
+
+    //Coupon Popup
+    // String? deviceId;
+    // if (Platform.isIOS) {
+    //   var deviceInfo = DeviceInfoPlugin();
+    //   var iosDeviceInfo = await deviceInfo.iosInfo;
+    //   deviceId = iosDeviceInfo.identifierForVendor;
+    // } else if (Platform.isAndroid) {
+    //   const androidId = AndroidId();
+    //   deviceId = await androidId.getId();
+    // }
+    // print('Device ID: $deviceId'); // unique Device ID
+    // var doc = await FirebaseFirestore.instance
+    //     .collection('Devices')
+    //     .doc(deviceId)
+    //     .get();
+    // if (doc.exists) {
+    //   print('exists ${doc.id}');
+    // } else {
+    //   await AppUtil.dialog2(
+    //     context,
+    //     'ourOffers'.tr,
+    //     [
+    //       CustomText(
+    //         text: 'discount20'.tr,
+    //         textAlign: TextAlign.center,
+    //         fontSize: 24,
+    //         fontWeight: FontWeight.w700,
+    //         color: avocado,
+    //       ),
+    //       const SizedBox(
+    //         height: 8,
+    //       ),
+    //       CustomText(
+    //         text: 'paltaPrograms'.tr,
+    //         textAlign: TextAlign.center,
+    //         fontSize: 16,
+    //         fontWeight: FontWeight.w700,
+    //         color: almostBlack,
+    //       ),
+    //       const SizedBox(
+    //         height: 8,
+    //       ),
+    //       Row(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         crossAxisAlignment: CrossAxisAlignment.center,
+    //         children: [
+    //           CustomText(
+    //             text: 'couponCode'.tr,
+    //             fontSize: 14,
+    //             fontWeight: FontWeight.w700,
+    //             color: pineGreen,
+    //           ),
+    //           const SizedBox(
+    //             width: 8,
+    //           ),
+    //           const SelectableText(
+    //             'PA20',
+    //             style: TextStyle(
+    //               fontSize: 18,
+    //               fontWeight: FontWeight.w700,
+    //               color: avocado,
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ],
+    //     barrierDismissible: false,
+    //     showClose: true,
+    //     isCoupon: true,
+    //     onClose: () async {
+    //       await FirebaseFirestore.instance
+    //           .collection('Devices')
+    //           .doc(deviceId)
+    //           .set({'deviceId': deviceId});
+    //       Get.back();
+    //     },
+    //   );
+    // }
   }
 }
