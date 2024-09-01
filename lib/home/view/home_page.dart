@@ -1,8 +1,8 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:android_id/android_id.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+// import 'package:android_id/android_id.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:palta/auth/view/login_screen.dart';
 import 'package:palta/checkout/controllers/checkout_controller.dart';
